@@ -1,0 +1,1310 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>deciwa feedback mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* danwos design tokens (brain: danwos/20_facts/branding/tokens.json) – every tool uses these for recognition */
+:root, :root[data-theme="dark"] {
+  --bg: #0D1B2A; --panel: #102234; --panel2: #0a1622; --line: #1f3449; --text: #E8EDF3; --muted: #93a3b4;
+  --primary: #14B8A6; --primary-ink: #0D1B2A; --hover: #E2725B; --hl: rgba(20,184,166,.10);
+  --card: #112538; --edge: #E8EDF3; --shadow: 3px 3px 0 #000;
+  --approved: #A3B46F; --change: #E2725B; --requested: #14B8A6; --stale: #D8C3A5; --rejected: #ff7a66; --note: #93a3b4; --orphaned: #6b7d8f; --frozen: #E8EDF3; --broken: #ff7a66; --rated: #D8C3A5;
+  --kw: #E2725B; --str: #A3B46F; --com: #6b7d8f; --head: #14B8A6;
+  --page: #0f2132; --page-text: #E8EDF3;
+}
+:root[data-theme="light"] {
+  --bg: #FFFFFF; --panel: #f5f3ef; --panel2: #ece8e1; --line: #ddd6cb; --text: #1B1A22; --muted: #5f5a54;
+  --primary: #0F766E; --primary-ink: #FFFFFF; --hover: #E2725B; --hl: rgba(15,118,110,.07);
+  --card: #FFFFFF; --edge: #1B1A22; --shadow: 3px 3px 0 #1B1A22;
+  --approved: #5E6E30; --change: #C4553E; --requested: #0F766E; --stale: #9C7A4A; --rejected: #A8322A; --note: #5f5a54; --orphaned: #8b857d; --frozen: #1B1A22; --broken: #A8322A; --rated: #9C7A4A;
+  --kw: #B4462F; --str: #5E6E30; --com: #8b857d; --head: #0F766E;
+  --page: #FFFFFF; --page-text: #1B1A22;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--text); font: 14px/1.5 Inter, system-ui, sans-serif; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.mono, .code, pre, code, .sel { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+/* top bar */
+header.app { display: flex; align-items: center; gap: 16px; padding: 8px 14px; background: var(--panel2); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 8px; font: 800 18px "Bricolage Grotesque", system-ui, sans-serif; }
+.brand small { font: 400 12px Inter, system-ui, sans-serif; color: var(--muted); }
+.seg { display: inline-flex; border: 1.5px solid var(--edge); border-radius: 10px; overflow: hidden; }
+.seg button { background: none; border: 0; padding: 4px 12px; font-size: 13px; }
+.seg button + button { border-left: 1.5px solid var(--edge); }
+.seg button.on { background: var(--primary); color: var(--primary-ink); font-weight: 600; }
+.seg button:disabled { opacity: .4; cursor: not-allowed; }
+.seg.mini button { padding: 1px 10px; font-size: 12px; }
+.vdesc { color: var(--muted); font-size: 12px; }
+.spacer { flex: 1; }
+.tbtn { background: var(--card); border: 1.5px solid var(--edge); border-radius: 10px; padding: 3px 10px; font-size: 13px; box-shadow: 2px 2px 0 var(--edge); }
+.tbtn:hover { border-color: var(--hover); box-shadow: 2px 2px 0 var(--hover); }
+.tbtn:active { box-shadow: 1px 1px 0 var(--edge); transform: translate(1px, 1px); }
+.tbtn.on { background: var(--primary); color: var(--primary-ink); }
+
+/* main layout */
+main { display: grid; grid-template-columns: 200px 1fr 340px; min-height: 0; }
+main.wide-panel { grid-template-columns: 200px 1fr 380px; }
+nav.files { background: var(--panel); border-right: 1px solid var(--line); padding: 10px 0; overflow: auto; }
+nav.files h4 { margin: 4px 14px 8px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.fitem { display: flex; align-items: center; gap: 8px; padding: 4px 14px; cursor: pointer; font-size: 13px; }
+.fitem:hover { background: var(--hl); }
+.fitem.on { background: var(--hl); box-shadow: inset 3px 0 0 var(--primary); }
+.fitem.dir { color: var(--muted); font-size: 12px; cursor: default; }
+.fitem .badge { margin-left: auto; font-size: 11px; background: var(--change); color: #fff; border-radius: 999px; padding: 0 6px; }
+.legend { margin: 18px 14px 0; font-size: 12px; color: var(--muted); display: grid; gap: 4px; }
+.legend span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; background: var(--c); }
+
+/* editor */
+.editor { position: relative; overflow: auto; min-width: 0; }
+.tabbar { position: sticky; top: 0; z-index: 6; display: flex; align-items: center; gap: 10px; padding: 6px 14px; background: var(--bg); border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+.tabbar b { color: var(--text); font-weight: 600; }
+.reviewbar { position: sticky; top: 35px; z-index: 6; display: none; align-items: center; gap: 12px; padding: 6px 14px; background: var(--primary); color: var(--primary-ink); font-size: 13px; }
+.reviewbar.on { display: flex; }
+.reviewbar .prog { flex: 1; height: 4px; background: rgba(255,255,255,.3); border-radius: 4px; overflow: hidden; }
+.reviewbar .prog i { display: block; height: 100%; background: var(--primary-ink); }
+.canvas { position: relative; padding: 10px 0 260px; }
+.line { display: flex; min-height: 21px; font-size: 13px; line-height: 21px; white-space: pre; cursor: default; }
+.ln { width: 48px; flex: none; text-align: right; padding-right: 18px; color: var(--muted); opacity: .6; user-select: none; }
+.code { padding-left: 6px; }
+.box { position: absolute; border-radius: 6px; pointer-events: none; display: none; z-index: 3; }
+.box.hover { border: 1.5px dashed var(--primary); background: var(--hl); }
+.box.focus { border: 2px solid var(--hover); }
+.box .tag { position: absolute; right: 6px; top: -10px; font-size: 11px; line-height: 16px; padding: 0 6px; border-radius: 999px; background: var(--primary); color: var(--primary-ink); white-space: nowrap; max-width: 90%; overflow: hidden; text-overflow: ellipsis; }
+.bar { position: absolute; width: 3px; border-radius: 2px; pointer-events: none; z-index: 2; }
+mark.tm { background: none; color: inherit; border-bottom: 2px solid var(--c); padding-bottom: 1px; }
+.l-h { color: var(--head); font-weight: 700; }
+.l-fm { color: var(--muted); }
+.l-str { color: var(--str); }
+.kw { color: var(--kw); } .st { color: var(--str); } .cm { color: var(--com); font-style: italic; } .ic { color: var(--primary); } .opt { color: var(--kw); }
+
+/* rendered view: a browser frame around the built result */
+.browser { margin: 4px 16px 0 22px; border: 1.5px solid var(--edge); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); background: var(--page); }
+.browser .bbar { display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: var(--panel2); border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.browser .dots { display: flex; gap: 5px; } .browser .dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+.browser .url { flex: 1; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 1px 12px; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.page { color: var(--page-text); padding: 18px 28px 28px 34px; cursor: default; }
+.page a { color: var(--primary); }
+/* docs look (Sphinx-like) */
+.doc { max-width: 70ch; font-size: 15px; line-height: 1.65; }
+.doc h1, .doc h2 { font-family: "Bricolage Grotesque", system-ui, sans-serif; line-height: 1.2; }
+.doc h1 { font-size: 28px; margin: 6px 0 14px; } .doc h2 { font-size: 21px; margin: 26px 0 10px; }
+.doc p { margin: 0 0 12px; }
+.doc code { font-size: 13px; background: var(--hl); padding: 1px 4px; border-radius: 4px; }
+.doc pre { background: var(--panel2); border-radius: 10px; padding: 10px 12px; font-size: 13px; overflow: auto; }
+.doc ul { padding-left: 22px; margin: 0 0 12px; } .doc li { margin: 3px 0; }
+.doc .fm { display: flex; gap: 6px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.doc .fm span { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; }
+.need { border: 1.5px solid var(--line); border-left: 4px solid var(--primary); border-radius: 10px; margin: 14px 0; overflow: hidden; }
+.need .nhead { display: flex; align-items: baseline; gap: 8px; padding: 7px 12px; background: var(--hl); font-size: 14px; }
+.need .ntype { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.need .nid { margin-left: auto; font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--primary); }
+.need .nmeta { display: flex; gap: 6px; flex-wrap: wrap; padding: 6px 12px 0; font-size: 12px; }
+.need .nopt { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; }
+.need .nopt i { font-style: normal; color: var(--muted); }
+.need .nbody { padding: 8px 12px 2px; }
+/* website look */
+.site { font-size: 15px; }
+.site #top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.site .logo { font: 800 18px "Bricolage Grotesque", system-ui, sans-serif; }
+.site nav { display: flex; gap: 14px; font-size: 13px; }
+.site #hero { padding: 26px 0 22px; display: grid; grid-template-columns: minmax(0, 1fr) 210px; column-gap: 24px; align-items: center; }
+.site #hero > * { grid-column: 1; }
+.site #hero > img { grid-column: 2; grid-row: 1 / span 3; width: 100%; height: auto; }
+.site #hero .btn { justify-self: start; }
+.page { container-type: inline-size; }
+@container (max-width: 600px) { .site #hero { grid-template-columns: 1fr; } .site #hero > img { grid-column: 1; grid-row: auto; max-width: 170px; margin-top: 14px; } }
+.site #hero h1 { font: 800 36px/1.1 "Bricolage Grotesque", system-ui, sans-serif; margin: 0 0 12px; }
+.site #hero p { font-size: 17px; color: var(--muted); margin: 0 0 18px; }
+.site .btn { display: inline-block; background: var(--primary); color: var(--primary-ink); text-decoration: none; font-weight: 600; padding: 8px 16px; border: 2px solid var(--edge); border-radius: 10px; box-shadow: var(--shadow); }
+.site h2 { font: 700 22px "Bricolage Grotesque", system-ui, sans-serif; margin: 10px 0 12px; }
+.site .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.site .card { border: 1.5px solid var(--edge); border-radius: 16px; padding: 12px 14px; box-shadow: var(--shadow); background: var(--card); }
+.site .card h3 { margin: 0 0 4px; font-size: 16px; }
+.site .card p { margin: 0; font-size: 14px; color: var(--muted); }
+.site #pricing { margin-top: 26px; }
+.site footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+
+/* right panel */
+aside { background: var(--panel); border-left: 1px solid var(--line); overflow: auto; padding: 12px; display: flex; flex-direction: column; gap: 14px; }
+aside h3 { margin: 0; font: 700 15px "Bricolage Grotesque", system-ui, sans-serif; }
+.counts { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--c); color: var(--c); white-space: nowrap; }
+.cov { font-size: 12px; color: var(--muted); }
+.cov .track { height: 6px; background: var(--panel2); border-radius: 6px; overflow: hidden; margin-top: 4px; }
+.cov .track i { display: block; height: 100%; background: var(--approved); }
+.alist { display: flex; flex-direction: column; gap: 6px; }
+.aitem { border: 1px solid var(--line); border-left: 3px solid var(--c); border-radius: 10px; padding: 6px 8px; background: var(--bg); cursor: pointer; font-size: 12px; }
+.aitem:hover { border-color: var(--hover); border-left-color: var(--c); }
+.aitem .t { display: flex; justify-content: space-between; gap: 6px; }
+.aitem .t b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.aitem .c { color: var(--muted); margin-top: 2px; }
+.empty { color: var(--muted); font-size: 12px; border: 1.5px dashed var(--line); border-radius: 12px; padding: 14px; text-align: center; }
+
+/* feedback form (card + panel) */
+.form { display: flex; flex-direction: column; gap: 10px; }
+.fhead .kind { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--primary); }
+.fhead b { display: block; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fhead .sel { font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ask { border: 1.5px solid var(--requested); border-radius: 10px; padding: 6px 9px; font-size: 12px; }
+.ask b { color: var(--requested); }
+.stars { display: flex; gap: 2px; align-items: center; }
+.stars button { background: none; border: 0; font-size: 20px; line-height: 1; padding: 0 1px; color: var(--line); }
+.stars button.on { color: var(--stale); }
+.stars span { font-size: 11px; color: var(--muted); margin-left: 6px; }
+.acts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+.act { border: 1.5px solid var(--edge); background: var(--card); color: var(--text); border-radius: 10px; padding: 6px 4px; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 1px; box-shadow: 2px 2px 0 var(--c); }
+.act:hover { background: var(--c); color: #fff; }
+.act:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--c); }
+.act .ico { font-size: 15px; line-height: 1; }
+.act kbd { font-size: 10px; opacity: .65; font-family: inherit; }
+textarea, select, input { font: inherit; font-size: 13px; color: var(--text); background: var(--bg); border: 1.5px solid var(--line); border-radius: 10px; padding: 6px 8px; }
+textarea { width: 100%; min-height: 54px; resize: vertical; }
+textarea:focus, select:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+.ffoot { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); flex-wrap: wrap; }
+.ffoot .tbtn { font-size: 12px; padding: 2px 8px; }
+.ffoot select { font-size: 12px; padding: 2px 4px; }
+.hist { border-top: 1px solid var(--line); padding-top: 8px; display: flex; flex-direction: column; gap: 8px; font-size: 12px; }
+.hist .h { display: flex; flex-direction: column; gap: 2px; }
+.hist .meta { color: var(--muted); font-size: 11px; }
+.diff { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; border-radius: 6px; overflow: auto; white-space: pre; padding: 4px 6px; background: var(--panel2); }
+.diff .del { color: var(--rejected); } .diff .add { color: var(--approved); }
+.shake { animation: shake .3s; }
+@keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+/* variant A card */
+.card-ui { position: absolute; right: 14px; width: 330px; z-index: 8; background: var(--card); border: 2px solid var(--edge); border-radius: 16px; box-shadow: var(--shadow); padding: 12px; display: none; }
+.card-ui.on { display: block; }
+.card-ui .x { position: absolute; top: 6px; right: 8px; background: none; border: 0; color: var(--muted); font-size: 16px; }
+
+/* status bar, toast, modal */
+footer.status { display: flex; gap: 16px; align-items: center; padding: 3px 14px; font-size: 12px; background: var(--primary); color: var(--primary-ink); min-height: 24px; overflow: hidden; white-space: nowrap; }
+footer.status .hint { margin-left: auto; opacity: .85; }
+.toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 7px 14px; border-radius: 10px; font-size: 13px; z-index: 40; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.on { opacity: 1; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 50; display: none; align-items: center; justify-content: center; padding: 16px; }
+.modal.on { display: flex; }
+.modal .in { background: var(--card); border: 2px solid var(--edge); border-radius: 16px; box-shadow: var(--shadow); width: min(760px, 100%); max-height: 85vh; display: flex; flex-direction: column; }
+.modal .mh { display: flex; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--line); gap: 10px; }
+.modal pre { margin: 0; padding: 14px; overflow: auto; font-size: 12px; }
+
+/* clean look for website screenshots (?shot) */
+body.shot .brand small, body.shot #variants, body.shot #vdesc, body.shot #btnReset, body.shot #btnJson, body.shot #btnTheme { display: none; }
+
+@media (max-width: 900px) {
+  main, main.wide-panel { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+  nav.files { display: flex; overflow-x: auto; padding: 4px; border-right: 0; border-bottom: 1px solid var(--line); }
+  nav.files h4, .legend { display: none; }
+  aside { max-height: 40vh; border-left: 0; border-top: 1px solid var(--line); }
+}
+</style>
+</head>
+<body>
+
+<header class="app">
+  <div class="brand">
+    <img src="assets/deciwa.webp" alt="" width="34" height="34" style="margin:-6px 0">
+    deciwa <small>feedback UI mockup</small>
+  </div>
+  <div class="seg" id="variants">
+    <button data-v="A">A · Card</button><button data-v="B">B · Side panel</button>
+  </div>
+  <span class="vdesc" id="vdesc"></span>
+  <span class="spacer"></span>
+  <button class="tbtn" id="btnReview" title="Walk through all elements of this file (v)">▶ Review mode <span class="mono">v</span></button>
+  <button class="tbtn" id="btnJson" title="Show what deciwa stores for this file">.deciwa JSON</button>
+  <button class="tbtn" id="btnReset" title="Back to the example data">Reset</button>
+  <button class="tbtn" id="btnTheme" title="Light / dark">◐</button>
+</header>
+
+<main id="main">
+  <nav class="files" id="nav"></nav>
+  <section class="editor" id="editor">
+    <div class="tabbar" id="tabbar"></div>
+    <div class="reviewbar" id="reviewbar"></div>
+    <div class="canvas" id="canvas">
+      <div id="view"></div>
+      <div id="bars"></div>
+      <div class="box hover" id="hoverBox"><span class="tag"></span></div>
+      <div class="box focus" id="focusBox"></div>
+      <div class="card-ui" id="card"><button class="x" data-close>×</button><div id="cardBody"></div></div>
+    </div>
+  </section>
+  <aside id="panel"></aside>
+</main>
+
+<footer class="status" id="status"></footer>
+
+<div class="toast" id="toast"></div>
+<div class="modal" id="modal"><div class="in"><div class="mh"><b id="mTitle"></b><span class="spacer"></span><button class="tbtn" data-mclose>Close</button></div><pre id="mBody"></pre></div></div>
+
+<!-- example sources -->
+<script type="text/plain" id="src-requirements-rst">
+Logging requirements
+====================
+
+This chapter collects the requirements for audit logging in the
+fleet backend. It is reviewed before every release.
+
+.. req:: Log every configuration change
+   :id: REQ_001
+   :status: open
+   :tags: audit, logging
+
+   The system shall write a log entry for every change of the
+   configuration, including user, time, old and new value.
+
+.. req:: Keep logs for 30 days
+   :id: REQ_002
+   :status: open
+   :links: REQ_001
+
+   Log entries shall be kept for at least 30 days and then be
+   deleted automatically.
+
+Storage
+-------
+
+Logs are stored in the central log service. Access is limited
+to operators and auditors.
+
+.. spec:: Write logs as JSON lines
+   :id: SPEC_001
+   :links: REQ_001
+
+   Each log entry is one JSON object per line with the fields
+   ``ts``, ``user``, ``key``, ``old`` and ``new``.
+</script>
+
+<script type="text/plain" id="src-guide-md">
+---
+title: Getting started
+owner: daniel
+status: draft
+---
+
+# Getting started
+
+deciwa keeps feedback on your docs next to the docs, without
+touching the source files.
+
+## Install
+
+Install the CLI with pipx:
+
+```bash
+pipx install deciwa
+```
+
+## First review
+
+- Run `deciwa elements guide.md` to see what deciwa can point at.
+- Open the file in VS Code and hover over a paragraph.
+- Click it and choose approve, rephrase or more details.
+
+Every verdict lands in `.deciwa/` and can be committed with Git.
+</script>
+
+<script type="text/plain" id="src-index-html">
+<header id="top"><div class="logo">deciwa</div><nav><a href="#">Features</a><a href="#">Pricing</a><a href="#">Docs</a></nav></header>
+<section id="hero">
+  <h1>Point at it. Say what you think.</h1>
+  <p>deciwa keeps your feedback on docs, websites and code right where it belongs, remembers what you approved, notices when it changes and tells the AI exactly what to do next.</p>
+  <a class="btn" href="#">Try the prototype</a>
+  <img src="assets/deciwa-megaphone.webp" alt="deciwa with a megaphone">
+</section>
+<section id="features">
+  <h2>Why reviewers like it</h2>
+  <div class="grid">
+    <article class="card"><h3>Review the result</h3><p>Click on the rendered page, not on lines of source.</p></article>
+    <article class="card"><h3>Approved stays approved</h3><p>When approved text changes, deciwa shows the change and asks again.</p></article>
+    <article class="card"><h3>Freeze</h3><p>Legal text and agreed requirements stay exactly as they are.</p></article>
+  </div>
+</section>
+<section id="pricing">
+  <h2>Pricing</h2>
+  <p>Free to use. The hosted service for teams is paid.</p>
+</section>
+<footer><p>© 2026 danwos · Imprint · Privacy</p></footer>
+</script>
+
+<script type="text/plain" id="src-loader-py">
+"""Load and validate the deciwa configuration."""
+
+import json
+from pathlib import Path
+
+DEFAULT_PATH = Path(".deciwa/config.json")
+
+
+class ConfigError(Exception):
+    """Raised when the configuration is invalid."""
+
+
+class Config:
+    """Settings for one repository."""
+
+    def __init__(self, backend: str, reviewers: list[str]):
+        self.backend = backend
+        self.reviewers = reviewers
+
+    def is_hosted(self) -> bool:
+        """Return True if annotations are stored in the hosted service."""
+        return self.backend.startswith("https://")
+
+
+def load_config(path: Path = DEFAULT_PATH) -> Config:
+    """Read the config file and return a Config.
+
+    Falls back to local storage if the file does not exist.
+    """
+    if not path.exists():
+        return Config(backend="local", reviewers=[])
+    data = json.loads(path.read_text())
+    if "backend" not in data:
+        raise ConfigError("missing key: backend")
+    return Config(data["backend"], data.get("reviewers", []))
+</script>
+
+<script>
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const short = (s, n) => s.length > n ? s.slice(0, n - 1) + '…' : s;
+const norm = s => s.replace(/`+/g, '').replace(/\s+/g, ' ').trim();
+const trimEnd = (L, s, e) => { while (e > s && !L[e].trim()) e--; return e; };
+const hash = s => { let h = 5381; for (const c of norm(s)) h = ((h << 5) + h + c.charCodeAt(0)) >>> 0; return 'sha256:' + h.toString(16).padStart(8, '0') + '…'; };
+const today = () => new Date().toISOString();
+const day = iso => iso.slice(0, 10);
+const inline = s => esc(s).replace(/``([^`]+)``/g, '<code>$1</code>').replace(/`([^`]+)`/g, '<code>$1</code>');
+
+/* ---------- format adapters: elements come from the content, no markers ---------- */
+function mkAdd(els) { return (kind, label, start, end, selector) => { const e = { kind, label, start, end, selector }; els.push(e); return e; }; }
+function counter() { const c = {}; return key => (c[key] = (c[key] || 0) + 1); }
+
+function parseMd(f) {
+  const L = f.lines, els = [], add = mkAdd(els), num = counter();
+  add('file', f.name, 0, L.length - 1, 'md:file:' + f.path);
+  let i = 0;
+  if (L[0] === '---') {
+    let j = 1; while (j < L.length && L[j] !== '---') j++;
+    add('frontmatter', 'frontmatter', 0, j, 'md:frontmatter');
+    for (let k = 1; k < j; k++) { const m = L[k].match(/^([\w-]+):/); if (m) add('field', m[1], k, k, 'md:frontmatter:' + m[1]); }
+    i = j + 1;
+  }
+  const heads = []; let fence = false;
+  for (let k = i; k < L.length; k++) {
+    if (/^```/.test(L[k])) fence = !fence;
+    if (fence) continue;
+    const m = L[k].match(/^(#{1,6})\s+(.*)$/); if (m) heads.push({ line: k, level: m[1].length, text: m[2] });
+  }
+  const stack = [];
+  heads.forEach((h, idx) => {
+    let end = L.length - 1;
+    for (let n = idx + 1; n < heads.length; n++) if (heads[n].level <= h.level) { end = heads[n].line - 1; break; }
+    while (stack.length && stack[stack.length - 1].level >= h.level) stack.pop();
+    stack.push(h); h.path = stack.map(x => x.text).join('/');
+    const e = add('section', h.text, h.line, trimEnd(L, h.line, end), 'md:heading:' + h.path); e.level = h.level;
+  });
+  const pathAt = k => { let p = ''; heads.forEach(h => { if (h.line <= k) p = h.path; }); return p; };
+  const isLi = s => /^\s*([-*]|\d+\.)\s/.test(s);
+  let k = i;
+  while (k < L.length) {
+    const t = L[k];
+    if (!t.trim() || /^#{1,6}\s/.test(t)) { k++; continue; }
+    const p = pathAt(k);
+    if (/^```/.test(t)) {
+      let j = k + 1; while (j < L.length && !/^```/.test(L[j])) j++;
+      add('code block', 'code block', k, j, 'md:code:' + p + '#' + num('c' + p)); k = j + 1; continue;
+    }
+    if (isLi(t)) {
+      let j = k + 1; while (j < L.length && L[j].trim() && /^\s{2,}/.test(L[j]) && !isLi(L[j])) j++;
+      add('list item', short(t.replace(/^\s*([-*]|\d+\.)\s/, ''), 44), k, j - 1, 'md:list-item:' + p + '#' + num('l' + p)); k = j; continue;
+    }
+    let j = k; while (j < L.length && L[j].trim() && !/^#{1,6}\s/.test(L[j]) && !/^```/.test(L[j]) && !isLi(L[j])) j++;
+    add('paragraph', short(t, 44), k, j - 1, 'md:paragraph:' + p + '#' + num('p' + p)); k = j;
+  }
+  return els;
+}
+
+function parseRst(f) {
+  const L = f.lines, els = [], add = mkAdd(els), num = counter();
+  add('file', f.name, 0, L.length - 1, 'rst:file:' + f.path);
+  const under = /^([=\-~^"'`#*+])\1{2,}\s*$/, titles = [], levels = [];
+  for (let k = 0; k < L.length - 1; k++) {
+    if (L[k].trim() && !/^\s/.test(L[k]) && under.test(L[k + 1])) {
+      const c = L[k + 1][0]; if (!levels.includes(c)) levels.push(c);
+      titles.push({ line: k, level: levels.indexOf(c), text: L[k].trim() }); k++;
+    }
+  }
+  const stack = [];
+  titles.forEach((h, idx) => {
+    let end = L.length - 1;
+    for (let n = idx + 1; n < titles.length; n++) if (titles[n].level <= h.level) { end = titles[n].line - 1; break; }
+    while (stack.length && stack[stack.length - 1].level >= h.level) stack.pop();
+    stack.push(h); h.path = stack.map(x => x.text).join('/');
+    const e = add('section', h.text, h.line, trimEnd(L, h.line, end), 'rst:section:' + h.path); e.level = h.level + 1;
+  });
+  const isTitle = k => titles.some(h => h.line === k || h.line + 1 === k);
+  const pathAt = k => { let p = ''; titles.forEach(h => { if (h.line <= k) p = h.path; }); return p; };
+  let k = 0;
+  while (k < L.length) {
+    const t = L[k];
+    if (!t.trim() || isTitle(k)) { k++; continue; }
+    const m = t.match(/^\.\.\s+([\w-]+)::\s*(.*)$/);
+    if (m) {
+      let j = k + 1; while (j < L.length && (!L[j].trim() || /^\s/.test(L[j]))) j++;
+      const end = trimEnd(L, k, j - 1);
+      let id = null; for (let n = k + 1; n <= end; n++) { const o = L[n].match(/^\s+:id:\s*(\S+)/); if (o) id = o[1]; }
+      const isNeed = ['req', 'spec', 'test', 'need'].includes(m[1]) && id;
+      const base = isNeed ? 'sphinx-needs:' + id : 'rst:directive:' + m[1] + '#' + num('d' + m[1]);
+      const ne = add(isNeed ? 'need · ' + m[1] : 'directive', (id ? id + ' · ' : '') + m[2], k, end, base);
+      Object.assign(ne, { ntype: m[1], title: m[2], nid: id });
+      let n = k + 1, pc = 0;
+      while (n <= end) {
+        const o = L[n].match(/^\s+:([\w-]+):\s*(.*)$/);
+        if (o) { const oe = add('option', ':' + o[1] + ': ' + o[2], n, n, base + '/:' + o[1]); Object.assign(oe, { key: o[1], value: o[2] }); n++; continue; }
+        if (!L[n].trim()) { n++; continue; }
+        let q = n; while (q <= end && L[q].trim() && !/^\s+:[\w-]+:/.test(L[q])) q++;
+        add('paragraph', short(L[n].trim(), 44), n, q - 1, base + '/content#' + (++pc)); n = q;
+      }
+      k = j; continue;
+    }
+    let j = k; while (j < L.length && L[j].trim() && !isTitle(j) && !/^\.\.\s/.test(L[j])) j++;
+    const p = pathAt(k);
+    add('paragraph', short(t, 44), k, j - 1, 'rst:paragraph:' + p + '#' + num('p' + p)); k = j;
+  }
+  return els;
+}
+
+function parsePy(f) {
+  const L = f.lines, els = [], add = mkAdd(els), mod = f.name.replace(/\.py$/, '');
+  const ind = s => s.match(/^\s*/)[0].length, blank = s => !s.trim();
+  const firstIndent = (a, b) => { for (let n = a; n <= b; n++) if (!blank(L[n])) return ind(L[n]); return null; };
+  add('file', f.name, 0, L.length - 1, 'python:module:' + mod);
+  function body(from, to, indent, qual, ctx) {
+    let k = from, sc = 0, prevImport = null;
+    while (k <= to) {
+      const t = L[k];
+      if (blank(t) || ind(t) < indent) { k++; continue; }
+      const s = t.trim();
+      if (s.startsWith('"""')) {
+        let end = k;
+        if ((s.match(/"""/g) || []).length < 2) { end = k + 1; while (end <= to && !L[end].includes('"""')) end++; }
+        add('docstring', 'docstring of ' + qual.replace(mod + '.', ''), k, end, 'python:docstring:' + qual);
+        k = end + 1; prevImport = null; continue;
+      }
+      let j = k + 1; while (j <= to && (blank(L[j]) || ind(L[j]) > indent)) j++;
+      const end = trimEnd(L, k, j - 1);
+      let m;
+      if ((m = s.match(/^(?:async\s+)?def\s+(\w+)/))) {
+        const q = qual + '.' + m[1], kind = ctx === 'class' ? 'method' : 'function';
+        add(kind, q.replace(mod + '.', '') + '()', k, end, 'python:' + kind + ':' + q);
+        const bi = firstIndent(k + 1, end); if (bi) body(k + 1, end, bi, q, 'def');
+      } else if ((m = s.match(/^class\s+(\w+)/))) {
+        const q = qual + '.' + m[1];
+        add('class', m[1], k, end, 'python:class:' + q);
+        const bi = firstIndent(k + 1, end); if (bi) body(k + 1, end, bi, q, 'class');
+      } else if (/^(import|from)\s/.test(s) && ctx === 'module') {
+        if (prevImport && prevImport.end === k - 1) prevImport.end = end;
+        else prevImport = add('imports', 'imports', k, end, 'python:imports:' + qual);
+        k = j; continue;
+      } else if (s.startsWith('#')) {
+        add('comment', short(s, 44), k, end, 'python:comment:' + qual + '#' + (++sc));
+      } else {
+        add(ctx === 'class' ? 'attribute' : 'statement', short(s, 44), k, end, 'python:statement:' + qual + '#' + (++sc));
+      }
+      prevImport = null; k = j;
+    }
+  }
+  body(0, L.length - 1, 0, mod, 'module');
+  return els;
+}
+
+/* HTML: elements are the block containers of the DOM, addressed by CSS path */
+function parseHtml(f) {
+  const doc = new DOMParser().parseFromString(f.text, 'text/html');
+  const els = [];
+  const cssPath = n => {
+    if (n.id) return '#' + n.id;
+    if (n.tagName === 'BODY') return 'body';
+    const same = [...n.parentElement.children].filter(c => c.tagName === n.tagName);
+    return cssPath(n.parentElement) + ' > ' + n.tagName.toLowerCase() + (same.length > 1 ? ':nth-of-type(' + (same.indexOf(n) + 1) + ')' : '');
+  };
+  const kindOf = n => {
+    const t = n.tagName.toLowerCase();
+    if (/^h[1-6]$/.test(t)) return 'heading';
+    if (t === 'a') return n.classList.contains('btn') ? 'button' : null;
+    return { header: 'header', nav: 'navigation', main: 'main', section: 'section', article: n.classList.contains('card') ? 'card' : 'article', footer: 'footer', aside: 'aside', div: 'container', p: 'paragraph', ul: 'list', ol: 'list', li: 'list item', figure: 'figure', img: 'image', blockquote: 'quote', pre: 'code block', button: 'button', table: 'table' }[t] || null;
+  };
+  const root = { kind: 'page', label: f.name, selector: 'html:css:body', node: doc.body, parent: null, text: norm(doc.body.textContent) };
+  els.push(root);
+  (function walk(node, parentId) {
+    [...node.children].forEach(c => {
+      const kind = kindOf(c);
+      let pid = parentId;
+      if (kind) {
+        const h = c.querySelector('h1,h2,h3');
+        const txt = c.tagName === 'IMG' ? c.getAttribute('alt') || 'image' : norm(c.textContent);
+        const label = (c.id ? '#' + c.id + ' · ' : '') + short(kind === 'section' && h ? norm(h.textContent) : txt, 44);
+        els.push({ kind, label, selector: 'html:css:' + cssPath(c), node: c, parent: parentId, text: txt });
+        pid = els.length - 1;
+      }
+      walk(c, pid);
+    });
+  })(doc.body, 0);
+  els.forEach((e, i) => { e.id = i; e.node.setAttribute('data-el', i); });
+  f.html = doc.body.innerHTML;
+  return els;
+}
+
+function link(els) {
+  els.forEach((e, i) => e.id = i);
+  const size = e => e.end - e.start;
+  els.forEach((b, bi) => {
+    let best = null;
+    els.forEach((a, ai) => {
+      if (a === b || a.start > b.start || a.end < b.end) return;
+      if (!(size(a) > size(b) || (size(a) === size(b) && ai < bi))) return;
+      if (!best || size(a) < size(best) || (size(a) === size(best) && ai > best.id)) best = a;
+    });
+    b.parent = best ? best.id : null;
+  });
+  return els;
+}
+function finish(els) {
+  els.forEach(e => { let d = 0, p = e.parent; while (p != null) { d++; p = els[p].parent; } e.depth = d; e.leaf = !els.some(c => c.parent === e.id); });
+  return els;
+}
+
+const FILES = [
+  { name: 'requirements.rst', path: 'docs/requirements.rst', lang: 'rst', parse: parseRst, url: 'localhost:8000/_build/html/requirements.html', engine: 'Sphinx + Sphinx-Needs' },
+  { name: 'guide.md', path: 'docs/guide.md', lang: 'md', parse: parseMd, url: 'localhost:8000/_build/html/guide.html', engine: 'Sphinx (MyST)' },
+  { name: 'index.html', path: 'site/index.html', lang: 'html', parse: parseHtml, url: 'deciwa.example/', engine: 'website' },
+  { name: 'loader.py', path: 'src/deciwa/loader.py', lang: 'py', parse: parsePy },
+];
+FILES.forEach(f => {
+  f.text = document.getElementById('src-' + f.name.replace('.', '-')).textContent.replace(/^\n/, '').replace(/\s+$/, '');
+  f.lines = f.text.split('\n');
+  f.els = finish(f.lang === 'html' ? f.parse(f) : link(f.parse(f)));
+  f.canRender = f.lang !== 'py';
+  f.canSource = f.lang !== 'html';
+});
+const fileBy = name => FILES.find(f => f.name === name);
+const elText = (f, e) => e.text != null ? e.text : f.lines.slice(e.start, e.end + 1).join('\n');
+const elBySel = (f, sel) => f.els.find(e => e.selector === sel);
+const childrenOf = (f, e) => f.els.filter(c => c.parent === e.id).sort((a, b) => a.start - b.start);
+
+/* ---------- rendered output, built from the same elements ---------- */
+function renderDoc(f) {
+  const L = f.lines;
+  const para = e => L.slice(e.start, e.end + 1).map(s => s.trim()).join(' ');
+  function r(e) {
+    const kids = childrenOf(f, e);
+    const inner = () => {
+      let out = '', list = [];
+      const flush = () => { if (list.length) { out += '<ul>' + list.join('') + '</ul>'; list = []; } };
+      kids.forEach(c => { if (c.kind === 'list item') list.push(r(c)); else { flush(); out += r(c); } });
+      flush(); return out;
+    };
+    switch (e.kind) {
+      case 'file': return `<div class="doc" data-el="${e.id}">${inner()}</div>`;
+      case 'frontmatter': return `<div class="fm" data-el="${e.id}">${inner()}</div>`;
+      case 'field': return `<span data-el="${e.id}">${esc(L[e.start])}</span>`;
+      case 'section': { const h = Math.min(e.level || 1, 2); return `<section data-el="${e.id}"><h${h}>${inline(e.label)}</h${h}>${inner()}</section>`; }
+      case 'paragraph': return `<p data-el="${e.id}">${inline(para(e))}</p>`;
+      case 'list item': return `<li data-el="${e.id}">${inline(para(e).replace(/^([-*]|\d+\.)\s/, ''))}</li>`;
+      case 'code block': return `<pre data-el="${e.id}"><code>${esc(L.slice(e.start + 1, e.end).join('\n'))}</code></pre>`;
+      case 'option': return `<span class="nopt" data-el="${e.id}"><i>${esc(e.key)}</i> ${esc(e.value)}</span>`;
+      default:
+        if (e.kind.startsWith('need')) {
+          const opts = kids.filter(c => c.kind === 'option' && c.key !== 'id'), body = kids.filter(c => c.kind !== 'option');
+          return `<div class="need" data-el="${e.id}"><div class="nhead"><span class="ntype">${{ req: 'Requirement', spec: 'Specification', test: 'Test' }[e.ntype] || e.ntype}</span><b>${inline(e.title)}</b><span class="nid">${esc(e.nid)}</span></div><div class="nmeta">${opts.map(r).join('')}</div><div class="nbody">${body.map(r).join('')}</div></div>`;
+        }
+        return `<div data-el="${e.id}">${inner()}</div>`;
+    }
+  }
+  return r(f.els[0]);
+}
+
+/* ---------- annotations ---------- */
+const ACTS = {
+  approve:  { label: 'Approve',      ico: '✓', key: 'a', c: 'approved', verdict: 'approve', tip: 'Confirm the statement – it becomes a decision' },
+  rephrase: { label: 'Rephrase',     ico: '✎', key: 'r', c: 'change',   verdict: 'change', action: 'rephrase', tip: 'AI: say it better' },
+  more:     { label: 'More details', ico: '＋', key: 'm', c: 'change',   verdict: 'change', action: 'more-details', tip: 'AI: expand it' },
+  delete:   { label: 'Delete',       ico: '🗑', key: 'd', c: 'change',   verdict: 'change', action: 'delete', tip: 'AI: remove this element' },
+  freeze:   { label: 'Freeze',       ico: '❄', key: 'f', c: 'frozen',   verdict: 'freeze', tip: 'Keep exactly as it is – the AI must never change it' },
+  reject:   { label: 'Reject',       ico: '✗', key: 'x', c: 'rejected', verdict: 'reject', tip: 'The statement is wrong' },
+  note:     { label: 'Note',         ico: '💬', key: 'n', c: 'note',     verdict: 'note', tip: 'Just a note, no verdict (needs a comment)' },
+};
+const ACT_ORDER = ['approve', 'rephrase', 'more', 'delete', 'freeze', 'reject', 'note'];
+const STATE_LABEL = { approved: 'approved', change: 'changes requested', requested: 'review requested', stale: 'stale', rejected: 'rejected', note: 'note', orphaned: 'orphaned', resolved: 'resolved', frozen: 'frozen', broken: 'frozen, but changed!', rated: 'rated' };
+
+function seed() {
+  const out = []; let n = 0;
+  const mk = (file, selector, p, oldText) => {
+    const f = fileBy(file), e = elBySel(f, selector);
+    const fpText = oldText != null ? oldText : (p.exact ? p.exact : (e ? elText(f, e) : 'gone'));
+    out.push(Object.assign({ id: 'a' + (++n), file, selector, kind: e ? e.kind : 'section', label: e ? e.label : p.label, author: 'daniel', status: 'open', fingerprint: hash(fpText), oldText }, p));
+  };
+  mk('requirements.rst', 'sphinx-needs:REQ_001', { verdict: 'approve', rating: 5, created: '2026-10-10T09:00:00Z' });
+  mk('requirements.rst', 'sphinx-needs:REQ_002', { verdict: 'approve', rating: 4, created: '2026-10-10T09:02:00Z' },
+     '.. req:: Keep logs for 90 days\n   :id: REQ_002\n   :status: open\n   :links: REQ_001\n\n   Log entries shall be kept for at least 90 days and then be\n   deleted automatically.');
+  mk('requirements.rst', 'sphinx-needs:SPEC_001/content#1', { verdict: 'change', action: 'more-details', rating: 3, comment: 'Name the type of each field and the time zone of ts.', created: '2026-10-15T14:20:00Z' });
+  mk('requirements.rst', 'rst:paragraph:Logging requirements/Storage#1', { verdict: 'request', author: 'claude', to: 'daniel', comment: 'Is access really limited to operators and auditors, or can developers read logs too?', created: '2026-10-17T08:10:00Z' });
+  mk('requirements.rst', 'rst:paragraph:Logging requirements#1', { verdict: 'note', exact: 'fleet backend', comment: 'Official name is "Fleet Monitor backend".', created: '2026-10-16T12:00:00Z' });
+  mk('guide.md', 'md:heading:Getting started/Install', { verdict: 'approve', rating: 4, created: '2026-10-12T11:00:00Z' });
+  mk('guide.md', 'md:list-item:Getting started/First review#2', { verdict: 'change', action: 'rephrase', rating: 2, comment: 'Not only VS Code – say "your editor or browser".', created: '2026-10-16T16:40:00Z' });
+  mk('guide.md', 'md:paragraph:Getting started/Install#1', { verdict: 'note', exact: 'pipx', comment: 'Also mention uv tool install.', created: '2026-10-16T16:42:00Z' });
+  mk('guide.md', 'md:heading:Getting started/Configuration', { verdict: 'approve', rating: 5, label: 'Configuration', created: '2026-10-08T10:00:00Z' });
+  mk('index.html', 'html:css:#hero > h1', { verdict: 'approve', rating: 5, created: '2026-10-14T15:00:00Z' });
+  mk('index.html', 'html:css:#hero > p', { verdict: 'change', action: 'rephrase', rating: 3, comment: 'Too long – one idea per sentence.', created: '2026-10-16T10:00:00Z' });
+  mk('index.html', 'html:css:#features > div > article:nth-of-type(2) > p', { verdict: 'request', author: 'claude', to: 'daniel', comment: 'Should this card mention that deciwa also notices changes to frozen text?', created: '2026-10-17T08:40:00Z' });
+  mk('index.html', 'html:css:#pricing > p', { verdict: 'note', exact: 'is paid', comment: 'Add the price once it is decided.', created: '2026-10-16T10:05:00Z' });
+  mk('index.html', 'html:css:body > footer > p', { verdict: 'freeze', comment: 'Legal wording – do not touch.', created: '2026-10-15T09:00:00Z' });
+  mk('loader.py', 'python:statement:loader#1', { verdict: 'freeze', comment: 'Path is part of the open format – never change.', created: '2026-10-13T09:00:00Z' }, 'DEFAULT_PATH = Path(".deciwa/config.yaml")');
+  mk('loader.py', 'python:function:loader.load_config', { verdict: 'approve', rating: 4, created: '2026-10-14T10:00:00Z' });
+  mk('loader.py', 'python:docstring:loader.Config.is_hosted', { verdict: 'change', action: 'rephrase', comment: '"hosted service" → name it deciwa cloud?', created: '2026-10-16T09:30:00Z' });
+  mk('loader.py', 'python:statement:loader.load_config#3', { verdict: 'request', author: 'claude', to: 'daniel', comment: 'Should a config without backend fall back to local instead of failing?', created: '2026-10-17T08:30:00Z' });
+  out.slice().forEach(a => { if (a.rating && a.verdict !== 'rating') { out.push({ ...a, id: a.id + 'r', verdict: 'rating', comment: undefined, oldText: undefined, status: 'open' }); delete a.rating; } });
+  return out;
+}
+
+const STORE = 'deciwa-mockup-v2';
+const S = { file: 'requirements.rst', variant: 'A', mode: {}, hoverBase: null, level: 0, target: null, rating: 0, review: null, anns: null };
+try { const saved = JSON.parse(localStorage.getItem(STORE) || 'null'); if (saved) Object.assign(S, { anns: saved.anns, variant: saved.variant || 'A', file: saved.file || S.file, mode: saved.mode || {} }); } catch (e) {}
+if (!S.anns) S.anns = seed();
+if (S.variant !== 'A' && S.variant !== 'B') S.variant = 'A';
+try { const t = localStorage.getItem(STORE + '-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+const persist = () => { try { localStorage.setItem(STORE, JSON.stringify({ anns: S.anns, variant: S.variant, file: S.file, mode: S.mode })); } catch (e) {} };
+const modeOf = f => f.canRender && (S.mode[f.name] || 'rendered') === 'rendered' || !f.canSource ? 'rendered' : 'source';
+
+const keyOf = t => t.selector + (t.exact ? '|' + t.exact : '');
+function locate(a) {
+  const f = fileBy(a.file), e = elBySel(f, a.selector);
+  if (!e) return null;
+  if (!a.exact) return { el: e, start: e.start, end: e.end, text: elText(f, e) };
+  if (e.start != null) for (let k = e.start; k <= e.end; k++) if (f.lines[k].includes(a.exact)) return { el: e, start: k, end: k, text: a.exact, line: k };
+  if (norm(elText(f, e)).includes(norm(a.exact))) return { el: e, start: e.start, end: e.end, text: a.exact, line: null };
+  return null;
+}
+function annState(a) {
+  const loc = locate(a);
+  if (!loc) return 'orphaned';
+  if (a.status === 'resolved') return 'resolved';
+  if (a.verdict === 'approve') return hash(loc.text) === a.fingerprint ? 'approved' : 'stale';
+  if (a.verdict === 'rating') return 'rated';
+  if (a.verdict === 'freeze') return hash(loc.text) === a.fingerprint ? 'frozen' : 'broken';
+  if (a.verdict === 'change') return 'change';
+  if (a.verdict === 'reject') return 'rejected';
+  if (a.verdict === 'request') return 'requested';
+  return 'note';
+}
+function currentRating(file, key) {
+  const r = S.anns.filter(a => a.file === file && keyOf(a) === key && a.verdict === 'rating').sort((x, y) => x.created.localeCompare(y.created)).pop();
+  return r ? r.rating : 0;
+}
+function targetState(file, key) {
+  const list = S.anns.filter(a => a.file === file && keyOf(a) === key).sort((x, y) => x.created.localeCompare(y.created));
+  if (!list.length) return null;
+  const decisive = list.filter(a => ['approve', 'change', 'reject', 'freeze'].includes(a.verdict) && a.status !== 'resolved').pop();
+  const req = list.filter(a => a.verdict === 'request' && a.status === 'open').pop();
+  if (decisive && (!req || decisive.created > req.created)) return annState(decisive);
+  if (req) return annState(req);
+  const note = list.find(a => a.verdict === 'note');
+  return note ? annState(note) : null;
+}
+
+/* ---------- geometry: one API for source lines and rendered DOM ---------- */
+const cur = () => fileBy(S.file);
+const canvas = $('#canvas');
+const lineEls = () => $('#view').querySelectorAll('.line');
+const lineTop = k => lineEls()[k] ? lineEls()[k].offsetTop : 0;
+const lineH = () => lineEls()[0] ? lineEls()[0].offsetHeight : 21;
+const domOf = id => $('#view').querySelector(`[data-el="${id}"]`);
+function relRect(node, pad = 4) {
+  const r = node.getBoundingClientRect(), c = canvas.getBoundingClientRect();
+  return { top: r.top - c.top - pad, left: r.left - c.left - pad, width: r.width + pad * 2, height: r.height + pad * 2 };
+}
+function rectOfRange(start, end) {
+  const top = lineTop(start);
+  return { top, left: 50, width: canvas.clientWidth - 60, height: lineTop(end) + lineH() - top };
+}
+function rectOfEl(e) {
+  if (modeOf(cur()) === 'source') return rectOfRange(e.start, e.end);
+  const n = domOf(e.id); return n ? relRect(n) : null;
+}
+function rectOfTarget(t) {
+  const loc = locate(t); if (!loc) return null;
+  if (modeOf(cur()) === 'source') return t.exact && loc.line != null ? rectOfRange(loc.line, loc.line) : rectOfRange(loc.start, loc.end);
+  if (t.exact) { const m = [...$('#view').querySelectorAll('mark.tm')].find(x => x.dataset.key === keyOf(t)); if (m) return relRect(m, 2); }
+  return rectOfEl(loc.el);
+}
+function placeBox(box, r, tag) {
+  if (!r) { box.style.display = 'none'; return; }
+  Object.assign(box.style, { display: 'block', top: r.top + 'px', left: r.left + 'px', width: r.width + 'px', height: r.height + 'px' });
+  const t = box.querySelector('.tag'); if (t) t.textContent = tag || '';
+}
+
+/* ---------- rendering ---------- */
+function hlSegment(s, f) {
+  let h = esc(s);
+  if (f.lang === 'py') {
+    h = h.replace(/"([^"]*?)"|(#.*$)|\b(def|class|return|if|not|in|raise|import|from|as|for|async|self|True|False|None)\b/g,
+      (m, str, com, kw) => com ? `<span class="cm">${com}</span>` : kw ? `<span class="kw">${kw}</span>` : `<span class="st">${m}</span>`);
+  } else if (f.lang === 'md') {
+    h = h.replace(/`([^`]+)`/g, '<span class="ic">`$1`</span>').replace(/^(\s*)([-*]|\d+\.)(\s)/, '$1<span class="kw">$2</span>$3');
+  } else {
+    h = h.replace(/``([^`]+)``/g, '<span class="ic">``$1``</span>').replace(/^(\.\.\s+[\w-]+::)/, '<span class="kw">$1</span>').replace(/^(\s+:[\w-]+:)/, '<span class="opt">$1</span>');
+  }
+  return h;
+}
+function lineClass(f, k) {
+  const t = f.lines[k];
+  if (f.lang === 'md') {
+    const fm = f.els.find(e => e.kind === 'frontmatter'); if (fm && k >= fm.start && k <= fm.end) return 'l-fm';
+    if (/^#{1,6}\s/.test(t)) return 'l-h';
+    if (f.els.some(e => e.kind === 'code block' && k >= e.start && k <= e.end)) return 'l-str';
+  }
+  if (f.lang === 'rst' && f.els.some(e => e.kind === 'section' && (e.start === k || e.start + 1 === k))) return 'l-h';
+  if (f.lang === 'py' && f.els.some(e => e.kind === 'docstring' && k >= e.start && k <= e.end)) return 'l-str';
+  return '';
+}
+function renderLine(f, k) {
+  const t = f.lines[k];
+  const marks = S.anns.filter(a => a.file === f.name && a.exact).map(a => ({ a, loc: locate(a) })).filter(x => x.loc && x.loc.line === k);
+  let html;
+  if (marks.length) {
+    const { a } = marks[0], i = t.indexOf(a.exact), st = targetState(f.name, keyOf(a)) || 'note';
+    html = hlSegment(t.slice(0, i), f) + `<mark class="tm" data-key="${esc(keyOf(a))}" style="--c:var(--${st})">${esc(a.exact)}</mark>` + hlSegment(t.slice(i + a.exact.length), f);
+  } else html = hlSegment(t, f);
+  return `<div class="line" data-line="${k}"><span class="ln">${k + 1}</span><span class="code ${lineClass(f, k)}">${html || ' '}</span></div>`;
+}
+function markRendered(f) {
+  const seen = new Set();
+  S.anns.filter(a => a.file === f.name && a.exact).forEach(a => {
+    const key = keyOf(a); if (seen.has(key)) return; seen.add(key);
+    const loc = locate(a); if (!loc) return;
+    const node = domOf(loc.el.id); if (!node) return;
+    const w = document.createTreeWalker(node, NodeFilter.SHOW_TEXT); let t;
+    while ((t = w.nextNode())) {
+      const i = t.textContent.indexOf(a.exact);
+      if (i < 0) continue;
+      const r = document.createRange(); r.setStart(t, i); r.setEnd(t, i + a.exact.length);
+      const m = document.createElement('mark'); m.className = 'tm'; m.dataset.key = key;
+      m.style.setProperty('--c', `var(--${targetState(f.name, key) || 'note'})`);
+      r.surroundContents(m); break;
+    }
+  });
+}
+
+function renderEditor() {
+  const f = cur(), mode = modeOf(f);
+  if (mode === 'source') {
+    $('#view').innerHTML = f.lines.map((_, k) => renderLine(f, k)).join('');
+  } else {
+    const body = f.lang === 'html' ? `<div class="site" data-el="0">${f.html}</div>` : renderDoc(f);
+    $('#view').innerHTML = `<div class="browser"><div class="bbar"><span class="dots"><i></i><i></i><i></i></span><span class="url">${f.url}</span></div><div class="page">${body}</div></div>`;
+    markRendered(f);
+  }
+  const seg = `<span class="seg mini"><button data-mode="rendered" class="${mode === 'rendered' ? 'on' : ''}" ${f.canRender ? '' : 'disabled title="Code is reviewed in the source"'}>Rendered</button><button data-mode="source" class="${mode === 'source' ? 'on' : ''}" ${f.canSource ? '' : 'disabled title="Only the result exists here – like the browser extension"'}>Source</button></span>`;
+  const what = mode === 'rendered'
+    ? (f.lang === 'html' ? 'live page · elements = HTML containers' : `built by ${f.engine} · feedback maps back to ${f.path}`)
+    : `${f.els.length - 1} elements found by the ${({ rst: 'rST / Sphinx-Needs', md: 'Markdown', py: 'Python' })[f.lang]} adapter`;
+  $('#tabbar').innerHTML = `${seg}<b>${f.name}</b><span>${what}</span>`;
+  renderBars(); positionFocus(); updateHover();
+}
+function renderBars() {
+  const f = cur(), keys = new Set(), mode = modeOf(f);
+  const page = mode === 'rendered' ? $('#view .page') : null;
+  const pageLeft = page ? relRect(page, 0).left : 0;
+  let html = '';
+  S.anns.filter(a => a.file === f.name).forEach(a => {
+    const key = keyOf(a); if (keys.has(key)) return; keys.add(key);
+    const loc = locate(a), st = targetState(f.name, key);
+    if (!loc || !st || st === 'resolved') return;
+    let r;
+    if (mode === 'source') r = rectOfRange(loc.start, loc.end);
+    else { const n = domOf(loc.el.id); if (!n) return; r = relRect(n, 0); }
+    const left = mode === 'source' ? 42 + loc.el.depth * 4 : pageLeft + 8 + loc.el.depth * 4;
+    html += `<div class="bar" style="left:${left}px;top:${r.top + 2}px;height:${Math.max(6, r.height - 4)}px;background:var(--${st})" title="${STATE_LABEL[st]}"></div>`;
+  });
+  $('#bars').innerHTML = html;
+}
+function hoverEl() {
+  if (S.hoverBase == null) return null;
+  const f = cur(); let e = f.els[S.hoverBase];
+  for (let i = 0; i < S.level && e && e.parent != null; i++) e = f.els[e.parent];
+  return e;
+}
+function updateHover() {
+  const e = hoverEl();
+  placeBox($('#hoverBox'), e ? rectOfEl(e) : null, e ? e.kind + ' · ' + e.label : '');
+  renderStatus(e);
+}
+function positionFocus() {
+  const t = S.target;
+  placeBox($('#focusBox'), t && t.file === S.file ? rectOfTarget(t) : null);
+}
+function renderStatus(e) {
+  const f = cur(), st = $('#status');
+  if (!e) { st.innerHTML = `<span>Hover an element · select text for words · click to give feedback</span><span class="hint">Alt = one level up · v = review mode</span>`; return; }
+  const path = []; let p = e; while (p) { path.unshift(p.kind); p = p.parent != null ? f.els[p.parent] : null; }
+  const where = e.start != null ? `${modeOf(f) === 'rendered' ? 'from ' + f.path + ' ' : ''}lines ${e.start + 1}–${e.end + 1}` : '';
+  st.innerHTML = `<span>${esc(path.join(' › '))}</span><span class="sel">${esc(e.selector)}</span><span>${where}</span><span class="sel">${hash(elText(f, e))}</span><span class="hint">Alt = one level up${S.level ? ' (' + S.level + ')' : ''}</span>`;
+}
+
+function renderNav() {
+  const dirs = {};
+  FILES.forEach(f => { const d = f.path.split('/').slice(0, -1).join('/'); (dirs[d] = dirs[d] || []).push(f); });
+  let html = '<h4>example-repo</h4>';
+  Object.entries(dirs).forEach(([d, fs]) => {
+    html += `<div class="fitem dir">▾ ${d}/</div>`;
+    fs.forEach(f => {
+      const open = S.anns.filter(a => a.file === f.name && ['change', 'requested', 'stale', 'orphaned', 'broken'].includes(annState(a))).length;
+      html += `<div class="fitem ${f.name === S.file ? 'on' : ''}" data-file="${f.name}" style="padding-left:28px">${f.name}${open ? `<span class="badge">${open}</span>` : ''}</div>`;
+    });
+  });
+  html += `<div class="legend">${['approved', 'frozen', 'change', 'requested', 'stale', 'broken', 'rejected', 'note', 'orphaned'].map(s => `<span style="--c:var(--${s})">${STATE_LABEL[s]}</span>`).join('')}</div>`;
+  $('#nav').innerHTML = html;
+}
+
+function formHtml(t) {
+  const list = S.anns.filter(a => a.file === t.file && keyOf(a) === keyOf(t)).sort((x, y) => y.created.localeCompare(x.created));
+  const req = list.find(a => a.verdict === 'request' && a.status === 'open');
+  const stars = [1, 2, 3, 4, 5].map(i => `<button data-star="${i}" class="${i <= S.rating ? 'on' : ''}" title="${i} – ${['poor', 'weak', 'ok', 'good', 'excellent'][i - 1]}">★</button>`).join('');
+  const acts = ACT_ORDER.map(k => { const a = ACTS[k]; return `<button class="act" data-act="${k}" style="--c:var(--${a.c})" title="${a.tip}"><span class="ico">${a.ico}</span>${a.label}<kbd>${a.key}</kbd></button>`; }).join('');
+  const loc = locate(t);
+  const hist = list.filter(a => a !== req && a.verdict !== 'rating').map(a => {
+    const st = annState(a), act = a.action ? ' · ' + a.action : '';
+    let diff = '';
+    if ((st === 'stale' || st === 'broken') && a.oldText && loc) {
+      const o = a.oldText.split('\n'), n = loc.text.split('\n');
+      const rows = o.length === n.length
+        ? o.flatMap((l, i) => l === n[i] ? [] : [`<span class="del">- ${esc(l.trim())}</span>`, `<span class="add">+ ${esc(n[i].trim())}</span>`])
+        : [...o.map(l => `<span class="del">- ${esc(l)}</span>`), ...n.map(l => `<span class="add">+ ${esc(l)}</span>`)];
+      diff = `<div class="diff">${rows.join('\n')}</div>`;
+    }
+    return `<div class="h"><div><span class="chip" style="--c:var(--${st})">${STATE_LABEL[st]}</span> <b>${a.verdict}${act}</b> ${a.rating ? '★'.repeat(a.rating) : ''}</div>${a.comment ? `<div>${esc(a.comment)}</div>` : ''}<div class="meta">${a.author} · ${day(a.created)}${a.to ? ' → ' + a.to : ''}${st === 'stale' ? ' · text changed after approval' : st === 'broken' ? ' · frozen text was changed – restore it' : ''}</div>${diff}</div>`;
+  }).join('');
+  return `<div class="form">
+    <div class="fhead"><span class="kind">${esc(t.exact ? 'text selection' : t.kind)}</span><b>${esc(t.exact ? '“' + t.exact + '”' : t.label)}</b><div class="sel" title="${esc(t.selector)}">${esc(t.selector)}${t.exact ? ' + TextQuote' : ''}</div></div>
+    ${req ? `<div class="ask"><b>? ${req.author} asks ${req.to}:</b> ${esc(req.comment)}</div>` : ''}
+    <div class="stars">${stars}<span>quality 1–5</span></div>
+    <div class="acts">${acts}</div>
+    <textarea id="cmt" placeholder="Comment – optional, required for Note. The AI gets this text."></textarea>
+    <div class="ffoot"><button class="tbtn" data-act="request">Ask for review</button><select id="askTo"><option>daniel</option><option>claude</option><option>team</option></select><span style="margin-left:auto">keys a r m d f x n · 1–5 · esc</span></div>
+    ${hist ? `<div class="hist">${hist}</div>` : ''}
+  </div>`;
+}
+
+function renderPanel() {
+  const f = cur(), anns = S.anns.filter(a => a.file === f.name);
+  const counts = {}; anns.forEach(a => { const s = annState(a); counts[s] = (counts[s] || 0) + 1; });
+  const leaves = f.els.filter(e => e.leaf && e.parent != null);
+  const approved = leaves.filter(e => { let p = e; while (p) { if (targetState(f.name, p.selector) === 'approved') return true; p = p.parent != null ? f.els[p.parent] : null; } return false; }).length;
+  let html = '';
+  if (S.variant === 'B') html += `<div>${S.target ? formHtml(S.target) : '<div class="empty">Click an element or select text.<br>Feedback appears here – no popup.</div>'}</div>`;
+  const order = a => { const l = locate(a); return l ? (l.start != null ? l.start : l.el.id) : 1e9; };
+  html += `<div><h3>This file</h3></div>
+    <div class="counts">${Object.entries(counts).map(([s, n]) => `<span class="chip" style="--c:var(--${s})">${n} ${STATE_LABEL[s]}</span>`).join('') || '<span class="cov">no feedback yet</span>'}</div>
+    <div class="cov">${approved} of ${leaves.length} elements covered by an approval<div class="track"><i style="width:${Math.round(approved / leaves.length * 100)}%"></i></div></div>
+    <div class="alist">${anns.filter(a => a.verdict !== 'rating' || !anns.some(o => o.verdict !== 'rating' && keyOf(o) === keyOf(a))).sort((x, y) => order(x) - order(y)).map(a => {
+      const st = annState(a), loc = locate(a), stars = currentRating(f.name, keyOf(a));
+      const where = !loc ? ' · element not found' : loc.start != null ? ' · L' + (loc.start + 1) : '';
+      return `<div class="aitem" data-ann="${a.id}" style="--c:var(--${st})"><div class="t"><b>${esc(a.exact ? '“' + a.exact + '”' : a.label)}</b><span class="chip" style="--c:var(--${st})">${STATE_LABEL[st]}</span></div>
+        <div class="c">${a.verdict}${a.action ? ' · ' + a.action : ''}${stars ? ' · ' + '★'.repeat(stars) : ''} · ${a.author} · ${day(a.created)}${where}</div>${a.comment ? `<div class="c">${esc(short(a.comment, 90))}</div>` : ''}</div>`;
+    }).join('')}</div>`;
+  $('#panel').innerHTML = html;
+}
+
+function renderHeader() {
+  document.querySelectorAll('#variants button').forEach(b => b.classList.toggle('on', b.dataset.v === S.variant));
+  $('#vdesc').textContent = { A: 'Card opens at the element', B: 'Everything in the side panel, no popup' }[S.variant];
+  $('#main').classList.toggle('wide-panel', S.variant === 'B');
+  $('#btnReview').classList.toggle('on', !!S.review);
+}
+function renderAll() { renderHeader(); renderNav(); renderEditor(); renderPanel(); renderReviewBar(); }
+
+/* ---------- open / close feedback UI ---------- */
+function targetFromEl(e) { return { file: S.file, selector: e.selector, kind: e.kind, label: e.label }; }
+function uiOpen() { return S.variant === 'A' ? $('#card').classList.contains('on') : !!S.target; }
+
+function openUI(t) {
+  S.target = t; S.rating = currentRating(t.file, keyOf(t));
+  positionFocus();
+  if (S.variant === 'A') {
+    const r = rectOfTarget(t);
+    $('#cardBody').innerHTML = formHtml(t);
+    const card = $('#card'); card.classList.add('on');
+    card.style.top = (r ? (t.exact ? r.top + r.height + 6 : r.top) : 20) + 'px';
+    const cr = card.getBoundingClientRect(), ed = $('#editor').getBoundingClientRect();
+    if (cr.bottom > ed.bottom) $('#editor').scrollTop += cr.bottom - ed.bottom + 12;
+    if (cr.top < ed.top + 40) $('#editor').scrollTop -= ed.top + 40 - cr.top;
+  }
+  renderPanel();
+}
+function closeUI() {
+  $('#card').classList.remove('on');
+  S.target = null; S.rating = 0; positionFocus(); renderPanel();
+  const sel = window.getSelection(); if (sel) sel.removeAllRanges();
+}
+
+/* ---------- saving ---------- */
+function save(kind) {
+  const t = S.target; if (!t) return;
+  const cmtEl = $('#cmt'), comment = (cmtEl ? cmtEl.value : '').trim();
+  if (kind === 'note' && !comment) {
+    if (cmtEl) { cmtEl.focus(); cmtEl.classList.add('shake'); setTimeout(() => cmtEl.classList.remove('shake'), 400); }
+    toast('A note needs a comment'); return;
+  }
+  if (kind === 'request' && !comment) { if (cmtEl) cmtEl.focus(); toast('Write the question into the comment field'); return; }
+  const loc = locate(t), a = ACTS[kind] || { verdict: 'request' };
+  const ann = { id: 'a' + Date.now(), file: t.file, selector: t.selector, kind: t.kind, label: t.label, author: 'daniel', status: 'open', created: today(), verdict: a.verdict, fingerprint: hash(loc ? loc.text : '') };
+  if (a.action) ann.action = a.action;
+  if (comment) ann.comment = comment;
+  if (t.exact) Object.assign(ann, { exact: t.exact, prefix: t.prefix, suffix: t.suffix });
+  if (kind === 'request') ann.to = $('#askTo') ? $('#askTo').value : 'daniel';
+  if (['approve', 'change', 'reject', 'freeze'].includes(ann.verdict)) {
+    S.anns.forEach(o => { if (o.file === t.file && keyOf(o) === keyOf(t) && o.status === 'open' && o.verdict !== 'note') o.status = 'resolved'; });
+  }
+  S.anns.push(ann); persist();
+  toast(`${a.label || 'Request'} saved → .deciwa/annotations/${fileBy(t.file).path}.json`);
+  if (S.review) { closeUI(); renderAll(); reviewStep(1); return; }
+  if (S.variant === 'A') closeUI();
+  renderAll();
+}
+
+/* ---------- review mode ---------- */
+function reviewList() { const f = cur(), m = modeOf(f); return f.els.filter(e => e.leaf && e.parent != null && (m === 'source' || domOf(e.id))); }
+function startReview() { S.review = { idx: -1 }; reviewStep(1); renderHeader(); }
+function stopReview() { S.review = null; closeUI(); renderHeader(); renderReviewBar(); }
+function reviewStep(d) {
+  const list = reviewList(); if (!S.review) return;
+  S.review.idx += d;
+  if (S.review.idx >= list.length) { stopReview(); toast('File reviewed – all crystal clear'); return; }
+  if (S.review.idx < 0) S.review.idx = 0;
+  const e = list[S.review.idx];
+  renderReviewBar();
+  const r = rectOfEl(e); if (r) $('#editor').scrollTop = Math.max(0, r.top - 120);
+  setTimeout(() => openUI(targetFromEl(e)), 30);
+}
+function renderReviewBar() {
+  const rb = $('#reviewbar');
+  if (!S.review) { rb.classList.remove('on'); return; }
+  const list = reviewList(), i = Math.max(0, S.review.idx);
+  rb.classList.add('on');
+  rb.innerHTML = `<b>Review mode</b><span>${i + 1} / ${list.length}</span><span class="prog"><i style="width:${(i + 1) / list.length * 100}%"></i></span><span>j next · k back · esc stop</span>`;
+}
+
+/* ---------- events ---------- */
+const view = $('#view');
+function baseFromEvent(ev) {
+  const f = cur();
+  if (modeOf(f) === 'source') {
+    const l = ev.target.closest('.line'); if (!l) return null;
+    const k = +l.dataset.line;
+    const e = f.els.filter(x => x.start <= k && x.end >= k).sort((a, b) => (a.end - a.start) - (b.end - b.start) || b.id - a.id)[0];
+    return e ? e.id : null;
+  }
+  const n = ev.target.closest('[data-el]'); return n ? +n.dataset.el : null;
+}
+view.addEventListener('mousemove', ev => {
+  const b = baseFromEvent(ev);
+  if (b !== S.hoverBase) { S.hoverBase = b; S.level = 0; updateHover(); }
+});
+view.addEventListener('mouseleave', () => { S.hoverBase = null; S.level = 0; updateHover(); });
+view.addEventListener('click', ev => { if (ev.target.closest('a')) ev.preventDefault(); });
+view.addEventListener('mouseup', ev => {
+  const b = baseFromEvent(ev);
+  if (b !== S.hoverBase) { S.hoverBase = b; S.level = 0; updateHover(); }
+  setTimeout(() => {
+    const sel = window.getSelection(), f = cur();
+    if (sel && !sel.isCollapsed && sel.toString().trim()) {
+      const anchor = sel.anchorNode && (sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentElement);
+      const exact = sel.toString().split('\n')[0].trim();
+      let e = null;
+      if (modeOf(f) === 'source') {
+        const l = anchor && anchor.closest('.line'); if (!l) return;
+        const k = +l.dataset.line; if (!f.lines[k].includes(exact)) return;
+        e = f.els.filter(x => x.start <= k && x.end >= k).sort((a, b) => (a.end - a.start) - (b.end - b.start) || b.id - a.id)[0];
+      } else {
+        const n = anchor && anchor.closest('[data-el]'); if (!n) return;
+        e = f.els[+n.dataset.el];
+        while (e && !norm(elText(f, e)).includes(norm(exact)) && e.parent != null) e = f.els[e.parent];
+      }
+      if (!exact || !e) return;
+      const txt = elText(f, e), i = txt.indexOf(exact);
+      openUI({ file: S.file, selector: e.selector, kind: e.kind, label: e.label, exact, prefix: i >= 0 ? txt.slice(Math.max(0, i - 20), i) : '', suffix: i >= 0 ? txt.slice(i + exact.length, i + exact.length + 20) : '' });
+      renderEditor();
+      return;
+    }
+    const e = hoverEl(); if (e) openUI(targetFromEl(e));
+  }, 0);
+});
+
+document.addEventListener('click', ev => {
+  const t = ev.target;
+  const v = t.closest('[data-v]'); if (v) { closeUI(); S.variant = v.dataset.v; persist(); renderAll(); return; }
+  const md = t.closest('[data-mode]'); if (md) { if (md.disabled) return; closeUI(); S.mode[S.file] = md.dataset.mode; persist(); renderAll(); return; }
+  const fi = t.closest('[data-file]'); if (fi) { closeUI(); S.file = fi.dataset.file; S.review = null; persist(); $('#editor').scrollTop = 0; renderAll(); return; }
+  const st = t.closest('[data-star]'); if (st) { setRating(+st.dataset.star); return; }
+  const act = t.closest('[data-act]'); if (act) { save(act.dataset.act); return; }
+  if (t.closest('[data-close]')) { closeUI(); return; }
+  const ai = t.closest('.aitem'); if (ai) { focusAnn(ai.dataset.ann); return; }
+  if (t.closest('[data-mclose]') || t.id === 'modal') { $('#modal').classList.remove('on'); return; }
+});
+document.addEventListener('mousedown', ev => {
+  const t = ev.target;
+  if (S.variant === 'A' && $('#card').classList.contains('on') && !t.closest('#card') && !t.closest('#view') && !t.closest('aside')) closeUI();
+});
+function showStars(n) {
+  S.rating = n;
+  document.querySelectorAll('[data-star]').forEach(b => b.classList.toggle('on', +b.dataset.star <= S.rating));
+}
+// Quality is independent of feedback: a star click saves the rating right away and keeps the card open.
+function setRating(n) {
+  const t = S.target; if (!t) return;
+  S.anns = S.anns.filter(a => !(a.file === t.file && keyOf(a) === keyOf(t) && a.verdict === 'rating' && a.author === 'daniel'));
+  const loc = locate(t);
+  const ann = { id: 'a' + Date.now(), file: t.file, selector: t.selector, kind: t.kind, label: t.label, author: 'daniel', status: 'open', created: today(), verdict: 'rating', rating: n, fingerprint: hash(loc ? loc.text : '') };
+  if (t.exact) Object.assign(ann, { exact: t.exact, prefix: t.prefix, suffix: t.suffix });
+  S.anns.push(ann); persist();
+  showStars(n); renderPanel(); renderNav();
+  toast(`Rated ${'★'.repeat(n)} – independent of approval`);
+}
+function focusAnn(id) {
+  const a = S.anns.find(x => x.id === id); if (!a) return;
+  if (a.file !== S.file) { S.file = a.file; renderAll(); }
+  const loc = locate(a);
+  if (!loc) { toast('Element not found any more – deciwa would offer to relink it'); return; }
+  const t = { file: a.file, selector: a.selector, kind: a.kind, label: a.label };
+  if (a.exact) Object.assign(t, { exact: a.exact, prefix: a.prefix, suffix: a.suffix });
+  const r = rectOfTarget(t); if (r) $('#editor').scrollTop = Math.max(0, r.top - 120);
+  setTimeout(() => openUI(t), 30);
+}
+
+document.addEventListener('keydown', e => {
+  const typing = /^(TEXTAREA|INPUT|SELECT)$/.test(document.activeElement.tagName);
+  if (e.key === 'Alt') {
+    e.preventDefault();
+    if (!typing && S.hoverBase != null) { const h = hoverEl(); if (h && h.parent != null) S.level++; updateHover(); }
+    return;
+  }
+  if (typing) { if (e.key === 'Escape') document.activeElement.blur(); return; }
+  if (e.key === 'Escape') { if (S.review) stopReview(); else if (uiOpen()) closeUI(); else $('#modal').classList.remove('on'); return; }
+  if (S.target && uiOpen()) {
+    const k = ACT_ORDER.find(x => ACTS[x].key === e.key);
+    if (k) { e.preventDefault(); save(k); return; }
+    if (/^[1-5]$/.test(e.key)) { setRating(+e.key); return; }
+  }
+  if (e.key === 'v') { S.review ? stopReview() : startReview(); return; }
+  if (S.review && (e.key === 'j' || e.key === 'k')) { closeUI(); reviewStep(e.key === 'j' ? 1 : -1); }
+});
+document.addEventListener('keyup', e => { if (e.key === 'Alt') e.preventDefault(); });
+window.addEventListener('resize', () => { renderBars(); positionFocus(); updateHover(); });
+
+$('#btnReview').onclick = () => S.review ? stopReview() : startReview();
+$('#btnReset').onclick = () => { S.anns = seed(); S.mode = {}; closeUI(); S.review = null; persist(); renderAll(); toast('Example data restored'); };
+$('#btnTheme').onclick = () => {
+  const r = document.documentElement, t = r.dataset.theme === 'dark' ? 'light' : 'dark';
+  r.dataset.theme = t; try { localStorage.setItem(STORE + '-theme', t); } catch (e) {}
+};
+$('#btnJson').onclick = () => {
+  const f = cur();
+  const doc = { deciwa: '0.1', source: f.path, annotations: S.anns.filter(a => a.file === f.name).map(a => {
+    const [ns, kind, ...rest] = a.selector.split(':');
+    const sels = [{ type: ns + ':' + kind, value: rest.join(':') }];
+    if (a.exact) sels.push({ type: 'TextQuoteSelector', exact: a.exact, prefix: a.prefix, suffix: a.suffix });
+    const o = { id: a.id, target: { selectors: sels, fingerprint: a.fingerprint }, author: a.author, created: a.created, verdict: a.verdict };
+    ['action', 'rating', 'comment', 'to', 'status'].forEach(k => { if (a[k] != null) o[k] = a[k]; });
+    o.state = annState(a) + '  (computed, not stored)';
+    return o;
+  }) };
+  $('#mTitle').textContent = '.deciwa/annotations/' + f.path + '.json';
+  $('#mBody').textContent = JSON.stringify(doc, null, 2);
+  $('#modal').classList.add('on');
+};
+
+let toastT;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2200); }
+
+/* fixed states for screenshots: ?clean&theme=light&file=…&mode=…&variant=…&open=<selector>&rating=3&comment=… */
+const Q = new URLSearchParams(location.search);
+if (Q.has('clean')) { S.anns = seed(); S.mode = {}; }
+if (Q.has('shot')) document.body.classList.add('shot');
+if (Q.get('theme')) document.documentElement.dataset.theme = Q.get('theme');
+if (Q.get('file')) S.file = Q.get('file');
+if (Q.get('variant')) S.variant = Q.get('variant');
+if (Q.get('mode')) S.mode[S.file] = Q.get('mode');
+
+renderAll();
+document.fonts && document.fonts.ready.then(() => {
+  renderBars(); positionFocus();
+  const e = Q.get('open') && elBySel(cur(), Q.get('open'));
+  if (e) {
+    const r = rectOfEl(e); if (r) $('#editor').scrollTop = Math.max(0, r.top - (+Q.get('above') || 80));
+    openUI(targetFromEl(e));
+    if (Q.get('rating')) showStars(+Q.get('rating'));
+    if (Q.get('comment')) $('#cmt').value = Q.get('comment');
+    if (Q.get('scroll') != null) $('#editor').scrollTop = +Q.get('scroll');
+    positionFocus();
+  }
+  if (Q.get('demo')) runDemo(Q.get('demo'));
+});
+</script>
+
+<!-- ?demo=de|en plays a scripted walk-through with a visible cursor and captions (used to record the product video) -->
+<style>
+  #dcursor { position: fixed; left: 0; top: 0; z-index: 100; pointer-events: none; width: 26px; height: 26px; transform: translate(-3px, -2px); }
+  #dcursor .ring { position: absolute; left: -14px; top: -14px; width: 30px; height: 30px; border-radius: 50%; border: 3px solid var(--hover); opacity: 0; }
+  #dcursor .ring.on { animation: ring .45s ease-out; }
+  @keyframes ring { from { opacity: .9; transform: scale(.4); } to { opacity: 0; transform: scale(1.4); } }
+  #dcap { position: fixed; left: 50%; top: 8px; transform: translateX(-50%); z-index: 99; max-width: 760px; text-align: center; padding: 10px 22px; border-radius: 14px; background: #1B1A22; color: #fff; border: 2px solid #fff; box-shadow: 3px 3px 0 #0F766E; font: 700 21px/1.3 "Bricolage Grotesque", system-ui, sans-serif; opacity: 0; transition: opacity .3s; }
+  #dcap.on { opacity: 1; }
+  #dend { position: fixed; inset: 0; z-index: 101; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: var(--bg); opacity: 0; transition: opacity .6s; pointer-events: none; }
+  #dend.on { opacity: 1; }
+  #dend img { width: 200px; height: 200px; }
+  #dend b { font: 800 54px "Bricolage Grotesque", system-ui, sans-serif; }
+  #dend span { font: 600 22px "JetBrains Mono", ui-monospace, monospace; color: var(--primary); }
+  #dend small { margin-top: 14px; font: 400 17px Inter, system-ui, sans-serif; color: var(--muted); }
+</style>
+<script>
+async function runDemo(lang) {
+  const TXT = {
+    de: {
+      point: 'Zeig auf eine Stelle – direkt im Ergebnis.',
+      feedback: 'Feedback geben: ein Klick sagt, was passieren soll.',
+      typedRephrase: 'Kürzer – ein Gedanke pro Satz.',
+      quality: 'Qualität einschätzen – ganz unabhängig davon.',
+      ask: 'Die KI fragt – du antwortest direkt an der Stelle.',
+      typedAnswer: 'Ja, ein Satz zu Freeze passt hier gut.',
+      stale: 'Bestätigt bleibt bestätigt – bis sich der Text ändert.',
+      freeze: 'Freeze: Ändert sich der Text doch, schlägt deciwa Alarm.',
+      end: 'Feedback, Qualität und Fragen der KI – an einem Ort.',
+    },
+    en: {
+      point: 'Point at a spot – right on the result.',
+      feedback: 'Give feedback: one click says what should happen.',
+      typedRephrase: 'Shorter – one idea per sentence.',
+      quality: 'Rate the quality – completely separate from that.',
+      ask: 'The AI asks – you answer right at the spot.',
+      typedAnswer: 'Yes, one sentence about freeze fits well here.',
+      stale: 'Approved stays approved – until the text changes.',
+      freeze: 'Freeze: if the text changes anyway, deciwa raises the alarm.',
+      end: 'Feedback, quality and the AI\'s questions – in one place.',
+    },
+  }[lang] || {};
+  window.__demoDone = false;
+  document.body.classList.add('shot');
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const frame = () => new Promise(r => requestAnimationFrame(r));
+
+  const pointer = document.createElement('div');
+  pointer.id = 'dcursor';
+  pointer.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24"><path d="M3 2l7.5 19 2.6-7.7L21 10.8z" fill="#fff" stroke="#1B1A22" stroke-width="1.6" stroke-linejoin="round"/></svg><div class="ring"></div>';
+  document.body.append(pointer);
+  const cap = document.createElement('div'); cap.id = 'dcap'; document.body.append(cap);
+  let x = innerWidth * .55, y = innerHeight * .45;
+  const place = () => { pointer.style.left = x + 'px'; pointer.style.top = y + 'px'; };
+  place();
+
+  async function caption(text, hold = 0) {
+    cap.classList.remove('on'); await sleep(250);
+    cap.textContent = text; cap.classList.add('on'); await sleep(hold);
+  }
+  async function move(tx, ty, ms = 650) {
+    const sx = x, sy = y, t0 = performance.now();
+    for (;;) {
+      const p = Math.min(1, (performance.now() - t0) / ms), e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      x = sx + (tx - sx) * e; y = sy + (ty - sy) * e; place();
+      const el = document.elementFromPoint(x, y);
+      if (el) el.dispatchEvent(new MouseEvent('mousemove', { bubbles: true, clientX: x, clientY: y }));
+      if (p >= 1) break;
+      await frame();
+    }
+  }
+  function ensureVisible(el) {
+    const ed = $('#editor');
+    if (!ed.contains(el)) return;
+    const r = el.getBoundingClientRect(), er = ed.getBoundingClientRect();
+    if (r.top < er.top + 50 || r.bottom > er.bottom - 120) ed.scrollTop += r.top - er.top - 90;
+  }
+  async function to(el, fx = .3, fy = .5, ms) {
+    ensureVisible(el); await frame();
+    const r = el.getBoundingClientRect();
+    await move(r.left + r.width * fx, r.top + r.height * fy, ms);
+    return el;
+  }
+  async function click() {
+    const ring = pointer.querySelector('.ring');
+    ring.classList.remove('on'); void ring.offsetWidth; ring.classList.add('on');
+    const el = document.elementFromPoint(x, y);
+    const o = { bubbles: true, clientX: x, clientY: y };
+    el.dispatchEvent(new MouseEvent('mousedown', o));
+    el.dispatchEvent(new MouseEvent('mouseup', o));
+    el.dispatchEvent(new MouseEvent('click', o));
+    await sleep(350);
+  }
+  async function type(text) {
+    const ta = $('#cmt');
+    await to(ta, .2, .5, 450); await click();
+    for (const ch of text) { ta.value += ch; await sleep(42); }
+    await sleep(250);
+  }
+  const el = sel => domOf(elBySel(cur(), sel).id);
+  const act = k => document.querySelector(`#card [data-act="${k}"]`);
+
+  await sleep(700);
+
+  // 1 – point at things on the rendered result
+  await caption(TXT.point);
+  await to(el('html:css:#hero > h1'), .35, .5, 900); await sleep(500);
+  await to(el('html:css:#hero > p'), .4, .5); await sleep(500);
+  await to(el('html:css:#features > div > article:nth-of-type(1) > p'), .4, .5); await sleep(700);
+
+  // 2 – feedback
+  await caption(TXT.feedback);
+  await to(el('html:css:#hero > p'), .45, .4); await click(); await sleep(500);
+  await type(TXT.typedRephrase);
+  await to(act('rephrase'), .5, .5); await sleep(200); await click(); await sleep(1100);
+
+  // 3 – quality, separate from feedback
+  await caption(TXT.quality);
+  await to(el('html:css:#features > div > article:nth-of-type(3) > p'), .4, .5); await click(); await sleep(500);
+  await to(document.querySelector('#card [data-star="4"]'), .5, .5); await sleep(150); await click(); await sleep(1300);
+  await to(document.querySelector('#card [data-close]'), .5, .5, 500); await click(); await sleep(300);
+
+  // 4 – the AI asks
+  await caption(TXT.ask);
+  await to(el('html:css:#features > div > article:nth-of-type(2) > p'), .4, .5); await click(); await sleep(1600);
+  await type(TXT.typedAnswer);
+  await to(act('note'), .5, .5); await sleep(200); await click(); await sleep(1100);
+
+  // 5 – stale approval in Sphinx-Needs docs
+  await caption(TXT.stale);
+  await to(document.querySelector('[data-file="requirements.rst"]'), .3, .5, 800); await click(); await sleep(700);
+  await to(el('sphinx-needs:REQ_002').querySelector('.nhead'), .35, .5, 800); await click(); await sleep(3200);
+  closeUI(); await sleep(200);
+
+  // 6 – freeze alarm in code
+  await caption(TXT.freeze);
+  await to(document.querySelector('[data-file="loader.py"]'), .3, .5, 800); await click(); await sleep(700);
+  await to(lineEls()[5].querySelector('.code'), .2, .5, 800); await click(); await sleep(3400);
+
+  // 7 – end card
+  cap.classList.remove('on');
+  const end = document.createElement('div'); end.id = 'dend';
+  end.innerHTML = `<img src="assets/deciwa.webp" alt=""><b>deciwa</b><span>decision watcher</span><small>${TXT.end}</small>`;
+  document.body.append(end); await frame(); end.classList.add('on');
+  await sleep(3200);
+  window.__demoDone = true;
+}
+</script>
+</body>
+</html>
