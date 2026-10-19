@@ -62,8 +62,15 @@ article h1::after {
 a { text-decoration-color: var(--dw-primary); text-underline-offset: 2px; }
 a:hover { color: var(--dw-terracotta); }
 code.literal { background: var(--dw-tint); border: 0; border-radius: 4px; }
-.sidebar-logo { max-width: 72px; }
-.sidebar-brand-text { font-size: 1.6rem; }
+/* sidebar brand: monster, name, slogan – centred */
+.dw-brand { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 18px 12px 14px; text-decoration: none; }
+.dw-brand .sidebar-logo-container { margin: 0 0 6px; }
+.dw-brand .sidebar-logo { max-width: 132px; width: 132px; height: auto; filter: drop-shadow(3px 3px 0 rgba(0,0,0,.18)); transition: transform .15s; }
+.dw-brand:hover .sidebar-logo { transform: rotate(-4deg) scale(1.03); }
+.dw-brand-name { font-family: var(--font-stack--headings); font-weight: 800; font-size: 2rem; line-height: 1; letter-spacing: -0.02em; color: var(--color-foreground-primary); }
+.dw-brand-slogan { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--color-brand-primary); }
+.dw-brand-slogan::after { content: ""; display: block; height: 4px; width: 84px; margin: 9px auto 0; border-radius: 2px;
+  background: linear-gradient(90deg, #14B8A6 0 25%, #E2725B 25% 50%, #D8C3A5 50% 75%, #8A9A5B 75%); }
 .sidebar-tree .caption-text { font-family: var(--font-stack--headings); font-size: 0.8rem; letter-spacing: 0.06em; color: var(--dw-primary); }
 .sidebar-tree .current-page > .reference { border-left: 3px solid var(--dw-terracotta); }
 
@@ -117,3 +124,11 @@ body[data-theme="dark"] .needflow img, body[data-theme="dark"] .graphviz img { f
   body:not([data-theme="light"]) .needflow img, body:not([data-theme="light"]) .graphviz img { filter: invert(0.88) hue-rotate(180deg); }
 }
 figure.diagram .arrowhead { fill: var(--dw-muted); }
+
+/* footer: "a danwos project" */
+.dw-made-by { display: flex; justify-content: flex-start; margin: 10px 0 0 -6px; }
+.dw-made-by a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-foreground-secondary);
+  font-size: .8rem; padding: 4px 10px 4px 6px; border-radius: 999px; border: 1.5px solid transparent; }
+.dw-made-by a:hover { border-color: var(--color-brand-primary); color: var(--color-foreground-primary); }
+.dw-made-by img { height: 26px; width: auto; }
+.dw-made-by b { font-family: var(--font-stack--headings); font-weight: 800; color: var(--color-foreground-primary); }

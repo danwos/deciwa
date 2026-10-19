@@ -50,6 +50,8 @@ source. The engine does it in three steps for every annotated file.
 If the selector that hit is not the first one, the engine reports a
 `relinked` hint so `deciwa` can update the stored selectors (only on an
 explicit `deciwa relink`, never silently). Nothing hits → `orphaned`.
+Text quote and position follow the
+[W3C Web Annotation Data Model](https://www.w3.org/TR/annotation-model/).
 ```
 
 ## 2 · Compare
@@ -87,8 +89,8 @@ first rule that applies:
 | 1 | target not found | `orphaned` |
 | 2 | latest freeze is in force and the fingerprint changed | `frozen, but changed` |
 | 3 | latest freeze is in force | `frozen` |
-| 4 | an open quick action (rephrase, details, delete) | `changes requested` |
-| 5 | latest verdict is reject | `rejected` |
+| 4 | an open delete job | `changes requested` |
+| 5 | latest verdict is an open reject (not fixed yet) | `rejected` |
 | 6 | latest verdict is approve and the fingerprint changed | `stale` |
 | 7 | latest verdict is approve | `approved` |
 | 8 | an open request | `requested` |
@@ -108,12 +110,11 @@ changed.
 
 ```{question} How is a freeze lifted?
 :id: Q_UNFREEZE
-:status: open
+:status: answered
 :to: Daniel
 :refines: PROP_STATE_RULES
 
-Options: (a) a new verdict `approve` on the element ends the freeze;
-(b) an explicit `deciwa unfreeze <id>` that only humans may run; (c) only by
-deleting the freeze annotation. Proposal: (b) – a freeze is strong on
-purpose, and agents must never lift it.
+Options were: (a) a new verdict on the element ends the freeze; (b) an
+explicit `deciwa unfreeze <id>`; (c) only by deleting the freeze annotation.
+Answered by Daniel (2026-10-19): (a) – see {need}`DEC_FREEZE_BY_VERDICT`.
 ```

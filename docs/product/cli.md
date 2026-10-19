@@ -8,25 +8,30 @@ local server), never to the files directly. Every command has `--json`.
 
 | Command | Does |
 |---|---|
-| `deciwa elements <file>` | elements an adapter finds, with selectors – the base for every hover UI |
-| `deciwa annotate …` | add feedback or a rating |
-| `deciwa request … --to … --question …` | ask someone about an element |
-| `deciwa status [path]` | counts per state |
-| `deciwa todo` | open jobs for the AI or developer |
-| `deciwa resolve <id>` | mark a job as done |
-| `deciwa diff <id>` | approved vs. current wording |
-| `deciwa serve` | local JSON API for the integrations |
-| `deciwa push / pull` | sync with the hosted service |
+| `deciwa init [--at <folder>]` | create `.deciwa/` |
+| `deciwa serve` | build the docs, serve them with the review overlay, rebuild on change |
+| `deciwa elements <file>` | the elements of a source, with their selectors |
+| `deciwa show <file>` | all feedback of a source with the element states |
+| `deciwa status` | states and coverage of the whole project |
+| `deciwa todo` | open jobs for the AI or developer, and open questions |
+| `deciwa annotate <file> <element> --verdict … [--comment …]` | give feedback |
+| `deciwa rate <file> <element> <0-5>` | give stars |
+| `deciwa request <file> <element> --to … --question …` | ask someone about an element |
+| `deciwa answer <id> [--verdict …] [--text …]` | answer a question |
+| `deciwa resolve <id> [--note …]` | mark a job as done |
+| `deciwa export [file]` | all review data as one file |
+| `deciwa import <file> [--force]` | replace the review data with a file – refused if it is older |
+| `deciwa diff <id>` | approved vs. current wording (0.1) |
+| `deciwa push / pull` | sync with the hosted service (0.4) |
 
-Proposed details for 0.1: [CLI concept](../concept/cli.md).
+Proposed details for 0.1: [CLI concept](../technical/cli.md).
 
 ## Agent skills
 
-Agents pick up feedback and ask questions without extra prompting
-({need}`DEC_SKILLS`).
-
-- **`deciwa-work`** – fetch `deciwa todo`, apply rephrase / more details /
-  delete and comments, never touch frozen elements, `deciwa resolve`,
+- **`deciwa-work`** – fetch `deciwa todo`, apply comments, fix rejected
+  statements and delete elements, never touch frozen elements, `deciwa resolve`,
   request a re-review.
 - **`deciwa-ask`** – instead of a `[CHECK]` marker in the text, ask a
   question on the element.
+
+How to use them with Claude: [Claude](../integrations/claude.md).

@@ -61,13 +61,27 @@ diffs stay small and merge conflicts stay rare.
 | Field | Values | Note |
 |---|---|---|
 | `kind` | `feedback` · `rating` · `request` | the three ways of working stay separate in the data |
-| `verdict` | `approve` · `reject` · `rephrase` · `details` · `delete` · `freeze` · `note` | only for `feedback` |
-| `stars` | 1–5 | only for `rating` |
+| `verdict` | `approve` · `reject` · `freeze` · `delete` · `note` | only for `feedback`; `note` = a comment without verdict |
+| `stars` | 0–5 | only for `rating` |
 | `question`, `to` | text, list of authors | only for `request`; answers are `replies` with an optional `verdict` |
 | `snapshot` | element text when the annotation was made | needed for `deciwa diff`, stale views and the freeze alarm |
-| `status` | `open` · `resolved` | quick actions and requests start `open`; approvals, ratings and notes start `resolved` |
+| `status` | `open` · `resolved` | jobs start `open`: delete, reject, note (a comment for the AI) and requests; approvals, freezes and ratings start `resolved` |
 | `author` | `daniel`, `agent:claude` | from `git config user.email` or `DECIWA_AUTHOR` |
 | `id` | 8 characters, lowercase base32, random | short enough to type in the CLI |
+
+```{prop} While an element is unchanged, an author's latest verdict and latest rating replace the earlier ones
+:id: PROP_LATEST_WINS
+:status: draft
+:refines: PROP_ANNOTATION, DEC_THREE_MODES
+
+A misclick or a second thought must not pile up entries. As long as the
+element's fingerprint is the same, a new verdict of the same author replaces
+the old verdict, and a new rating the old rating. Once the element changed,
+earlier annotations stay as history (that is how `stale` works). Notes and
+questions are never replaced; a comment that came with a replaced verdict is
+kept as a note. That is also how a freeze ends: the author gives another verdict
+({need}`DEC_FREEZE_BY_VERDICT`).
+```
 
 ```{prop} The snapshot of the element text is stored with every annotation
 :id: PROP_SNAPSHOT

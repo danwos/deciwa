@@ -1,0 +1,11 @@
+{%- extends "!page.html" %}
+{#- adds "a danwos project" with the danwos monogram to the footer of every page -#}
+{% block footer %}
+{{ super() }}
+<div class="dw-made-by">
+  <a href="https://danwos.dev" title="danwos.dev">
+    <img src="{{ pathto('_static/img/logo.svg', 1) }}" alt="" width="22" height="31">
+    <span>a <b>danwos</b> project</span>
+  </a>
+</div>
+{% endblock footer %}

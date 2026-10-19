@@ -54,11 +54,11 @@ them. Each statement is a Sphinx-Needs object with an id and a status.
 | Object | Prefix | Status | Meaning |
 |---|---|---|---|
 | Decision | `DEC_` | `approved` | decided by Daniel – binding |
-| Proposal | `PROP_` | `draft` → `review` → `approved` / `rejected` | part of a concept, not binding yet |
+| Proposal | `PROP_` | `draft` → `review` → `approved` / `rejected` | part of the technical details of a version, not binding yet |
 | Question | `Q_` | `open` → `answered` | someone has to decide something |
 
 An approved proposal becomes a decision: it gets a `DEC_` object in
-[Decisions](decisions/index.md), and the concept page links to it.
+[Decisions](decisions/index.md), and the technical page links to it.
 
 ## Waiting for a decision
 
@@ -76,10 +76,24 @@ An approved proposal becomes a decision: it gets a `DEC_` object in
 product/index
 product/ways-of-working
 product/elements
-product/data
-product/cli
+product/review-rules
 product/ui
+product/cli
+product/data
 product/roadmap
+```
+
+```{toctree}
+:caption: Integrations
+:maxdepth: 2
+:hidden:
+
+integrations/index
+integrations/sphinx/index
+integrations/vscode
+integrations/chrome
+integrations/claude
+integrations/desktop
 ```
 
 ```{toctree}
@@ -90,20 +104,20 @@ decisions/index
 ```
 
 ```{toctree}
-:caption: Concept 0.1 · draft
+:caption: Technical details · 0.1 draft
 :maxdepth: 2
 :hidden:
 
-concept/index
-concept/stack
-concept/layers
-concept/adapters
-concept/file-format
-concept/state-engine
-concept/cli
-concept/skills
-concept/rollout
-concept/questions
+technical/index
+technical/stack
+technical/layers
+technical/adapters
+technical/file-format
+technical/state-engine
+technical/cli
+technical/skills
+technical/rollout
+technical/questions
 ```
 
 ```{toctree}

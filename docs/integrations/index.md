@@ -1,0 +1,13 @@
+# Integrations
+
+deciwa comes to where people already work ({need}`DEC_INTEGRATIONS`). Every
+integration shows the same [review UI](../product/ui.md) and talks to the
+same CLI, so feedback given in one place shows up in all others.
+
+| Integration | Where you review | Status |
+|---|---|---|
+| [Sphinx](sphinx/index.md) | the built docs in the browser – with Sphinx-Needs | prototype, usable now |
+| [VS Code](vscode.md) | the editor and its docs preview | 0.2 |
+| [Chrome](chrome.md) | any rendered page – docs or website | 0.3 |
+| [Claude](claude.md) | a conversation with the AI; Claude asks at the element | skills in 0.1, UI later |
+| [Desktop app](desktop.md) | without a development environment | later |

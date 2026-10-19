@@ -4,7 +4,7 @@ Product and technical decisions on deciwa. All decided by Daniel; they are
 binding requirements for every feature and every piece of code. Business
 decisions (pricing, licence, market) are kept outside this repository.
 
-A new decision comes from an approved proposal of a concept – see
+A new decision comes from an approved proposal in the technical details – see
 [Working on deciwa](../contributing.md).
 
 ```{needtable}
@@ -41,6 +41,22 @@ A new decision comes from an approved proposal of a concept – see
 ```
 
 ## Feedback and decisions
+
+```{dec} The feedback card has four verdicts – approve, reject, approve & freeze, delete – plus a comment; a comment alone is a note; quality is rated with 0–5 stars
+:id: DEC_CARD_VERDICTS
+:status: approved
+:decided: 2026-10-19
+:reason: Seen in the prototype: seven three-line buttons were too big; what should change about a text is said better in the comment than with rephrase or more-details buttons; a note is just a comment without verdict; quality needs a clear scale with keys.
+:alternatives: the seven buttons of the clickable prototype (approve, rephrase, more details, delete, freeze, reject, note) and 1–5 stars.
+```
+
+```{dec} A freeze ends with a new verdict; there is no separate "lift freeze"
+:id: DEC_FREEZE_BY_VERDICT
+:status: approved
+:decided: 2026-10-19
+:reason: Approving an element again replaces one's own freeze anyway (latest verdict wins while the element is unchanged); a second way to lift it only confuses.
+:alternatives: an explicit unfreeze command for humans only; deleting the freeze annotation.
+```
 
 ```{dec} Feedback verdicts plus quick actions for the AI
 :id: DEC_VERDICTS

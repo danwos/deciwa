@@ -1,0 +1,174 @@
+"""deciwa CLI (prototype). Every command can print JSON with --json."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+from pathlib import Path
+
+from . import store
+from .engine import Project
+
+
+def _out(args, command: str, result, human=None):
+    if args.json:
+        print(json.dumps({"deciwa": "0.1", "command": command, "ok": True, "result": result},
+                         indent=2, ensure_ascii=False))
+    elif human:
+        human(result)
+    else:
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+
+
+def cmd_init(args):
+    root = Path(args.at or ".").resolve()
+    (root / store.FOLDER / "annotations").mkdir(parents=True, exist_ok=True)
+    print(f"created {root / store.FOLDER}")
+
+
+def cmd_serve(args):
+    from .server import serve
+    serve(Project(), port=args.port)
+
+
+def cmd_status(args):
+    def human(r):
+        req = r["required"]
+        print(f"{r['elements']} elements · {req['done']} of {req['total']} required approved "
+              f"(rules: {', '.join(req['rules']['required']) or 'none'})")
+        for state, n in sorted(r["states"].items(), key=lambda x: -x[1]):
+            print(f"  {n:4}  {state}")
+    _out(args, "status", Project().status(), human)
+
+
+def cmd_todo(args):
+    def human(jobs):
+        if not jobs:
+            print("nothing to do")
+        for j in jobs:
+            what = j.get("verdict") or j["job"]
+            print(f"{j['id']}  {what:9} {j['source']}:{j.get('line') or '?'}  {j['element']}")
+            if j.get("question"):
+                print(f"          ? {j['question']}")
+            if j.get("comment"):
+                print(f"          “{j['comment']}”")
+    _out(args, "todo", Project().todo(args.for_), human)
+
+
+def cmd_show(args):
+    p = Project()
+    _, page = p.page_of_source(p.index(), args.source)
+    view = p.view(args.source, page["elements"])
+
+    def human(v):
+        for sel, st in v["elements"].items():
+            badge = " +request" if st["requested"] else ""
+            print(f"{st['state']:20}{badge} {sel}")
+            for a in st["annotations"]:
+                what = a.get("verdict") or (f"Q{a['stars']}" if a["kind"] == "rating" else a["kind"])
+                print(f"    {a['id']}  {what:9} {a['status']:9} {a['author']}  {a.get('comment') or a.get('question') or ''}")
+        for o in v["orphans"]:
+            print(f"orphaned             {o['target']['selectors'][0]['value']}  ({o['id']})")
+    _out(args, "show", view, human)
+
+
+def cmd_elements(args):
+    p = Project()
+    _, page = p.page_of_source(p.index(), args.source)
+
+    def human(els):
+        for e in els:
+            print(f"{e['selector']:50} {e['line'] or '':>4}  {e['kind']:9} {e['label']}")
+    _out(args, "elements", page["elements"], human)
+
+
+def cmd_annotate(args):
+    fields = {k: v for k, v in {"verdict": args.verdict, "comment": args.comment}.items() if v}
+    ann = Project().add(args.source, args.element, "feedback", author=args.author, **fields)
+    _out(args, "annotate", ann, lambda a: print(a["id"]))
+
+
+def cmd_rate(args):
+    ann = Project().add(args.source, args.element, "rating", author=args.author, stars=args.stars)
+    _out(args, "rate", ann, lambda a: print(a["id"]))
+
+
+def cmd_request(args):
+    ann = Project().add(args.source, args.element, "request", author=args.author,
+                        question=args.question, to=args.to)
+    _out(args, "request", ann, lambda a: print(a["id"]))
+
+
+def cmd_answer(args):
+    ann = Project().reply(args.id, args.text or "", args.verdict, "resolved", author=args.author)
+    _out(args, "answer", ann, lambda a: print(f"{a['id']} answered"))
+
+
+def cmd_resolve(args):
+    ann = Project().resolve_job(args.id, args.note or "", author=args.author)
+    _out(args, "resolve", ann, lambda a: print(f"{a['id']} resolved"))
+
+
+def cmd_import(args):
+    r = Project().import_file(Path(args.file), force=args.force)
+    _out(args, "import", r, lambda x: print(f"replaced: {x['annotations']} annotations in {x['sources']} sources"))
+
+
+def cmd_export(args):
+    data = Project().export()
+    text = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
+    if args.file:
+        Path(args.file).write_text(text)
+        print(f"exported to {args.file}")
+    else:
+        print(text, end="")
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(prog="deciwa", description="deciwa prototype CLI")
+    ap.add_argument("--json", action="store_true", help="print the JSON envelope")
+    ap.add_argument("--root", help="start looking for .deciwa/ here instead of the current folder")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+
+    s = sub.add_parser("init"); s.add_argument("--at"); s.set_defaults(fn=cmd_init)
+    s = sub.add_parser("serve"); s.add_argument("--port", type=int, default=4337); s.set_defaults(fn=cmd_serve)
+    s = sub.add_parser("status"); s.set_defaults(fn=cmd_status)
+    s = sub.add_parser("todo"); s.add_argument("--for", dest="for_"); s.set_defaults(fn=cmd_todo)
+    s = sub.add_parser("show"); s.add_argument("source"); s.set_defaults(fn=cmd_show)
+    s = sub.add_parser("elements"); s.add_argument("source"); s.set_defaults(fn=cmd_elements)
+    for name, fn in (("annotate", cmd_annotate), ("rate", cmd_rate), ("request", cmd_request)):
+        s = sub.add_parser(name); s.add_argument("source"); s.add_argument("element")
+        s.add_argument("--author"); s.set_defaults(fn=fn)
+        if name == "annotate":
+            s.add_argument("--verdict", required=True); s.add_argument("--comment")
+        if name == "rate":
+            s.add_argument("stars", type=int)
+        if name == "request":
+            s.add_argument("--question", required=True); s.add_argument("--to", action="append", default=[])
+    s = sub.add_parser("answer"); s.add_argument("id"); s.add_argument("--text"); s.add_argument("--verdict")
+    s.add_argument("--author"); s.set_defaults(fn=cmd_answer)
+    s = sub.add_parser("import", help="replace the review data with an export (no merge)"); s.add_argument("file")
+    s.add_argument("--force", action="store_true", help="also when the project has newer data"); s.set_defaults(fn=cmd_import)
+    s = sub.add_parser("export", help="write all review data to one file"); s.add_argument("file", nargs="?")
+    s.set_defaults(fn=cmd_export)
+    s = sub.add_parser("resolve"); s.add_argument("id"); s.add_argument("--note"); s.add_argument("--author")
+    s.set_defaults(fn=cmd_resolve)
+
+    args = ap.parse_args(argv)
+    if args.root:
+        os.chdir(args.root)
+    try:
+        args.fn(args)
+    except (KeyError, ValueError, FileNotFoundError) as e:
+        msg = str(e).strip("'\"")
+        if args.json:
+            print(json.dumps({"deciwa": "0.1", "command": args.cmd, "ok": False, "error": {"message": msg}}))
+        else:
+            print(f"deciwa: {msg}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

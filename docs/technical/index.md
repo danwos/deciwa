@@ -1,9 +1,9 @@
-# Concept 0.1 – architecture
+# Technical details – 0.1
 
 :::{admonition} Status: draft
 :class: status-draft
-Proposals by Claude, 2026-10-19. Nothing on these pages is binding until
-Daniel approves it. Questions that block work are collected in
+How 0.1 is built – updated for every version. Proposals by Claude,
+2026-10-19; nothing on these pages is binding until Daniel approves it. Questions that block work are collected in
 [Open questions](questions.md).
 :::
 

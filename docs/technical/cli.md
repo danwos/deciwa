@@ -25,7 +25,6 @@ Proposals by Claude – not binding until Daniel approves them.
 | `deciwa resolve <id> [--note …]` | mark a job as done |
 | `deciwa diff <id>` | snapshot vs. current text |
 | `deciwa relink <id> [<element>]` | update the selectors of a moved or orphaned annotation |
-| `deciwa unfreeze <id>` | lift a freeze – depends on {need}`Q_UNFREEZE` |
 
 `serve`, `push` and `pull` follow in 0.2 and 0.4.
 

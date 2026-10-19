@@ -1,10 +1,16 @@
 """Sphinx configuration for the deciwa developer docs."""
 
+import sys
+from pathlib import Path
+
+# deciwa review overlay (prototype) – review these docs in deciwa itself
+sys.path.insert(0, str(Path(__file__).parents[1] / "prototype"))
+
 project = "deciwa"
 author = "danwos"
 copyright = "2026, danwos"
 
-extensions = ["myst_parser", "sphinx_needs", "sphinx.ext.graphviz"]
+extensions = ["myst_parser", "sphinx_needs", "sphinx.ext.graphviz", "deciwa_proto.sphinx_ext"]
 
 source_suffix = {".md": "markdown", ".rst": "restructuredtext"}
 exclude_patterns = ["_build", "README.md"]
@@ -18,10 +24,11 @@ html_title = "deciwa"
 html_logo = "_static/img/deciwa.webp"
 html_favicon = "_static/img/logo.svg"
 html_static_path = ["_static"]
+templates_path = ["_templates"]
 html_css_files = ["danwos.css"]
 html_show_sourcelink = False
 html_theme_options = {
-    "sidebar_hide_name": False,
+    "sidebar_hide_name": True,
     "navigation_with_keys": True,
     "light_css_variables": {
         "color-brand-primary": "#0F766E",
@@ -61,6 +68,8 @@ def _text(description):
 
 needs_fields = {
     "status": {"schema": {"type": "string", "enum": STATUSES}, "nullable": True},
+    # metadata is folded away; the toggle on each need shows it
+    "collapse": {"default": True},
     "decided": _text("date of the decision (YYYY-MM-DD)"),
     "reason": _text("why it was decided this way"),
     "alternatives": _text("options that were considered and not taken"),

@@ -1,0 +1,13 @@
+author = "daniel"
+
+[sphinx]
+docs = "docs"
+build = "docs/_build/html"
+
+[review]
+# required: what must be approved – element kinds (need, heading, paragraph, item,
+# row, code, note, figure), "all", or selector patterns like "sphinx-needs:PROP_*".
+# paths: optional, only these sources, e.g. ["docs/concept/*"]. Everything else
+# can still get feedback; it just does not count.
+required = ["need", "paragraph"]
+paths = []

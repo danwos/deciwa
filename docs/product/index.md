@@ -10,12 +10,18 @@ deciwa collects, evaluates and shows; it does not watch that decisions are
 kept ({need}`DEC_NO_ENFORCING`). Doing the work is the job of the AI or the
 developer.
 
-## Where it came from
+## How a review goes
 
-Daniel needed a simple way to review content and agree to statements in his
-own knowledge base – today that happens with `[CHECK]` markers in the text
-and a feedback toolbar on the website. deciwa replaces both; Daniel's own
-work is the first user.
+1. **Open the result** – the built docs page, the website, the file in your
+   editor – and switch review on.
+2. **Point and decide** – hover an element, press a key: approve, reject,
+   approve & freeze, delete; add stars and a comment if you like.
+3. **Let the work happen** – an AI agent or a developer picks up the open
+   jobs, changes the text and marks the jobs as done.
+4. **See what changed** – an approved text that was changed since shows up
+   as `stale`; a frozen one that was changed raises an alarm.
+5. **Track coverage** – the panel shows per page and for the whole project
+   how many of the elements that must be approved are approved.
 
 ## Not deciwa
 
@@ -24,10 +30,3 @@ work is the first user.
 | Making or checking the change itself | AI agent or developer |
 | Testing whether code follows a decision | quawa, normal tests |
 | Managing facts and generating views from them | faktwerk |
-
-## Prototype
-
-A clickable prototype of the feedback UI lives in `mockups/feedback-ui.html`
-(see the repository README). It shows the feedback card, quality stars, AI
-questions, a stale approval in Sphinx-Needs docs and a freeze alarm in
-Python.

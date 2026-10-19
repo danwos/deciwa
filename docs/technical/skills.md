@@ -18,8 +18,8 @@ instruction plus the CLI calls it uses. The skills only call the CLI with
 ## deciwa-work
 
 1. `deciwa todo --json` – the work list.
-2. Per job: read the element, apply rephrase / more details / delete or the
-   comment.
+2. Per job: read the element and apply the comment, fix a rejected
+   statement, or delete the element.
 3. Never edit an element in state `frozen`; if a job collides with a freeze,
    skip it and say so.
 4. `deciwa resolve <id> --note "<what changed>"`.
@@ -48,12 +48,13 @@ current project; (b) a Claude Code plugin that bundles both skills; (c) both.
 Proposal: (a) for 0.1, (b) once the CLI is published.
 ```
 
-```{question} Which quick actions besides rephrase, delete and more details?
+```{question} Are there quick actions besides delete?
 :id: Q_QUICK_ACTIONS
 :status: open
 :to: Daniel
-:refines: DEC_VERDICTS
+:refines: DEC_CARD_VERDICTS
 
-Candidates: shorten, split, add source, translate. A fixed set, or
-configurable in `.deciwa/config.toml`?
+Rephrase and more details are now said in the comment ({need}`DEC_CARD_VERDICTS`).
+Candidates for extra one-click jobs: shorten, split, add source, translate.
+None, a fixed set, or configurable in `.deciwa/config.toml`?
 ```

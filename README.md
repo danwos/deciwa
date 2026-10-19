@@ -5,7 +5,7 @@ and code.
 
 ## docs/
 
-Product description, decisions and concepts – the requirements for all code
+Product description, integrations, decisions and technical details – the requirements for all code
 in this repository. Markdown (MyST) with Sphinx-Needs; the HTML is
 generated.
 
@@ -16,6 +16,12 @@ uv venv && uv pip install -r docs/requirements.txt
 
 Then open `http://localhost:4336`. How proposals become decisions:
 `docs/contributing.md`.
+
+## prototype/
+
+Review overlay for these docs (Sphinx extension, engine, local server, CLI):
+`uv pip install -e prototype`, then `.venv/bin/deciwa serve` and open
+`http://127.0.0.1:4337`. Details: `docs/contributing.md`.
 
 ## mockups/
 

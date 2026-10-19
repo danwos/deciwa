@@ -1,53 +1,44 @@
-# Elements and formats
+# What you can review
 
-No markers in the source: elements come from the content
-({need}`DEC_NO_MARKERS`). A Sphinx-Needs requirement, a heading, a Python
-function, an HTML container or a selected word – all of them are elements as
-they are.
+Everything you can point at is an element – a Sphinx-Needs requirement, a
+heading, a paragraph, a table row, a picture or a single selected word. There
+are no markers in the source; deciwa finds the elements in the content
+itself ({need}`DEC_NO_MARKERS`).
 
-## Review on results
+## Review on the result
 
-The main review surface is the result: the built Sphinx page, rendered
-Markdown, the live website ({need}`DEC_REVIEW_ON_RESULTS`). Every element of
-the result maps back to its source element (same selector), so the source
-view shows the same annotations. Source review stays for code. deciwa must
-not look like a pull-request code review.
+You review what readers see: the built Sphinx page, rendered Markdown, the
+live website ({need}`DEC_REVIEW_ON_RESULTS`). Every element of the result
+belongs to its place in the source, so the same feedback shows up wherever
+the element is shown. Code is reviewed in the source.
 
-## Element identity
+## Elements per format
 
-Each annotation stores several selectors plus a fingerprint; deciwa tries
-them in order:
+Hovering highlights the element under the pointer; a click or a key selects
+it. `Alt` moves one level up, e.g. from a paragraph to its section. Selecting
+text first gives feedback on just those words ({need}`DEC_HOVER_SELECT`).
 
-| Selector | Example | Robust against |
+| Format | Elements | Available |
 |---|---|---|
-| Structural (format adapter) | `sphinx-needs:REQ_042`, `python:function:deciwa.core.load`, `md:heading:Career/Advisor`, `html:css:#main > section:nth-of-type(2)` | moves, edits elsewhere |
-| Text quote | exact text plus some words before and after | reformatting, moves in the file |
-| Position | line/column, offset | nothing – last fallback |
+| Sphinx (rST, Markdown) with Sphinx-Needs | need, section, paragraph, list item, table row, code block, note, picture | now (prototype) |
+| Markdown | section, paragraph, list item, table row, code block, frontmatter field | 0.1 |
+| Plain text | paragraph, line | 0.1 |
+| Python | module, class, function, method, docstring | 0.3 |
+| HTML | block containers, headings, paragraphs, images | 0.3 |
+| AsciiDoc, C, JS, TS | sections and blocks; functions, classes, structs | later |
 
-Fingerprint = hash of the normalised element text:
+Pictures – images, figures and inline SVG diagrams – are reviewed as a whole.
 
-- equal → unchanged
-- different → `stale` (or `frozen, but changed`) with a diff
-- element missing → `orphaned`, offered for relinking
+## When an element changes
 
-Text quote and position follow the
-[W3C Web Annotation Data Model](https://www.w3.org/TR/annotation-model/).
+deciwa recognises an element again after the file was edited, even when it
+moved. What happens to your feedback:
 
-## Formats
+| The element … | Shown as |
+|---|---|
+| is unchanged | your verdict as it is |
+| was changed after you approved it | `stale` – with the old and the new wording |
+| was changed although it is frozen | `frozen, but changed` – an alarm |
+| cannot be found any more | `orphaned` – listed in the panel |
 
-Format objects are highlighted on hover and directly selectable; free text
-selection works down to single words ({need}`DEC_HOVER_SELECT`). Supported
-formats: {need}`DEC_FORMATS`.
-
-| Format | Objects on hover | Priority |
-|---|---|---|
-| Markdown | section, paragraph, list item, table row, code block, frontmatter field | MVP |
-| rST + Sphinx-Needs | need (by id), option, directive, section, paragraph | MVP |
-| Plain text | paragraph, line | MVP |
-| Python | module, class, function, method, docstring, statement | next |
-| HTML | block containers, headings, paragraphs, images | next |
-| AsciiDoc | section, block | later |
-| C, JS, TS | function, class, struct (tree-sitter) | later |
-
-Free text selection works in every format and falls back to the text quote
-selector.
+A redrawn picture counts as changed too.

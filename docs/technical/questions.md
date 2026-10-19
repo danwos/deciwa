@@ -1,6 +1,6 @@
 # Open questions
 
-Everything in concept 0.1 that waits for a decision. An answered question
+Everything in the technical details of 0.1 that waits for a decision. An answered question
 becomes `answered`; the proposal it refers to becomes `approved` (or
 `rejected`) and gets a decision in [Decisions](../decisions/index.md).
 

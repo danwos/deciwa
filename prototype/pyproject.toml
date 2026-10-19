@@ -1,0 +1,19 @@
+[project]
+name = "deciwa-proto"
+version = "0.0.1"
+description = "deciwa prototype: review overlay for Sphinx docs, engine and CLI"
+requires-python = ">=3.12"
+dependencies = ["sphinx>=9"]
+
+[project.scripts]
+deciwa = "deciwa_proto.cli:main"
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["deciwa_proto*"]
+
+[tool.setuptools.package-data]
+deciwa_proto = ["static/*"]

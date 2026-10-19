@@ -1,0 +1,10 @@
+{#- deciwa brand in the sidebar: monster, name and slogan, centred -#}
+<a class="sidebar-brand centered dw-brand" href="{{ pathto(master_doc) }}">
+  {%- if logo_url %}
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="{{ logo_url }}" alt=""/>
+  </div>
+  {%- endif %}
+  <span class="dw-brand-name">{{ project }}</span>
+  <span class="dw-brand-slogan">decision watcher</span>
+</a>
