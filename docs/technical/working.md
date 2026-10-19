@@ -19,7 +19,7 @@ $ .venv/bin/sphinx-build -W -b html docs docs/_build/html         # CI build, wa
 
 `.github/workflows/docs.yml` checks the docs (warnings fail) on every push
 and pull request. From `main` it publishes them to the `gh-pages` branch of
-the public repository `danwos/deciwa-docs`, whose GitHub Pages serve them –
+the public repository `danwos/deciwa.docs`, whose GitHub Pages serve them –
 the code here stays private. The published build is an offline review build
 without the review data of `.deciwa/`, so visitors can try deciwa on these
 pages in their own browser.

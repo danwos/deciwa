@@ -1,5 +1,5 @@
 # Builds the docs and publishes them on GitHub Pages of the public repository
-# danwos/deciwa-docs – the code in this repository stays private.
+# danwos/deciwa.docs – the code in this repository stays private.
 #
 # The public build is an offline review build: visitors can try deciwa right
 # on these pages – their review stays in their own browser – and no review
@@ -55,7 +55,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.DOCS_DEPLOY_KEY }}
-          external_repository: ${{ vars.DOCS_REPOSITORY || 'danwos/deciwa-docs' }}
+          external_repository: ${{ vars.DOCS_REPOSITORY || 'danwos/deciwa.docs' }}
           publish_branch: gh-pages
           publish_dir: docs/_build/site
           force_orphan: true
