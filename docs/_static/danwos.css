@@ -139,3 +139,9 @@ figure.diagram .legend-key path { stroke-width: 2; fill: none; }
 figure.diagram .legend-key path.dep { stroke: var(--dw-muted); }
 figure.diagram .legend-key path.runl { stroke: var(--dw-terracotta); stroke-dasharray: 6 5; }
 figure.diagram text.label { paint-order: stroke; stroke: var(--color-background-primary); stroke-width: 5px; stroke-linejoin: round; }
+
+/* product video and screenshots */
+figure.video { margin: 1.5rem 0; }
+figure.video video { width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--color-foreground-primary); box-shadow: 3px 3px 0 var(--color-foreground-primary); background: #0D1B2A; }
+figure.video figcaption { color: var(--dw-muted); font-size: 14px; text-align: center; margin-top: 0.5rem; }
+article figure img[src*="screens/"] { border-radius: 10px; border: 1.5px solid var(--dw-line); }

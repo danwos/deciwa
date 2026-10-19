@@ -42,3 +42,11 @@ moved. What happens to your feedback:
 | cannot be found any more | `orphaned` – listed in the panel |
 
 A redrawn picture counts as changed too.
+
+```{figure} ../_static/screens/stale.webp
+:alt: A stale approval: the history shows the old and the new wording
+:width: 560px
+
+Approved, then changed: the history shows what changed.
+```
+

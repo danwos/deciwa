@@ -62,6 +62,13 @@ when it was exported and when the data last changed.
   overrides that. The browser warns instead.
 - `deciwa export [file]` writes the same file from the command line.
 
+```{figure} ../../_static/screens/panel-files.webp
+:alt: The Im/Export tab of the panel
+
+The panel tab **Im/Export**.
+```
+
+
 ## Publishing a review build
 
 For a public demo set `deciwa_mode=offline` and

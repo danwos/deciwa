@@ -9,6 +9,14 @@ They stay separate – in the UI, in the data and on the website
 | 2. Quality rating | 0–5, one click or key, saved on its own | quick judgement without a decision; an approved element can still get a 2; evaluations show the weak areas |
 | 3. AI communication | answer a question the AI (e.g. Claude) asked on an element – by verdict ("approve" = yes) or in text | the AI asks instead of guessing; the question lives at the element, not in a chat |
 
+
+```{figure} ../_static/screens/question.webp
+:alt: A question from Claude at the element, with Yes, No and an answer field
+:width: 560px
+
+Mode 3: Claude asks at the element – answer with yes, no or in words.
+```
+
 ## Feedback (mode 1)
 
 Four verdicts and a comment field ({need}`DEC_VERDICTS`, {need}`DEC_CARD_VERDICTS`):

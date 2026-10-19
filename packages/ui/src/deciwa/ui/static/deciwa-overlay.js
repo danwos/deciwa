@@ -619,7 +619,19 @@
   }
 
   // -- feedback card ---------------------------------------------------------
-  const diff = (a, b) => `<div class="diff"><span class="del">${esc(a)}</span>\n<span class="add">${esc(b)}</span></div>`;
+  // word diff: only what changed, with a few words around it
+  function diff(a, b) {
+    const plain = t => String(t).replace(/\*\*|`/g, "");  // drop Markdown emphasis and code marks for reading
+    const A = plain(a).split(/(\s+)/), B = plain(b).split(/(\s+)/);
+    let i = 0;
+    while (i < A.length && i < B.length && A[i] === B[i]) i++;
+    let j = 0;
+    while (j < A.length - i && j < B.length - i && A[A.length - 1 - j] === B[B.length - 1 - j]) j++;
+    const ctx = 10;  // tokens = about five words
+    const pre = A.slice(Math.max(0, i - ctx), i).join(""), post = A.slice(A.length - j, A.length - j + ctx).join("");
+    const del = A.slice(i, A.length - j).join(""), add = B.slice(i, B.length - j).join("");
+    return `<div class="diff">${i > ctx ? "… " : ""}${esc(pre)}${del ? `<span class="del">${esc(del)}</span>` : ""}${add ? `<span class="add">${esc(add)}</span>` : ""}${esc(post)}${A.length - j + ctx < A.length ? " …" : ""}</div>`;
+  }
 
   function histItem(a) {
     const what = a.kind === "rating" ? `${"★".repeat(a.stars)}${"☆".repeat(5 - a.stars)}` : a.kind === "request" ? "Question" : LABELS[a.verdict] || a.verdict;

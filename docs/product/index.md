@@ -10,6 +10,13 @@ deciwa collects, evaluates and shows; it does not watch that decisions are
 kept ({need}`DEC_NO_ENFORCING`). Doing the work is the job of the AI or the
 developer.
 
+```{raw} html
+<figure class="video">
+<video src="../_static/video/deciwa-product-en.mp4" poster="../_static/video/deciwa-product-en.jpg" controls muted playsinline preload="metadata"></video>
+<figcaption>deciwa in 50 seconds – recorded from these docs.</figcaption>
+</figure>
+```
+
 ## How a review goes
 
 1. **Open the result** – the built docs page, the website, the file in your
@@ -22,6 +29,13 @@ developer.
    as `stale`; a frozen one that was changed raises an alarm.
 5. **Track coverage** – the panel shows per page and for the whole project
    how many of the elements that must be approved are approved.
+
+```{figure} ../_static/screens/review-page.webp
+:alt: A docs page under review: coloured bars beside the reviewed elements, the deciwa button at the bottom right
+
+A page under review: the bar beside each element shows its state; the deciwa button at the bottom right counts them.
+```
+
 
 ## Not deciwa
 

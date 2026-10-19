@@ -32,6 +32,13 @@ code blocks, notes, pictures and every Sphinx-Needs object by its id.
 | Rebuild on change | automatic, the page reloads | your own build |
 | AI and CLI see feedback | at once | after `deciwa import` |
 
+```{figure} ../../_static/screens/review-page.webp
+:alt: The Sphinx docs of deciwa with the review overlay
+
+These docs with the review overlay.
+```
+
+
 ## Pages
 
 - [Installation](install.md) – the extension and the CLI

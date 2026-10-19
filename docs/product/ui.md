@@ -32,12 +32,28 @@ element:
 Drag the card by its bar if it is in the way; the next card opens at its
 usual place again. A click next to the content, `Esc` or × closes the card.
 
+```{figure} ../_static/screens/card.webp
+:alt: The feedback card below an approved need: verdicts, stars and history
+:width: 560px
+
+The card of an approved need: comment, verdicts, stars and its history.
+```
+
+
 ## On phones and tablets
 
 Tap instead of hover: tap the deciwa logo for the switches, tap an element
 for its card, tap next to it to close. Buttons and stars are larger, keys
 are not shown, and the panel takes the whole screen – choosing an entry
 closes it and opens the card.
+
+```{figure} ../_static/screens/phone.webp
+:alt: The review on a phone: the card fills the width
+:width: 300px
+
+On a phone: tap an element, the card opens below it.
+```
+
 
 ## Keys
 
@@ -66,11 +82,25 @@ next pages. `j` / `k` skip forward and back (also without guided review);
 **Stop guided** in the panel or `v` ends it. Stars
 and notes do not move on; it stays on across pages until you stop it.
 
+```{figure} ../_static/screens/guided.webp
+:alt: Guided review: the panel shows what is open, the card is on the next element
+
+Guided review: the card is on the next element without a verdict.
+```
+
+
 ## State bars
 
 A coloured bar beside each element with feedback shows its state; a `?`
 marks an open question; a grey dashed line marks an element that must still
 be approved.
+
+```{figure} ../_static/screens/required.webp
+:alt: Grey dashed lines beside required elements without a verdict, coloured bars beside reviewed ones
+
+Coloured bars for reviewed elements, grey dashed lines for required ones that are still open.
+```
+
 
 ## Panel
 
@@ -86,3 +116,21 @@ be approved.
   leaves the browser – see [offline review](../integrations/sphinx/workflow.md#offline).
 
 The panel stays open across pages.
+
+```{figure} ../_static/screens/panel-page.webp
+:alt: The panel, tab This page: coverage of verdicts and stars, the review rules and the elements still to review
+
+**This page** – verdict and quality coverage, review rules, what is still open.
+```
+
+```{figure} ../_static/screens/panel-project.webp
+:alt: The panel, tab Project: every page with its open elements
+
+**Project** – every page with what is open; a click jumps there.
+```
+
+```{figure} ../_static/screens/panel-files.webp
+:alt: The panel, tab Im/Export
+
+**Im/Export** – export, show or load a deciwa file.
+```

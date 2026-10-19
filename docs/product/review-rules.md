@@ -29,3 +29,10 @@ are set in the [configuration](../integrations/sphinx/configuration.md).
   got any verdict (approve, reject, approve & freeze, delete) – and
   **Quality** – how many got stars.
 - The card of such an element says **must be approved**.
+
+```{figure} ../_static/screens/required.webp
+:alt: Dashed lines beside required needs without a verdict
+
+Required needs without a verdict carry a grey dashed line.
+```
+
