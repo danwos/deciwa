@@ -612,7 +612,10 @@
       try { await api("/api/rules", { required: kinds }); toast("Review rules saved"); refresh(); }
       catch (err) { toast(err.message); }
     });
-    panel.querySelectorAll(".item[data-sel]").forEach(it => it.onclick = () => goTo(it.dataset.doc, it.dataset.sel));
+    panel.querySelectorAll(".item[data-sel]").forEach(it => it.onclick = () => {
+      if (innerWidth <= 560 && panel.classList.contains("on")) togglePanel();  // on a phone the panel covers the page
+      goTo(it.dataset.doc, it.dataset.sel);
+    });
   }
 
   // -- feedback card ---------------------------------------------------------

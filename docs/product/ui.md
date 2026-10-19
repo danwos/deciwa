@@ -32,6 +32,13 @@ element:
 Drag the card by its bar if it is in the way; the next card opens at its
 usual place again. A click next to the content, `Esc` or × closes the card.
 
+## On phones and tablets
+
+Tap instead of hover: tap the deciwa logo for the switches, tap an element
+for its card, tap next to it to close. Buttons and stars are larger, keys
+are not shown, and the panel takes the whole screen – choosing an entry
+closes it and opens the card.
+
 ## Keys
 
 | Key | Does |

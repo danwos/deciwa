@@ -256,3 +256,21 @@ body.dwr-on article a { cursor: alias; }
 .dwr-card .tbar { cursor: grab; user-select: none; touch-action: none; }
 .dwr-card.dragging .tbar { cursor: grabbing; }
 .dwr-card.dragging { box-shadow: var(--t-shadow-hover); }
+
+/* phones and tablets: no hover, no keyboard – bigger targets, no key chips */
+@media (hover: none) {
+  .dwr kbd, .dwr-panel .keys, .dwr .sec > label kbd { display: none; }
+  .dwr-box.hover { display: none !important; }
+  .dwr .btn { padding: 9px 12px; }
+  .dwr .acts { gap: 10px; }
+  .dwr .stars button { font-size: 36px; padding: 0 3px; }
+  .dwr .chip { padding: 5px 13px; }
+  .dwr-panel .item { padding: 9px 10px; }
+  .dwr .tbar .x { font-size: 26px; top: 4px; right: 6px; }
+}
+/* narrow screens: card and panel use the width there is */
+@media (max-width: 560px) {
+  .dwr-card { width: calc(100vw - 16px); max-width: 352px; }
+  .dwr-panel { width: 100vw; border-left: 0; }
+  .dwr-tools { right: 10px; bottom: 10px; }
+}
