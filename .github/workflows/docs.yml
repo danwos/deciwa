@@ -1,8 +1,13 @@
-# Builds the docs and publishes them on the GitHub Pages of this repository.
+# Builds the docs and publishes them on GitHub Pages of the public repository
+# danwos/deciwa-docs – the code in this repository stays private.
 #
 # The public build is an offline review build: visitors can try deciwa right
 # on these pages – their review stays in their own browser – and no review
 # data from .deciwa/ is shipped.
+#
+# Needs in this repository: the secret DOCS_DEPLOY_KEY (private SSH key whose
+# public half is a deploy key with write access on the docs repository).
+# Optional: the variable DOCS_REPOSITORY to publish somewhere else.
 
 name: docs
 
@@ -16,11 +21,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages
+  group: docs-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,20 +50,15 @@ jobs:
           -D deciwa_mode=offline -D deciwa_offline_annotations=0
           docs docs/_build/site
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Publish to the docs repository (gh-pages branch)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: docs/_build/site
-
-  deploy:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          deploy_key: ${{ secrets.DOCS_DEPLOY_KEY }}
+          external_repository: ${{ vars.DOCS_REPOSITORY || 'danwos/deciwa-docs' }}
+          publish_branch: gh-pages
+          publish_dir: docs/_build/site
+          force_orphan: true
+          user_name: deciwa docs bot
+          user_email: actions@users.noreply.github.com
+          full_commit_message: "docs from danwos/deciwa@${{ github.sha }}"
