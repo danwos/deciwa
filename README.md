@@ -1,8 +1,21 @@
 # deciwa
 
 decision watcher – a review and decision tool for elements in docs, websites
-and code. Concept and decisions live in Daniel's brain
-(`danwos/20_facts/projects/deciwa/`).
+and code.
+
+## docs/
+
+Product description, decisions and concepts – the requirements for all code
+in this repository. Markdown (MyST) with Sphinx-Needs; the HTML is
+generated.
+
+```console
+uv venv && uv pip install -r docs/requirements.txt
+.venv/bin/sphinx-autobuild docs docs/_build/html --port 4336
+```
+
+Then open `http://localhost:4336`. How proposals become decisions:
+`docs/contributing.md`.
 
 ## mockups/
 

@@ -1,0 +1,119 @@
+/* danwos look for the deciwa docs – values from the danwos design tokens. */
+
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 200 800; font-display: swap;
+  src: url("fonts/bricolage-grotesque-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2199, U+2212; }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 200 800; font-display: swap;
+  src: url("fonts/bricolage-grotesque-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Inter"; font-weight: 100 900; font-display: swap;
+  src: url("fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2190-2199, U+2212; }
+@font-face { font-family: "Inter"; font-weight: 100 900; font-display: swap;
+  src: url("fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: swap;
+  src: url("fonts/jetbrains-mono-latin.woff2") format("woff2"); }
+
+:root {
+  --dw-ink: #1B1A22;
+  --dw-primary: #0F766E;
+  --dw-teal: #14B8A6;
+  --dw-terracotta: #E2725B;
+  --dw-sand: #D8C3A5;
+  --dw-moss: #8A9A5B;
+  --dw-surface: #F4F7F7;
+  --dw-line: #D5DEDD;
+  --dw-muted: #5B6470;
+  --dw-tint: rgba(20, 184, 166, 0.10);
+  --dw-warm-tint: rgba(226, 114, 91, 0.12);
+  --dw-sand-tint: rgba(216, 195, 165, 0.30);
+}
+body[data-theme="dark"] {
+  --dw-primary: #14B8A6;
+  --dw-surface: #12253A;
+  --dw-line: #2A3E55;
+  --dw-muted: #9DAAB8;
+  --dw-tint: rgba(20, 184, 166, 0.16);
+  --dw-warm-tint: rgba(226, 114, 91, 0.18);
+  --dw-sand-tint: rgba(216, 195, 165, 0.14);
+}
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) {
+    --dw-primary: #14B8A6;
+    --dw-surface: #12253A;
+    --dw-line: #2A3E55;
+    --dw-muted: #9DAAB8;
+    --dw-tint: rgba(20, 184, 166, 0.16);
+    --dw-warm-tint: rgba(226, 114, 91, 0.18);
+    --dw-sand-tint: rgba(216, 195, 165, 0.14);
+  }
+}
+
+/* Text */
+body { font-size: 17px; }
+article { line-height: 1.65; }
+h1, h2, h3, h4, .sidebar-brand-text { font-family: var(--font-stack--headings); font-weight: 700; letter-spacing: -0.01em; }
+h1 { font-weight: 800; }
+article h1::after {
+  content: ""; display: block; height: 6px; width: 120px; margin-top: 10px; border-radius: 3px;
+  background: repeating-linear-gradient(90deg, var(--dw-teal) 0 30px, var(--dw-terracotta) 30px 60px, var(--dw-sand) 60px 90px, var(--dw-moss) 90px 120px);
+}
+a { text-decoration-color: var(--dw-primary); text-underline-offset: 2px; }
+a:hover { color: var(--dw-terracotta); }
+code.literal { background: var(--dw-tint); border: 0; border-radius: 4px; }
+.sidebar-logo { max-width: 72px; }
+.sidebar-brand-text { font-size: 1.6rem; }
+.sidebar-tree .caption-text { font-family: var(--font-stack--headings); font-size: 0.8rem; letter-spacing: 0.06em; color: var(--dw-primary); }
+.sidebar-tree .current-page > .reference { border-left: 3px solid var(--dw-terracotta); }
+
+/* Tables */
+article table.docutils { border-radius: 10px; border-collapse: separate; border-spacing: 0; overflow: hidden; box-shadow: none; border: 1px solid var(--dw-line); }
+article table.docutils th { background: var(--dw-surface); font-weight: 600; }
+article table.docutils td, article table.docutils th { border-color: var(--dw-line); }
+
+/* Status admonition on concept pages */
+.admonition.status-draft { border-left-color: var(--dw-sand); background: var(--dw-sand-tint); }
+.admonition.status-draft > .admonition-title { background: transparent; font-weight: 600; }
+.admonition.status-draft > .admonition-title::before { background-color: var(--dw-terracotta); }
+
+/* Sphinx-Needs objects as danwos cards (overrides sphinx-needs modern.css) */
+article table.need {
+  border: 2px solid var(--dw-line) !important; border-radius: 16px; overflow: hidden; margin: 1.25rem 0;
+  background: var(--color-background-primary) !important; border-collapse: separate; width: 100%; box-shadow: none;
+}
+article table.need td { border: 0 !important; background: transparent !important; }
+article table.need tr.head { background: var(--dw-surface) !important; }
+article table.need tr.head td { padding: 0.7rem 1rem; }
+article table.need tr.meta td, article table.need tr.content td { padding: 0.4rem 1rem 0.8rem; }
+article table.need tr.meta { font-size: 0.85rem; color: var(--dw-muted); }
+article table.need.needs_type_dec { border-left: 6px solid var(--dw-teal) !important; }
+article table.need.needs_type_prop { border-left: 6px solid var(--dw-sand) !important; }
+article table.need.needs_type_question { border-left: 6px solid var(--dw-terracotta) !important; }
+article table.need.needs_type_question tr.head { background: var(--dw-warm-tint) !important; }
+article table.need tr.head .needs_type_name { color: var(--dw-primary); }
+
+/* Status pills (needtables and need cards) */
+.needs_status_approved, .needs_status_draft, .needs_status_open, .needs_status_review, .needs_status_answered { border-radius: 999px; }
+
+/* Diagrams drawn as inline SVG */
+figure.diagram { margin: 1.5rem 0; }
+figure.diagram svg { width: 100%; height: auto; font-family: var(--font-stack); }
+figure.diagram figcaption { color: var(--dw-muted); font-size: 14px; text-align: center; margin-top: 0.5rem; }
+figure.diagram text { text-anchor: middle; dominant-baseline: middle; font-size: 15px; fill: var(--color-foreground-primary); }
+figure.diagram text.small { font-size: 12px; fill: var(--dw-muted); }
+figure.diagram text.strong { font-weight: 700; font-family: var(--font-stack--headings); font-size: 16px; }
+figure.diagram text.label { font-size: 12px; fill: var(--dw-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+figure.diagram .box rect { fill: var(--dw-surface); stroke: var(--dw-line); stroke-width: 2; }
+figure.diagram .box.main rect { fill: var(--dw-tint); stroke: var(--dw-primary); }
+figure.diagram .box.alt rect { fill: var(--color-background-primary); stroke: var(--dw-primary); stroke-dasharray: 5 4; }
+figure.diagram .box.warm rect { fill: var(--dw-sand-tint); stroke: var(--dw-sand); }
+figure.diagram .arrow path { stroke: var(--dw-muted); stroke-width: 2; fill: none; marker-end: url(#dw-arrow); }
+
+/* Graphviz needflow: transparent and readable in both themes */
+.needflow svg, div.graphviz svg, object.graphviz { max-width: 100%; height: auto; }
+body[data-theme="dark"] .needflow img, body[data-theme="dark"] .graphviz img { filter: invert(0.88) hue-rotate(180deg); }
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) .needflow img, body:not([data-theme="light"]) .graphviz img { filter: invert(0.88) hue-rotate(180deg); }
+}
+figure.diagram .arrowhead { fill: var(--dw-muted); }
