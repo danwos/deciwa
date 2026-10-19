@@ -1,8 +1,8 @@
-# Technical details – 0.1
+# Technical overview
 
 :::{admonition} Status: draft
 :class: status-draft
-How 0.1 is built – updated for every version. Proposals by Claude,
+How the next version (0.1) is built – updated for every version. Proposals by Claude,
 2026-10-19; nothing on these pages is binding until Daniel approves it. Questions that block work are collected in
 [Open questions](questions.md).
 :::
@@ -14,9 +14,100 @@ format, the adapters Markdown, rST/Sphinx-Needs and plain text, and the
 agent skills `deciwa-work` and `deciwa-ask` – good enough that Daniel uses
 deciwa in his knowledge base instead of `[CHECK]` markers.
 
-**Not in 0.1:** `deciwa serve`, `push` / `pull`, VS Code, Chrome, hosted
+**Not in 0.1:** `push` / `pull`, VS Code, Chrome, hosted
 service, Python/HTML adapters. The design must not block them, though –
 especially review on results ({need}`DEC_REVIEW_ON_RESULTS`).
+
+## Repository
+
+```text
+deciwa/
+├── packages/            one package per part – see below
+│   ├── core/            deciwa-core     model, .deciwa/ store, engine
+│   ├── server/          deciwa-server   review server
+│   ├── cli/             deciwa-cli      the deciwa command
+│   ├── ui/              deciwa-ui       review overlay (JS/CSS)
+│   └── sphinx/          deciwa-sphinx   Sphinx extension
+├── docs/                these docs – product, integrations, decisions,
+│                        technical details
+├── .deciwa/             review data of these docs (config.toml: what must be approved)
+├── mockups/             first clickable mock-up of the feedback UI, demo recorder
+├── pyproject.toml       the uv workspace (all packages + docs tools)
+└── uv.lock
+```
+
+## Packages
+
+The split into packages is {need}`DEC_PACKAGES`.
+
+deciwa is one repository with one package per part – a uv workspace. All
+packages share the Python namespace `deciwa`.
+
+```{raw} html
+<figure class="diagram">
+<svg viewBox="0 0 760 340" role="img" aria-labelledby="pkg-t">
+  <defs><marker id="dw-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrowhead"/></marker></defs>
+  <title id="pkg-t">Packages: cli depends on server and core; sphinx on core and ui; server on core. At run time the review UI calls the server's JSON API, and the server runs the Sphinx build.</title>
+  <g class="box alt"><rect x="20" y="20" width="220" height="60" rx="10"/><text x="130" y="44">deciwa-cli</text><text x="130" y="64" class="small">the deciwa command</text></g>
+  <g class="box alt"><rect x="270" y="20" width="220" height="60" rx="10"/><text x="380" y="44">deciwa-sphinx</text><text x="380" y="64" class="small">Sphinx extension</text></g>
+  <g class="box alt"><rect x="520" y="20" width="220" height="60" rx="10"/><text x="630" y="44">later: VS Code, Chrome …</text><text x="630" y="64" class="small">own repos or integrations/</text></g>
+  <g class="box"><rect x="20" y="140" width="220" height="60" rx="10"/><text x="130" y="164">deciwa-server</text><text x="130" y="184" class="small">site + JSON API + rebuild</text></g>
+  <g class="box"><rect x="520" y="140" width="220" height="60" rx="10"/><text x="630" y="164">deciwa-ui</text><text x="630" y="184" class="small">review overlay JS / CSS</text></g>
+  <g class="box main"><rect x="20" y="245" width="720" height="56" rx="12"/><text x="380" y="267" class="strong">deciwa-core</text><text x="380" y="287" class="small">model · store · engine – all the logic</text></g>
+  <g class="arrow">
+    <path d="M130 80 V135"/><path d="M60 80 V240"/><path d="M130 200 V240"/>
+    <path d="M380 80 V240"/><path d="M430 80 L590 135"/>
+    <path d="M630 80 V135"/><path d="M540 80 L240 145"/><path d="M710 80 V240"/>
+  </g>
+  <g class="arrow run">
+    <path d="M520 178 H245"/>
+    <path d="M200 140 C230 110 255 90 265 62"/>
+  </g>
+  <text x="382" y="170" class="label">HTTP · JSON API</text>
+  <text x="210" y="112" class="label">runs the build</text>
+  <g class="legend-key">
+    <path d="M30 325 H70" class="dep"/><text x="78" y="325" class="small" style="text-anchor:start">package dependency</text>
+    <path d="M250 325 H290" class="runl"/><text x="298" y="325" class="small" style="text-anchor:start">at run time (with deciwa serve)</text>
+  </g>
+</svg>
+<figcaption>Solid: what a package imports. Dashed: how the parts talk to each other while reviewing with a server.</figcaption>
+</figure>
+```
+
+| Folder | Distribution | Import | Contains | Depends on |
+|---|---|---|---|---|
+| `packages/core` | `deciwa-core` | `deciwa.core` | model, `.deciwa/` store, engine – states, review rules, project overview, export/import | – |
+| `packages/server` | `deciwa-server` | `deciwa.server` | local review server: serves a built site, the JSON API for the review UI, rebuilds and reloads on change; knows no build tool – the caller passes the build command | core |
+| `packages/cli` | `deciwa-cli` | `deciwa.cli` | the `deciwa` command; `deciwa serve` passes the Sphinx build to the server | core, server |
+| `packages/ui` | `deciwa-ui` | `deciwa.ui` | the review overlay (JavaScript, CSS, logo) in the danwos tool UI kit, including the offline engine; no Python logic | – |
+| `packages/sphinx` | `deciwa-sphinx` | `deciwa.sphinx` | Sphinx extension: finds the elements of every page, writes the elements index, ships the review UI | core, ui |
+
+`deciwa-sphinx` does not import `deciwa-server`: a static (offline) build
+needs no server. With `deciwa serve`, the server runs the Sphinx build, and
+the review UI in the pages talks to the server's JSON API.
+
+Rules:
+
+- Logic lives in `deciwa-core` only. The offline engine in `deciwa-ui` mirrors
+  its rules for reviews without a server and must be kept in step.
+- `deciwa-server` and `deciwa-cli` are reused by every integration that
+  reviews in a browser or calls the CLI.
+- An integration package depends on `deciwa-core` and, for a browser UI, on
+  `deciwa-ui` – never on another integration.
+
+### Setting up
+
+```console
+$ uv sync                          # all packages, editable, plus the docs tools
+$ .venv/bin/deciwa serve           # the CLI from packages/cli
+```
+
+Using deciwa in another Sphinx project:
+
+```console
+$ cd ~/workspace/deciwa/packages
+$ uv pip install --python <project>/.venv/bin/python -e core -e server -e cli -e ui -e sphinx
+```
 
 ## Pages
 
@@ -30,6 +121,7 @@ especially review on results ({need}`DEC_REVIEW_ON_RESULTS`).
 | [CLI](cli.md) | commands, element addressing, JSON output |
 | [Skills](skills.md) | what the two agent skills do and how they ship |
 | [Rollout](rollout.md) | how 0.1 gets into Daniel's knowledge base |
+| [Working on deciwa](working.md) | docs as the truth, reviewing them in deciwa, from proposal to decision |
 
 ## All proposals
 

@@ -104,7 +104,7 @@ decisions/index
 ```
 
 ```{toctree}
-:caption: Technical details · 0.1 draft
+:caption: Technical details
 :maxdepth: 2
 :hidden:
 
@@ -118,11 +118,6 @@ technical/cli
 technical/skills
 technical/rollout
 technical/questions
+technical/working
 ```
 
-```{toctree}
-:caption: Working on deciwa
-:hidden:
-
-contributing
-```

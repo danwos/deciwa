@@ -1,5 +1,8 @@
 # Working on deciwa
 
+How the docs work and how a proposal becomes a decision. The repository and
+its packages: [Technical overview](index.md).
+
 ## The docs are the truth
 
 Product description, integrations, decisions and technical details live in
@@ -7,19 +10,19 @@ Product description, integrations, decisions and technical details live in
 (MyST). The HTML pages are generated; nobody edits them.
 
 ```console
-$ uv venv && uv pip install -r docs/requirements.txt
+$ uv sync                                                         # packages + docs tools
 $ .venv/bin/sphinx-autobuild docs docs/_build/html --port 4336   # live preview
 $ .venv/bin/sphinx-build -W -b html docs docs/_build/html         # CI build, warnings fail
 ```
 
 ## Reviewing these docs in deciwa
 
-These docs use the [Sphinx integration](integrations/sphinx/index.md)
-themselves: `uv pip install -e prototype`, then `.venv/bin/deciwa serve`
+These docs use the [Sphinx integration](../integrations/sphinx/index.md)
+themselves: `uv sync`, then `.venv/bin/deciwa serve`
 and open `http://127.0.0.1:4337`. What must be approved is set in
 `.deciwa/config.toml` (today: every need). The full loop – review, work
 with `deciwa todo` / `deciwa resolve`, rebuild – is described in the
-[workflow](integrations/sphinx/workflow.md).
+[workflow](../integrations/sphinx/workflow.md).
 
 Approving a `prop` or answering a `question` in deciwa is the decision; the
 proposal is then turned into a `dec` as described below.
@@ -58,6 +61,9 @@ proposal is then turned into a `dec` as described below.
 Reference an object in text with `` {need}`DEC_SOMETHING` ``.
 
 ## Code
+
+The code is split into packages – [packages](index.md#packages). Logic
+belongs into `deciwa-core`; front ends only use `deciwa.core.Project`.
 
 Code follows the decisions. If code and a decision disagree, the decision
 wins – or a new proposal changes the decision first.

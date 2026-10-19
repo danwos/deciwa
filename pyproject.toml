@@ -1,0 +1,25 @@
+# deciwa monorepo – one uv workspace, one package per part.
+#   packages/core    deciwa-core    deciwa.core     model, .deciwa/ store, engine (the logic)
+#   packages/server  deciwa-server  deciwa.server   review server: site + JSON API + rebuild
+#   packages/cli     deciwa-cli     deciwa.cli      the `deciwa` command
+#   packages/ui      deciwa-ui      deciwa.ui       review overlay (JS/CSS) for every browser integration
+#   packages/sphinx  deciwa-sphinx  deciwa.sphinx   Sphinx extension
+[project]
+name = "deciwa-workspace"
+version = "0.0.1"
+requires-python = ">=3.12"
+dependencies = ["deciwa-cli", "deciwa-sphinx"]
+
+[dependency-groups]
+docs = ["sphinx>=9", "furo>=2025.12", "sphinx-needs>=9", "myst-parser>=5", "sphinx-autobuild"]
+
+[tool.uv]
+package = false
+default-groups = ["docs"]
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+deciwa-cli = { workspace = true }
+deciwa-sphinx = { workspace = true }

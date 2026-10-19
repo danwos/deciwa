@@ -35,41 +35,23 @@ Proposals by Claude – not binding until Daniel approves them.
 </figure>
 ```
 
-```{prop} The core is split into five layers with a strict dependency direction
+```{prop} The core is split into layers with a strict dependency direction
 :id: PROP_LAYERS
 :status: draft
-:refines: DEC_CLI_MASTER
+:refines: DEC_CLI_MASTER, DEC_PACKAGES
 
-| Package | Contains | May use |
+Inside `deciwa.core`:
+
+| Module | Contains | May use |
 |---|---|---|
-| `deciwa.model` | dataclasses, JSON (de)serialisation, schema version | – |
-| `deciwa.adapters` | one module per format; text in, elements out | model |
-| `deciwa.store` | finding `.deciwa/`, reading and writing annotation files, config | model |
-| `deciwa.engine` | resolving selectors, fingerprints, states, todo lists | model, adapters, store |
-| `deciwa.cli`, `deciwa.server`, `deciwa.sphinx` | front ends | engine (never store or files directly) |
+| `deciwa.core.model` | annotations, ids, fingerprints, schema version | – |
+| `deciwa.core.adapters` (0.1) | one module per format; text in, elements out | model |
+| `deciwa.core.store` | finding `.deciwa/`, reading and writing annotation files, config | model |
+| `deciwa.core.engine` | resolving selectors, states, review rules, todo lists, export/import | model, adapters, store |
 
-The engine is the public Python API. Front ends never touch files, so the
-hosted service can later replace `store` without changing them.
+Every other package is a front end and uses only `deciwa.core.Project`
+(never the store or the files directly), so the hosted service can later
+replace `store` without changing them.
 ```
 
-```{prop} Repository layout
-:id: PROP_REPO_LAYOUT
-:status: draft
-:refines: PROP_LAYERS
-```
-
-```text
-deciwa/
-├── src/deciwa/
-│   ├── model/        annotation.py, selector.py, element.py, state.py
-│   ├── adapters/     markdown.py, rst.py, text.py, base.py
-│   ├── store/        discover.py, files.py, config.py
-│   ├── engine/       resolve.py, fingerprint.py, state.py, todo.py
-│   └── cli/          main.py
-├── schema/           deciwa-0.1.schema.json
-├── skills/           deciwa-work/SKILL.md, deciwa-ask/SKILL.md
-├── tests/            fixtures/ per adapter, golden files, edit scenarios
-├── integrations/     vscode/, chrome/ (0.2+)
-├── mockups/          clickable prototype, demo recorder
-└── docs/             these docs
-```
+The packages themselves: [Technical overview](index.md#packages).

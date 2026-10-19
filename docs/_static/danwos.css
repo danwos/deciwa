@@ -132,3 +132,10 @@ figure.diagram .arrowhead { fill: var(--dw-muted); }
 .dw-made-by a:hover { border-color: var(--color-brand-primary); color: var(--color-foreground-primary); }
 .dw-made-by img { height: 26px; width: auto; }
 .dw-made-by b { font-family: var(--font-stack--headings); font-weight: 800; color: var(--color-foreground-primary); }
+
+/* diagrams: run-time connections dashed, plus legend keys */
+figure.diagram .arrow.run path { stroke: var(--dw-terracotta); stroke-dasharray: 6 5; }
+figure.diagram .legend-key path { stroke-width: 2; fill: none; }
+figure.diagram .legend-key path.dep { stroke: var(--dw-muted); }
+figure.diagram .legend-key path.runl { stroke: var(--dw-terracotta); stroke-dasharray: 6 5; }
+figure.diagram text.label { paint-order: stroke; stroke: var(--color-background-primary); stroke-width: 5px; stroke-linejoin: round; }

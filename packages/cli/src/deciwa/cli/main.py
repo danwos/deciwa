@@ -1,4 +1,4 @@
-"""deciwa CLI (prototype). Every command can print JSON with --json."""
+"""deciwa CLI. Every command can print JSON with --json."""
 
 from __future__ import annotations
 
@@ -8,8 +8,7 @@ import os
 import sys
 from pathlib import Path
 
-from . import store
-from .engine import Project
+from deciwa.core import Project, store
 
 
 def _out(args, command: str, result, human=None):
@@ -29,8 +28,17 @@ def cmd_init(args):
 
 
 def cmd_serve(args):
-    from .server import serve
-    serve(Project(), port=args.port)
+    from deciwa.server import Builder, serve
+    p = Project()
+    # the build: Sphinx today; other integrations bring their own command
+    base = [sys.executable, "-m", "sphinx", "-q", "-b", "html", str(p.docs), str(p.build)]
+    watch = [p.docs]
+    for module in ("deciwa.ui", "deciwa.sphinx"):  # rebuild when the overlay or extension changes, too
+        try:
+            watch.append(Path(__import__(module, fromlist=["_"]).__file__).parent)
+        except ImportError:
+            pass
+    serve(p, p.build, Builder(base, base[:3] + ["-E"] + base[3:], watch), port=args.port)
 
 
 def cmd_status(args):
@@ -127,7 +135,7 @@ def cmd_export(args):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="deciwa", description="deciwa prototype CLI")
+    ap = argparse.ArgumentParser(prog="deciwa", description="deciwa – review and decision tool")
     ap.add_argument("--json", action="store_true", help="print the JSON envelope")
     ap.add_argument("--root", help="start looking for .deciwa/ here instead of the current folder")
     sub = ap.add_subparsers(dest="cmd", required=True)

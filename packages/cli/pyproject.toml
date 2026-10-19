@@ -1,0 +1,20 @@
+[project]
+name = "deciwa-cli"
+version = "0.0.1"
+description = "The deciwa command line – the master for all integrations and agents"
+requires-python = ">=3.12"
+dependencies = ["deciwa-core", "deciwa-server"]
+
+[project.scripts]
+deciwa = "deciwa.cli.main:main"
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/deciwa"]
+
+[tool.uv.sources]
+deciwa-core = { workspace = true }
+deciwa-server = { workspace = true }

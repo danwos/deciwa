@@ -1,7 +1,8 @@
 # Installation
 
-The Sphinx integration ships with the deciwa prototype in this repository
-(`prototype/`); later it comes with the published CLI as `deciwa[sphinx]`.
+The Sphinx integration is the package `deciwa-sphinx`; it brings the review
+UI (`deciwa-ui`) along. The `deciwa` command comes from `deciwa-cli`. Until
+the packages are published, install them from the repository.
 
 ## Requirements
 
@@ -11,7 +12,8 @@ The Sphinx integration ships with the deciwa prototype in this repository
 ## Install
 
 ```console
-$ uv pip install -e prototype      # the CLI and the Sphinx extension
+$ cd <deciwa>/packages
+$ uv pip install -e core -e server -e cli -e ui -e sphinx   # from your project's environment
 $ deciwa init                      # creates .deciwa/ in the repository root
 ```
 
@@ -23,7 +25,7 @@ In `conf.py`:
 extensions = [
     "myst_parser",       # if you write Markdown
     "sphinx_needs",      # if you use Sphinx-Needs
-    "deciwa_proto.sphinx_ext",
+    "deciwa.sphinx",
 ]
 ```
 

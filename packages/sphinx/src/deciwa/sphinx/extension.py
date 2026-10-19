@@ -15,10 +15,9 @@ from pathlib import Path
 from docutils import nodes
 from sphinx.application import Sphinx
 
-from . import store
-from .model import fingerprint, normalise
-
-STATIC = Path(__file__).parent / "static"
+from deciwa.core import store
+from deciwa.core.model import fingerprint, normalise
+from deciwa.ui import SCRIPT, STATIC, STYLE
 
 try:  # Sphinx-Needs is optional
     from sphinx_needs.data import SphinxNeedsData
@@ -219,6 +218,6 @@ def setup(app: Sphinx):
     app.connect("doctree-resolved", on_doctree_resolved, priority=400)
     app.connect("html-page-context", on_page_context)
     app.connect("build-finished", on_build_finished)
-    app.add_css_file("deciwa-overlay.css")
-    app.add_js_file("deciwa-overlay.js", defer="defer")
+    app.add_css_file(STYLE)
+    app.add_js_file(SCRIPT, defer="defer")
     return {"version": "0.0.1", "parallel_read_safe": True, "parallel_write_safe": False}

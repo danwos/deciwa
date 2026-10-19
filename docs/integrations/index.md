@@ -1,4 +1,4 @@
-# Integrations
+# Integration overview
 
 deciwa comes to where people already work ({need}`DEC_INTEGRATIONS`). Every
 integration shows the same [review UI](../product/ui.md) and talks to the

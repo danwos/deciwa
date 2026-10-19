@@ -1,16 +1,11 @@
 """Sphinx configuration for the deciwa developer docs."""
 
-import sys
-from pathlib import Path
-
-# deciwa review overlay (prototype) – review these docs in deciwa itself
-sys.path.insert(0, str(Path(__file__).parents[1] / "prototype"))
 
 project = "deciwa"
 author = "danwos"
 copyright = "2026, danwos"
 
-extensions = ["myst_parser", "sphinx_needs", "sphinx.ext.graphviz", "deciwa_proto.sphinx_ext"]
+extensions = ["myst_parser", "sphinx_needs", "sphinx.ext.graphviz", "deciwa.sphinx"]  # deciwa.sphinx: review these docs in deciwa itself
 
 source_suffix = {".md": "markdown", ".rst": "restructuredtext"}
 exclude_patterns = ["_build", "README.md"]

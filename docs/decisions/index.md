@@ -1,11 +1,11 @@
-# Decisions
+# All decisions
 
 Product and technical decisions on deciwa. All decided by Daniel; they are
 binding requirements for every feature and every piece of code. Business
 decisions (pricing, licence, market) are kept outside this repository.
 
 A new decision comes from an approved proposal in the technical details – see
-[Working on deciwa](../contributing.md).
+[Working on deciwa](../technical/working.md).
 
 ```{needtable}
 :types: dec
@@ -177,6 +177,14 @@ A new decision comes from an approved proposal in the technical details – see
 ```
 
 ## Working on deciwa
+
+```{dec} deciwa is one repository of separate packages: core, server, CLI, UI and one per integration
+:id: DEC_PACKAGES
+:status: approved
+:decided: 2026-10-20
+:reason: The CLI and the server are reused by every integration; the logic stays in one place (core); integrations such as Sphinx, VS Code or Chrome stay independent of each other.
+:alternatives: one package with everything (the first prototype, deciwa_proto).
+```
 
 ```{dec} Decisions, features and concepts live in the repository as Sphinx docs with Sphinx-Needs
 :id: DEC_DOCS_IN_REPO

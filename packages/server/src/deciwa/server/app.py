@@ -1,11 +1,11 @@
-"""Local server: serves the built docs, rebuilds on change, and relays the
-overlay's requests to the engine. No logic of its own."""
+"""Local server: serves a built site, rebuilds it when sources change, and
+relays the review UI's requests to the engine. No logic of its own and no
+knowledge of the build tool – the caller passes the build command."""
 
 from __future__ import annotations
 
 import json
 import subprocess
-import sys
 import threading
 import time
 from functools import partial
@@ -13,22 +13,30 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-from .engine import Project
+from deciwa.core import Project
 
 WATCH_SUFFIXES = {".md", ".rst", ".py", ".css", ".js", ".svg", ".toml"}
 
 
 class Builder:
-    def __init__(self, project: Project):
-        self.project = project
+    """Runs a build command, and again whenever a watched file changes.
+
+    ``command`` builds incrementally, ``full_command`` from scratch (used at
+    start and when code changes). Without a command the server only serves.
+    """
+
+    def __init__(self, command: list[str] | None = None, full_command: list[str] | None = None,
+                 watch: list[Path] | None = None):
+        self.command = command
+        self.full_command = full_command or command
+        self.watch_paths = [Path(p) for p in (watch or [])]
         self.version = 0
         self.building = False
         self.error = ""
         self.lock = threading.Lock()
 
     def _sources(self):
-        roots = [self.project.docs, Path(__file__).parent]
-        for root in roots:
+        for root in self.watch_paths:
             for p in root.rglob("*"):
                 if p.suffix in WATCH_SUFFIXES and "_build" not in p.parts and "__pycache__" not in p.parts:
                     yield p
@@ -37,11 +45,11 @@ class Builder:
         return {str(p): p.stat().st_mtime for p in self._sources()}
 
     def build(self, full: bool = False):
+        cmd = self.full_command if full else self.command
+        if not cmd:
+            return
         with self.lock:
             self.building = True
-            cmd = [sys.executable, "-m", "sphinx", "-q", "-b", "html", str(self.project.docs), str(self.project.build)]
-            if full:
-                cmd.insert(3, "-E")
             res = subprocess.run(cmd, capture_output=True, text=True)
             self.error = res.stderr.strip() if res.returncode else ""
             self.building = False
@@ -58,7 +66,7 @@ class Builder:
             changed = {p for p in set(now) | set(seen) if now.get(p) != seen.get(p)}
             if changed:
                 seen = now
-                # code or config changes need a full rebuild; text changes are incremental
+                # code changes need a full rebuild; text changes are incremental
                 self.build(full=any(Path(p).suffix == ".py" for p in changed))
 
 
@@ -129,13 +137,16 @@ class Handler(SimpleHTTPRequestHandler):
         self._call(routes[url.path])
 
 
-def serve(project: Project, port: int = 4337, host: str = "127.0.0.1"):
-    builder = Builder(project)
-    print(f"deciwa: building {project.docs} …", flush=True)
-    builder.build(full=True)
-    threading.Thread(target=builder.watch, daemon=True).start()
+def serve(project: Project, site: Path, builder: Builder | None = None, port: int = 4337,
+          host: str = "127.0.0.1"):
+    """Serve ``site`` with the review API on ``host:port``."""
+    builder = builder or Builder()
+    if builder.command:
+        print("deciwa: building …", flush=True)
+        builder.build(full=True)
+        threading.Thread(target=builder.watch, daemon=True).start()
     Handler.project, Handler.builder = project, builder
-    handler = partial(Handler, directory=str(project.build))
+    handler = partial(Handler, directory=str(site))
     server = ThreadingHTTPServer((host, port), handler)
     print(f"deciwa: review at http://{host}:{port}/", flush=True)
     server.serve_forever()
