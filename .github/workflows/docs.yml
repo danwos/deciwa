@@ -1,0 +1,64 @@
+# Builds the docs and publishes them on the GitHub Pages of this repository.
+#
+# The public build is an offline review build: visitors can try deciwa right
+# on these pages – their review stays in their own browser – and no review
+# data from .deciwa/ is shipped.
+
+name: docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install graphviz (needflow diagrams)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends graphviz
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Install the packages and the docs tools
+        run: uv sync --locked
+
+      - name: Check the docs (warnings fail)
+        run: uv run sphinx-build -W -E -q -b html docs docs/_build/check
+
+      - name: Build the public review build
+        run: >
+          uv run sphinx-build -E -q -b html
+          -D deciwa_mode=offline -D deciwa_offline_annotations=0
+          docs docs/_build/site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_build/site
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

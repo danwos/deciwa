@@ -15,6 +15,13 @@ $ .venv/bin/sphinx-autobuild docs docs/_build/html --port 4336   # live preview
 $ .venv/bin/sphinx-build -W -b html docs docs/_build/html         # CI build, warnings fail
 ```
 
+## Published docs
+
+`.github/workflows/docs.yml` checks the docs (warnings fail) on every push
+and pull request, and publishes them on GitHub Pages from `main` – as an
+offline review build without the review data of `.deciwa/`, so visitors can
+try deciwa on these pages in their own browser.
+
 ## Reviewing these docs in deciwa
 
 These docs use the [Sphinx integration](../integrations/sphinx/index.md)
