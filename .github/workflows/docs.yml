@@ -7,7 +7,8 @@
 #
 # Needs in this repository: the secret DOCS_DEPLOY_KEY (private SSH key whose
 # public half is a deploy key with write access on the docs repository).
-# Optional: the variable DOCS_REPOSITORY to publish somewhere else.
+# Optional: the variable DOCS_REPOSITORY ("owner/name" or just "name") to
+# publish somewhere else.
 
 name: docs
 
@@ -50,12 +51,23 @@ jobs:
           -D deciwa_mode=offline -D deciwa_offline_annotations=0
           docs docs/_build/site
 
+      - name: Resolve the docs repository
+        id: target
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          REPO: ${{ vars.DOCS_REPOSITORY || 'danwos/deciwa.docs' }}
+        run: |
+          # "deciwa.docs" alone means: in the same account as this repository
+          case "$REPO" in */*) ;; *) REPO="${{ github.repository_owner }}/$REPO" ;; esac
+          echo "repo=$REPO" >> "$GITHUB_OUTPUT"
+          echo "publishing to $REPO"
+
       - name: Publish to the docs repository (gh-pages branch)
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.DOCS_DEPLOY_KEY }}
-          external_repository: ${{ vars.DOCS_REPOSITORY || 'danwos/deciwa.docs' }}
+          external_repository: ${{ steps.target.outputs.repo }}
           publish_branch: gh-pages
           publish_dir: docs/_build/site
           force_orphan: true
