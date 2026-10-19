@@ -71,6 +71,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: docs/_build/site
           force_orphan: true
+          cname: deciwa.danwos.dev   # custom domain – written on every deploy, or force_orphan would drop it
           user_name: deciwa docs bot
           user_email: actions@users.noreply.github.com
           full_commit_message: "docs from danwos/deciwa@${{ github.sha }}"
