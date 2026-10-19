@@ -18,6 +18,8 @@
     note: "Comment", rephrase: "Rephrase", details: "More details" };
   const COLORS = { approve: "approved", reject: "rejected", freeze: "frozen", delete: "change",
     rephrase: "change", details: "change", note: "note" };
+  // one line about an annotation for lists: its comment or question, else its verdict; stars are shown apart
+  const describe = a => !a ? "" : a.comment || a.question || (a.kind === "feedback" ? LABELS[a.verdict] || a.verdict : "");
   const KEY2ACT = Object.fromEntries(Object.entries(ACTS).map(([v, a]) => [a.key, v]));
   const MONSTER = (document.currentScript?.src || "").replace(/deciwa-overlay\.js.*$/, "deciwa-monster.webp");
   const STATE_C = {
@@ -237,7 +239,7 @@
           const st = v.elements[e.selector], last = st ? st.annotations.at(-1) : {};
           return { selector: e.selector, label: e.label, kind: e.kind, state: st ? st.state : "unreviewed", required: req.has(e.selector),
             decided: hasVerdict(st), rated: !!st && st.stars !== null,
-            stars: st ? st.stars : null, requested: st ? st.requested : false, last: last.comment || last.question || last.verdict || "" };
+            stars: st ? st.stars : null, requested: st ? st.requested : false, last: describe(st && last) };
         });
         const d = items.filter(i => i.required && DONE_.includes(i.state)).length;
         const dc = items.filter(i => i.required && i.decided).length, rt = items.filter(i => i.required && i.rated).length;
@@ -427,7 +429,7 @@
     if (todo.length) {
       html += `<h4>To review · ${todo.length}</h4>` + todo.map(sel => {
         const last = view.elements[sel]?.annotations.at(-1);
-        return item(sel, stateName(sel), last ? (last.comment || last.question || last.verdict || last.kind) : "");
+        return item(sel, stateName(sel), describe(last));
       }).join("");
     }
     const groups = {};
@@ -439,7 +441,7 @@
       if (!groups[s]) continue;
       html += `<h4>${esc(s)} · ${groups[s].length}</h4>` + groups[s].map(([sel, st]) => {
         const last = st.annotations.at(-1);
-        return item(sel, s, last.comment || last.question || last.verdict || last.kind);
+        return item(sel, s, describe(last));
       }).join("");
     }
     if (!todo.length && !Object.keys(view.elements).length && !view.orphans.length)
@@ -466,7 +468,7 @@
         <summary><b>${esc(pg.title)}</b><span>${pg.required ? `${pg.decided}/${pg.required} · ${pg.rated}★` : ""}${pg.orphans ? ` · ${pg.orphans} orphaned` : ""}</span></summary>
         ${items.map(i => `<div class="item${i.required ? " required" : ""}" data-doc="${esc(pg.doc)}" data-sel="${esc(i.selector)}" style="--c:${cv(STATE_C[i.state])}">
           <div class="t"><b>${esc(i.label)}</b><span>${esc(i.state)}${i.stars != null ? " · " + i.stars + "★" : ""}${i.requested ? " · ?" : ""}</span></div>
-          ${i.last ? `<div class="c">${esc(i.last)}</div>` : ""}</div>`).join("")}
+          ${i.last ? `<div class="c">${esc(LABELS[i.last] || i.last)}</div>` : ""}</div>`).join("")}
       </details>`;
     }
     if (quiet.length) html += `<h4>No feedback · ${quiet.length} pages</h4><div class="quiet">${quiet.map(pg =>
