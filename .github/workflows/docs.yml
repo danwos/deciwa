@@ -63,9 +63,10 @@ jobs:
           -D deciwa_mode=offline -D deciwa_offline_annotations=0
           docs docs/_build/site
 
-      - name: Add the web script (deciwa.danwos.dev/js/<version>/deciwa.js)
+      - name: Add the web script (deciwa.danwos.dev/js/<release>/deciwa.js)
         run: |
-          v=$(node -p "require('./packages/ui/package.json').version")
+          # release = major.minor; in the prototype phase each deploy overwrites it
+          v=$(node -p "require('./packages/ui/package.json').version.split('.').slice(0, 2).join('.')")
           for d in "$v" latest; do
             mkdir -p "docs/_build/site/js/$d"
             cp packages/ui/src/deciwa/ui/static/deciwa.js "docs/_build/site/js/$d/"

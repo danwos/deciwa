@@ -65,9 +65,13 @@ the overlay and the overlay's CSS cannot change the page.
 :status: approved
 :refines: PROP_WEB_BUNDLE
 
-The docs workflow publishes `deciwa.js` to `https://deciwa.danwos.dev/js/<version>/deciwa.js`.
-A published version never changes, so sites can pin it with a Subresource
-Integrity hash; `/js/latest/deciwa.js` follows the newest version.
+The docs workflow publishes `deciwa.js` to `https://deciwa.danwos.dev/js/<release>/deciwa.js`,
+where the release is major and minor of `packages/ui/package.json` (`0.2`);
+`/js/latest/deciwa.js` follows the newest release. During the prototype
+phase every deploy overwrites the one published release – the release
+number is not raised yet. Once releases are raised, the builds of earlier
+releases are kept, so a published release never changes and sites can pin
+it with a Subresource Integrity hash.
 Decided: {need}`DEC_WEB_HOSTING`.
 ```
 
