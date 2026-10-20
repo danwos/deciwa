@@ -777,9 +777,25 @@ export function startOverlay(host) {
   }
 
   // -- events ------------------------------------------------------------------
+  // a link inside the text keeps working; a link around or over the element
+  // (a card that is one big link) opens the card instead of leaving the page
+  let blockClick = false;
+  function linkedElement(ev, link, up) {
+    const e = elementAt(ev.target, up);
+    if (e && link.contains(e.node)) return e;
+    const under = document.elementsFromPoint(ev.clientX, ev.clientY).find(n => !link.contains(n));
+    const u = under && elementAt(under, up);
+    return u && !u.node.contains(link) ? u : null;
+  }
+  document.addEventListener("mousedown", () => { blockClick = false; }, true);
+  document.addEventListener("click", ev => {
+    if (blockClick) { ev.preventDefault(); ev.stopPropagation(); blockClick = false; }
+  }, true);
+
   document.addEventListener("mousemove", ev => {
     if (!reviewOn || inUI(ev)) return;
-    const e = elementAt(ev.target, ev.altKey ? 1 : 0);
+    const link = ev.target.closest("a[href]");
+    const e = (link && linkedElement(ev, link, ev.altKey ? 1 : 0)) || elementAt(ev.target, ev.altKey ? 1 : 0);
     hovered = e;
     if (!e) { hoverBox.style.display = "none"; return; }
     place(hoverBox, e.node);
@@ -788,10 +804,15 @@ export function startOverlay(host) {
 
   document.addEventListener("mouseup", ev => {
     if (!reviewOn || inUI(ev) || ev.button !== 0) return;
-    const link = ev.target.closest("a[href]");
-    if (link && !link.getAttribute("href").startsWith("#")) return; // links keep working
     if (ev.target.closest(".needs_collapse")) return;  // the need's own metadata toggle
-    const e = elementAt(ev.target, ev.altKey ? 1 : 0);
+    const up = ev.altKey ? 1 : 0;
+    const link = ev.target.closest("a[href]");
+    let e;
+    if (link && !link.getAttribute("href").startsWith("#")) {
+      e = linkedElement(ev, link, up);
+      if (!e) return;
+      blockClick = true;
+    } else e = elementAt(ev.target, up);
     if (!e) { if (current) closeCard(); return; }  // a click next to the content closes the card
     quote = selectionQuote(e);
     if (!quote && getSelection() && !getSelection().isCollapsed) return;

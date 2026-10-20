@@ -22,6 +22,10 @@ same [review UI](../product/ui.md) as the [Sphinx integration](sphinx/index.md).
 | Feedback is stored | in your browser, per website; **Export** hands it over as one file |
 | A page is identified by | its address, e.g. `danwos.dev/services/` |
 
+In review mode a click selects an element. Links inside a text keep working;
+a link that wraps or covers a whole element – a card that is one big link –
+opens the review card instead.
+
 ## Optional settings
 
 All settings are attributes on the script tag. Leave them out until you need

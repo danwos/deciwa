@@ -59,10 +59,13 @@ function pictureText(el) {
   const svg = el.matches("svg") ? el : el.querySelector("svg");
   return svg ? `svg ${normalise(svg.outerHTML)} ${cap}` : `figure ${normalise(el.textContent)}`;
 }
+// decorative images have no alt text: their file name tells them apart (also behind /_image/?href=…)
+const fileName = src => { try { return decodeURIComponent(src).match(/([\w.-]+\.(?:webp|avif|png|jpe?g|gif|svg))(?![\w.])/i)?.[1]; } catch (_) { return null; } };
 function pictureLabel(el) {
   const img = el.matches("img") ? el : el.querySelector?.("img");
+  const name = img && fileName(img.currentSrc || img.src);
   return short(el.querySelector?.("figcaption")?.textContent || img?.alt || el.getAttribute("aria-label")
-    || el.querySelector?.("title")?.textContent || "picture");
+    || el.querySelector?.("title")?.textContent || (name ? `picture ${name}` : "picture"));
 }
 
 /**

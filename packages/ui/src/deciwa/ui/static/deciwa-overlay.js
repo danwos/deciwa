@@ -1020,9 +1020,28 @@
         suffix: i >= 0 ? all.slice(i + exact.length, i + exact.length + 24) : ""
       };
     }
+    let blockClick = false;
+    function linkedElement(ev, link, up) {
+      const e = elementAt(ev.target, up);
+      if (e && link.contains(e.node)) return e;
+      const under = document.elementsFromPoint(ev.clientX, ev.clientY).find((n) => !link.contains(n));
+      const u = under && elementAt(under, up);
+      return u && !u.node.contains(link) ? u : null;
+    }
+    document.addEventListener("mousedown", () => {
+      blockClick = false;
+    }, true);
+    document.addEventListener("click", (ev) => {
+      if (blockClick) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        blockClick = false;
+      }
+    }, true);
     document.addEventListener("mousemove", (ev) => {
       if (!reviewOn || inUI(ev)) return;
-      const e = elementAt(ev.target, ev.altKey ? 1 : 0);
+      const link = ev.target.closest("a[href]");
+      const e = link && linkedElement(ev, link, ev.altKey ? 1 : 0) || elementAt(ev.target, ev.altKey ? 1 : 0);
       hovered = e;
       if (!e) {
         hoverBox.style.display = "none";
@@ -1033,10 +1052,15 @@
     });
     document.addEventListener("mouseup", (ev) => {
       if (!reviewOn || inUI(ev) || ev.button !== 0) return;
-      const link = ev.target.closest("a[href]");
-      if (link && !link.getAttribute("href").startsWith("#")) return;
       if (ev.target.closest(".needs_collapse")) return;
-      const e = elementAt(ev.target, ev.altKey ? 1 : 0);
+      const up = ev.altKey ? 1 : 0;
+      const link = ev.target.closest("a[href]");
+      let e;
+      if (link && !link.getAttribute("href").startsWith("#")) {
+        e = linkedElement(ev, link, up);
+        if (!e) return;
+        blockClick = true;
+      } else e = elementAt(ev.target, up);
       if (!e) {
         if (current) closeCard();
         return;
