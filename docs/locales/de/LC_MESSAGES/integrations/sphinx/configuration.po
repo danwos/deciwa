@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/sphinx/configuration.md:1
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: ../../integrations/sphinx/configuration.md:3
+msgid "`conf.py`"
+msgstr "`conf.py`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "Option"
+msgstr "Option"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "Default"
+msgstr "Standard"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "Meaning"
+msgstr "Bedeutung"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`deciwa_mode`"
+msgstr "`deciwa_mode`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`\"auto\"`"
+msgstr "`\"auto\"`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid ""
+"`auto`: use `deciwa serve` when it answers, otherwise review offline · "
+"`offline`: never ask for a server (static sites, demos) · `server`: never"
+" go offline"
+msgstr ""
+"`auto`: `deciwa serve` nutzen, wenn es antwortet, sonst offline reviewen "
+"· `offline`: nie nach einem Server fragen (statische Seiten, Demos) · "
+"`server`: nie offline gehen"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`deciwa_offline_annotations`"
+msgstr "`deciwa_offline_annotations`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`True`"
+msgstr "`True`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid ""
+"ship the feedback from `.deciwa/` with the build, so offline readers see "
+"it; set `False` for public builds"
+msgstr ""
+"das Feedback aus `.deciwa/` mit dem Build ausliefern, damit es auch "
+"offline sichtbar ist; für öffentliche Builds auf `False` setzen"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`deciwa_root`"
+msgstr "`deciwa_root`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "the folder that holds `.deciwa/` above `conf.py`"
+msgstr "der Ordner über `conf.py`, der `.deciwa/` enthält"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "where `.deciwa/` lives, if it is not above the docs"
+msgstr "wo `.deciwa/` liegt, falls es nicht über den Docs liegt"
+
+#: ../../integrations/sphinx/configuration.md:11
+msgid ""
+"Options can also be given on the command line, e.g. `sphinx-build -D "
+"deciwa_mode=offline …`."
+msgstr ""
+"Optionen lassen sich auch auf der Kommandozeile setzen, z. B. `sphinx-"
+"build -D deciwa_mode=offline …`."
+
+#: ../../integrations/sphinx/configuration.md:14
+msgid "`.deciwa/config.toml`"
+msgstr "`.deciwa/config.toml`"
+
+#: ../../integrations/sphinx/configuration.md:28
+msgid ""
+"`required` takes element kinds (`need`, `heading`, `paragraph`, `item`, "
+"`row`, `code`, `note`, `figure`), `all`, or selector patterns such as "
+"`sphinx-needs:PROP_*` – see [what must be approved](../../product/review-"
+"rules.md). The kinds can also be switched in the panel; patterns and "
+"paths are set here."
+msgstr ""
+"`required` nimmt Elementarten (`need`, `heading`, `paragraph`, `item`, "
+"`row`, `code`, `note`, `figure`), `all` oder Selektor-Muster wie `sphinx-"
+"needs:PROP_*` – siehe [was freigegeben werden muss](../../product/review-"
+"rules.md). Die Arten lassen sich auch im Panel schalten; Muster und Pfade"
+" stehen hier."
+
+#: ../../integrations/sphinx/configuration.md:34
+msgid "Elements the extension finds"
+msgstr "Elemente, die die Erweiterung findet"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "Kind"
+msgstr "Art"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "In the page"
+msgstr "In der Seite"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`need`"
+msgstr "`need`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "every Sphinx-Needs object, by its id"
+msgstr "jedes Sphinx-Needs-Objekt, über seine ID"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`heading`"
+msgstr "`heading`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "a section, picked through its heading"
+msgstr "ein Abschnitt, ausgewählt über seine Überschrift"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`paragraph`, `item`, `row`, `code`, `note`"
+msgstr "`paragraph`, `item`, `row`, `code`, `note`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "paragraphs, list items, table rows, code blocks, admonitions"
+msgstr "Absätze, Listenpunkte, Tabellenzeilen, Codeblöcke, Hinweisboxen"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "`figure`"
+msgstr "`figure`"
+
+#: ../../integrations/sphinx/configuration.md
+msgid "images, figures and inline HTML pictures such as SVG diagrams"
+msgstr "Grafiken, Abbildungen und eingebettete HTML-Bilder wie SVG-Diagramme"
+
+#: ../../integrations/sphinx/configuration.md:43
+msgid ""
+"Generated content (tables of needs, the table of contents) is not "
+"reviewable; review its source instead."
+msgstr ""
+"Erzeugte Inhalte (Need-Tabellen, das Inhaltsverzeichnis) lassen sich "
+"nicht reviewen; reviewe stattdessen ihre Quelle."
+

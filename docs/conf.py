@@ -1,16 +1,49 @@
 """Sphinx configuration for the deciwa developer docs."""
 
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent / "_ext"))
+
 
 project = "deciwa"
 author = "danwos"
 copyright = "2026, danwos"
 
-extensions = ["myst_parser", "sphinx_needs", "sphinx.ext.graphviz", "deciwa.sphinx"]  # deciwa.sphinx: review these docs in deciwa itself
+extensions = ["myst_parser", "sphinx_needs", "sphinx.ext.graphviz", "deciwa.sphinx", "docs_i18n"]  # deciwa.sphinx: review these docs in deciwa itself
 
 source_suffix = {".md": "markdown", ".rst": "restructuredtext"}
 exclude_patterns = ["_build", "README.md"]
 myst_enable_extensions = ["colon_fence", "deflist", "fieldlist"]
 myst_heading_anchors = 3
+
+# -- Languages ---------------------------------------------------------------
+# English is the source; translations live in locales/<lang>/LC_MESSAGES/*.po
+# (sphinx-build -b gettext, then sphinx-intl update). Build one language with
+# -D language=de; every language gets its own folder on the published site.
+
+language = "en"
+locale_dirs = ["locales/"]
+gettext_compact = False
+gettext_uuid = False
+# every language and its folder on the site; English stays at the root
+DOCS_LANGUAGES = {"en": ("English", ""), "de": ("Deutsch", "de/")}
+DOCS_URL = "https://deciwa.danwos.dev/"
+
+
+def _languages(app, config):
+    """Switcher and hreflang links: the same page in every other language."""
+    here = DOCS_LANGUAGES.get(config.language, DOCS_LANGUAGES["en"])[1]
+    up = "../" * here.count("/")  # from this build's root to the site root
+    config.html_baseurl = DOCS_URL + here
+    config.html_context["docs_languages"] = [
+        {"code": code, "name": name, "rel": up + folder, "url": DOCS_URL + folder, "current": code == config.language}
+        for code, (name, folder) in DOCS_LANGUAGES.items()
+    ]
+
+
+def setup(app):
+    app.connect("config-inited", _languages)
 
 # -- Theme -------------------------------------------------------------------
 
@@ -22,6 +55,9 @@ html_static_path = ["_static"]
 templates_path = ["_templates"]
 html_css_files = ["danwos.css"]
 html_show_sourcelink = False
+html_context = {}
+html_sidebars = {"**": ["sidebar/brand.html", "sidebar/search.html", "sidebar/languages.html",
+                        "sidebar/scroll-start.html", "sidebar/navigation.html", "sidebar/scroll-end.html"]}
 html_theme_options = {
     "sidebar_hide_name": True,
     "navigation_with_keys": True,

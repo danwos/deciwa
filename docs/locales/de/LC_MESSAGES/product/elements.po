@@ -1,0 +1,226 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../product/elements.md:1
+msgid "What you can review"
+msgstr "Was du reviewen kannst"
+
+#: ../../product/elements.md:3
+#, python-brace-format
+msgid ""
+"Everything you can point at is an element – a Sphinx-Needs requirement, a"
+" heading, a paragraph, a table row, a picture or a single selected word. "
+"There are no markers in the source; deciwa finds the elements in the "
+"content itself ({need}`DEC_NO_MARKERS`)."
+msgstr ""
+"Alles, worauf du zeigen kannst, ist ein Element – eine Sphinx-Needs-"
+"Anforderung, eine Überschrift, ein Absatz, eine Tabellenzeile, ein Bild "
+"oder ein einzelnes markiertes Wort. Es gibt keine Markierungen im "
+"Quelltext; deciwa findet die Elemente im Inhalt selbst "
+"({need}`DEC_NO_MARKERS`)."
+
+#: ../../product/elements.md:8
+msgid "Review on the result"
+msgstr "Review am Ergebnis"
+
+#: ../../product/elements.md:10
+#, python-brace-format
+msgid ""
+"You review what readers see: the built Sphinx page, rendered Markdown, "
+"the live website ({need}`DEC_REVIEW_ON_RESULTS`). Every element of the "
+"result belongs to its place in the source, so the same feedback shows up "
+"wherever the element is shown. Code is reviewed in the source."
+msgstr ""
+"Du reviewst, was die Lesenden sehen: die gebaute Sphinx-Seite, "
+"gerendertes Markdown, die Live-Website ({need}`DEC_REVIEW_ON_RESULTS`). "
+"Jedes Element des Ergebnisses gehört zu seiner Stelle im Quelltext, "
+"deshalb erscheint dasselbe Feedback überall, wo das Element gezeigt wird."
+" Code wird im Quelltext reviewt."
+
+#: ../../product/elements.md:15
+msgid "Elements per format"
+msgstr "Elemente pro Format"
+
+#: ../../product/elements.md:17
+#, python-brace-format
+msgid ""
+"Hovering highlights the element under the pointer; a click or a key "
+"selects it. `Alt` moves one level up, e.g. from a paragraph to its "
+"section. Selecting text first gives feedback on just those words "
+"({need}`DEC_HOVER_SELECT`)."
+msgstr ""
+"Beim Überfahren wird das Element unter dem Mauszeiger hervorgehoben; ein "
+"Klick oder eine Taste wählt es aus. `Alt` geht eine Ebene höher, z. B. "
+"von einem Absatz zu seinem Abschnitt. Markierst du vorher Text, gibst du "
+"Feedback nur zu diesen Wörtern ({need}`DEC_HOVER_SELECT`)."
+
+#: ../../product/elements.md
+msgid "Format"
+msgstr "Format"
+
+#: ../../product/elements.md
+msgid "Elements"
+msgstr "Elemente"
+
+#: ../../product/elements.md
+msgid "Available"
+msgstr "Verfügbar"
+
+#: ../../product/elements.md
+msgid "Sphinx (rST, Markdown) with Sphinx-Needs"
+msgstr "Sphinx (rST, Markdown) mit Sphinx-Needs"
+
+#: ../../product/elements.md
+msgid "need, section, paragraph, list item, table row, code block, note, picture"
+msgstr ""
+"Need, Abschnitt, Absatz, Listenpunkt, Tabellenzeile, Codeblock, Hinweis, "
+"Bild"
+
+#: ../../product/elements.md
+msgid "now (prototype)"
+msgstr "jetzt (Prototyp)"
+
+#: ../../product/elements.md
+msgid "Markdown"
+msgstr "Markdown"
+
+#: ../../product/elements.md
+msgid "section, paragraph, list item, table row, code block, frontmatter field"
+msgstr "Abschnitt, Absatz, Listenpunkt, Tabellenzeile, Codeblock, Frontmatter-Feld"
+
+#: ../../product/elements.md
+msgid "0.1"
+msgstr "0.1"
+
+#: ../../product/elements.md
+msgid "Plain text"
+msgstr "Reiner Text"
+
+#: ../../product/elements.md
+msgid "paragraph, line"
+msgstr "Absatz, Zeile"
+
+#: ../../product/elements.md
+msgid "Python"
+msgstr "Python"
+
+#: ../../product/elements.md
+msgid "module, class, function, method, docstring"
+msgstr "Modul, Klasse, Funktion, Methode, Docstring"
+
+#: ../../product/elements.md
+msgid "0.3"
+msgstr "0.3"
+
+#: ../../product/elements.md
+msgid "HTML"
+msgstr "HTML"
+
+#: ../../product/elements.md
+msgid "block containers, headings, paragraphs, images"
+msgstr "Block-Container, Überschriften, Absätze, Bilder"
+
+#: ../../product/elements.md
+msgid "AsciiDoc, C, JS, TS"
+msgstr "AsciiDoc, C, JS, TS"
+
+#: ../../product/elements.md
+msgid "sections and blocks; functions, classes, structs"
+msgstr "Abschnitte und Blöcke; Funktionen, Klassen, Structs"
+
+#: ../../product/elements.md
+msgid "later"
+msgstr "später"
+
+#: ../../product/elements.md:30
+msgid ""
+"Pictures – images, figures and inline SVG diagrams – are reviewed as a "
+"whole."
+msgstr ""
+"Bilder – Grafiken, Abbildungen und eingebettete SVG-Diagramme – werden "
+"als Ganzes reviewt."
+
+#: ../../product/elements.md:32
+msgid "When an element changes"
+msgstr "Wenn sich ein Element ändert"
+
+#: ../../product/elements.md:34
+msgid ""
+"deciwa recognises an element again after the file was edited, even when "
+"it moved. What happens to your feedback:"
+msgstr ""
+"deciwa erkennt ein Element wieder, nachdem die Datei bearbeitet wurde, "
+"auch wenn es verschoben wurde. Was mit deinem Feedback passiert:"
+
+#: ../../product/elements.md
+msgid "The element …"
+msgstr "Das Element …"
+
+#: ../../product/elements.md
+msgid "Shown as"
+msgstr "Angezeigt als"
+
+#: ../../product/elements.md
+msgid "is unchanged"
+msgstr "ist unverändert"
+
+#: ../../product/elements.md
+msgid "your verdict as it is"
+msgstr "dein Urteil, wie es ist"
+
+#: ../../product/elements.md
+msgid "was changed after you approved it"
+msgstr "wurde geändert, nachdem du es freigegeben hast"
+
+#: ../../product/elements.md
+msgid "`stale` – with the old and the new wording"
+msgstr "`stale` – mit alter und neuer Formulierung"
+
+#: ../../product/elements.md
+msgid "was changed although it is frozen"
+msgstr "wurde geändert, obwohl es eingefroren ist"
+
+#: ../../product/elements.md
+msgid "`frozen, but changed` – an alarm"
+msgstr "`frozen, but changed` – ein Alarm"
+
+#: ../../product/elements.md
+msgid "cannot be found any more"
+msgstr "ist nicht mehr auffindbar"
+
+#: ../../product/elements.md
+msgid "`orphaned` – listed in the panel"
+msgstr "`orphaned` – im Panel aufgeführt"
+
+#: ../../product/elements.md:44
+msgid "A redrawn picture counts as changed too."
+msgstr "Ein neu gezeichnetes Bild zählt ebenfalls als geändert."
+
+#: ../../product/elements.md:46
+msgid "A stale approval: the history shows the old and the new wording"
+msgstr ""
+"Eine veraltete Freigabe: der Verlauf zeigt die alte und die neue "
+"Formulierung"
+
+#: ../../product/elements.md:50
+msgid "Approved, then changed: the history shows what changed."
+msgstr "Freigegeben, dann geändert: der Verlauf zeigt, was sich geändert hat."
+

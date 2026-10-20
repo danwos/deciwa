@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/sphinx/install.md:1
+msgid "Installation"
+msgstr "Installation"
+
+#: ../../integrations/sphinx/install.md:3
+msgid ""
+"The Sphinx integration is the package `deciwa-sphinx`; it brings the "
+"review UI (`deciwa-ui`) along. The `deciwa` command comes from `deciwa-"
+"cli`. Until the packages are published, install them from the repository."
+msgstr ""
+"Die Sphinx-Integration ist das Paket `deciwa-sphinx`; es bringt die "
+"Review-Oberfläche (`deciwa-ui`) mit. Der Befehl `deciwa` kommt aus "
+"`deciwa-cli`. Bis die Pakete veröffentlicht sind, installierst du sie aus"
+" dem Repository."
+
+#: ../../integrations/sphinx/install.md:7
+msgid "Requirements"
+msgstr "Voraussetzungen"
+
+#: ../../integrations/sphinx/install.md:9
+msgid "Python 3.12 or newer"
+msgstr "Python 3.12 oder neuer"
+
+#: ../../integrations/sphinx/install.md:10
+msgid "Sphinx 9; Sphinx-Needs and MyST are optional but recognised"
+msgstr "Sphinx 9; Sphinx-Needs und MyST sind optional, werden aber erkannt"
+
+#: ../../integrations/sphinx/install.md:12
+msgid "Install"
+msgstr "Installieren"
+
+#: ../../integrations/sphinx/install.md:20
+msgid "Add the extension"
+msgstr "Die Erweiterung hinzufügen"
+
+#: ../../integrations/sphinx/install.md:22
+msgid "In `conf.py`:"
+msgstr "In `conf.py`:"
+
+#: ../../integrations/sphinx/install.md:32
+msgid ""
+"The extension finds `.deciwa/` by walking up from the folder of "
+"`conf.py`. If it lives somewhere else, set `deciwa_root` – see "
+"[configuration](configuration.md)."
+msgstr ""
+"Die Erweiterung findet `.deciwa/`, indem sie vom Ordner von `conf.py` aus"
+" nach oben sucht. Liegt es woanders, setz `deciwa_root` – siehe "
+"[Konfiguration](configuration.md)."
+
+#: ../../integrations/sphinx/install.md:36
+msgid "Check"
+msgstr "Prüfen"
+
+#: ../../integrations/sphinx/install.md:45
+msgid ""
+"Open the address; the round deciwa logo at the bottom right means the "
+"overlay is there."
+msgstr ""
+"Öffne die Adresse; das runde deciwa-Logo unten rechts heißt, das Overlay "
+"ist da."
+

@@ -28,6 +28,7 @@ decisions: `docs/technical/working.md`.
 
 ```console
 .venv/bin/sphinx-build -W -b html docs docs/_build/html        # strict build
+.venv/bin/sphinx-build -W -b html -D language=de docs docs/_build/html/de   # German
 .venv/bin/sphinx-build -E -b html -D deciwa_mode=offline -D deciwa_offline_annotations=0 \
     docs docs/_build/offline                                   # static review build, works from file://
 ```

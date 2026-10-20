@@ -1,0 +1,37 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/questions.md:1
+msgid "Open questions"
+msgstr "Offene Fragen"
+
+#: ../../technical/questions.md:3
+msgid ""
+"Everything in the technical details of 0.1 that waits for a decision. An "
+"answered question becomes `answered`; the proposal it refers to becomes "
+"`approved` (or `rejected`) and gets a decision in "
+"[Decisions](../decisions/index.md)."
+msgstr ""
+"Alles in den technischen Details von 0.1, das auf eine Entscheidung "
+"wartet. Eine beantwortete Frage wird `answered`; der Vorschlag, auf den "
+"sie sich bezieht, wird `approved` (oder `rejected`) und bekommt eine "
+"Entscheidung in [Entscheidungen](../decisions/index.md)."
+

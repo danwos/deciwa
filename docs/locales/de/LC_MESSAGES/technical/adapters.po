@@ -1,0 +1,261 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/adapters.md:1
+msgid "Adapters"
+msgstr "Adapter"
+
+#: ../../technical/adapters.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/adapters.md:5
+msgid "Proposals by Claude – not binding until Daniel approves them."
+msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
+
+#: ../../technical/adapters.md:8
+msgid ""
+"An adapter knows which objects exist in its format. It turns the text of "
+"a source file into a tree of elements, each with a structural selector, a"
+" text range and the text used for the fingerprint."
+msgstr ""
+"Ein Adapter weiß, welche Objekte es in seinem Format gibt. Er macht aus "
+"dem Text einer Quelldatei einen Baum von Elementen, jedes mit einem "
+"strukturellen Selektor, einem Textbereich und dem Text, der für den "
+"Fingerprint genutzt wird."
+
+#: ../../technical/adapters.md:36
+msgid ""
+"Adapters are pure: no file access, no state. That keeps them fast to test"
+" with golden files (source in, element list as JSON out) and lets the "
+"Sphinx extension reuse them later."
+msgstr ""
+"Adapter sind pur: kein Dateizugriff, kein Zustand. Dadurch lassen sie "
+"sich schnell mit Golden Files testen (Quelle rein, Elementliste als JSON "
+"raus), und die Sphinx-Erweiterung kann sie später wiederverwenden."
+
+#: ../../technical/adapters.md:40
+msgid "Structural selectors"
+msgstr "Strukturelle Selektoren"
+
+#: ../../technical/adapters.md:42
+msgid ""
+"A selector is a string `<adapter>:<kind>:<path>`. It is what users see in"
+" the CLI and what the file format stores."
+msgstr ""
+"Ein Selektor ist ein String `<adapter>:<kind>:<path>`. Ihn sehen Nutzer "
+"in der CLI, und ihn speichert das Dateiformat."
+
+#: ../../technical/adapters.md:12
+msgid "Adapter"
+msgstr "Adapter"
+
+#: ../../technical/adapters.md:12
+msgid "Selector"
+msgstr "Selektor"
+
+#: ../../technical/adapters.md:12
+msgid "Element"
+msgstr "Element"
+
+#: ../../technical/adapters.md:12
+msgid "md"
+msgstr "md"
+
+#: ../../technical/adapters.md:12
+msgid "`md:heading:Career/Advisor`"
+msgstr "`md:heading:Career/Advisor`"
+
+#: ../../technical/adapters.md:12
+msgid "the section under that heading path, including its content"
+msgstr "der Abschnitt unter diesem Überschriftenpfad, mit seinem Inhalt"
+
+#: ../../technical/adapters.md:12
+msgid "`md:paragraph:Career/Advisor#2`"
+msgstr "`md:paragraph:Career/Advisor#2`"
+
+#: ../../technical/adapters.md:12
+msgid "the 2nd paragraph inside that section"
+msgstr "der 2. Absatz in diesem Abschnitt"
+
+#: ../../technical/adapters.md:12
+msgid "`md:item:Open#3` · `md:row:Formats#5` · `md:code:Setup#1`"
+msgstr "`md:item:Open#3` · `md:row:Formats#5` · `md:code:Setup#1`"
+
+#: ../../technical/adapters.md:12
+msgid "list item, table row, code block – numbered per section"
+msgstr "Listenpunkt, Tabellenzeile, Codeblock – pro Abschnitt nummeriert"
+
+#: ../../technical/adapters.md:12
+msgid "`md:front:summary`"
+msgstr "`md:front:summary`"
+
+#: ../../technical/adapters.md:12
+msgid "a frontmatter field"
+msgstr "ein Frontmatter-Feld"
+
+#: ../../technical/adapters.md:12
+msgid "rst"
+msgstr "rst"
+
+#: ../../technical/adapters.md:12
+msgid "`rst:section:Install/Linux` · `rst:paragraph:Install/Linux#1`"
+msgstr "`rst:section:Install/Linux` · `rst:paragraph:Install/Linux#1`"
+
+#: ../../technical/adapters.md:12
+msgid "as in Markdown"
+msgstr "wie in Markdown"
+
+#: ../../technical/adapters.md:12
+msgid "`sphinx-needs:REQ_042`"
+msgstr "`sphinx-needs:REQ_042`"
+
+#: ../../technical/adapters.md:12
+msgid "a need, found by id – the most robust selector there is"
+msgstr "ein Need, gefunden über seine ID – der robusteste Selektor, den es gibt"
+
+#: ../../technical/adapters.md:12
+msgid "`sphinx-needs:REQ_042:status`"
+msgstr "`sphinx-needs:REQ_042:status`"
+
+#: ../../technical/adapters.md:12
+msgid "one option of a need"
+msgstr "eine Option eines Needs"
+
+#: ../../technical/adapters.md:12
+msgid "`rst:directive:Install/Linux#note1`"
+msgstr "`rst:directive:Install/Linux#note1`"
+
+#: ../../technical/adapters.md:12
+msgid "the first `note` directive in that section"
+msgstr "die erste `note`-Directive in diesem Abschnitt"
+
+#: ../../technical/adapters.md:12
+msgid "text"
+msgstr "text"
+
+#: ../../technical/adapters.md:12
+msgid "`text:paragraph#4` · `text:line#17`"
+msgstr "`text:paragraph#4` · `text:line#17`"
+
+#: ../../technical/adapters.md:12
+msgid "plain text"
+msgstr "reiner Text"
+
+#: ../../technical/adapters.md:62
+#, python-brace-format
+msgid ""
+"Heading paths survive moves of whole sections and edits in other "
+"sections. The counter (`#2`) breaks when a paragraph is inserted above – "
+"that is why every annotation also stores a text quote ({doc}`file-"
+"format`), which the engine tries next. Duplicate heading names in one "
+"path get a suffix (`Notes~2`)."
+msgstr ""
+"Überschriftenpfade überstehen das Verschieben ganzer Abschnitte und "
+"Änderungen in anderen Abschnitten. Der Zähler (`#2`) bricht, wenn darüber"
+" ein Absatz eingefügt wird – deshalb speichert jede Annotation zusätzlich"
+" ein Textzitat ({doc}`file-format`), das die Engine als Nächstes "
+"probiert. Doppelte Überschriften in einem Pfad bekommen ein Suffix "
+"(`Notes~2`)."
+
+#: ../../technical/adapters.md:69
+msgid "Markdown"
+msgstr "Markdown"
+
+#: ../../technical/adapters.md:71
+msgid ""
+"Parser: markdown-it-py (CommonMark + tables), token maps give line "
+"ranges; offsets come from the line ranges."
+msgstr ""
+"Parser: markdown-it-py (CommonMark + Tabellen); Token-Maps liefern "
+"Zeilenbereiche, Offsets ergeben sich aus den Zeilenbereichen."
+
+#: ../../technical/adapters.md:73
+msgid ""
+"Elements: heading sections, paragraphs, list items (nested), table rows, "
+"code blocks, frontmatter fields (YAML keys at the top level)."
+msgstr ""
+"Elemente: Überschriften-Abschnitte, Absätze, Listenpunkte "
+"(verschachtelt), Tabellenzeilen, Codeblöcke, Frontmatter-Felder (YAML-"
+"Schlüssel auf oberster Ebene)."
+
+#: ../../technical/adapters.md:76
+msgid "rST and Sphinx-Needs"
+msgstr "rST und Sphinx-Needs"
+
+#: ../../technical/adapters.md:83
+msgid ""
+"docutils keeps source lines on every node. Unknown directives and roles "
+"(Sphinx, Sphinx-Needs, any extension) are registered as generic "
+"placeholders, so a file parses without `conf.py` and without importing "
+"extensions. Need directives are recognised by name; their `:id:` gives "
+"the `sphinx-needs:` selector."
+msgstr ""
+"docutils merkt sich an jedem Knoten die Quellzeilen. Unbekannte "
+"Directives und Rollen (Sphinx, Sphinx-Needs, beliebige Erweiterungen) "
+"werden als generische Platzhalter registriert, sodass eine Datei ohne "
+"`conf.py` und ohne Import von Erweiterungen geparst wird. Need-Directives"
+" werden am Namen erkannt; ihre `:id:` ergibt den `sphinx-"
+"needs:`-Selektor."
+
+#: ../../technical/adapters.md:96
+msgid ""
+"Proposal: read them from `needs.json` if the project builds one, "
+"otherwise from `.deciwa/config.toml` (`needs.directives = [\"req\", "
+"\"spec\", ...]`), and fall back to the Sphinx-Needs defaults (`req`, "
+"`spec`, `impl`, `test`, `need`). OK, or should deciwa read `conf.py` / "
+"`ubproject.toml` directly?"
+msgstr ""
+"Vorschlag: aus `needs.json` lesen, wenn das Projekt eines baut, sonst aus"
+" `.deciwa/config.toml` (`needs.directives = [\"req\", \"spec\", ...]`), "
+"und auf die Standardwerte von Sphinx-Needs zurückfallen (`req`, `spec`, "
+"`impl`, `test`, `need`). OK, oder soll deciwa `conf.py` / "
+"`ubproject.toml` direkt lesen?"
+
+#: ../../technical/adapters.md:102
+msgid "Plain text"
+msgstr "Reiner Text"
+
+#: ../../technical/adapters.md:104
+msgid ""
+"Paragraphs are blocks separated by blank lines; lines are a second level."
+" Everything else is free text selection."
+msgstr ""
+"Absätze sind durch Leerzeilen getrennte Blöcke; Zeilen sind eine zweite "
+"Ebene. Alles andere ist freie Textauswahl."
+
+#: ../../technical/adapters.md:107
+msgid "Free text selection"
+msgstr "Freie Textauswahl"
+
+#: ../../technical/adapters.md:114
+msgid ""
+"Selecting a word stores the structural selector of the element that "
+"contains it plus a `TextQuoteSelector` (exact, prefix, suffix) and a "
+"`TextPositionSelector` relative to that element. This works in every "
+"format, and the fingerprint covers only the selected text."
+msgstr ""
+"Wird ein Wort markiert, speichert deciwa den strukturellen Selektor des "
+"Elements, das es enthält, plus einen `TextQuoteSelector` (exact, prefix, "
+"suffix) und einen `TextPositionSelector` relativ zu diesem Element. Das "
+"funktioniert in jedem Format, und der Fingerprint umfasst nur den "
+"markierten Text."
+

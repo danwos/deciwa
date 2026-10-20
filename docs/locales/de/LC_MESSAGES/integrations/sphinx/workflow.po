@@ -1,0 +1,179 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/sphinx/workflow.md:1
+msgid "Workflow"
+msgstr "Workflow"
+
+#: ../../integrations/sphinx/workflow.md:3
+msgid "With the server"
+msgstr "Mit dem Server"
+
+#: ../../integrations/sphinx/workflow.md:9
+msgid ""
+"**Build** – `deciwa serve` builds the docs once, then watches the sources"
+" and the extension; every change triggers an incremental rebuild, and "
+"open pages reload by themselves, keeping their scroll position."
+msgstr ""
+"**Bauen** – `deciwa serve` baut die Docs einmal und beobachtet dann die "
+"Quellen und die Erweiterung; jede Änderung löst einen inkrementellen "
+"Build aus, und offene Seiten laden sich selbst neu und behalten ihre "
+"Scrollposition."
+
+#: ../../integrations/sphinx/workflow.md:12
+msgid ""
+"**Review** – open a page, turn on **Review** (`Shift+R`) and give "
+"feedback. Everything is written to `.deciwa/annotations/` at once."
+msgstr ""
+"**Reviewen** – öffne eine Seite, schalte **Review** ein (`Shift+R`) und "
+"gib Feedback. Alles wird sofort nach `.deciwa/annotations/` geschrieben."
+
+#: ../../integrations/sphinx/workflow.md:14
+msgid "**Work** – the AI or a developer takes the open jobs:"
+msgstr ""
+"**Arbeiten** – die KI oder jemand aus der Entwicklung nimmt die offenen "
+"Aufgaben:"
+
+#: ../../integrations/sphinx/workflow.md:21
+msgid ""
+"With Claude, say \"work through the deciwa feedback\" – see "
+"[Claude](../claude.md)."
+msgstr ""
+"Sag Claude „arbeite das deciwa-Feedback ab“ – siehe "
+"[Claude](../claude.md)."
+
+#: ../../integrations/sphinx/workflow.md:23
+msgid ""
+"**Check** – the changed sources are rebuilt; an approved text that "
+"changed is now `stale` and shows the old and the new wording. Approve it "
+"again or give new feedback."
+msgstr ""
+"**Prüfen** – die geänderten Quellen werden neu gebaut; ein freigegebener "
+"Text, der sich geändert hat, ist jetzt `stale` und zeigt die alte und die"
+" neue Formulierung. Gib ihn erneut frei oder gib neues Feedback."
+
+#: ../../integrations/sphinx/workflow.md:26
+msgid "**Commit** – `.deciwa/` goes into Git together with the docs."
+msgstr "**Committen** – `.deciwa/` kommt zusammen mit den Docs in Git."
+
+#: ../../integrations/sphinx/workflow.md:28
+msgid ""
+"`deciwa status` shows the coverage of the whole project in the terminal; "
+"the panel's **Project** tab shows the same in the browser."
+msgstr ""
+"`deciwa status` zeigt die Abdeckung des ganzen Projekts im Terminal; der "
+"Reiter **Project** im Panel zeigt dasselbe im Browser."
+
+#: ../../integrations/sphinx/workflow.md:32
+msgid "Offline"
+msgstr "Offline"
+
+#: ../../integrations/sphinx/workflow.md:34
+msgid ""
+"Without `deciwa serve` the overlay works on its own: a plain static "
+"build, a laptop without the CLI, or a demo on a website."
+msgstr ""
+"Ohne `deciwa serve` funktioniert das Overlay allein: ein einfacher "
+"statischer Build, ein Laptop ohne CLI oder eine Demo auf einer Website."
+
+#: ../../integrations/sphinx/workflow.md:42
+msgid ""
+"Open `index.html` straight from the folder (`file://`), pass the folder "
+"on as a ZIP, or publish it as static files – no server needed."
+msgstr ""
+"Öffne `index.html` direkt aus dem Ordner (`file://`), gib den Ordner als "
+"ZIP weiter oder veröffentliche ihn als statische Dateien – kein Server "
+"nötig."
+
+#: ../../integrations/sphinx/workflow.md:44
+msgid ""
+"The deciwa button shows **offline**; feedback is kept in this browser and"
+" survives reloads and page changes."
+msgstr ""
+"Der deciwa-Button zeigt **offline**; Feedback bleibt in diesem Browser "
+"und übersteht Neuladen und Seitenwechsel."
+
+#: ../../integrations/sphinx/workflow.md:46
+msgid ""
+"The panel tab **Im/Export** downloads everything as one deciwa file, "
+"loads one into the browser, or resets to what the build shipped."
+msgstr ""
+"Der Panel-Reiter **Im/Export** lädt alles als eine deciwa-Datei herunter,"
+" lädt eine in den Browser oder setzt auf das zurück, was der Build "
+"mitgebracht hat."
+
+#: ../../integrations/sphinx/workflow.md:48
+msgid "Bring an export into the repository:"
+msgstr "Einen Export ins Repository bringen:"
+
+#: ../../integrations/sphinx/workflow.md:54
+msgid "Import and export"
+msgstr "Import und Export"
+
+#: ../../integrations/sphinx/workflow.md:56
+msgid ""
+"A deciwa file holds the review data of the whole project plus two times: "
+"when it was exported and when the data last changed."
+msgstr ""
+"Eine deciwa-Datei enthält die Review-Daten des ganzen Projekts plus zwei "
+"Zeitpunkte: wann sie exportiert wurde und wann sich die Daten zuletzt "
+"geändert haben."
+
+#: ../../integrations/sphinx/workflow.md:59
+msgid "**No merge** – an import replaces all review data."
+msgstr "**Kein Zusammenführen** – ein Import ersetzt alle Review-Daten."
+
+#: ../../integrations/sphinx/workflow.md:60
+msgid ""
+"**Never older over newer** – the server and `deciwa import` refuse a file"
+" whose last change is older than the project's; `deciwa import --force` "
+"overrides that. The browser warns instead."
+msgstr ""
+"**Nie älter über neuer** – der Server und `deciwa import` lehnen eine "
+"Datei ab, deren letzte Änderung älter ist als die des Projekts; `deciwa "
+"import --force` übergeht das. Der Browser warnt stattdessen."
+
+#: ../../integrations/sphinx/workflow.md:63
+msgid "`deciwa export [file]` writes the same file from the command line."
+msgstr "`deciwa export [file]` schreibt dieselbe Datei von der Kommandozeile."
+
+#: ../../integrations/sphinx/workflow.md:65
+msgid "The Im/Export tab of the panel"
+msgstr "Der Reiter Im/Export im Panel"
+
+#: ../../integrations/sphinx/workflow.md:68
+msgid "The panel tab **Im/Export**."
+msgstr "Der Panel-Reiter **Im/Export**."
+
+#: ../../integrations/sphinx/workflow.md:72
+msgid "Publishing a review build"
+msgstr "Einen Review-Build veröffentlichen"
+
+#: ../../integrations/sphinx/workflow.md:74
+msgid ""
+"For a public demo set `deciwa_mode=offline` and "
+"`deciwa_offline_annotations=0`: nothing is sent anywhere, and visitors "
+"start with an empty review in their own browser."
+msgstr ""
+"Für eine öffentliche Demo setz `deciwa_mode=offline` und "
+"`deciwa_offline_annotations=0`: nichts wird irgendwohin geschickt, und "
+"Besucher starten mit einem leeren Review in ihrem eigenen Browser."
+

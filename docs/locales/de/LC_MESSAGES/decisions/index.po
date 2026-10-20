@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/index.md:1
+msgid "All decisions"
+msgstr "Alle Entscheidungen"
+
+#: ../../decisions/index.md:3
+msgid ""
+"Product and technical decisions on deciwa. All decided by Daniel; they "
+"are binding requirements for every feature and every piece of code. "
+"Business decisions (pricing, licence, market) are kept outside this "
+"repository."
+msgstr ""
+"Produkt- und technische Entscheidungen zu deciwa. Alle von Daniel "
+"entschieden; sie sind verbindliche Anforderungen an jedes Feature und "
+"jedes Stück Code. Geschäftliche Entscheidungen (Preise, Lizenz, Markt) "
+"liegen außerhalb dieses Repositorys."
+
+#: ../../decisions/index.md:7
+msgid ""
+"A new decision comes from an approved proposal in the technical details –"
+" see [Working on deciwa](../technical/working.md)."
+msgstr ""
+"Eine neue Entscheidung entsteht aus einem freigegebenen Vorschlag in den "
+"technischen Details – siehe [An deciwa "
+"arbeiten](../technical/working.md)."
+
+#: ../../decisions/index.md:17
+msgid "Purpose and scope"
+msgstr "Zweck und Umfang"
+
+#: ../../decisions/index.md:43
+msgid "Feedback and decisions"
+msgstr "Feedback und Entscheidungen"
+
+#: ../../decisions/index.md:85
+msgid "Elements and formats"
+msgstr "Elemente und Formate"
+
+#: ../../decisions/index.md:119
+msgid "Architecture and data"
+msgstr "Architektur und Daten"
+
+#: ../../decisions/index.md:153
+msgid "UI and integrations"
+msgstr "Oberfläche und Integrationen"
+
+#: ../../decisions/index.md:179
+msgid "Working on deciwa"
+msgstr "An deciwa arbeiten"
+

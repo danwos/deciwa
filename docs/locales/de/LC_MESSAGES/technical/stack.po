@@ -1,0 +1,221 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/stack.md:1
+msgid "Stack"
+msgstr "Stack"
+
+#: ../../technical/stack.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/stack.md:5
+msgid "Proposals by Claude – not binding until Daniel approves them."
+msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
+
+#: ../../technical/stack.md:8
+#, python-brace-format
+msgid ""
+"The core language is the one decision everything else depends on. It is "
+"driven by the MVP formats ({need}`DEC_FORMATS`): Markdown, rST with "
+"Sphinx-Needs, and plain text."
+msgstr ""
+"Die Sprache des Cores ist die eine Entscheidung, von der alles andere "
+"abhängt. Sie richtet sich nach den MVP-Formaten ({need}`DEC_FORMATS`): "
+"Markdown, rST mit Sphinx-Needs und reiner Text."
+
+#: ../../technical/stack.md:3
+msgid "Python"
+msgstr "Python"
+
+#: ../../technical/stack.md:3
+msgid "TypeScript / Node"
+msgstr "TypeScript / Node"
+
+#: ../../technical/stack.md:3
+msgid "Rust"
+msgstr "Rust"
+
+#: ../../technical/stack.md:3
+msgid "rST + Sphinx-Needs"
+msgstr "rST + Sphinx-Needs"
+
+#: ../../technical/stack.md:3
+msgid "**docutils / Sphinx – the only complete rST parser**"
+msgstr "**docutils / Sphinx – der einzige vollständige rST-Parser**"
+
+#: ../../technical/stack.md:3
+msgid "no complete rST parser"
+msgstr "kein vollständiger rST-Parser"
+
+#: ../../technical/stack.md:3
+msgid "Markdown"
+msgstr "Markdown"
+
+#: ../../technical/stack.md:3
+msgid "markdown-it-py (same rules as markdown-it)"
+msgstr "markdown-it-py (dieselben Regeln wie markdown-it)"
+
+#: ../../technical/stack.md:3
+msgid "markdown-it"
+msgstr "markdown-it"
+
+#: ../../technical/stack.md:3
+msgid "pulldown-cmark, comrak"
+msgstr "pulldown-cmark, comrak"
+
+#: ../../technical/stack.md:3
+msgid "Code formats later"
+msgstr "Code-Formate später"
+
+#: ../../technical/stack.md:3
+msgid "tree-sitter bindings"
+msgstr "tree-sitter-Bindings"
+
+#: ../../technical/stack.md:3
+msgid "tree-sitter (native)"
+msgstr "tree-sitter (nativ)"
+
+#: ../../technical/stack.md:3
+msgid "Same language as VS Code / Chrome extensions"
+msgstr "Dieselbe Sprache wie die Erweiterungen für VS Code / Chrome"
+
+#: ../../technical/stack.md:3
+msgid "no – they call `deciwa serve` / `--json`"
+msgstr "nein – sie rufen `deciwa serve` / `--json` auf"
+
+#: ../../technical/stack.md:3
+msgid "yes"
+msgstr "ja"
+
+#: ../../technical/stack.md:3
+msgid "no, but WASM possible"
+msgstr "nein, aber WASM möglich"
+
+#: ../../technical/stack.md:3
+msgid "Sphinx extension for review on results"
+msgstr "Sphinx-Erweiterung für Review am Ergebnis"
+
+#: ../../technical/stack.md:3
+msgid "native"
+msgstr "nativ"
+
+#: ../../technical/stack.md:3
+msgid "–"
+msgstr "–"
+
+#: ../../technical/stack.md:3
+msgid "Install for users"
+msgstr "Installation für Nutzer"
+
+#: ../../technical/stack.md:3
+msgid "`uv tool install deciwa`, `pipx`"
+msgstr "`uv tool install deciwa`, `pipx`"
+
+#: ../../technical/stack.md:3
+msgid "`npm i -g`"
+msgstr "`npm i -g`"
+
+#: ../../technical/stack.md:3
+msgid "single binary"
+msgstr "eine einzelne Binary"
+
+#: ../../technical/stack.md:3
+msgid "Speed to 0.1"
+msgstr "Tempo bis 0.1"
+
+#: ../../technical/stack.md:3
+msgid "fast"
+msgstr "schnell"
+
+#: ../../technical/stack.md:3
+msgid "medium (rST gap)"
+msgstr "mittel (rST-Lücke)"
+
+#: ../../technical/stack.md:3
+msgid "slow"
+msgstr "langsam"
+
+#: ../../technical/stack.md:27
+#, python-brace-format
+msgid ""
+"rST with Sphinx-Needs is an MVP format, and only docutils parses rST "
+"fully. The same code then runs inside a Sphinx build to tag the rendered "
+"HTML with selectors – the base for review on results. The TypeScript "
+"integrations of 0.2/0.3 talk to the CLI through `--json` and `deciwa "
+"serve`, as {need}`DEC_CLI_MASTER` demands anyway. If the browser ever "
+"needs element finding without a local CLI, a WASM or TypeScript port of "
+"single adapters stays possible because the selectors are a documented "
+"format."
+msgstr ""
+"rST mit Sphinx-Needs ist ein MVP-Format, und nur docutils parst rST "
+"vollständig. Derselbe Code läuft dann innerhalb eines Sphinx-Builds, um "
+"das gerenderte HTML mit Selektoren zu markieren – die Grundlage für "
+"Review am Ergebnis. Die TypeScript-Integrationen von 0.2/0.3 sprechen "
+"über `--json` und `deciwa serve` mit der CLI, wie es "
+"{need}`DEC_CLI_MASTER` ohnehin verlangt. Braucht der Browser je eine "
+"Elementsuche ohne lokale CLI, bleibt ein WASM- oder TypeScript-Port "
+"einzelner Adapter möglich, weil die Selektoren ein dokumentiertes Format "
+"sind."
+
+#: ../../technical/stack.md:41
+msgid "**uv** for environments, locking and `uv tool install deciwa`."
+msgstr "**uv** für Umgebungen, Locking und `uv tool install deciwa`."
+
+#: ../../technical/stack.md:42
+msgid ""
+"**ruff** for lint and format, **pytest** for tests, **mypy** strict for "
+"`src/deciwa/model` and `src/deciwa/engine`."
+msgstr ""
+"**ruff** für Lint und Format, **pytest** für Tests, **mypy** strict für "
+"`src/deciwa/model` und `src/deciwa/engine`."
+
+#: ../../technical/stack.md:44
+msgid "**click** for the CLI – small, stable, no magic."
+msgstr "**click** für die CLI – klein, stabil, keine Magie."
+
+#: ../../technical/stack.md:45
+msgid ""
+"**pydantic** is not used; the model is plain dataclasses plus a JSON "
+"Schema in `schema/` so other languages can validate the files too."
+msgstr ""
+"**pydantic** wird nicht genutzt; das Modell besteht aus einfachen "
+"Dataclasses plus einem JSON Schema in `schema/`, damit auch andere "
+"Sprachen die Dateien validieren können."
+
+#: ../../technical/stack.md:47
+msgid ""
+"Runtime dependencies for 0.1: `click`, `markdown-it-py`, `docutils`, "
+"`pyyaml` (frontmatter). Sphinx only as an optional extra "
+"(`deciwa[sphinx]`)."
+msgstr ""
+"Laufzeit-Abhängigkeiten für 0.1: `click`, `markdown-it-py`, `docutils`, "
+"`pyyaml` (Frontmatter). Sphinx nur als optionales Extra "
+"(`deciwa[sphinx]`)."
+
+#: ../../technical/stack.md:58
+msgid ""
+"Yes → PROP_PYTHON_CORE and PROP_TOOLING become decisions. No → which "
+"language, and how should the rST/Sphinx-Needs adapter work?"
+msgstr ""
+"Ja → PROP_PYTHON_CORE und PROP_TOOLING werden Entscheidungen. Nein → "
+"welche Sprache, und wie soll der rST-/Sphinx-Needs-Adapter funktionieren?"
+

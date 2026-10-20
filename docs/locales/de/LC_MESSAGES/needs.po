@@ -1,0 +1,607 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 14:04+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../decisions/index.md:19
+msgid ""
+"deciwa is a review and decision tool for everyone who works with docs and"
+" code"
+msgstr ""
+"deciwa ist ein Review- und Entscheidungs-Tool für alle, die mit Docs und "
+"Code arbeiten"
+
+#: ../../decisions/index.md:19 ../../decisions/index.md:27
+#: ../../decisions/index.md:35 ../../decisions/index.md:45
+#: ../../decisions/index.md:53 ../../decisions/index.md:61
+#: ../../decisions/index.md:69 ../../decisions/index.md:77
+#: ../../decisions/index.md:87 ../../decisions/index.md:95
+#: ../../decisions/index.md:103 ../../decisions/index.md:111
+#: ../../decisions/index.md:121 ../../decisions/index.md:129
+#: ../../decisions/index.md:137 ../../decisions/index.md:145
+#: ../../decisions/index.md:155 ../../decisions/index.md:163
+#: ../../decisions/index.md:171 ../../decisions/index.md:181
+#: ../../decisions/index.md:189
+msgid "Decision"
+msgstr "Entscheidung"
+
+#: ../../decisions/index.md:19
+msgid ""
+"Daniel needs a simple way to review content and agree to statements "
+"(trigger: his own work in his knowledge base)."
+msgstr ""
+"Daniel braucht einen einfachen Weg, Inhalte zu reviewen und Aussagen "
+"zuzustimmen (Auslöser: seine eigene Arbeit in seiner Wissensbasis)."
+
+#: ../../decisions/index.md:19
+msgid ""
+"a decision log only; a tool for one group (developers, AI agents or "
+"management)."
+msgstr ""
+"nur ein Entscheidungslog; ein Tool für eine einzige Gruppe (Entwicklung, "
+"KI-Agenten oder Management)."
+
+#: ../../decisions/index.md:27
+msgid ""
+"deciwa collects, evaluates and shows; it does not watch that decisions "
+"are kept"
+msgstr ""
+"deciwa sammelt, bewertet und zeigt; es überwacht nicht, ob Entscheidungen"
+" eingehalten werden"
+
+#: ../../decisions/index.md:27
+msgid ""
+"Enforcing decisions is not possible; doing the work is the job of the AI "
+"or the developer."
+msgstr ""
+"Entscheidungen durchzusetzen ist nicht möglich; die Arbeit selbst ist "
+"Aufgabe der KI oder der Entwicklung."
+
+#: ../../decisions/index.md:27
+msgid "a \"watcher\" that checks the implementation (dropped)."
+msgstr "ein „Watcher“, der die Umsetzung prüft (verworfen)."
+
+#: ../../decisions/index.md:35
+msgid ""
+"Three ways of working that stay separate: feedback, quality rating, AI "
+"communication"
+msgstr ""
+"Drei Arbeitsweisen, die getrennt bleiben: Feedback, Qualitätsbewertung, "
+"KI-Kommunikation"
+
+#: ../../decisions/index.md:35
+msgid ""
+"Stars are a quick judgement independent of any verdict, to focus on weak "
+"areas later; AI questions are answered at the element by verdict or text."
+msgstr ""
+"Sterne sind eine schnelle Einschätzung unabhängig von jedem Urteil, um "
+"sich später auf schwache Stellen zu konzentrieren; Fragen der KI werden "
+"am Element per Urteil oder Text beantwortet."
+
+#: ../../decisions/index.md:35
+msgid "stars as part of a verdict."
+msgstr "Sterne als Teil eines Urteils."
+
+#: ../../decisions/index.md:45
+msgid ""
+"The feedback card has four verdicts – approve, reject, approve & freeze, "
+"delete – plus a comment; a comment alone is a note; quality is rated with"
+" 0–5 stars"
+msgstr ""
+"Die Feedback-Karte hat vier Urteile – freigeben, ablehnen, freigeben & "
+"einfrieren, löschen – plus einen Kommentar; ein Kommentar allein ist eine"
+" Notiz; Qualität wird mit 0–5 Sternen bewertet"
+
+#: ../../decisions/index.md:45
+msgid ""
+"Seen in the prototype: seven three-line buttons were too big; what should"
+" change about a text is said better in the comment than with rephrase or "
+"more-details buttons; a note is just a comment without verdict; quality "
+"needs a clear scale with keys."
+msgstr ""
+"Im Prototyp gesehen: sieben dreizeilige Buttons waren zu groß; was sich "
+"an einem Text ändern soll, sagt der Kommentar besser als Buttons für "
+"Umformulieren oder Mehr Details; eine Notiz ist einfach ein Kommentar "
+"ohne Urteil; Qualität braucht eine klare Skala mit Tasten."
+
+#: ../../decisions/index.md:45
+msgid ""
+"the seven buttons of the clickable prototype (approve, rephrase, more "
+"details, delete, freeze, reject, note) and 1–5 stars."
+msgstr ""
+"die sieben Buttons des klickbaren Prototyps (freigeben, umformulieren, "
+"mehr Details, löschen, einfrieren, ablehnen, Notiz) und 1–5 Sterne."
+
+#: ../../decisions/index.md:53
+msgid "A freeze ends with a new verdict; there is no separate \"lift freeze\""
+msgstr ""
+"Ein Einfrieren endet mit einem neuen Urteil; es gibt kein eigenes "
+"„Einfrieren aufheben“"
+
+#: ../../decisions/index.md:53
+msgid ""
+"Approving an element again replaces one's own freeze anyway (latest "
+"verdict wins while the element is unchanged); a second way to lift it "
+"only confuses."
+msgstr ""
+"Ein erneutes Freigeben ersetzt das eigene Einfrieren ohnehin (solange das"
+" Element unverändert ist, gilt das neueste Urteil); ein zweiter Weg, es "
+"aufzuheben, verwirrt nur."
+
+#: ../../decisions/index.md:53
+msgid ""
+"an explicit unfreeze command for humans only; deleting the freeze "
+"annotation."
+msgstr ""
+"ein ausdrücklicher Befehl zum Auftauen nur für Menschen; das Löschen der "
+"Einfrier-Annotation."
+
+#: ../../decisions/index.md:61
+msgid "Feedback verdicts plus quick actions for the AI"
+msgstr "Feedback-Urteile plus Schnellaktionen für die KI"
+
+#: ../../decisions/index.md:61
+msgid ""
+"Approve, reject, note and the quick actions rephrase, more details and "
+"delete give the AI a complete instruction with one click."
+msgstr ""
+"Freigeben, ablehnen, Notiz und die Schnellaktionen umformulieren, mehr "
+"Details und löschen geben der KI mit einem Klick eine vollständige "
+"Anweisung."
+
+#: ../../decisions/index.md:61
+msgid "free comments only."
+msgstr "nur freie Kommentare."
+
+#: ../../decisions/index.md:69
+msgid "New verdict freeze"
+msgstr "Neues Urteil: einfrieren"
+
+#: ../../decisions/index.md:69
+msgid ""
+"Some wording must survive every edit; the AI must never change it, and "
+"deciwa raises an alarm if it changes anyway."
+msgstr ""
+"Manche Formulierungen müssen jede Bearbeitung überstehen; die KI darf sie"
+" nie ändern, und deciwa schlägt Alarm, wenn sie sich trotzdem ändern."
+
+#: ../../decisions/index.md:69 ../../decisions/index.md:145
+#: ../../decisions/index.md:155
+msgid "–"
+msgstr "–"
+
+#: ../../decisions/index.md:77
+msgid "A decision is an approved statement, not an extra object"
+msgstr "Eine Entscheidung ist eine freigegebene Aussage, kein zusätzliches Objekt"
+
+#: ../../decisions/index.md:77
+msgid "Decisions can then be mapped onto anything that is an element."
+msgstr "Entscheidungen lassen sich dann auf alles abbilden, was ein Element ist."
+
+#: ../../decisions/index.md:77
+msgid "separate decision records in the source."
+msgstr "eigene Entscheidungsdatensätze im Quelltext."
+
+#: ../../decisions/index.md:87
+msgid "No markers in the source; elements come from the content"
+msgstr "Keine Markierungen im Quelltext; Elemente ergeben sich aus dem Inhalt"
+
+#: ../../decisions/index.md:87
+msgid ""
+"The source stays clean and every element stays documented (a Sphinx-Needs"
+" requirement, a heading, a Python function, an HTML container, a selected"
+" word)."
+msgstr ""
+"Der Quelltext bleibt sauber, und jedes Element bleibt dokumentiert (eine "
+"Sphinx-Needs-Anforderung, eine Überschrift, eine Python-Funktion, ein "
+"HTML-Container, ein markiertes Wort)."
+
+#: ../../decisions/index.md:87
+msgid "[CHECK]-style markers or ids in the text."
+msgstr "Markierungen im Stil von [CHECK] oder IDs im Text."
+
+#: ../../decisions/index.md:95
+msgid "Formats: text, HTML, Python, C, JS, TS, rST, Markdown, AsciiDoc"
+msgstr "Formate: Text, HTML, Python, C, JS, TS, rST, Markdown, AsciiDoc"
+
+#: ../../decisions/index.md:95
+msgid "Docs-as-code plus the results and code around it."
+msgstr "Docs-as-Code plus die Ergebnisse und der Code drumherum."
+
+#: ../../decisions/index.md:95
+msgid "Markdown only."
+msgstr "nur Markdown."
+
+#: ../../decisions/index.md:103
+msgid ""
+"Format objects are highlighted on hover and directly selectable; free "
+"text selection down to single words"
+msgstr ""
+"Format-Objekte werden beim Überfahren hervorgehoben und sind direkt "
+"auswählbar; freie Textauswahl bis hinunter zu einzelnen Wörtern"
+
+#: ../../decisions/index.md:103
+msgid "Pointing must be as fast as looking."
+msgstr "Zeigen muss so schnell gehen wie Hinsehen."
+
+#: ../../decisions/index.md:103
+msgid "line-based selection like a code review."
+msgstr "zeilenbasierte Auswahl wie in einem Code-Review."
+
+#: ../../decisions/index.md:111
+msgid "Reviews happen on results, not only on source"
+msgstr "Reviews finden auf den Ergebnissen statt, nicht nur im Quelltext"
+
+#: ../../decisions/index.md:111
+msgid ""
+"Rendered docs and websites are what reviewers see; deciwa must not look "
+"like a pull-request code review. The source view shows the same element."
+msgstr ""
+"Gerenderte Docs und Websites sind das, was Reviewende sehen; deciwa darf "
+"nicht wie ein Pull-Request-Code-Review aussehen. Die Quelltextansicht "
+"zeigt dasselbe Element."
+
+#: ../../decisions/index.md:111
+msgid "source-only review."
+msgstr "Review nur im Quelltext."
+
+#: ../../decisions/index.md:121
+msgid "The CLI is the master, with an openly documented file format"
+msgstr "Die CLI ist der Master, mit einem offen dokumentierten Dateiformat"
+
+#: ../../decisions/index.md:121
+msgid ""
+"One logic for all front ends; agents and integrations use the same "
+"commands and JSON."
+msgstr ""
+"Eine Logik für alle Frontends; Agenten und Integrationen nutzen dieselben"
+" Befehle und dasselbe JSON."
+
+#: ../../decisions/index.md:121
+msgid "a web app as the core."
+msgstr "eine Web-App als Kern."
+
+#: ../../decisions/index.md:129
+msgid ""
+"All deciwa files in one .deciwa/ folder at the repository root or in a "
+"parent folder"
+msgstr ""
+"Alle deciwa-Dateien in einem Ordner .deciwa/ im Wurzelverzeichnis des "
+"Repositorys oder in einem übergeordneten Ordner"
+
+#: ../../decisions/index.md:129
+msgid ""
+"The files must not get in the user's way; a parent folder covers several "
+"repositories or repositories that must stay untouched."
+msgstr ""
+"Die Dateien dürfen nicht im Weg sein; ein übergeordneter Ordner deckt "
+"mehrere Repositorys ab oder Repositorys, die unberührt bleiben müssen."
+
+#: ../../decisions/index.md:129
+msgid "sidecar files next to each source."
+msgstr "Sidecar-Dateien neben jeder Quelle."
+
+#: ../../decisions/index.md:137
+msgid ".deciwa/ is committed to Git by default"
+msgstr ".deciwa/ wird standardmäßig in Git committet"
+
+#: ../../decisions/index.md:137
+msgid "Reviews are versioned together with the content."
+msgstr "Reviews werden zusammen mit dem Inhalt versioniert."
+
+#: ../../decisions/index.md:137
+msgid "git-ignored until a team decides."
+msgstr "von Git ignoriert, bis ein Team entscheidet."
+
+#: ../../decisions/index.md:145
+msgid "One or two agent skills for working with deciwa"
+msgstr "Ein oder zwei Agent-Skills für die Arbeit mit deciwa"
+
+#: ../../decisions/index.md:145
+msgid ""
+"Agents should pick up feedback and ask questions without extra prompting "
+"(deciwa-work, deciwa-ask)."
+msgstr ""
+"Agenten sollen Feedback aufgreifen und Fragen stellen, ohne extra dazu "
+"aufgefordert zu werden (deciwa-work, deciwa-ask)."
+
+#: ../../decisions/index.md:155
+msgid "Integrations: VS Code, Chrome, Claude UI, desktop app"
+msgstr "Integrationen: VS Code, Chrome, Claude-Oberfläche, Desktop-App"
+
+#: ../../decisions/index.md:155
+msgid ""
+"Reviews happen where people already work – editor, browser, chat; the "
+"desktop app covers people without an IDE."
+msgstr ""
+"Reviews finden dort statt, wo man ohnehin arbeitet – Editor, Browser, "
+"Chat; die Desktop-App deckt alle ohne IDE ab."
+
+#: ../../decisions/index.md:163
+msgid ""
+"Feedback card at the element is the default UI; side panel is the "
+"alternative; radial menu dropped"
+msgstr ""
+"Die Feedback-Karte am Element ist die Standard-Oberfläche; das "
+"Seitenpanel ist die Alternative; das Radialmenü ist verworfen"
+
+#: ../../decisions/index.md:163
+msgid "Compared in the clickable prototype."
+msgstr "Im klickbaren Prototyp verglichen."
+
+#: ../../decisions/index.md:163
+msgid "radial menu at the cursor."
+msgstr "ein Radialmenü am Cursor."
+
+#: ../../decisions/index.md:171
+msgid "deciwa uses the danwos colours and tokens"
+msgstr "deciwa nutzt die danwos-Farben und -Tokens"
+
+#: ../../decisions/index.md:171
+msgid ""
+"Recognition across all danwos tools; the deciwa monster colours are only "
+"for pictures."
+msgstr ""
+"Wiedererkennung über alle danwos-Tools hinweg; die Farben des deciwa-"
+"Monsters sind nur für Bilder."
+
+#: ../../decisions/index.md:171
+msgid "an own deciwa colour scheme."
+msgstr "ein eigenes deciwa-Farbschema."
+
+#: ../../decisions/index.md:181
+msgid ""
+"deciwa is one repository of separate packages: core, server, CLI, UI and "
+"one per integration"
+msgstr ""
+"deciwa ist ein Repository aus getrennten Paketen: Core, Server, CLI, UI "
+"und eines pro Integration"
+
+#: ../../decisions/index.md:181
+msgid ""
+"The CLI and the server are reused by every integration; the logic stays "
+"in one place (core); integrations such as Sphinx, VS Code or Chrome stay "
+"independent of each other."
+msgstr ""
+"CLI und Server werden von jeder Integration wiederverwendet; die Logik "
+"bleibt an einer Stelle (Core); Integrationen wie Sphinx, VS Code oder "
+"Chrome bleiben voneinander unabhängig."
+
+#: ../../decisions/index.md:181
+msgid "one package with everything (the first prototype, deciwa_proto)."
+msgstr "ein Paket mit allem (der erste Prototyp, deciwa_proto)."
+
+#: ../../decisions/index.md:189
+msgid ""
+"Decisions, features and concepts live in the repository as Sphinx docs "
+"with Sphinx-Needs"
+msgstr ""
+"Entscheidungen, Features und Konzepte liegen im Repository als Sphinx-"
+"Docs mit Sphinx-Needs"
+
+#: ../../decisions/index.md:189
+msgid ""
+"Others develop in the repository too, and decisions act as requirements; "
+"Sphinx-Needs gives every decision an id, a status and links, and deciwa "
+"can later review its own docs."
+msgstr ""
+"Andere entwickeln auch im Repository, und Entscheidungen wirken als "
+"Anforderungen; Sphinx-Needs gibt jeder Entscheidung eine ID, einen Status"
+" und Links, und deciwa kann später seine eigenen Docs reviewen."
+
+#: ../../decisions/index.md:189
+msgid ""
+"decisions in Daniel's knowledge base only; MkDocs Material (plain text "
+"without ids or traceability)."
+msgstr ""
+"Entscheidungen nur in Daniels Wissensbasis; MkDocs Material (reiner Text "
+"ohne IDs oder Rückverfolgbarkeit)."
+
+#: ../../demo.md:49
+msgid "The machine is ready for the first coffee 60 seconds after switching on"
+msgstr ""
+"Die Maschine ist 60 Sekunden nach dem Einschalten bereit für den ersten "
+"Kaffee"
+
+#: ../../demo.md:49 ../../demo.md:54 ../../demo.md:59 ../../demo.md:64
+msgid "Requirement"
+msgstr "Anforderung"
+
+#: ../../demo.md:54
+msgid "A cup of coffee is ready in under 5 seconds"
+msgstr "Eine Tasse Kaffee ist in unter 5 Sekunden fertig"
+
+#: ../../demo.md:59
+msgid ""
+"The machine warns when the water tank holds less than 200 ml, so a full "
+"cup can still be made"
+msgstr ""
+"Die Maschine warnt, wenn der Wassertank weniger als 200 ml enthält, damit"
+" noch eine volle Tasse möglich ist"
+
+#: ../../demo.md:64
+msgid ""
+"Every setting can be changed with one hand while holding a cup in the "
+"other"
+msgstr ""
+"Jede Einstellung lässt sich mit einer Hand ändern, während die andere "
+"eine Tasse hält"
+
+#: ../../technical/adapters.md:12
+msgid "One small adapter interface for all formats"
+msgstr "Eine kleine Adapter-Schnittstelle für alle Formate"
+
+#: ../../technical/adapters.md:12 ../../technical/adapters.md:57
+#: ../../technical/adapters.md:78 ../../technical/adapters.md:109
+#: ../../technical/cli.md:8 ../../technical/cli.md:50 ../../technical/cli.md:61
+#: ../../technical/file-format.md:15 ../../technical/file-format.md:26
+#: ../../technical/file-format.md:72 ../../technical/file-format.md:86
+#: ../../technical/file-format.md:96 ../../technical/layers.md:38
+#: ../../technical/rollout.md:11 ../../technical/rollout.md:20
+#: ../../technical/skills.md:8 ../../technical/stack.md:22
+#: ../../technical/stack.md:36 ../../technical/state-engine.md:37
+#: ../../technical/state-engine.md:59 ../../technical/state-engine.md:99
+#: ../../technical/working.md:46 ../../technical/working.md:60
+msgid "Proposal"
+msgstr "Vorschlag"
+
+#: ../../technical/adapters.md:57
+msgid "Element selectors are paths of headings plus a per-section counter"
+msgstr ""
+"Element-Selektoren sind Pfade aus Überschriften plus ein Zähler pro "
+"Abschnitt"
+
+#: ../../technical/adapters.md:78
+msgid "The rST adapter parses with docutils, without running Sphinx"
+msgstr "Der rST-Adapter parst mit docutils, ohne Sphinx auszuführen"
+
+#: ../../technical/adapters.md:90
+msgid "Which directive names count as needs?"
+msgstr "Welche Directive-Namen zählen als Needs?"
+
+#: ../../technical/adapters.md:90 ../../technical/rollout.md:31
+#: ../../technical/rollout.md:42 ../../technical/skills.md:40
+#: ../../technical/skills.md:51 ../../technical/stack.md:52
+#: ../../technical/state-engine.md:69 ../../technical/state-engine.md:111
+#: ../../technical/working.md:70
+msgid "Question"
+msgstr "Frage"
+
+#: ../../technical/adapters.md:109
+msgid "A free text selection is a text quote inside its nearest element"
+msgstr "Eine freie Textauswahl ist ein Textzitat innerhalb ihres nächsten Elements"
+
+#: ../../technical/cli.md:8
+msgid "Commands in 0.1"
+msgstr "Befehle in 0.1"
+
+#: ../../technical/cli.md:50
+msgid "JSON output has one envelope for every command"
+msgstr "JSON-Ausgaben haben für jeden Befehl dieselbe Hülle"
+
+#: ../../technical/cli.md:61
+msgid "deciwa status can fail a CI run on freeze alarms"
+msgstr "deciwa status kann einen CI-Lauf bei Einfrier-Alarmen scheitern lassen"
+
+#: ../../technical/file-format.md:15
+msgid "One annotation file per source, deterministic JSON"
+msgstr "Eine Annotationsdatei pro Quelle, deterministisches JSON"
+
+#: ../../technical/file-format.md:26
+msgid "Annotation structure"
+msgstr "Aufbau einer Annotation"
+
+#: ../../technical/file-format.md:72
+msgid ""
+"While an element is unchanged, an author's latest verdict and latest "
+"rating replace the earlier ones"
+msgstr ""
+"Solange ein Element unverändert ist, ersetzen das neueste Urteil und die "
+"neueste Bewertung einer Person die früheren"
+
+#: ../../technical/file-format.md:86
+msgid "The snapshot of the element text is stored with every annotation"
+msgstr "Der Schnappschuss des Elementtexts wird mit jeder Annotation gespeichert"
+
+#: ../../technical/file-format.md:96
+msgid "A JSON Schema is the documented contract"
+msgstr "Ein JSON Schema ist der dokumentierte Vertrag"
+
+#: ../../technical/layers.md:38
+msgid "The core is split into layers with a strict dependency direction"
+msgstr "Der Core ist in Schichten mit strenger Abhängigkeitsrichtung aufgeteilt"
+
+#: ../../technical/rollout.md:11
+msgid ".deciwa/ at the root of the knowledge base, committed"
+msgstr ".deciwa/ im Wurzelverzeichnis der Wissensbasis, committet"
+
+#: ../../technical/rollout.md:20
+msgid "Existing [CHECK] markers are migrated once into requests"
+msgstr "Bestehende [CHECK]-Markierungen werden einmalig in Anfragen überführt"
+
+#: ../../technical/rollout.md:31
+msgid "Does deciwa replace [CHECK] and [ASSUMPTION], or only [CHECK]?"
+msgstr "Ersetzt deciwa [CHECK] und [ASSUMPTION] oder nur [CHECK]?"
+
+#: ../../technical/rollout.md:42
+msgid "How does Daniel review in 0.1 without an editor integration?"
+msgstr "Wie reviewt Daniel in 0.1 ohne Editor-Integration?"
+
+#: ../../technical/skills.md:8
+msgid "Two skills in the Agent Skills format, shipped in the repository"
+msgstr "Zwei Skills im Agent-Skills-Format, im Repository mitgeliefert"
+
+#: ../../technical/skills.md:40
+msgid "How do the skills get into a project?"
+msgstr "Wie kommen die Skills in ein Projekt?"
+
+#: ../../technical/skills.md:51
+msgid "Are there quick actions besides delete?"
+msgstr "Gibt es außer Löschen weitere Schnellaktionen?"
+
+#: ../../technical/stack.md:22
+msgid "The core and the CLI are written in Python"
+msgstr "Core und CLI sind in Python geschrieben"
+
+#: ../../technical/stack.md:36
+msgid "Tooling: Python 3.12+, uv, ruff, pytest, click"
+msgstr "Tooling: Python 3.12+, uv, ruff, pytest, click"
+
+#: ../../technical/stack.md:52
+msgid "Python for the core and the CLI?"
+msgstr "Python für Core und CLI?"
+
+#: ../../technical/state-engine.md:37
+msgid "Selectors are tried in a fixed order and the first unique hit wins"
+msgstr ""
+"Selektoren werden in fester Reihenfolge probiert, und der erste "
+"eindeutige Treffer gewinnt"
+
+#: ../../technical/state-engine.md:59
+msgid "The fingerprint covers the source text with whitespace normalised"
+msgstr "Der Fingerprint umfasst den Quelltext mit normalisierten Leerzeichen"
+
+#: ../../technical/state-engine.md:69
+msgid "Should pure formatting changes make an approval stale?"
+msgstr "Sollen reine Formatierungsänderungen eine Freigabe veralten lassen?"
+
+#: ../../technical/state-engine.md:99
+msgid "State rules in this order"
+msgstr "Zustandsregeln in dieser Reihenfolge"
+
+#: ../../technical/state-engine.md:111
+msgid "How is a freeze lifted?"
+msgstr "Wie wird ein Einfrieren aufgehoben?"
+
+#: ../../technical/working.md:46
+msgid ""
+"English is the source of the docs; German is a translation in gettext "
+"catalogs"
+msgstr ""
+"Englisch ist die Quelle der Docs; Deutsch ist eine Übersetzung in "
+"gettext-Katalogen"
+
+#: ../../technical/working.md:60
+msgid "Reviews and decisions happen only on the English docs"
+msgstr "Reviews und Entscheidungen finden nur auf den englischen Docs statt"
+
+#: ../../technical/working.md:70
+msgid "Should the overlay speak German on German pages?"
+msgstr "Soll das Overlay auf deutschen Seiten Deutsch sprechen?"
+

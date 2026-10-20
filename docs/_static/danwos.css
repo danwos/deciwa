@@ -73,6 +73,11 @@ code.literal { background: var(--dw-tint); border: 0; border-radius: 4px; }
   background: linear-gradient(90deg, #14B8A6 0 25%, #E2725B 25% 50%, #D8C3A5 50% 75%, #8A9A5B 75%); }
 .sidebar-tree .caption-text { font-family: var(--font-stack--headings); font-size: 0.8rem; letter-spacing: 0.06em; color: var(--dw-primary); }
 .sidebar-tree .current-page > .reference { border-left: 3px solid var(--dw-terracotta); }
+/* language switcher below the search */
+.dw-languages { display: flex; justify-content: center; gap: 4px; padding: 10px var(--sidebar-item-spacing-horizontal) 4px; font-size: .78rem; font-weight: 600; }
+.dw-languages > * { padding: 2px 10px; border-radius: 999px; text-decoration: none; color: var(--color-foreground-secondary); }
+.dw-languages a:hover { color: var(--dw-primary); background: var(--color-background-hover); }
+.dw-languages [aria-current] { color: var(--dw-primary); background: var(--color-background-hover); }
 
 /* Tables */
 article table.docutils { border-radius: 10px; border-collapse: separate; border-spacing: 0; overflow: hidden; box-shadow: none; border: 1px solid var(--dw-line); }

@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../product/cli.md:1
+msgid "CLI and agent skills"
+msgstr "CLI und Agent-Skills"
+
+#: ../../product/cli.md:3
+msgid "CLI – the master"
+msgstr "CLI – der Master"
+
+#: ../../product/cli.md:5
+#, python-brace-format
+msgid ""
+"The CLI is the master, with an openly documented file format "
+"({need}`DEC_CLI_MASTER`). Every integration talks to the CLI (library / "
+"local server), never to the files directly. Every command has `--json`."
+msgstr ""
+"Die CLI ist der Master, mit einem offen dokumentierten Dateiformat "
+"({need}`DEC_CLI_MASTER`). Jede Integration spricht mit der CLI "
+"(Bibliothek / lokaler Server), nie direkt mit den Dateien. Jeder Befehl "
+"hat `--json`."
+
+#: ../../product/cli.md
+msgid "Command"
+msgstr "Befehl"
+
+#: ../../product/cli.md
+msgid "Does"
+msgstr "Bewirkt"
+
+#: ../../product/cli.md
+msgid "`deciwa init [--at <folder>]`"
+msgstr "`deciwa init [--at <folder>]`"
+
+#: ../../product/cli.md
+msgid "create `.deciwa/`"
+msgstr "`.deciwa/` anlegen"
+
+#: ../../product/cli.md
+msgid "`deciwa serve`"
+msgstr "`deciwa serve`"
+
+#: ../../product/cli.md
+msgid "build the docs, serve them with the review overlay, rebuild on change"
+msgstr ""
+"die Docs bauen, mit dem Review-Overlay ausliefern, bei Änderungen neu "
+"bauen"
+
+#: ../../product/cli.md
+msgid "`deciwa elements <file>`"
+msgstr "`deciwa elements <file>`"
+
+#: ../../product/cli.md
+msgid "the elements of a source, with their selectors"
+msgstr "die Elemente einer Quelle, mit ihren Selektoren"
+
+#: ../../product/cli.md
+msgid "`deciwa show <file>`"
+msgstr "`deciwa show <file>`"
+
+#: ../../product/cli.md
+msgid "all feedback of a source with the element states"
+msgstr "alles Feedback einer Quelle mit den Zuständen der Elemente"
+
+#: ../../product/cli.md
+msgid "`deciwa status`"
+msgstr "`deciwa status`"
+
+#: ../../product/cli.md
+msgid "states and coverage of the whole project"
+msgstr "Zustände und Abdeckung des ganzen Projekts"
+
+#: ../../product/cli.md
+msgid "`deciwa todo`"
+msgstr "`deciwa todo`"
+
+#: ../../product/cli.md
+msgid "open jobs for the AI or developer, and open questions"
+msgstr "offene Aufgaben für die KI oder die Entwicklung und offene Fragen"
+
+#: ../../product/cli.md
+msgid "`deciwa annotate <file> <element> --verdict … [--comment …]`"
+msgstr "`deciwa annotate <file> <element> --verdict … [--comment …]`"
+
+#: ../../product/cli.md
+msgid "give feedback"
+msgstr "Feedback geben"
+
+#: ../../product/cli.md
+msgid "`deciwa rate <file> <element> <0-5>`"
+msgstr "`deciwa rate <file> <element> <0-5>`"
+
+#: ../../product/cli.md
+msgid "give stars"
+msgstr "Sterne vergeben"
+
+#: ../../product/cli.md
+msgid "`deciwa request <file> <element> --to … --question …`"
+msgstr "`deciwa request <file> <element> --to … --question …`"
+
+#: ../../product/cli.md
+msgid "ask someone about an element"
+msgstr "jemandem eine Frage zu einem Element stellen"
+
+#: ../../product/cli.md
+msgid "`deciwa answer <id> [--verdict …] [--text …]`"
+msgstr "`deciwa answer <id> [--verdict …] [--text …]`"
+
+#: ../../product/cli.md
+msgid "answer a question"
+msgstr "eine Frage beantworten"
+
+#: ../../product/cli.md
+msgid "`deciwa resolve <id> [--note …]`"
+msgstr "`deciwa resolve <id> [--note …]`"
+
+#: ../../product/cli.md
+msgid "mark a job as done"
+msgstr "eine Aufgabe als erledigt markieren"
+
+#: ../../product/cli.md
+msgid "`deciwa export [file]`"
+msgstr "`deciwa export [file]`"
+
+#: ../../product/cli.md
+msgid "all review data as one file"
+msgstr "alle Review-Daten als eine Datei"
+
+#: ../../product/cli.md
+msgid "`deciwa import <file> [--force]`"
+msgstr "`deciwa import <file> [--force]`"
+
+#: ../../product/cli.md
+msgid "replace the review data with a file – refused if it is older"
+msgstr "die Review-Daten durch eine Datei ersetzen – abgelehnt, wenn sie älter ist"
+
+#: ../../product/cli.md
+msgid "`deciwa diff <id>`"
+msgstr "`deciwa diff <id>`"
+
+#: ../../product/cli.md
+msgid "approved vs. current wording (0.1)"
+msgstr "freigegebene vs. aktuelle Formulierung (0.1)"
+
+#: ../../product/cli.md
+msgid "`deciwa push / pull`"
+msgstr "`deciwa push / pull`"
+
+#: ../../product/cli.md
+msgid "sync with the hosted service (0.4)"
+msgstr "mit dem gehosteten Dienst synchronisieren (0.4)"
+
+#: ../../product/cli.md:27
+msgid "Proposed details for 0.1: [CLI concept](../technical/cli.md)."
+msgstr "Vorgeschlagene Details für 0.1: [CLI-Konzept](../technical/cli.md)."
+
+#: ../../product/cli.md:29
+msgid "Agent skills"
+msgstr "Agent-Skills"
+
+#: ../../product/cli.md:31
+msgid ""
+"**`deciwa-work`** – fetch `deciwa todo`, apply comments, fix rejected "
+"statements and delete elements, never touch frozen elements, `deciwa "
+"resolve`, request a re-review."
+msgstr ""
+"**`deciwa-work`** – `deciwa todo` abrufen, Kommentare umsetzen, "
+"abgelehnte Aussagen korrigieren und Elemente löschen, eingefrorene "
+"Elemente nie anfassen, `deciwa resolve`, ein erneutes Review anfordern."
+
+#: ../../product/cli.md:34
+msgid ""
+"**`deciwa-ask`** – instead of a `[CHECK]` marker in the text, ask a "
+"question on the element."
+msgstr ""
+"**`deciwa-ask`** – statt einer `[CHECK]`-Markierung im Text eine Frage am"
+" Element stellen."
+
+#: ../../product/cli.md:37
+msgid "How to use them with Claude: [Claude](../integrations/claude.md)."
+msgstr "Wie du sie mit Claude nutzt: [Claude](../integrations/claude.md)."
+

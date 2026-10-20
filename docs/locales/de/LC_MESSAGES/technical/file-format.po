@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/file-format.md:1
+msgid "File format"
+msgstr "Dateiformat"
+
+#: ../../technical/file-format.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/file-format.md:5
+msgid "Proposals by Claude – not binding until Daniel approves them."
+msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
+
+#: ../../technical/file-format.md:20
+msgid ""
+"The path under `annotations/` mirrors the source path relative to the "
+"folder that holds `.deciwa/`. The CLI writes sorted keys, two-space "
+"indent, one annotation after the other by creation time and a final "
+"newline – so Git diffs stay small and merge conflicts stay rare."
+msgstr ""
+"Der Pfad unter `annotations/` spiegelt den Quellpfad relativ zu dem "
+"Ordner, der `.deciwa/` enthält. Die CLI schreibt sortierte Schlüssel, "
+"zwei Leerzeichen Einrückung, eine Annotation nach der anderen nach "
+"Erstellungszeit und einen abschließenden Zeilenumbruch – so bleiben Git-"
+"Diffs klein und Merge-Konflikte selten."
+
+#: ../../technical/file-format.md:26
+msgid "Field"
+msgstr "Feld"
+
+#: ../../technical/file-format.md:26
+msgid "Values"
+msgstr "Werte"
+
+#: ../../technical/file-format.md:26
+msgid "Note"
+msgstr "Hinweis"
+
+#: ../../technical/file-format.md:26
+msgid "`kind`"
+msgstr "`kind`"
+
+#: ../../technical/file-format.md:26
+msgid "`feedback` · `rating` · `request`"
+msgstr "`feedback` · `rating` · `request`"
+
+#: ../../technical/file-format.md:26
+msgid "the three ways of working stay separate in the data"
+msgstr "die drei Arbeitsweisen bleiben auch in den Daten getrennt"
+
+#: ../../technical/file-format.md:26
+msgid "`verdict`"
+msgstr "`verdict`"
+
+#: ../../technical/file-format.md:26
+msgid "`approve` · `reject` · `freeze` · `delete` · `note`"
+msgstr "`approve` · `reject` · `freeze` · `delete` · `note`"
+
+#: ../../technical/file-format.md:26
+msgid "only for `feedback`; `note` = a comment without verdict"
+msgstr "nur für `feedback`; `note` = ein Kommentar ohne Urteil"
+
+#: ../../technical/file-format.md:26
+msgid "`stars`"
+msgstr "`stars`"
+
+#: ../../technical/file-format.md:26
+msgid "0–5"
+msgstr "0–5"
+
+#: ../../technical/file-format.md:26
+msgid "only for `rating`"
+msgstr "nur für `rating`"
+
+#: ../../technical/file-format.md:26
+msgid "`question`, `to`"
+msgstr "`question`, `to`"
+
+#: ../../technical/file-format.md:26
+msgid "text, list of authors"
+msgstr "Text, Liste von Autoren"
+
+#: ../../technical/file-format.md:26
+msgid "only for `request`; answers are `replies` with an optional `verdict`"
+msgstr "nur für `request`; Antworten sind `replies` mit optionalem `verdict`"
+
+#: ../../technical/file-format.md:26
+msgid "`snapshot`"
+msgstr "`snapshot`"
+
+#: ../../technical/file-format.md:26
+msgid "element text when the annotation was made"
+msgstr "Text des Elements, als die Annotation erstellt wurde"
+
+#: ../../technical/file-format.md:26
+msgid "needed for `deciwa diff`, stale views and the freeze alarm"
+msgstr ""
+"nötig für `deciwa diff`, Ansichten veralteter Elemente und den Einfrier-"
+"Alarm"
+
+#: ../../technical/file-format.md:26
+msgid "`status`"
+msgstr "`status`"
+
+#: ../../technical/file-format.md:26
+msgid "`open` · `resolved`"
+msgstr "`open` · `resolved`"
+
+#: ../../technical/file-format.md:26
+msgid ""
+"jobs start `open`: delete, reject, note (a comment for the AI) and "
+"requests; approvals, freezes and ratings start `resolved`"
+msgstr ""
+"Aufgaben starten `open`: löschen, ablehnen, Notiz (ein Kommentar für die "
+"KI) und Anfragen; Freigaben, Einfrierungen und Bewertungen starten "
+"`resolved`"
+
+#: ../../technical/file-format.md:26
+msgid "`author`"
+msgstr "`author`"
+
+#: ../../technical/file-format.md:26
+msgid "`daniel`, `agent:claude`"
+msgstr "`daniel`, `agent:claude`"
+
+#: ../../technical/file-format.md:26
+msgid "from `git config user.email` or `DECIWA_AUTHOR`"
+msgstr "aus `git config user.email` oder `DECIWA_AUTHOR`"
+
+#: ../../technical/file-format.md:26
+msgid "`id`"
+msgstr "`id`"
+
+#: ../../technical/file-format.md:26
+msgid "8 characters, lowercase base32, random"
+msgstr "8 Zeichen, Base32 in Kleinbuchstaben, zufällig"
+
+#: ../../technical/file-format.md:26
+msgid "short enough to type in the CLI"
+msgstr "kurz genug, um es in der CLI zu tippen"
+
+#: ../../technical/file-format.md:77
+#, python-brace-format
+msgid ""
+"A misclick or a second thought must not pile up entries. As long as the "
+"element's fingerprint is the same, a new verdict of the same author "
+"replaces the old verdict, and a new rating the old rating. Once the "
+"element changed, earlier annotations stay as history (that is how `stale`"
+" works). Notes and questions are never replaced; a comment that came with"
+" a replaced verdict is kept as a note. That is also how a freeze ends: "
+"the author gives another verdict ({need}`DEC_FREEZE_BY_VERDICT`)."
+msgstr ""
+"Ein Fehlklick oder ein zweiter Gedanke darf keine Einträge anhäufen. "
+"Solange der Fingerprint des Elements gleich ist, ersetzt ein neues Urteil"
+" derselben Person das alte Urteil und eine neue Bewertung die alte "
+"Bewertung. Hat sich das Element geändert, bleiben frühere Annotationen "
+"als Verlauf erhalten (so funktioniert `stale`). Notizen und Fragen werden"
+" nie ersetzt; ein Kommentar, der mit einem ersetzten Urteil kam, bleibt "
+"als Notiz erhalten. So endet auch ein Einfrieren: die Person gibt ein "
+"anderes Urteil ab ({need}`DEC_FREEZE_BY_VERDICT`)."
+
+#: ../../technical/file-format.md:91
+#, python-brace-format
+msgid ""
+"Without it deciwa can tell *that* an approved or frozen text changed, but"
+" not *what* it looked like – and the freeze alarm must show the old "
+"wording ({need}`DEC_FREEZE`). The cost is some duplicate text in "
+"`.deciwa/`."
+msgstr ""
+"Ohne ihn kann deciwa sagen, *dass* sich ein freigegebener oder "
+"eingefrorener Text geändert hat, aber nicht, *wie* er aussah – und der "
+"Einfrier-Alarm muss die alte Formulierung zeigen ({need}`DEC_FREEZE`). "
+"Der Preis ist etwas doppelter Text in `.deciwa/`."
+
+#: ../../technical/file-format.md:101
+msgid ""
+"`schema/deciwa-0.1.schema.json` is published with the CLI and in these "
+"docs. The CLI validates every file it reads. A new major field means a "
+"new schema version; the CLI reads older versions and writes the newest."
+msgstr ""
+"`schema/deciwa-0.1.schema.json` wird mit der CLI und in diesen Docs "
+"veröffentlicht. Die CLI validiert jede Datei, die sie liest. Ein neues "
+"Hauptfeld bedeutet eine neue Schemaversion; die CLI liest ältere "
+"Versionen und schreibt die neueste."
+
+#: ../../technical/file-format.md:106
+msgid "config.toml"
+msgstr "config.toml"
+

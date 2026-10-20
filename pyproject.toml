@@ -11,7 +11,14 @@ requires-python = ">=3.12"
 dependencies = ["deciwa-cli", "deciwa-sphinx"]
 
 [dependency-groups]
-docs = ["sphinx>=9", "furo>=2025.12", "sphinx-needs>=9", "myst-parser>=5", "sphinx-autobuild"]
+docs = [
+    "sphinx>=9",
+    "furo>=2025.12",
+    "sphinx-needs>=9",
+    "myst-parser>=5",
+    "sphinx-autobuild",
+    "sphinx-intl>=2.4.0",
+]
 
 [tool.uv]
 package = false

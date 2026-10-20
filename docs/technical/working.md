@@ -38,6 +38,54 @@ the code here stays private. The published build is an offline review build
 without the review data of `.deciwa/`, so visitors can try deciwa on these
 pages in their own browser.
 
+## Translations
+
+The docs are published in English and German; more languages can follow
+the same way.
+
+```{prop} English is the source of the docs; German is a translation in gettext catalogs
+:id: PROP_DOCS_TRANSLATION
+:status: draft
+:refines: DEC_DOCS_IN_REPO
+
+Everybody writes and changes the English Markdown. The translations live in
+`docs/locales/<language>/LC_MESSAGES/*.po`, one catalog per page plus
+`needs.po` for the titles and fields of needs. When an English paragraph
+changes, its translation becomes `fuzzy` and the old one stays visible
+until somebody updates it. English is published at the root, German in
+`de/`; a switcher in the sidebar leads to the same page in the other
+language.
+```
+
+```{prop} Reviews and decisions happen only on the English docs
+:id: PROP_DOCS_REVIEW_SOURCE
+:status: draft
+:refines: PROP_DOCS_TRANSLATION
+
+A translation is checked like any wording, but the binding statement is
+the English one: `.deciwa/` only holds reviews of the English pages. The
+German pages carry the overlay only as the offline demo for visitors.
+```
+
+```{question} Should the overlay speak German on German pages?
+:id: Q_OVERLAY_LANGUAGE
+:status: open
+:to: Daniel
+:refines: PROP_DOCS_TRANSLATION
+
+Today every label of the overlay is English. It could take its language
+from `<html lang>` and ship a small dictionary per language.
+```
+
+Update the catalogs after changing the English docs:
+
+```console
+$ .venv/bin/sphinx-build -E -b gettext -D needs_build_json=0 docs docs/_build/gettext
+$ .venv/bin/sphinx-intl update -p docs/_build/gettext -d docs/locales -l de
+$ .venv/bin/sphinx-intl stat -d docs/locales -l de                  # what is left to translate
+$ .venv/bin/sphinx-build -W -b html -D language=de docs docs/_build/html/de
+```
+
 ## Reviewing these docs in deciwa
 
 These docs use the [Sphinx integration](../integrations/sphinx/index.md)
@@ -85,7 +133,7 @@ Reference an object in text with `` {need}`DEC_SOMETHING` ``.
 
 ## Code
 
-The code is split into packages – [packages](index.md#packages). Logic
+The code is split into packages – {ref}`packages <packages>`. Logic
 belongs into `deciwa-core`; front ends only use `deciwa.core.Project`.
 
 Code follows the decisions. If code and a decision disagree, the decision

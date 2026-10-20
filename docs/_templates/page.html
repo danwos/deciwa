@@ -1,4 +1,11 @@
 {%- extends "!page.html" %}
+{#- the same page in every language, for search engines -#}
+{% block extrahead %}
+{{ super() }}
+{%- for lang in docs_languages %}
+<link rel="alternate" hreflang="{{ lang.code }}" href="{{ lang.url }}{{ pagename }}.html">
+{%- endfor %}
+{% endblock extrahead %}
 {#- adds "a danwos project" with the danwos monogram to the footer of every page -#}
 {% block footer %}
 {{ super() }}

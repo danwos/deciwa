@@ -43,13 +43,21 @@ jobs:
         run: uv sync --locked
 
       - name: Check the docs (warnings fail)
-        run: uv run sphinx-build -W -E -q -b html docs docs/_build/check
+        run: |
+          uv run sphinx-build -W -E -q -b html docs docs/_build/check
+          uv run sphinx-build -W -E -q -b html -D language=de docs docs/_build/check-de
 
-      - name: Build the public review build
-        run: >
-          uv run sphinx-build -E -q -b html
-          -D deciwa_mode=offline -D deciwa_offline_annotations=0
-          docs docs/_build/site
+      - name: Translation status (German)
+        run: uv run sphinx-intl stat -d docs/locales -l de | grep -v " 0 fuzzy, 0 untranslated" || true
+
+      - name: Build the public review build (English at the root, German in de/)
+        run: |
+          uv run sphinx-build -E -q -b html \
+            -D deciwa_mode=offline -D deciwa_offline_annotations=0 \
+            docs docs/_build/site
+          uv run sphinx-build -E -q -b html -D language=de \
+            -D deciwa_mode=offline -D deciwa_offline_annotations=0 \
+            docs docs/_build/site/de
 
       - name: Resolve the docs repository
         id: target

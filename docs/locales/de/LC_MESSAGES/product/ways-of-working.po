@@ -1,0 +1,377 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../product/ways-of-working.md:1
+msgid "Three ways of working"
+msgstr "Drei Arbeitsweisen"
+
+#: ../../product/ways-of-working.md:3
+#, python-brace-format
+msgid ""
+"They stay separate – in the UI, in the data and on the website "
+"({need}`DEC_THREE_MODES`)."
+msgstr ""
+"Sie bleiben getrennt – in der Oberfläche, in den Daten und auf der "
+"Website ({need}`DEC_THREE_MODES`)."
+
+#: ../../product/ways-of-working.md
+msgid "Mode"
+msgstr "Modus"
+
+#: ../../product/ways-of-working.md
+msgid "What the human does"
+msgstr "Was der Mensch tut"
+
+#: ../../product/ways-of-working.md
+msgid "What it is for"
+msgstr "Wofür es da ist"
+
+#: ../../product/ways-of-working.md
+msgid "1. Feedback"
+msgstr "1. Feedback"
+
+#: ../../product/ways-of-working.md
+msgid ""
+"approve, reject, freeze, delete, plus a comment (a comment alone is a "
+"note)"
+msgstr ""
+"freigeben, ablehnen, einfrieren, löschen, plus ein Kommentar (ein "
+"Kommentar allein ist eine Notiz)"
+
+#: ../../product/ways-of-working.md
+msgid ""
+"decide what happens to an element; drives element state and the AI's work"
+" list"
+msgstr ""
+"entscheiden, was mit einem Element passiert; steuert den Zustand des "
+"Elements und die Aufgabenliste der KI"
+
+#: ../../product/ways-of-working.md
+msgid "2. Quality rating"
+msgstr "2. Qualitätsbewertung"
+
+#: ../../product/ways-of-working.md
+msgid "0–5, one click or key, saved on its own"
+msgstr "0–5, ein Klick oder eine Taste, wird für sich gespeichert"
+
+#: ../../product/ways-of-working.md
+msgid ""
+"quick judgement without a decision; an approved element can still get a "
+"2; evaluations show the weak areas"
+msgstr ""
+"schnelle Einschätzung ohne Entscheidung; auch ein freigegebenes Element "
+"kann eine 2 bekommen; Auswertungen zeigen die schwachen Stellen"
+
+#: ../../product/ways-of-working.md
+msgid "3. AI communication"
+msgstr "3. KI-Kommunikation"
+
+#: ../../product/ways-of-working.md
+msgid ""
+"answer a question the AI (e.g. Claude) asked on an element – by verdict "
+"(\"approve\" = yes) or in text"
+msgstr ""
+"eine Frage beantworten, die die KI (z. B. Claude) an einem Element "
+"gestellt hat – per Urteil („freigeben“ = ja) oder als Text"
+
+#: ../../product/ways-of-working.md
+msgid ""
+"the AI asks instead of guessing; the question lives at the element, not "
+"in a chat"
+msgstr ""
+"die KI fragt, statt zu raten; die Frage lebt am Element, nicht in einem "
+"Chat"
+
+#: ../../product/ways-of-working.md:13
+msgid "A question from Claude at the element, with Yes, No and an answer field"
+msgstr "Eine Frage von Claude am Element, mit Ja, Nein und einem Antwortfeld"
+
+#: ../../product/ways-of-working.md:17
+msgid "Mode 3: Claude asks at the element – answer with yes, no or in words."
+msgstr "Modus 3: Claude fragt am Element – antworte mit Ja, Nein oder in Worten."
+
+#: ../../product/ways-of-working.md:20
+msgid "Feedback (mode 1)"
+msgstr "Feedback (Modus 1)"
+
+#: ../../product/ways-of-working.md:22
+#, python-brace-format
+msgid ""
+"Four verdicts and a comment field ({need}`DEC_VERDICTS`, "
+"{need}`DEC_CARD_VERDICTS`):"
+msgstr ""
+"Vier Urteile und ein Kommentarfeld ({need}`DEC_VERDICTS`, "
+"{need}`DEC_CARD_VERDICTS`):"
+
+#: ../../product/ways-of-working.md:13
+msgid "Button"
+msgstr "Button"
+
+#: ../../product/ways-of-working.md:13
+msgid "Key"
+msgstr "Taste"
+
+#: ../../product/ways-of-working.md:13
+msgid "Meaning"
+msgstr "Bedeutung"
+
+#: ../../product/ways-of-working.md:13
+msgid "Approve"
+msgstr "Approve"
+
+#: ../../product/ways-of-working.md:13
+msgid "`a`"
+msgstr "`a`"
+
+#: ../../product/ways-of-working.md:13
+msgid "the statement is confirmed – it becomes a decision"
+msgstr "die Aussage ist bestätigt – sie wird zur Entscheidung"
+
+#: ../../product/ways-of-working.md:13
+msgid "Reject"
+msgstr "Reject"
+
+#: ../../product/ways-of-working.md:13
+msgid "`r`"
+msgstr "`r`"
+
+#: ../../product/ways-of-working.md:13
+msgid "the statement is wrong"
+msgstr "die Aussage ist falsch"
+
+#: ../../product/ways-of-working.md:13
+msgid "Approve & freeze"
+msgstr "Approve & freeze"
+
+#: ../../product/ways-of-working.md:13
+msgid "`f`"
+msgstr "`f`"
+
+#: ../../product/ways-of-working.md:13
+#, python-brace-format
+msgid ""
+"approve and keep exactly as it is; the AI must never change it "
+"({need}`DEC_FREEZE`)"
+msgstr ""
+"freigeben und genau so behalten, wie es ist; die KI darf es nie ändern "
+"({need}`DEC_FREEZE`)"
+
+#: ../../product/ways-of-working.md:13
+msgid "Delete"
+msgstr "Delete"
+
+#: ../../product/ways-of-working.md:13
+msgid "`d`"
+msgstr "`d`"
+
+#: ../../product/ways-of-working.md:13
+msgid "job for the AI: remove the element"
+msgstr "Aufgabe für die KI: das Element entfernen"
+
+#: ../../product/ways-of-working.md:13
+msgid "Comment only"
+msgstr "Comment only"
+
+#: ../../product/ways-of-working.md:13
+msgid "`Ctrl+Enter`"
+msgstr "`Ctrl+Enter`"
+
+#: ../../product/ways-of-working.md:13
+msgid ""
+"saves the optional comment without a verdict; with a verdict, the comment"
+" goes along as extra information"
+msgstr ""
+"speichert den optionalen Kommentar ohne Urteil; mit Urteil geht der "
+"Kommentar als zusätzliche Information mit"
+
+#: ../../product/ways-of-working.md:32
+msgid ""
+"One click saves. What should change about a text goes into the comment – "
+"there are no separate rephrase or more-details buttons. A frozen element "
+"that changes anyway raises an alarm and shows the old wording."
+msgstr ""
+"Ein Klick speichert. Was sich an einem Text ändern soll, kommt in den "
+"Kommentar – es gibt keine eigenen Buttons für Umformulieren oder Mehr "
+"Details. Ändert sich ein eingefrorenes Element trotzdem, gibt es Alarm, "
+"und die alte Formulierung wird angezeigt."
+
+#: ../../product/ways-of-working.md:36
+msgid "Quality (mode 2)"
+msgstr "Qualität (Modus 2)"
+
+#: ../../product/ways-of-working.md:38
+msgid ""
+"Zero to five stars, keys `0`–`5`, saved on its own, independent of any "
+"verdict."
+msgstr ""
+"Null bis fünf Sterne, Tasten `0`–`5`, für sich gespeichert, unabhängig "
+"von jedem Urteil."
+
+#: ../../product/ways-of-working.md:41
+#, python-brace-format
+msgid ""
+"A decision is an approved statement, not an extra object "
+"({need}`DEC_DECISION_IS_APPROVAL`) – so decisions can be mapped onto "
+"anything that is an element."
+msgstr ""
+"Eine Entscheidung ist eine freigegebene Aussage, kein zusätzliches Objekt"
+" ({need}`DEC_DECISION_IS_APPROVAL`) – so lassen sich Entscheidungen auf "
+"alles abbilden, was ein Element ist."
+
+#: ../../product/ways-of-working.md:45
+msgid "Terms"
+msgstr "Begriffe"
+
+#: ../../product/ways-of-working.md:13
+msgid "Term"
+msgstr "Begriff"
+
+#: ../../product/ways-of-working.md:13
+msgid "Element"
+msgstr "Element"
+
+#: ../../product/ways-of-working.md:13
+msgid ""
+"anything that can be pointed at: a structural object of the format (need,"
+" section, function, HTML container …) or a free text range down to one "
+"word. Found from the content – never a marker in the source."
+msgstr ""
+"alles, worauf man zeigen kann: ein Strukturobjekt des Formats (Need, "
+"Abschnitt, Funktion, HTML-Container …) oder ein freier Textbereich bis "
+"hinunter zu einem Wort. Wird aus dem Inhalt ermittelt – nie eine "
+"Markierung im Quelltext."
+
+#: ../../product/ways-of-working.md:13
+msgid "Annotation"
+msgstr "Annotation"
+
+#: ../../product/ways-of-working.md:13
+msgid ""
+"one piece of feedback, one rating or one answer on an element; author "
+"(person or agent), status `open` / `resolved`"
+msgstr ""
+"ein Feedback, eine Bewertung oder eine Antwort zu einem Element; mit "
+"Autor (Person oder Agent) und Status `open` / `resolved`"
+
+#: ../../product/ways-of-working.md:13
+msgid "Request"
+msgstr "Anfrage"
+
+#: ../../product/ways-of-working.md:13
+msgid ""
+"an annotation that asks someone (often the AI asking the human) a "
+"question about an element"
+msgstr ""
+"eine Annotation, die jemandem eine Frage zu einem Element stellt (oft "
+"fragt die KI den Menschen)"
+
+#: ../../product/ways-of-working.md:13
+msgid "Decision"
+msgstr "Entscheidung"
+
+#: ../../product/ways-of-working.md:13
+msgid "an approved statement – not a separate object"
+msgstr "eine freigegebene Aussage – kein eigenes Objekt"
+
+#: ../../product/ways-of-working.md:13
+msgid "State"
+msgstr "Zustand"
+
+#: ../../product/ways-of-working.md:13
+msgid "computed, never stored – see below"
+msgstr "wird berechnet, nie gespeichert – siehe unten"
+
+#: ../../product/ways-of-working.md:55
+msgid "Element states"
+msgstr "Zustände von Elementen"
+
+#: ../../product/ways-of-working.md:13
+msgid "`unreviewed`"
+msgstr "`unreviewed`"
+
+#: ../../product/ways-of-working.md:13
+msgid "nobody gave a verdict yet"
+msgstr "noch niemand hat ein Urteil abgegeben"
+
+#: ../../product/ways-of-working.md:13
+msgid "`requested`"
+msgstr "`requested`"
+
+#: ../../product/ways-of-working.md:13
+msgid "someone was asked about it"
+msgstr "jemand wurde dazu gefragt"
+
+#: ../../product/ways-of-working.md:13
+msgid "`approved`"
+msgstr "`approved`"
+
+#: ../../product/ways-of-working.md:13
+msgid "the current wording is confirmed"
+msgstr "die aktuelle Formulierung ist bestätigt"
+
+#: ../../product/ways-of-working.md:13
+msgid "`frozen`"
+msgstr "`frozen`"
+
+#: ../../product/ways-of-working.md:13
+msgid "approved and must stay exactly as it is"
+msgstr "freigegeben und muss genau so bleiben"
+
+#: ../../product/ways-of-working.md:13
+msgid "`changes requested`"
+msgstr "`changes requested`"
+
+#: ../../product/ways-of-working.md:13
+msgid "a delete job is open"
+msgstr "eine Lösch-Aufgabe ist offen"
+
+#: ../../product/ways-of-working.md:13
+msgid "`rejected`"
+msgstr "`rejected`"
+
+#: ../../product/ways-of-working.md:13
+msgid "the statement is wrong – a job until it is fixed"
+msgstr "die Aussage ist falsch – eine Aufgabe, bis sie behoben ist"
+
+#: ../../product/ways-of-working.md:13
+msgid "`stale`"
+msgstr "`stale`"
+
+#: ../../product/ways-of-working.md:13
+msgid "approved, but the text changed since"
+msgstr "freigegeben, aber der Text hat sich seitdem geändert"
+
+#: ../../product/ways-of-working.md:13
+msgid "`frozen, but changed`"
+msgstr "`frozen, but changed`"
+
+#: ../../product/ways-of-working.md:13
+msgid "alarm: a frozen text was changed – restore it"
+msgstr "Alarm: ein eingefrorener Text wurde geändert – stell ihn wieder her"
+
+#: ../../product/ways-of-working.md:13
+msgid "`orphaned`"
+msgstr "`orphaned`"
+
+#: ../../product/ways-of-working.md:13
+msgid "the element is not found any more"
+msgstr "das Element wird nicht mehr gefunden"
+

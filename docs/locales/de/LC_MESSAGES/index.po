@@ -1,0 +1,434 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 14:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../index.md:100
+msgid "What deciwa is"
+msgstr "Was deciwa ist"
+
+#: ../../index.md:100
+msgid "Product"
+msgstr "Produkt"
+
+#: ../../index.md:116
+msgid "Integrations"
+msgstr "Integrationen"
+
+#: ../../index.md:129
+msgid "Decisions"
+msgstr "Entscheidungen"
+
+#: ../../index.md:136
+msgid "Technical details"
+msgstr "Technische Details"
+
+#: ../../index.md:1
+msgid "deciwa"
+msgstr "deciwa"
+
+#: ../../index.md:3
+msgid ""
+"**decision watcher** – point at any part of a doc, a website or a source "
+"file and say what you think of it. deciwa keeps your verdict tied to "
+"exactly that spot, notices when it changes and shows at any time what is "
+"confirmed, what is still open and what must not be touched."
+msgstr ""
+"**decision watcher** – zeig auf einen beliebigen Teil eines Dokuments, "
+"einer Website oder einer Quelldatei und sag, was du davon hältst. deciwa "
+"bindet dein Urteil genau an diese Stelle, merkt, wenn sie sich ändert, "
+"und zeigt jederzeit, was bestätigt ist, was noch offen ist und was nicht "
+"angefasst werden darf."
+
+#: ../../index.md:8
+msgid ""
+"<figure class=\"video\">\n"
+"<video src=\"_static/video/deciwa-product-en.mp4\" poster=\"_static/video"
+"/deciwa-product-en.jpg\" controls muted playsinline "
+"preload=\"metadata\"></video>\n"
+"<figcaption>deciwa in 50 seconds – recorded from these docs.</figcaption>"
+"\n"
+"</figure>"
+msgstr ""
+"<figure class=\"video\">\n"
+"<video src=\"_static/video/deciwa-product-en.mp4\" poster=\"_static/video"
+"/deciwa-product-en.jpg\" controls muted playsinline "
+"preload=\"metadata\"></video>\n"
+"<figcaption>deciwa in 50 Sekunden – aufgenommen auf diesen Docs (auf "
+"Englisch).</figcaption>\n"
+"</figure>"
+
+#: ../../index.md:15
+msgid "Why deciwa"
+msgstr "Warum deciwa"
+
+#: ../../index.md:17
+msgid ""
+"Feedback usually ends up in chats, tickets and comment threads, far away "
+"from the text it is about. A week later nobody knows which wording was "
+"agreed on, and after the next edit nobody notices that an agreed sentence"
+" quietly changed. deciwa puts the feedback where it belongs – on the "
+"element itself – and keeps watching it."
+msgstr ""
+"Feedback landet meist in Chats, Tickets und Kommentar-Threads, weit weg "
+"von dem Text, um den es geht. Eine Woche später weiß niemand mehr, auf "
+"welche Formulierung man sich geeinigt hat, und nach der nächsten Änderung"
+" merkt niemand, dass sich ein abgestimmter Satz still verändert hat. "
+"deciwa bringt das Feedback dorthin, wo es hingehört – an das Element "
+"selbst – und behält es im Blick."
+
+#: ../../index.md:23
+msgid ""
+"**Feedback stays at the element.** A verdict on a paragraph, a "
+"requirement or a single word stays with it, even when the text moves."
+msgstr ""
+"**Feedback bleibt am Element.** Ein Urteil zu einem Absatz, einer "
+"Anforderung oder einem einzelnen Wort bleibt dort, auch wenn der Text "
+"verschoben wird."
+
+#: ../../index.md:25
+msgid ""
+"**Changes do not slip through.** An approved text that is edited later "
+"shows up as `stale`, with old and new wording side by side. A frozen text"
+" that changes raises an alarm."
+msgstr ""
+"**Änderungen rutschen nicht durch.** Ein freigegebener Text, der später "
+"bearbeitet wird, erscheint als `stale`, mit alter und neuer Formulierung "
+"nebeneinander. Ändert sich ein eingefrorener Text, gibt es Alarm."
+
+#: ../../index.md:28
+msgid ""
+"**Decisions you can see.** An approved statement *is* the decision – no "
+"extra list to keep in sync."
+msgstr ""
+"**Entscheidungen, die man sieht.** Eine freigegebene Aussage *ist* die "
+"Entscheidung – keine zusätzliche Liste, die man synchron halten muss."
+
+#: ../../index.md:30
+msgid ""
+"**The AI asks instead of guessing.** Claude puts its questions right at "
+"the element; you answer with yes, no or a few words."
+msgstr ""
+"**Die KI fragt, statt zu raten.** Claude stellt seine Fragen direkt am "
+"Element; du antwortest mit Ja, Nein oder ein paar Worten."
+
+#: ../../index.md:32
+msgid ""
+"**You know where you stand.** Per page and for the whole project, deciwa "
+"shows how much of what must be approved is approved."
+msgstr ""
+"**Du weißt, wo du stehst.** Pro Seite und für das ganze Projekt zeigt "
+"deciwa, wie viel von dem, was freigegeben werden muss, schon freigegeben "
+"ist."
+
+#: ../../index.md:34
+msgid ""
+"**Your data stays yours.** Reviews live in an open format inside your "
+"repository and are versioned with Git."
+msgstr ""
+"**Deine Daten bleiben deine.** Reviews liegen in einem offenen Format in "
+"deinem Repository und werden mit Git versioniert."
+
+#: ../../index.md:37
+msgid "What you can do"
+msgstr "Was du tun kannst"
+
+#: ../../index.md:8
+msgid "**Give feedback**"
+msgstr "**Feedback geben**"
+
+#: ../../index.md:8
+msgid ""
+"approve, reject, approve & freeze or delete – one key or click, with an "
+"optional comment – [Three ways of working](product/ways-of-working.md)"
+msgstr ""
+"freigeben, ablehnen, freigeben & einfrieren oder löschen – eine Taste "
+"oder ein Klick, optional mit Kommentar – [Drei Arbeitsweisen](product"
+"/ways-of-working.md)"
+
+#: ../../index.md:8
+msgid "**Rate quality**"
+msgstr "**Qualität bewerten**"
+
+#: ../../index.md:8
+msgid "zero to five stars, independent of any verdict, to find the weak spots"
+msgstr ""
+"null bis fünf Sterne, unabhängig von jedem Urteil, um die Schwachstellen "
+"zu finden"
+
+#: ../../index.md:8
+msgid "**Answer the AI**"
+msgstr "**Der KI antworten**"
+
+#: ../../index.md:8
+msgid "questions from Claude appear at the element they are about"
+msgstr "Fragen von Claude erscheinen an dem Element, um das es geht"
+
+#: ../../index.md:8
+msgid "**Review anything you can point at**"
+msgstr "**Alles reviewen, worauf du zeigen kannst**"
+
+#: ../../index.md:8
+msgid ""
+"requirements, headings, paragraphs, table rows, pictures, a selected word"
+" – no markers in the source – [What you can review](product/elements.md)"
+msgstr ""
+"Anforderungen, Überschriften, Absätze, Tabellenzeilen, Bilder, ein "
+"markiertes Wort – ohne Markierungen im Quelltext – [Was du reviewen "
+"kannst](product/elements.md)"
+
+#: ../../index.md:8
+msgid "**Decide what must be approved**"
+msgstr "**Festlegen, was freigegeben werden muss**"
+
+#: ../../index.md:8
+msgid ""
+"every requirement, every heading, only some pages – [What must be "
+"approved](product/review-rules.md)"
+msgstr ""
+"jede Anforderung, jede Überschrift, nur manche Seiten – [Was freigegeben "
+"werden muss](product/review-rules.md)"
+
+#: ../../index.md:8
+msgid "**Work through a page**"
+msgstr "**Eine Seite durcharbeiten**"
+
+#: ../../index.md:8
+msgid ""
+"guided review jumps from one open element to the next – [The review "
+"UI](product/ui.md)"
+msgstr ""
+"das geführte Review springt von einem offenen Element zum nächsten – [Die"
+" Review-Oberfläche](product/ui.md)"
+
+#: ../../index.md:8
+msgid "**Keep the overview**"
+msgstr "**Den Überblick behalten**"
+
+#: ../../index.md:8
+msgid "the panel lists all feedback, open jobs and coverage per page and project"
+msgstr ""
+"das Panel listet alles Feedback, offene Aufgaben und die Abdeckung pro "
+"Seite und Projekt"
+
+#: ../../index.md:49
+msgid ""
+"A docs page under review: coloured bars beside the reviewed elements, the"
+" deciwa button at the bottom right"
+msgstr ""
+"Eine Docs-Seite im Review: farbige Balken neben den geprüften Elementen, "
+"der deciwa-Button unten rechts"
+
+#: ../../index.md:52
+msgid ""
+"The bar beside each element shows its state; the deciwa button at the "
+"bottom right counts them."
+msgstr ""
+"Der Balken neben jedem Element zeigt seinen Zustand; der deciwa-Button "
+"unten rechts zählt sie."
+
+#: ../../index.md:55
+msgid "How a review goes"
+msgstr "So läuft ein Review"
+
+#: ../../index.md:57
+msgid ""
+"**Open the result** – the built docs page, the website, the file in your "
+"editor – and switch review on."
+msgstr ""
+"**Öffne das Ergebnis** – die gebaute Docs-Seite, die Website, die Datei "
+"in deinem Editor – und schalte das Review ein."
+
+#: ../../index.md:59
+msgid ""
+"**Point and decide** – hover an element, press a key: approve, reject, "
+"approve & freeze, delete; add stars and a comment if you like."
+msgstr ""
+"**Zeigen und entscheiden** – fahr mit der Maus über ein Element, drück "
+"eine Taste: freigeben, ablehnen, freigeben & einfrieren, löschen; wenn du"
+" magst, mit Sternen und Kommentar."
+
+#: ../../index.md:61
+msgid ""
+"**Let the work happen** – an AI agent or a developer picks up the open "
+"jobs, changes the text and marks them as done."
+msgstr ""
+"**Die Arbeit machen lassen** – ein KI-Agent oder jemand aus der "
+"Entwicklung nimmt die offenen Aufgaben, ändert den Text und meldet sie "
+"als erledigt."
+
+#: ../../index.md:63
+msgid ""
+"**See what changed** – changed approvals come back as `stale`, a changed "
+"frozen text as an alarm."
+msgstr ""
+"**Sehen, was sich geändert hat** – geänderte Freigaben kommen als `stale`"
+" zurück, ein geänderter eingefrorener Text als Alarm."
+
+#: ../../index.md:65
+msgid ""
+"**Track coverage** – watch the share of approved elements grow until the "
+"page or the whole project is through."
+msgstr ""
+"**Abdeckung verfolgen** – sieh zu, wie der Anteil freigegebener Elemente "
+"wächst, bis die Seite oder das ganze Projekt durch ist."
+
+#: ../../index.md:68
+#, python-brace-format
+msgid ""
+"deciwa is a review and decision tool for everyone who works with docs and"
+" code ({need}`DEC_PURPOSE`). It collects, evaluates and shows; it does "
+"not watch that decisions are kept ({need}`DEC_NO_ENFORCING`). The change "
+"itself is made by the AI or the developer – deciwa makes sure nobody "
+"loses track of it."
+msgstr ""
+"deciwa ist ein Review- und Entscheidungs-Tool für alle, die mit Docs und "
+"Code arbeiten ({need}`DEC_PURPOSE`). Es sammelt, bewertet und zeigt; es "
+"überwacht nicht, ob Entscheidungen eingehalten werden "
+"({need}`DEC_NO_ENFORCING`). Die Änderung selbst macht die KI oder die "
+"Entwicklung – deciwa sorgt dafür, dass niemand den Überblick verliert."
+
+#: ../../index.md:49
+msgid "Not deciwa"
+msgstr "Nicht deciwa"
+
+#: ../../index.md:49
+msgid "Who does it"
+msgstr "Wer es macht"
+
+#: ../../index.md:49
+msgid "Making or checking the change itself"
+msgstr "Die Änderung selbst machen oder prüfen"
+
+#: ../../index.md:49
+msgid "AI agent or developer"
+msgstr "KI-Agent oder Entwicklung"
+
+#: ../../index.md:49
+msgid "Testing whether code follows a decision"
+msgstr "Testen, ob Code einer Entscheidung folgt"
+
+#: ../../index.md:49
+msgid "quawa, normal tests"
+msgstr "quawa, normale Tests"
+
+#: ../../index.md:49
+msgid "Managing facts and generating views from them"
+msgstr "Fakten verwalten und Ansichten daraus erzeugen"
+
+#: ../../index.md:49
+msgid "faktwerk"
+msgstr "faktwerk"
+
+#: ../../index.md:80
+msgid "Try it on these pages"
+msgstr "Probier es auf diesen Seiten aus"
+
+#: ../../index.md:82
+msgid ""
+"These docs run deciwa themselves. Hover the round deciwa button at the "
+"bottom right, switch on **Review** and give feedback on anything you see."
+" Everything stays in your browser. A first round to follow: "
+"[Demo](demo.md)."
+msgstr ""
+"Diese Docs nutzen deciwa selbst. Fahr über den runden deciwa-Button unten"
+" rechts, schalte **Review** ein und gib Feedback zu allem, was du siehst."
+" Alles bleibt in deinem Browser. Eine erste Runde zum Mitmachen: "
+"[Demo](demo.md)."
+
+#: ../../index.md:87
+msgid "Where deciwa runs"
+msgstr "Wo deciwa läuft"
+
+#: ../../index.md:49
+msgid "Where you review"
+msgstr "Wo du reviewst"
+
+#: ../../index.md:49
+msgid "Status"
+msgstr "Status"
+
+#: ../../index.md:49
+msgid "[Sphinx](integrations/sphinx/index.md)"
+msgstr "[Sphinx](integrations/sphinx/index.md)"
+
+#: ../../index.md:49
+msgid "built docs in the browser, with Sphinx-Needs"
+msgstr "gebaute Docs im Browser, mit Sphinx-Needs"
+
+#: ../../index.md:49
+msgid "prototype, usable now"
+msgstr "Prototyp, schon nutzbar"
+
+#: ../../index.md:49
+msgid "[VS Code](integrations/vscode.md)"
+msgstr "[VS Code](integrations/vscode.md)"
+
+#: ../../index.md:49
+msgid "the editor and its docs preview"
+msgstr "der Editor und seine Docs-Vorschau"
+
+#: ../../index.md:49
+msgid "0.2"
+msgstr "0.2"
+
+#: ../../index.md:49
+msgid "[Chrome](integrations/chrome.md)"
+msgstr "[Chrome](integrations/chrome.md)"
+
+#: ../../index.md:49
+msgid "any rendered page – docs or website"
+msgstr "jede gerenderte Seite – Docs oder Website"
+
+#: ../../index.md:49
+msgid "0.3"
+msgstr "0.3"
+
+#: ../../index.md:49
+msgid "[Claude](integrations/claude.md)"
+msgstr "[Claude](integrations/claude.md)"
+
+#: ../../index.md:49
+msgid "a conversation with the AI"
+msgstr "ein Gespräch mit der KI"
+
+#: ../../index.md:49
+msgid "skills in 0.1"
+msgstr "Skills in 0.1"
+
+#: ../../index.md:49
+msgid "[Desktop app](integrations/desktop.md)"
+msgstr "[Desktop-App](integrations/desktop.md)"
+
+#: ../../index.md:49
+msgid "without a development environment"
+msgstr "ohne Entwicklungsumgebung"
+
+#: ../../index.md:49
+msgid "later"
+msgstr "später"
+
+#: ../../index.md:97
+msgid ""
+"What comes when: [Roadmap](product/roadmap.md). How deciwa is built: "
+"[Technical overview](technical/index.md)."
+msgstr ""
+"Was wann kommt: [Roadmap](product/roadmap.md). Wie deciwa gebaut ist: "
+"[Technischer Überblick](technical/index.md)."
+
