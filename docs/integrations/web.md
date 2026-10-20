@@ -45,7 +45,7 @@ A page can name its source file, so the AI knows which file to change:
 ```
 
 Instead of tagging every page, the repository can map addresses to files once
-in `.deciwa/config.toml` ([File format](../technical/file-format.md#web-sources)).
+in `.deciwa/config.toml` ({ref}`File format <web-sources>`).
 Both are optional: without them every page is kept under its address, and
 nothing is lost when a mapping is added later.
 

@@ -122,6 +122,7 @@ directives = ["req", "spec", "dec", "prop", "question"]
 paths = ["90_archive/**", "_build/**"]
 ```
 
+(web-sources)=
 ## Web sources
 
 ```{prop} Web pages without a source file are stored under their address
