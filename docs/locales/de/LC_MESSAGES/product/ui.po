@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 14:03+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -119,22 +119,33 @@ msgstr ""
 "Inhalt, `Esc` oder × schließt die Karte."
 
 #: ../../product/ui.md:35
+msgid ""
+"While reviewing, a click on an element always opens its card, also when "
+"the element is a link or contains one; `Ctrl`/`Cmd` + click follows the "
+"link. Links outside the content, like the navigation, work as usual."
+msgstr ""
+"Beim Reviewen öffnet ein Klick auf ein Element immer seine Karte, auch "
+"wenn das Element ein Link ist oder einen enthält; `Ctrl`/`Cmd` + Klick "
+"folgt dem Link. Links außerhalb des Inhalts, etwa die Navigation, "
+"funktionieren wie gewohnt."
+
+#: ../../product/ui.md:39
 msgid "The feedback card below an approved need: verdicts, stars and history"
 msgstr ""
 "Die Feedback-Karte unter einem freigegebenen Need: Urteile, Sterne und "
 "Verlauf"
 
-#: ../../product/ui.md:39
+#: ../../product/ui.md:43
 msgid "The card of an approved need: comment, verdicts, stars and its history."
 msgstr ""
 "Die Karte eines freigegebenen Needs: Kommentar, Urteile, Sterne und "
 "Verlauf."
 
-#: ../../product/ui.md:43
+#: ../../product/ui.md:47
 msgid "On phones and tablets"
 msgstr "Auf Smartphones und Tablets"
 
-#: ../../product/ui.md:45
+#: ../../product/ui.md:49
 msgid ""
 "Tap instead of hover: tap the deciwa logo for the switches, tap an "
 "element for its card, tap next to it to close. Buttons and stars are "
@@ -147,135 +158,143 @@ msgstr ""
 "den ganzen Bildschirm ein – wählst du einen Eintrag, schließt es sich und"
 " öffnet die Karte."
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "The review on a phone: the card fills the width"
 msgstr "Das Review auf einem Smartphone: die Karte füllt die Breite"
 
-#: ../../product/ui.md:54
+#: ../../product/ui.md:58
 msgid "On a phone: tap an element, the card opens below it."
 msgstr "Auf dem Smartphone: tipp auf ein Element, die Karte öffnet sich darunter."
 
-#: ../../product/ui.md:58
+#: ../../product/ui.md:62
 msgid "Keys"
 msgstr "Tasten"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "Key"
 msgstr "Taste"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "Does"
 msgstr "Bewirkt"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`a`"
 msgstr "`a`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "approve"
 msgstr "freigeben"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`r`"
 msgstr "`r`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "reject"
 msgstr "ablehnen"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`f`"
 msgstr "`f`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "approve & freeze"
 msgstr "freigeben & einfrieren"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`d`"
 msgstr "`d`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "delete"
 msgstr "löschen"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`0`–`5`"
 msgstr "`0`–`5`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "quality stars"
 msgstr "Qualitätssterne"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`n`"
 msgstr "`n`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "write a comment"
 msgstr "Kommentar schreiben"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`Ctrl+Enter`"
 msgstr "`Ctrl+Enter`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "comment only – save the comment without a verdict"
 msgstr "nur Kommentar – den Kommentar ohne Urteil speichern"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`Alt` + hover"
 msgstr "`Alt` + Überfahren"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "select the parent element"
 msgstr "das übergeordnete Element auswählen"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
+msgid "`Ctrl`/`Cmd` + click"
+msgstr "`Ctrl`/`Cmd` + Klick"
+
+#: ../../product/ui.md:54
+msgid "follow a link instead of reviewing"
+msgstr "einem Link folgen statt reviewen"
+
+#: ../../product/ui.md:54
 msgid "`v`"
 msgstr "`v`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "guided review on/off"
 msgstr "geführtes Review an/aus"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`j` / `k`"
 msgstr "`j` / `k`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "next / previous open element"
 msgstr "nächstes / vorheriges offenes Element"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`Shift+R`"
 msgstr "`Shift+R`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "review on/off"
 msgstr "Review an/aus"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`Shift+P`"
 msgstr "`Shift+P`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "panel on/off"
 msgstr "Panel an/aus"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "`Esc`"
 msgstr "`Esc`"
 
-#: ../../product/ui.md:50
+#: ../../product/ui.md:54
 msgid "close the card"
 msgstr "die Karte schließen"
 
-#: ../../product/ui.md:76
+#: ../../product/ui.md:81
 msgid "Guided review"
 msgstr "Geführtes Review"
 
-#: ../../product/ui.md:78
+#: ../../product/ui.md:83
 msgid ""
 "**▶ Guided review** in the panel (or `v`) walks through every element "
 "that must be approved and has no verdict yet: the card opens on the first"
@@ -292,7 +311,7 @@ msgstr ""
 "Sterne und Notizen gehen nicht weiter; es bleibt über Seiten hinweg an, "
 "bis du es stoppst."
 
-#: ../../product/ui.md:85
+#: ../../product/ui.md:90
 msgid ""
 "Guided review: the panel shows what is open, the card is on the next "
 "element"
@@ -300,15 +319,15 @@ msgstr ""
 "Geführtes Review: das Panel zeigt, was offen ist, die Karte steht am "
 "nächsten Element"
 
-#: ../../product/ui.md:88
+#: ../../product/ui.md:93
 msgid "Guided review: the card is on the next element without a verdict."
 msgstr "Geführtes Review: die Karte steht am nächsten Element ohne Urteil."
 
-#: ../../product/ui.md:92
+#: ../../product/ui.md:97
 msgid "State bars"
 msgstr "Zustandsbalken"
 
-#: ../../product/ui.md:94
+#: ../../product/ui.md:99
 msgid ""
 "A coloured bar beside each element with feedback shows its state; a `?` "
 "marks an open question; a grey dashed line marks an element that must "
@@ -318,7 +337,7 @@ msgstr ""
 "Zustand; ein `?` markiert eine offene Frage; eine graue gestrichelte "
 "Linie markiert ein Element, das noch freigegeben werden muss."
 
-#: ../../product/ui.md:98
+#: ../../product/ui.md:103
 msgid ""
 "Grey dashed lines beside required elements without a verdict, coloured "
 "bars beside reviewed ones"
@@ -326,7 +345,7 @@ msgstr ""
 "Graue gestrichelte Linien neben Pflicht-Elementen ohne Urteil, farbige "
 "Balken neben geprüften"
 
-#: ../../product/ui.md:101
+#: ../../product/ui.md:106
 msgid ""
 "Coloured bars for reviewed elements, grey dashed lines for required ones "
 "that are still open."
@@ -334,11 +353,11 @@ msgstr ""
 "Farbige Balken für geprüfte Elemente, graue gestrichelte Linien für "
 "Pflicht-Elemente, die noch offen sind."
 
-#: ../../product/ui.md:105
+#: ../../product/ui.md:110
 msgid "Panel"
 msgstr "Panel"
 
-#: ../../product/ui.md:107
+#: ../../product/ui.md:112
 msgid ""
 "**This page** – a bar with two shares of the required elements (with a "
 "verdict, with stars), the review rules, what still has no verdict and all"
@@ -348,7 +367,7 @@ msgstr ""
 "Urteil, mit Sternen), die Review-Regeln, was noch kein Urteil hat, und "
 "alles Feedback der Seite, nach Zustand gruppiert."
 
-#: ../../product/ui.md:110
+#: ../../product/ui.md:115
 msgid ""
 "**Project** – the same for every page, with a click jumping to the "
 "element on its page."
@@ -356,7 +375,7 @@ msgstr ""
 "**Project** – dasselbe für jede Seite; ein Klick springt zum Element auf "
 "seiner Seite."
 
-#: ../../product/ui.md:112
+#: ../../product/ui.md:117
 #, python-brace-format
 msgid ""
 "**Im/Export** – download all review data of the project as one deciwa "
@@ -373,11 +392,11 @@ msgstr ""
 "schon gespeichert; ohne Server verlässt ein Review so den Browser – siehe"
 " {ref}`Offline-Review <offline>`."
 
-#: ../../product/ui.md:118
+#: ../../product/ui.md:123
 msgid "The panel stays open across pages."
 msgstr "Das Panel bleibt über Seiten hinweg offen."
 
-#: ../../product/ui.md:120
+#: ../../product/ui.md:125
 msgid ""
 "The panel, tab This page: coverage of verdicts and stars, the review "
 "rules and the elements still to review"
@@ -385,7 +404,7 @@ msgstr ""
 "Das Panel, Reiter This page: Abdeckung von Urteilen und Sternen, die "
 "Review-Regeln und die Elemente, die noch zu reviewen sind"
 
-#: ../../product/ui.md:123
+#: ../../product/ui.md:128
 msgid ""
 "**This page** – verdict and quality coverage, review rules, what is still"
 " open."
@@ -393,21 +412,21 @@ msgstr ""
 "**This page** – Abdeckung von Urteilen und Qualität, Review-Regeln, was "
 "noch offen ist."
 
-#: ../../product/ui.md:126
+#: ../../product/ui.md:131
 msgid "The panel, tab Project: every page with its open elements"
 msgstr "Das Panel, Reiter Project: jede Seite mit ihren offenen Elementen"
 
-#: ../../product/ui.md:129
+#: ../../product/ui.md:134
 msgid "**Project** – every page with what is open; a click jumps there."
 msgstr ""
 "**Project** – jede Seite mit dem, was offen ist; ein Klick springt "
 "dorthin."
 
-#: ../../product/ui.md:132
+#: ../../product/ui.md:137
 msgid "The panel, tab Im/Export"
 msgstr "Das Panel, Reiter Im/Export"
 
-#: ../../product/ui.md:135
+#: ../../product/ui.md:140
 msgid "**Im/Export** – export, show or load a deciwa file."
 msgstr "**Im/Export** – eine deciwa-Datei exportieren, anzeigen oder laden."
 

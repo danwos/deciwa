@@ -32,6 +32,10 @@ element:
 Drag the card by its bar if it is in the way; the next card opens at its
 usual place again. A click next to the content, `Esc` or × closes the card.
 
+While reviewing, a click on an element always opens its card, also when the
+element is a link or contains one; `Ctrl`/`Cmd` + click follows the link.
+Links outside the content, like the navigation, work as usual.
+
 ```{figure} ../_static/screens/card.webp
 :alt: The feedback card below an approved need: verdicts, stars and history
 :width: 560px
@@ -67,6 +71,7 @@ On a phone: tap an element, the card opens below it.
 | `n` | write a comment |
 | `Ctrl+Enter` | comment only – save the comment without a verdict |
 | `Alt` + hover | select the parent element |
+| `Ctrl`/`Cmd` + click | follow a link instead of reviewing |
 | `v` | guided review on/off |
 | `j` / `k` | next / previous open element |
 | `Shift+R` | review on/off |

@@ -1028,6 +1028,7 @@
       const u = under && elementAt(under, up);
       return u && !u.node.contains(link) ? u : null;
     }
+    const pick = (ev, link, up) => link && linkedElement(ev, link, up) || elementAt(ev.target, up);
     document.addEventListener("mousedown", () => {
       blockClick = false;
     }, true);
@@ -1040,8 +1041,7 @@
     }, true);
     document.addEventListener("mousemove", (ev) => {
       if (!reviewOn || inUI(ev)) return;
-      const link = ev.target.closest("a[href]");
-      const e = link && linkedElement(ev, link, ev.altKey ? 1 : 0) || elementAt(ev.target, ev.altKey ? 1 : 0);
+      const e = pick(ev, ev.target.closest("a[href]"), ev.altKey ? 1 : 0);
       hovered = e;
       if (!e) {
         hoverBox.style.display = "none";
@@ -1053,18 +1053,14 @@
     document.addEventListener("mouseup", (ev) => {
       if (!reviewOn || inUI(ev) || ev.button !== 0) return;
       if (ev.target.closest(".needs_collapse")) return;
-      const up = ev.altKey ? 1 : 0;
       const link = ev.target.closest("a[href]");
-      let e;
-      if (link && !link.getAttribute("href").startsWith("#")) {
-        e = linkedElement(ev, link, up);
-        if (!e) return;
-        blockClick = true;
-      } else e = elementAt(ev.target, up);
+      if (link && (ev.ctrlKey || ev.metaKey)) return;
+      const e = pick(ev, link, ev.altKey ? 1 : 0);
       if (!e) {
-        if (current) closeCard();
+        if (current && !link) closeCard();
         return;
       }
+      if (link) blockClick = true;
       quote = selectionQuote(e);
       if (!quote && getSelection() && !getSelection().isCollapsed) return;
       openCard(e);

@@ -777,8 +777,9 @@ export function startOverlay(host) {
   }
 
   // -- events ------------------------------------------------------------------
-  // a link inside the text keeps working; a link around or over the element
-  // (a card that is one big link) opens the card instead of leaving the page
+  // in review mode a click on an element reviews it, even through a link on or
+  // in it (a card that is one big link); Ctrl/Cmd+click still follows the link.
+  // Links outside the reviewable content (navigation) keep working.
   let blockClick = false;
   function linkedElement(ev, link, up) {
     const e = elementAt(ev.target, up);
@@ -787,6 +788,7 @@ export function startOverlay(host) {
     const u = under && elementAt(under, up);
     return u && !u.node.contains(link) ? u : null;
   }
+  const pick = (ev, link, up) => (link && linkedElement(ev, link, up)) || elementAt(ev.target, up);
   document.addEventListener("mousedown", () => { blockClick = false; }, true);
   document.addEventListener("click", ev => {
     if (blockClick) { ev.preventDefault(); ev.stopPropagation(); blockClick = false; }
@@ -794,8 +796,7 @@ export function startOverlay(host) {
 
   document.addEventListener("mousemove", ev => {
     if (!reviewOn || inUI(ev)) return;
-    const link = ev.target.closest("a[href]");
-    const e = (link && linkedElement(ev, link, ev.altKey ? 1 : 0)) || elementAt(ev.target, ev.altKey ? 1 : 0);
+    const e = pick(ev, ev.target.closest("a[href]"), ev.altKey ? 1 : 0);
     hovered = e;
     if (!e) { hoverBox.style.display = "none"; return; }
     place(hoverBox, e.node);
@@ -805,15 +806,11 @@ export function startOverlay(host) {
   document.addEventListener("mouseup", ev => {
     if (!reviewOn || inUI(ev) || ev.button !== 0) return;
     if (ev.target.closest(".needs_collapse")) return;  // the need's own metadata toggle
-    const up = ev.altKey ? 1 : 0;
     const link = ev.target.closest("a[href]");
-    let e;
-    if (link && !link.getAttribute("href").startsWith("#")) {
-      e = linkedElement(ev, link, up);
-      if (!e) return;
-      blockClick = true;
-    } else e = elementAt(ev.target, up);
-    if (!e) { if (current) closeCard(); return; }  // a click next to the content closes the card
+    if (link && (ev.ctrlKey || ev.metaKey)) return;  // follow the link
+    const e = pick(ev, link, ev.altKey ? 1 : 0);
+    if (!e) { if (current && !link) closeCard(); return; }  // a click next to the content closes the card
+    if (link) blockClick = true;
     quote = selectionQuote(e);
     if (!quote && getSelection() && !getSelection().isCollapsed) return;
     openCard(e);
