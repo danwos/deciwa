@@ -10,6 +10,8 @@ from pathlib import Path
 from .model import SCHEMA, now
 
 FOLDER = ".deciwa"
+WEB = "web:"            # web pages without a source file: web:<host><path>
+WEB_PAGES = "web-pages.json"
 
 
 def find_root(start: Path) -> Path:
@@ -61,6 +63,9 @@ def save_config(root: Path, cfg: dict) -> None:
 
 
 def annotation_path(root: Path, source: str) -> Path:
+    if source.startswith(WEB):  # web:danwos.dev/de/tools -> _web/danwos.dev/de/tools.json
+        host, _, path = source[len(WEB):].partition("/")
+        return root / FOLDER / "annotations" / "_web" / host.replace(":", "_") / f"{path.strip('/') or 'index'}.json"
     return root / FOLDER / "annotations" / f"{source}.json"
 
 
@@ -103,4 +108,21 @@ def sources(root: Path) -> list[str]:
     base = root / FOLDER / "annotations"
     if not base.exists():
         return []
-    return sorted(str(p.relative_to(base))[: -len(".json")] for p in base.rglob("*.json"))
+    out = []
+    for p in base.rglob("*.json"):
+        rel = p.relative_to(base).as_posix()[: -len(".json")]
+        if rel.startswith("_web/"):  # the address is kept in the file, the path is only for people
+            rel = json.loads(p.read_text()).get("source") or rel
+        out.append(rel)
+    return sorted(out)
+
+
+def web_pages(root: Path) -> dict:
+    """The elements of reviewed web pages, as the browser found them, by address."""
+    path = root / FOLDER / WEB_PAGES
+    return json.loads(path.read_text()) if path.exists() else {}
+
+
+def save_web_pages(root: Path, pages: dict) -> None:
+    path = root / FOLDER / WEB_PAGES
+    path.write_text(json.dumps(pages, indent=1, sort_keys=True, ensure_ascii=False) + "\n")

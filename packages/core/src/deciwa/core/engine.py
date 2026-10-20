@@ -6,6 +6,7 @@ Every front end (server, CLI, Sphinx overlay) goes through this module.
 from __future__ import annotations
 
 import json
+import re
 from fnmatch import fnmatch
 from pathlib import Path
 
@@ -38,10 +39,29 @@ class Project:
     # -- elements index (written by the Sphinx extension) ------------------
 
     def index(self) -> dict:
+        """The Sphinx elements index plus the web pages imported from browsers."""
         path = self.build / INDEX
-        if not path.exists():
-            return {"pages": {}}
-        return json.loads(path.read_text())
+        index = json.loads(path.read_text()) if path.exists() else {"pages": {}}
+        for url, page in store.web_pages(self.root).items():
+            index["pages"].setdefault(url, page)
+        return index
+
+    # -- web pages: address -> source file ([web] in config.toml) ------------
+
+    def web_source(self, host: str, path: str) -> str:
+        """The first [web] rule whose file exists, else the address itself."""
+        web = self.cfg.get("web", {})
+        if not web.get("site") or web["site"] == host:
+            for rule in web.get("sources", []):
+                parts = _match_url(rule["url"], path)
+                if parts is None:
+                    continue
+                file = rule["file"]
+                for part in parts:
+                    file = file.replace("*", part, 1)
+                if (self.root / file).is_file():
+                    return file
+        return f"{store.WEB}{host}{path}"
 
     def page_of_source(self, index: dict, source: str) -> tuple[str | None, dict]:
         for docname, page in index["pages"].items():
@@ -187,9 +207,12 @@ class Project:
 
     def import_data(self, data: dict, force: bool = False) -> dict:
         """Replace all review data with the file's – no merge. Refused when the
-        project has newer data than the file, unless forced."""
+        project has newer data than the file, unless forced. A website export
+        (it carries the elements of its pages) only replaces its own pages."""
         if not isinstance(data.get("files"), dict):
             raise ValueError("not a deciwa export")
+        if isinstance(data.get("pages"), dict):
+            return self.import_web(data, force)
         mine, theirs = store.updated(self.root), data.get("updated")
         if mine and not force and (not theirs or theirs < mine):
             raise ValueError(f"the project has newer data ({mine}) than the file ({theirs or 'no timestamp'})")
@@ -199,6 +222,53 @@ class Project:
             store.save(self.root, source, anns)
             count += len(anns)
         return {"annotations": count, "sources": len(data["files"]), "updated": store.updated(self.root)}
+
+    def import_web(self, data: dict, force: bool = False) -> dict:
+        """A browser export of a website: replaces the review data of its pages
+        only, mapped to source files where a [web] rule fits."""
+        mine, theirs = store.updated(self.root), data.get("updated")
+        if mine and not force and (not theirs or theirs < mine):
+            raise ValueError(f"the project has newer data ({mine}) than the file ({theirs or 'no timestamp'})")
+        index = store.web_pages(self.root)
+        targets: dict[str, list[dict]] = {}
+        for doc, page in data["pages"].items():
+            source = page["source"]
+            url = page.get("url") or (source[len(store.WEB):] if source.startswith(store.WEB) else source)
+            target = self.web_source(url.split("/", 1)[0], doc) if source.startswith(store.WEB) else source
+            targets.setdefault(target, []).extend(data["files"].get(source, []))
+            index[url] = {"source": target, "url": url, "title": page.get("title") or url, "elements": page["elements"]}
+        for source, anns in data["files"].items():  # annotations of pages the export has no elements for
+            if not any(source == p["source"] for p in data["pages"].values()):
+                targets.setdefault(source, []).extend(anns)
+        for target, anns in targets.items():
+            store.save(self.root, target, anns)
+        store.save_web_pages(self.root, index)
+        mapped = sorted(t for t in targets if not t.startswith(store.WEB))
+        return {"annotations": sum(len(a) for a in targets.values()), "sources": sum(1 for a in targets.values() if a),
+                "mapped": mapped, "updated": store.updated(self.root)}
+
+    def remap(self) -> list[dict]:
+        """Apply the [web] rules again: web pages kept under their address move to their source file."""
+        index = store.web_pages(self.root)
+        moved = []
+        for url, page in index.items():
+            source = page["source"]
+            if not source.startswith(store.WEB):
+                continue
+            host, _, rest = source[len(store.WEB):].partition("/")
+            target = self.web_source(host, "/" + rest)
+            if target == source:
+                continue
+            anns = store.load(self.root, target)
+            known = {a["id"] for a in anns}
+            moving = [a for a in store.load(self.root, source) if a["id"] not in known]
+            store.save(self.root, target, anns + moving)
+            store.save(self.root, source, [])
+            page["source"] = target
+            moved.append({"url": url, "from": source, "to": target, "annotations": len(moving)})
+        if moved:
+            store.save_web_pages(self.root, index)
+        return moved
 
     def import_file(self, path: Path, force: bool = False) -> dict:
         return self.import_data(json.loads(Path(path).read_text()), force)
@@ -299,7 +369,7 @@ class Project:
     def todo(self, for_author: str | None = None) -> list[dict]:
         jobs = []
         for page, view in self.all_views():
-            lines = {e["selector"]: e["line"] for e in page["elements"]}
+            lines = {e["selector"]: e.get("line") for e in page["elements"]}
             for sel, st in view["elements"].items():
                 for a in st["annotations"]:
                     job = None
@@ -311,7 +381,7 @@ class Project:
                         job = "answer"
                     if job:
                         jobs.append({"job": job, "id": a["id"], "source": view["source"],
-                                     "line": lines.get(sel), "element": sel,
+                                     "line": lines.get(sel), "element": sel, **({"url": page["url"]} if page.get("url") else {}),
                                      "verdict": a.get("verdict"), "question": a.get("question"),
                                      "comment": a.get("comment"), "quote": a["target"]["snapshot"],
                                      "current": a["current"], "author": a["author"], "state": st["state"]})
@@ -324,4 +394,12 @@ class Project:
                 jobs.append({"job": "relink", "id": o["id"], "source": view["source"],
                              "element": o["target"]["selectors"][0]["value"], "quote": o["target"]["snapshot"]})
         return jobs
+
+
+def _match_url(pattern: str, path: str) -> list[str] | None:
+    """Match a page path against a rule like "/blog/*"; returns what the stars stand for."""
+    norm = lambda p: p.rstrip("/") or "/"
+    regex = "^" + re.escape(norm(pattern)).replace(r"\*", "(.+)") + "$"
+    m = re.match(regex, norm(path))
+    return list(m.groups()) if m else None
 

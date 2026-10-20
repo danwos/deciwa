@@ -33,7 +33,7 @@ function pageInfo() {
 const INDEX_KEY = "deciwa-web-index";
 const index = (() => { try { return JSON.parse(localStorage.getItem(INDEX_KEY)) || { pages: {} }; } catch (_) { return { pages: {} }; } })();
 function remember(page, elements) {
-  index.pages[page.doc] = { source: page.source, title: page.title,
+  index.pages[page.doc] = { source: page.source, url: location.host + page.doc, title: page.title,
     elements: elements.map(({ selector, kind, label, text, fingerprint, parent }) => ({ selector, kind, label, text, fingerprint, parent })) };
   try { localStorage.setItem(INDEX_KEY, JSON.stringify(index)); } catch (_) { /* storage full or blocked */ }
 }

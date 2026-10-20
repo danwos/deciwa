@@ -52,11 +52,42 @@ nothing is lost when a mapping is added later.
 ## From the browser to the repository
 
 1. Review the pages; feedback stays in the browser.
-2. **Export** in the panel saves one JSON file.
-3. `deciwa import export.json` in the website's repository stores it in
-   `.deciwa/` – mapped to source files where a mapping exists.
-4. `deciwa todo` lists the open jobs for the AI or a developer, as for any
-   other source.
+2. **Export** in the panel saves one JSON file. It holds the feedback and
+   the elements of every page this browser has seen.
+3. `deciwa init` once in the website's repository, then
+   `deciwa import export.json`. It replaces the review data of the pages in
+   the file and leaves everything else in `.deciwa/` alone – an older file
+   is refused unless `--force` is given.
+4. `deciwa todo` lists the open jobs for the AI or a developer, with the
+   source file and the address of the page:
+
+```console
+$ deciwa import deciwa-review-20261020.json
+replaced: 2 annotations in 2 sources
+  mapped to src/content/tools/de/monsterbrain.mdx
+$ deciwa todo
+yu6xkuap  note      src/content/tools/de/monsterbrain.mdx (danwos.dev/de/tools/monsterbrain)  html:paragraph:monsterbrain/Warum monsterbrain#2
+          “Satz ist zu lang, bitte in zwei Sätze teilen.”
+```
+
+### Mapping pages to files (optional)
+
+Without a mapping a page is kept under its address, and `deciwa todo` names
+the address only. Rules in `.deciwa/config.toml` tell deciwa which file a
+page comes from; a star stands for any part of the address and is put into
+the file name in the same order:
+
+```toml
+[web]
+sources = [
+  { url = "/*/tools/*", file = "src/content/tools/*/*.mdx" },
+  { url = "/*/tools/*", file = "src/content/tools/*/*.md" },
+]
+```
+
+The first rule whose file exists wins, so `/de/tools/monsterbrain` becomes
+`src/content/tools/de/monsterbrain.mdx`. A rule added later moves the
+feedback that was kept under the address: `deciwa remap`.
 
 The [Chrome extension](chrome.md) will use the same script, so it also works
 on pages that cannot be changed.

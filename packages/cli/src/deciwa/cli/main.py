@@ -57,7 +57,8 @@ def cmd_todo(args):
             print("nothing to do")
         for j in jobs:
             what = j.get("verdict") or j["job"]
-            print(f"{j['id']}  {what:9} {j['source']}:{j.get('line') or '?'}  {j['element']}")
+            where = f"{j['source']}:{j.get('line') or '?'}" if not j.get("url") else f"{j['source']} ({j['url']})"
+            print(f"{j['id']}  {what:9} {where}  {j['element']}")
             if j.get("question"):
                 print(f"          ? {j['question']}")
             if j.get("comment"):
@@ -88,7 +89,7 @@ def cmd_elements(args):
 
     def human(els):
         for e in els:
-            print(f"{e['selector']:50} {e['line'] or '':>4}  {e['kind']:9} {e['label']}")
+            print(f"{e['selector']:50} {e.get('line') or '':>4}  {e['kind']:9} {e['label']}")
     _out(args, "elements", page["elements"], human)
 
 
@@ -121,7 +122,21 @@ def cmd_resolve(args):
 
 def cmd_import(args):
     r = Project().import_file(Path(args.file), force=args.force)
-    _out(args, "import", r, lambda x: print(f"replaced: {x['annotations']} annotations in {x['sources']} sources"))
+
+    def human(x):
+        print(f"replaced: {x['annotations']} annotations in {x['sources']} sources")
+        for f in x.get("mapped", []):
+            print(f"  mapped to {f}")
+    _out(args, "import", r, human)
+
+
+def cmd_remap(args):
+    def human(moved):
+        if not moved:
+            print("nothing to move – no [web] rule fits a page kept under its address")
+        for m in moved:
+            print(f"{m['url']} -> {m['to']}  ({m['annotations']} annotations)")
+    _out(args, "remap", Project().remap(), human)
 
 
 def cmd_export(args):
@@ -159,6 +174,8 @@ def main(argv=None):
     s.add_argument("--author"); s.set_defaults(fn=cmd_answer)
     s = sub.add_parser("import", help="replace the review data with an export (no merge)"); s.add_argument("file")
     s.add_argument("--force", action="store_true", help="also when the project has newer data"); s.set_defaults(fn=cmd_import)
+    s = sub.add_parser("remap", help="move web pages kept under their address to the files of new [web] rules")
+    s.set_defaults(fn=cmd_remap)
     s = sub.add_parser("export", help="write all review data to one file"); s.add_argument("file", nargs="?")
     s.set_defaults(fn=cmd_export)
     s = sub.add_parser("resolve"); s.add_argument("id"); s.add_argument("--note"); s.add_argument("--author")

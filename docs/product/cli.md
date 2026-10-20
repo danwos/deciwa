@@ -20,7 +20,8 @@ local server), never to the files directly. Every command has `--json`.
 | `deciwa answer <id> [--verdict …] [--text …]` | answer a question |
 | `deciwa resolve <id> [--note …]` | mark a job as done |
 | `deciwa export [file]` | all review data as one file |
-| `deciwa import <file> [--force]` | replace the review data with a file – refused if it is older |
+| `deciwa import <file> [--force]` | replace the review data with a file – refused if it is older; an export of a website replaces only its own pages |
+| `deciwa remap` | move feedback on web pages kept under their address to the files of new `[web]` rules |
 | `deciwa diff <id>` | approved vs. current wording (0.1) |
 | `deciwa push / pull` | sync with the hosted service (0.5) |
 

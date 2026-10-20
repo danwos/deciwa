@@ -11,6 +11,7 @@ Proposals by Claude – not binding until Daniel approves them.
 └── annotations/
     ├── 20_facts/company/founder.md.json one file per annotated source
     └── _web/danwos.dev/services.json    web pages without a mapped source
+.deciwa/web-pages.json                   elements of the imported web pages
 ```
 
 ```{prop} One annotation file per source, deterministic JSON
@@ -130,11 +131,19 @@ paths = ["90_archive/**", "_build/**"]
 
 A page reviewed with the web script whose source is the fallback
 `web:<host><path>` is stored as `annotations/_web/<host>/<path>.json`; the
-path `/` becomes `index`. `deciwa import` applies the rules of `[web]` first,
-so mapped pages land in the file of their source. When a rule is added later,
-`deciwa import --remap` moves the annotations of `_web/` to their source
-files. Their structural selectors stay `html:…`; in the source file the
-engine finds the element by the text quote and the snapshot.
+path `/` becomes `index`, a port is written as `_<port>`, and the file keeps
+the address in its `source` field. `deciwa import` applies the rules of
+`[web]` first: a rule only counts when its file exists, so mapped pages land
+in the file of their source and everything else keeps its address. When a
+rule is added later, `deciwa remap` moves the annotations of `_web/` to
+their source files.
+
+An export from the web script carries the elements of its pages (selector,
+kind, label, text, fingerprint). The import keeps them in
+`.deciwa/web-pages.json` by address, so `todo`, `show` and `status` work
+without parsing HTML in Python; the selectors stay `html:…`, also for pages
+mapped to a Markdown file. Such an import replaces only the review data of
+the pages in the file, never the rest of the project.
 ```
 
 ```toml
@@ -148,4 +157,7 @@ sources = [                                           # optional, first match wi
 ```
 
 Without `[web]` – or without `.deciwa/` at all, when only the browser is
-used – every page keeps its address.
+used – every page keeps its address. `site` limits the rules to pages of
+that host; without it they apply to every host, also `localhost` while
+developing. A star in `url` stands for one or more parts of the address and
+replaces the stars in `file` in the same order.
