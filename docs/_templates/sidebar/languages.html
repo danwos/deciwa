@@ -1,0 +1,11 @@
+{#- language switcher: the same page in every language (DOCS_LANGUAGES in conf.py) -#}
+{%- set root = pathto('_static/', 1)[:-8] %}
+<nav class="dw-languages" aria-label="Language">
+  {%- for lang in docs_languages %}
+  {%- if lang.current %}
+  <span aria-current="true" lang="{{ lang.code }}">{{ lang.name }}</span>
+  {%- else %}
+  <a href="{{ root }}{{ lang.rel }}{{ pagename }}.html" hreflang="{{ lang.code }}" lang="{{ lang.code }}">{{ lang.name }}</a>
+  {%- endif %}
+  {%- endfor %}
+</nav>

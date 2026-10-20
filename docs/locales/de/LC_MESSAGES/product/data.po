@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../product/data.md:1
+msgid "Where reviews are stored"
+msgstr "Wo Reviews gespeichert werden"
+
+#: ../../product/data.md:3
+#, python-brace-format
+msgid ""
+"All feedback lives in one `.deciwa/` folder, never next to your sources "
+"({need}`DEC_DECIWA_FOLDER`): at the repository root, or in a parent "
+"folder for several repositories at once or for repositories that must "
+"stay untouched. `deciwa init [--at <folder>]` creates it."
+msgstr ""
+"Alles Feedback liegt in einem Ordner `.deciwa/`, nie neben deinen Quellen"
+" ({need}`DEC_DECIWA_FOLDER`): im Wurzelverzeichnis des Repositorys oder "
+"in einem übergeordneten Ordner für mehrere Repositorys auf einmal oder "
+"für Repositorys, die unberührt bleiben müssen. `deciwa init [--at "
+"<folder>]` legt ihn an."
+
+#: ../../product/data.md:7
+msgid ""
+"One file per reviewed source, in an openly documented JSON format – your "
+"data is never locked in."
+msgstr ""
+"Eine Datei pro reviewter Quelle, in einem offen dokumentierten JSON-"
+"Format – deine Daten sind nie eingesperrt."
+
+#: ../../product/data.md:9
+#, python-brace-format
+msgid ""
+"`.deciwa/` is committed to Git by default ({need}`DEC_GIT_COMMITTED`), so"
+" reviews are versioned together with the content."
+msgstr ""
+"`.deciwa/` wird standardmäßig in Git committet "
+"({need}`DEC_GIT_COMMITTED`), so werden Reviews zusammen mit dem Inhalt "
+"versioniert."
+
+#: ../../product/data.md:11
+msgid ""
+"All review data can be exported as one deciwa file and imported again – "
+"it then replaces the data, and a file older than the current data is "
+"refused. Without a server this is how a review leaves the browser."
+msgstr ""
+"Alle Review-Daten lassen sich als eine deciwa-Datei exportieren und "
+"wieder importieren – sie ersetzt dann die Daten, und eine Datei, die "
+"älter ist als die aktuellen Daten, wird abgelehnt. Ohne Server verlässt "
+"ein Review so den Browser."
+
+#: ../../product/data.md:15
+msgid "Hosted service"
+msgstr "Gehosteter Dienst"
+
+#: ../../product/data.md:17
+msgid ""
+"Teams can sync `.deciwa/` with the hosted service instead (0.4). It adds "
+"a web UI for reviewers outside development, a task list per person, "
+"evaluations (coverage, ratings, weak areas, time to approval), "
+"comparisons between versions, a team overview, an audit report (who "
+"approved which wording when), users and roles."
+msgstr ""
+"Teams können `.deciwa/` stattdessen mit dem gehosteten Dienst "
+"synchronisieren (0.4). Er bringt eine Web-Oberfläche für Reviewende "
+"außerhalb der Entwicklung, eine Aufgabenliste pro Person, Auswertungen "
+"(Abdeckung, Bewertungen, schwache Stellen, Zeit bis zur Freigabe), "
+"Vergleiche zwischen Versionen, einen Team-Überblick, einen Audit-Bericht "
+"(wer welche Formulierung wann freigegeben hat), Benutzer und Rollen."
+

@@ -1,0 +1,607 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 14:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/index.md:1
+msgid "Technical overview"
+msgstr "Technischer Überblick"
+
+#: ../../technical/index.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/index.md:5
+msgid ""
+"How the next version (0.1) is built – updated for every version. "
+"Proposals by Claude, 2026-10-19; nothing on these pages is binding until "
+"Daniel approves it. Questions that block work are collected in [Open "
+"questions](questions.md)."
+msgstr ""
+"Wie die nächste Version (0.1) gebaut wird – für jede Version "
+"aktualisiert. Vorschläge von Claude, 2026-10-19; nichts auf diesen Seiten"
+" ist verbindlich, bis Daniel es freigibt. Fragen, die die Arbeit "
+"blockieren, sind in [Offene Fragen](questions.md) gesammelt."
+
+#: ../../technical/index.md:10
+msgid "Goal"
+msgstr "Ziel"
+
+#: ../../technical/index.md:12
+#, python-brace-format
+msgid ""
+"Build release 0.1 ({doc}`../product/roadmap`): the CLI with the open file"
+" format, the adapters Markdown, rST/Sphinx-Needs and plain text, and the "
+"agent skills `deciwa-work` and `deciwa-ask` – good enough that Daniel "
+"uses deciwa in his knowledge base instead of `[CHECK]` markers."
+msgstr ""
+"Release 0.1 bauen ({doc}`../product/roadmap`): die CLI mit dem offenen "
+"Dateiformat, die Adapter für Markdown, rST/Sphinx-Needs und reinen Text "
+"sowie die Agent-Skills `deciwa-work` und `deciwa-ask` – gut genug, dass "
+"Daniel deciwa in seiner Wissensbasis statt `[CHECK]`-Markierungen nutzt."
+
+#: ../../technical/index.md:17
+#, python-brace-format
+msgid ""
+"**Not in 0.1:** `push` / `pull`, VS Code, Chrome, hosted service, "
+"Python/HTML adapters. The design must not block them, though – especially"
+" review on results ({need}`DEC_REVIEW_ON_RESULTS`)."
+msgstr ""
+"**Nicht in 0.1:** `push` / `pull`, VS Code, Chrome, gehosteter Dienst, "
+"Python-/HTML-Adapter. Das Design darf sie aber nicht blockieren – vor "
+"allem nicht das Review am Ergebnis ({need}`DEC_REVIEW_ON_RESULTS`)."
+
+#: ../../technical/index.md:21
+msgid "Architecture"
+msgstr "Architektur"
+
+#: ../../technical/index.md:23
+#, python-brace-format
+msgid ""
+"Every front end – the integrations as well as the agent skills – talks to"
+" the deciwa CLI and its core library, never to the files directly "
+"({need}`DEC_CLI_MASTER`). The CLI stores reviews in `.deciwa/` inside the"
+" repository or, later, in the hosted service."
+msgstr ""
+"Jedes Frontend – die Integrationen wie auch die Agent-Skills – spricht "
+"mit der deciwa-CLI und ihrer Core-Bibliothek, nie direkt mit den Dateien "
+"({need}`DEC_CLI_MASTER`). Die CLI speichert Reviews in `.deciwa/` im "
+"Repository oder später im gehosteten Dienst."
+
+#: ../../technical/index.md:28
+msgid ""
+"<figure class=\"diagram\">\n"
+"<svg viewBox=\"0 0 760 330\" role=\"img\" aria-labelledby=\"arch-t\">\n"
+"  <defs><marker id=\"dw-arrow\" viewBox=\"0 0 10 10\" refX=\"9\" "
+"refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-"
+"reverse\"><path d=\"M0 0 L10 5 L0 10 z\" "
+"class=\"arrowhead\"/></marker></defs>\n"
+"  <title id=\"arch-t\">deciwa architecture: integrations and agent skills"
+" use the CLI, the CLI stores in .deciwa or the hosted service</title>\n"
+"  <g class=\"box\">\n"
+"    <rect x=\"20\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text "
+"x=\"85\" y=\"50\">VS Code</text>\n"
+"    <rect x=\"165\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text"
+" x=\"230\" y=\"50\">Chrome</text>\n"
+"    <rect x=\"310\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text"
+" x=\"375\" y=\"50\">Claude UI</text>\n"
+"    <rect x=\"455\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text"
+" x=\"520\" y=\"50\">Desktop app</text>\n"
+"  </g>\n"
+"  <g class=\"box alt\">\n"
+"    <rect x=\"610\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text"
+" x=\"675\" y=\"42\">agent skills</text><text x=\"675\" y=\"60\" "
+"class=\"small\">work · ask</text>\n"
+"  </g>\n"
+"  <text x=\"302\" y=\"92\" class=\"label\">integrations</text>\n"
+"  <g class=\"arrow\">\n"
+"    <path d=\"M85 70 V120\"/><path d=\"M230 70 V120\"/><path d=\"M375 70 "
+"V120\"/><path d=\"M520 70 V120\"/><path d=\"M675 70 V120\"/>\n"
+"  </g>\n"
+"  <g class=\"box main\">\n"
+"    <rect x=\"20\" y=\"125\" width=\"720\" height=\"80\" rx=\"14\"/>\n"
+"    <text x=\"380\" y=\"157\" class=\"strong\">deciwa CLI / core library "
+"– the master</text>\n"
+"    <text x=\"380\" y=\"183\" class=\"small\">format adapters · selectors"
+" and fingerprints · state engine · JSON API (--json, serve)</text>\n"
+"  </g>\n"
+"  <g class=\"arrow\"><path d=\"M200 205 V250\"/><path d=\"M560 205 "
+"V250\"/></g>\n"
+"  <g class=\"box\">\n"
+"    <rect x=\"40\" y=\"255\" width=\"320\" height=\"60\" rx=\"10\"/>\n"
+"    <text x=\"200\" y=\"280\">.deciwa/ in the repository</text>\n"
+"    <text x=\"200\" y=\"300\" class=\"small\">open format · Git is the "
+"history · default</text>\n"
+"  </g>\n"
+"  <g class=\"box warm\">\n"
+"    <rect x=\"400\" y=\"255\" width=\"320\" height=\"60\" rx=\"10\"/>\n"
+"    <text x=\"560\" y=\"280\">hosted service (paid)</text>\n"
+"    <text x=\"560\" y=\"300\" class=\"small\">sync · task lists · "
+"evaluations · audit</text>\n"
+"  </g>\n"
+"</svg>\n"
+"<figcaption>Every front end talks to the CLI, never to the files "
+"directly.</figcaption>\n"
+"</figure>"
+msgstr ""
+"<figure class=\"diagram\">\n"
+"<svg viewBox=\"0 0 760 330\" role=\"img\" aria-labelledby=\"arch-t\">\n"
+"  <defs><marker id=\"dw-arrow\" viewBox=\"0 0 10 10\" refX=\"9\" "
+"refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-"
+"reverse\"><path d=\"M0 0 L10 5 L0 10 z\" "
+"class=\"arrowhead\"/></marker></defs>\n"
+"  <title id=\"arch-t\">deciwa-Architektur: Integrationen und Agent-Skills"
+" nutzen die CLI, die CLI speichert in .deciwa oder im gehosteten "
+"Dienst</title>\n"
+"  <g class=\"box\">\n"
+"    <rect x=\"20\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text "
+"x=\"85\" y=\"50\">VS Code</text>\n"
+"    <rect x=\"165\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text"
+" x=\"230\" y=\"50\">Chrome</text>\n"
+"    <rect x=\"310\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text"
+" x=\"375\" y=\"50\">Claude-Oberfläche</text>\n"
+"    <rect x=\"455\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text"
+" x=\"520\" y=\"50\">Desktop-App</text>\n"
+"  </g>\n"
+"  <g class=\"box alt\">\n"
+"    <rect x=\"610\" y=\"20\" width=\"130\" height=\"50\" rx=\"10\"/><text"
+" x=\"675\" y=\"42\">Agent-Skills</text><text x=\"675\" y=\"60\" "
+"class=\"small\">work · ask</text>\n"
+"  </g>\n"
+"  <text x=\"302\" y=\"92\" class=\"label\">Integrationen</text>\n"
+"  <g class=\"arrow\">\n"
+"    <path d=\"M85 70 V120\"/><path d=\"M230 70 V120\"/><path d=\"M375 70 "
+"V120\"/><path d=\"M520 70 V120\"/><path d=\"M675 70 V120\"/>\n"
+"  </g>\n"
+"  <g class=\"box main\">\n"
+"    <rect x=\"20\" y=\"125\" width=\"720\" height=\"80\" rx=\"14\"/>\n"
+"    <text x=\"380\" y=\"157\" class=\"strong\">deciwa-CLI / Core-"
+"Bibliothek – der Master</text>\n"
+"    <text x=\"380\" y=\"183\" class=\"small\">Format-Adapter · Selektoren"
+" und Fingerprints · Zustands-Engine · JSON-API (--json, serve)</text>\n"
+"  </g>\n"
+"  <g class=\"arrow\"><path d=\"M200 205 V250\"/><path d=\"M560 205 "
+"V250\"/></g>\n"
+"  <g class=\"box\">\n"
+"    <rect x=\"40\" y=\"255\" width=\"320\" height=\"60\" rx=\"10\"/>\n"
+"    <text x=\"200\" y=\"280\">.deciwa/ im Repository</text>\n"
+"    <text x=\"200\" y=\"300\" class=\"small\">offenes Format · Git ist "
+"der Verlauf · Standard</text>\n"
+"  </g>\n"
+"  <g class=\"box warm\">\n"
+"    <rect x=\"400\" y=\"255\" width=\"320\" height=\"60\" rx=\"10\"/>\n"
+"    <text x=\"560\" y=\"280\">gehosteter Dienst (kostenpflichtig)</text>\n"
+"    <text x=\"560\" y=\"300\" class=\"small\">Sync · Aufgabenlisten · "
+"Auswertungen · Audit</text>\n"
+"  </g>\n"
+"</svg>\n"
+"<figcaption>Jedes Frontend spricht mit der CLI, nie direkt mit den "
+"Dateien.</figcaption>\n"
+"</figure>"
+
+#: ../../technical/index.md:68
+msgid "Repository"
+msgstr "Repository"
+
+#: ../../technical/index.md:88
+msgid "Packages"
+msgstr "Pakete"
+
+#: ../../technical/index.md:90
+#, python-brace-format
+msgid "The split into packages is {need}`DEC_PACKAGES`."
+msgstr "Die Aufteilung in Pakete ist {need}`DEC_PACKAGES`."
+
+#: ../../technical/index.md:92
+msgid ""
+"deciwa is one repository with one package per part – a uv workspace. All "
+"packages share the Python namespace `deciwa`."
+msgstr ""
+"deciwa ist ein Repository mit einem Paket pro Teil – ein uv-Workspace. "
+"Alle Pakete teilen sich den Python-Namespace `deciwa`."
+
+#: ../../technical/index.md:95
+msgid ""
+"<figure class=\"diagram\">\n"
+"<svg viewBox=\"0 0 760 340\" role=\"img\" aria-labelledby=\"pkg-t\">\n"
+"  <defs><marker id=\"dw-arrow\" viewBox=\"0 0 10 10\" refX=\"9\" "
+"refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-"
+"reverse\"><path d=\"M0 0 L10 5 L0 10 z\" "
+"class=\"arrowhead\"/></marker></defs>\n"
+"  <title id=\"pkg-t\">Packages: cli depends on server and core; sphinx on"
+" core and ui; server on core. At run time the review UI calls the "
+"server's JSON API, and the server runs the Sphinx build.</title>\n"
+"  <g class=\"box alt\"><rect x=\"20\" y=\"20\" width=\"220\" "
+"height=\"60\" rx=\"10\"/><text x=\"130\" y=\"44\">deciwa-cli</text><text "
+"x=\"130\" y=\"64\" class=\"small\">the deciwa command</text></g>\n"
+"  <g class=\"box alt\"><rect x=\"270\" y=\"20\" width=\"220\" "
+"height=\"60\" rx=\"10\"/><text x=\"380\" y=\"44\">deciwa-"
+"sphinx</text><text x=\"380\" y=\"64\" class=\"small\">Sphinx "
+"extension</text></g>\n"
+"  <g class=\"box alt\"><rect x=\"520\" y=\"20\" width=\"220\" "
+"height=\"60\" rx=\"10\"/><text x=\"630\" y=\"44\">later: VS Code, Chrome "
+"…</text><text x=\"630\" y=\"64\" class=\"small\">own repos or "
+"integrations/</text></g>\n"
+"  <g class=\"box\"><rect x=\"20\" y=\"140\" width=\"220\" height=\"60\" "
+"rx=\"10\"/><text x=\"130\" y=\"164\">deciwa-server</text><text x=\"130\" "
+"y=\"184\" class=\"small\">site + JSON API + rebuild</text></g>\n"
+"  <g class=\"box\"><rect x=\"520\" y=\"140\" width=\"220\" height=\"60\" "
+"rx=\"10\"/><text x=\"630\" y=\"164\">deciwa-ui</text><text x=\"630\" "
+"y=\"184\" class=\"small\">review overlay JS / CSS</text></g>\n"
+"  <g class=\"box main\"><rect x=\"20\" y=\"245\" width=\"720\" "
+"height=\"56\" rx=\"12\"/><text x=\"380\" y=\"267\" class=\"strong"
+"\">deciwa-core</text><text x=\"380\" y=\"287\" class=\"small\">model · "
+"store · engine – all the logic</text></g>\n"
+"  <g class=\"arrow\">\n"
+"    <path d=\"M130 80 V135\"/><path d=\"M60 80 V240\"/><path d=\"M130 200"
+" V240\"/>\n"
+"    <path d=\"M380 80 V240\"/><path d=\"M430 80 L590 135\"/>\n"
+"    <path d=\"M630 80 V135\"/><path d=\"M540 80 L240 145\"/><path "
+"d=\"M710 80 V240\"/>\n"
+"  </g>\n"
+"  <g class=\"arrow run\">\n"
+"    <path d=\"M520 178 H245\"/>\n"
+"    <path d=\"M200 140 C230 110 255 90 265 62\"/>\n"
+"  </g>\n"
+"  <text x=\"382\" y=\"170\" class=\"label\">HTTP · JSON API</text>\n"
+"  <text x=\"210\" y=\"112\" class=\"label\">runs the build</text>\n"
+"  <g class=\"legend-key\">\n"
+"    <path d=\"M30 325 H70\" class=\"dep\"/><text x=\"78\" y=\"325\" "
+"class=\"small\" style=\"text-anchor:start\">package dependency</text>\n"
+"    <path d=\"M250 325 H290\" class=\"runl\"/><text x=\"298\" y=\"325\" "
+"class=\"small\" style=\"text-anchor:start\">at run time (with deciwa "
+"serve)</text>\n"
+"  </g>\n"
+"</svg>\n"
+"<figcaption>Solid: what a package imports. Dashed: how the parts talk to "
+"each other while reviewing with a server.</figcaption>\n"
+"</figure>"
+msgstr ""
+"<figure class=\"diagram\">\n"
+"<svg viewBox=\"0 0 760 340\" role=\"img\" aria-labelledby=\"pkg-t\">\n"
+"  <defs><marker id=\"dw-arrow\" viewBox=\"0 0 10 10\" refX=\"9\" "
+"refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-"
+"reverse\"><path d=\"M0 0 L10 5 L0 10 z\" "
+"class=\"arrowhead\"/></marker></defs>\n"
+"  <title id=\"pkg-t\">Pakete: cli hängt von server und core ab; sphinx "
+"von core und ui; server von core. Zur Laufzeit ruft die Review-Oberfläche"
+" die JSON-API des Servers auf, und der Server führt den Sphinx-Build "
+"aus.</title>\n"
+"  <g class=\"box alt\"><rect x=\"20\" y=\"20\" width=\"220\" "
+"height=\"60\" rx=\"10\"/><text x=\"130\" y=\"44\">deciwa-cli</text><text "
+"x=\"130\" y=\"64\" class=\"small\">der Befehl deciwa</text></g>\n"
+"  <g class=\"box alt\"><rect x=\"270\" y=\"20\" width=\"220\" "
+"height=\"60\" rx=\"10\"/><text x=\"380\" y=\"44\">deciwa-"
+"sphinx</text><text x=\"380\" y=\"64\" class=\"small\">Sphinx-"
+"Erweiterung</text></g>\n"
+"  <g class=\"box alt\"><rect x=\"520\" y=\"20\" width=\"220\" "
+"height=\"60\" rx=\"10\"/><text x=\"630\" y=\"44\">später: VS Code, Chrome"
+" …</text><text x=\"630\" y=\"64\" class=\"small\">eigene Repos oder "
+"integrations/</text></g>\n"
+"  <g class=\"box\"><rect x=\"20\" y=\"140\" width=\"220\" height=\"60\" "
+"rx=\"10\"/><text x=\"130\" y=\"164\">deciwa-server</text><text x=\"130\" "
+"y=\"184\" class=\"small\">Site + JSON-API + Neubau</text></g>\n"
+"  <g class=\"box\"><rect x=\"520\" y=\"140\" width=\"220\" height=\"60\" "
+"rx=\"10\"/><text x=\"630\" y=\"164\">deciwa-ui</text><text x=\"630\" "
+"y=\"184\" class=\"small\">Review-Overlay JS / CSS</text></g>\n"
+"  <g class=\"box main\"><rect x=\"20\" y=\"245\" width=\"720\" "
+"height=\"56\" rx=\"12\"/><text x=\"380\" y=\"267\" class=\"strong"
+"\">deciwa-core</text><text x=\"380\" y=\"287\" class=\"small\">model · "
+"store · engine – die ganze Logik</text></g>\n"
+"  <g class=\"arrow\">\n"
+"    <path d=\"M130 80 V135\"/><path d=\"M60 80 V240\"/><path d=\"M130 200"
+" V240\"/>\n"
+"    <path d=\"M380 80 V240\"/><path d=\"M430 80 L590 135\"/>\n"
+"    <path d=\"M630 80 V135\"/><path d=\"M540 80 L240 145\"/><path "
+"d=\"M710 80 V240\"/>\n"
+"  </g>\n"
+"  <g class=\"arrow run\">\n"
+"    <path d=\"M520 178 H245\"/>\n"
+"    <path d=\"M200 140 C230 110 255 90 265 62\"/>\n"
+"  </g>\n"
+"  <text x=\"382\" y=\"170\" class=\"label\">HTTP · JSON API</text>\n"
+"  <text x=\"210\" y=\"112\" class=\"label\">führt den Build aus</text>\n"
+"  <g class=\"legend-key\">\n"
+"    <path d=\"M30 325 H70\" class=\"dep\"/><text x=\"78\" y=\"325\" "
+"class=\"small\" style=\"text-anchor:start\">Paket-Abhängigkeit</text>\n"
+"    <path d=\"M250 325 H290\" class=\"runl\"/><text x=\"298\" y=\"325\" "
+"class=\"small\" style=\"text-anchor:start\">zur Laufzeit (mit deciwa "
+"serve)</text>\n"
+"  </g>\n"
+"</svg>\n"
+"<figcaption>Durchgezogen: was ein Paket importiert. Gestrichelt: wie die "
+"Teile beim Review mit Server miteinander sprechen.</figcaption>\n"
+"</figure>"
+
+#: ../../technical/index.md:95
+msgid "Folder"
+msgstr "Ordner"
+
+#: ../../technical/index.md:95
+msgid "Distribution"
+msgstr "Distribution"
+
+#: ../../technical/index.md:95
+msgid "Import"
+msgstr "Import"
+
+#: ../../technical/index.md:95
+msgid "Contains"
+msgstr "Enthält"
+
+#: ../../technical/index.md:95
+msgid "Depends on"
+msgstr "Hängt ab von"
+
+#: ../../technical/index.md:95
+msgid "`packages/core`"
+msgstr "`packages/core`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa-core`"
+msgstr "`deciwa-core`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa.core`"
+msgstr "`deciwa.core`"
+
+#: ../../technical/index.md:95
+msgid ""
+"model, `.deciwa/` store, engine – states, review rules, project overview,"
+" export/import"
+msgstr ""
+"Modell, `.deciwa/`-Store, Engine – Zustände, Review-Regeln, "
+"Projektüberblick, Export/Import"
+
+#: ../../technical/index.md:95
+msgid "–"
+msgstr "–"
+
+#: ../../technical/index.md:95
+msgid "`packages/server`"
+msgstr "`packages/server`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa-server`"
+msgstr "`deciwa-server`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa.server`"
+msgstr "`deciwa.server`"
+
+#: ../../technical/index.md:95
+msgid ""
+"local review server: serves a built site, the JSON API for the review UI,"
+" rebuilds and reloads on change; knows no build tool – the caller passes "
+"the build command"
+msgstr ""
+"lokaler Review-Server: liefert eine gebaute Site aus, die JSON-API für "
+"die Review-Oberfläche, baut bei Änderungen neu und lädt neu; kennt kein "
+"Build-Tool – der Aufrufer übergibt den Build-Befehl"
+
+#: ../../technical/index.md:95
+msgid "core"
+msgstr "core"
+
+#: ../../technical/index.md:95
+msgid "`packages/cli`"
+msgstr "`packages/cli`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa-cli`"
+msgstr "`deciwa-cli`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa.cli`"
+msgstr "`deciwa.cli`"
+
+#: ../../technical/index.md:95
+msgid "the `deciwa` command; `deciwa serve` passes the Sphinx build to the server"
+msgstr ""
+"der Befehl `deciwa`; `deciwa serve` übergibt den Sphinx-Build an den "
+"Server"
+
+#: ../../technical/index.md:95
+msgid "core, server"
+msgstr "core, server"
+
+#: ../../technical/index.md:95
+msgid "`packages/ui`"
+msgstr "`packages/ui`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa-ui`"
+msgstr "`deciwa-ui`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa.ui`"
+msgstr "`deciwa.ui`"
+
+#: ../../technical/index.md:95
+msgid ""
+"the review overlay (JavaScript, CSS, logo) in the danwos tool UI kit, "
+"including the offline engine; no Python logic"
+msgstr ""
+"das Review-Overlay (JavaScript, CSS, Logo) im danwos-Tool-UI-Kit, "
+"inklusive der Offline-Engine; keine Python-Logik"
+
+#: ../../technical/index.md:95
+msgid "`packages/sphinx`"
+msgstr "`packages/sphinx`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa-sphinx`"
+msgstr "`deciwa-sphinx`"
+
+#: ../../technical/index.md:95
+msgid "`deciwa.sphinx`"
+msgstr "`deciwa.sphinx`"
+
+#: ../../technical/index.md:95
+msgid ""
+"Sphinx extension: finds the elements of every page, writes the elements "
+"index, ships the review UI"
+msgstr ""
+"Sphinx-Erweiterung: findet die Elemente jeder Seite, schreibt den "
+"Elemente-Index, liefert die Review-Oberfläche mit"
+
+#: ../../technical/index.md:95
+msgid "core, ui"
+msgstr "core, ui"
+
+#: ../../technical/index.md:134
+msgid ""
+"`deciwa-sphinx` does not import `deciwa-server`: a static (offline) build"
+" needs no server. With `deciwa serve`, the server runs the Sphinx build, "
+"and the review UI in the pages talks to the server's JSON API."
+msgstr ""
+"`deciwa-sphinx` importiert `deciwa-server` nicht: ein statischer "
+"(Offline-)Build braucht keinen Server. Mit `deciwa serve` führt der "
+"Server den Sphinx-Build aus, und die Review-Oberfläche in den Seiten "
+"spricht mit der JSON-API des Servers."
+
+#: ../../technical/index.md:138
+msgid "Rules:"
+msgstr "Regeln:"
+
+#: ../../technical/index.md:140
+msgid ""
+"Logic lives in `deciwa-core` only. The offline engine in `deciwa-ui` "
+"mirrors its rules for reviews without a server and must be kept in step."
+msgstr ""
+"Logik lebt nur in `deciwa-core`. Die Offline-Engine in `deciwa-ui` "
+"spiegelt ihre Regeln für Reviews ohne Server und muss mit ihr Schritt "
+"halten."
+
+#: ../../technical/index.md:142
+msgid ""
+"`deciwa-server` and `deciwa-cli` are reused by every integration that "
+"reviews in a browser or calls the CLI."
+msgstr ""
+"`deciwa-server` und `deciwa-cli` werden von jeder Integration "
+"wiederverwendet, die im Browser reviewt oder die CLI aufruft."
+
+#: ../../technical/index.md:144
+msgid ""
+"An integration package depends on `deciwa-core` and, for a browser UI, on"
+" `deciwa-ui` – never on another integration."
+msgstr ""
+"Ein Integrationspaket hängt von `deciwa-core` und, für eine Browser-"
+"Oberfläche, von `deciwa-ui` ab – nie von einer anderen Integration."
+
+#: ../../technical/index.md:147
+msgid "Setting up"
+msgstr "Einrichten"
+
+#: ../../technical/index.md:154
+msgid "Using deciwa in another Sphinx project:"
+msgstr "deciwa in einem anderen Sphinx-Projekt nutzen:"
+
+#: ../../technical/index.md:161
+msgid "Pages"
+msgstr "Seiten"
+
+#: ../../technical/index.md:95
+msgid "Page"
+msgstr "Seite"
+
+#: ../../technical/index.md:95
+msgid "Decides"
+msgstr "Entscheidet"
+
+#: ../../technical/index.md:95
+msgid "[Stack](stack.md)"
+msgstr "[Stack](stack.md)"
+
+#: ../../technical/index.md:95
+msgid "language, packaging, tooling"
+msgstr "Sprache, Packaging, Tooling"
+
+#: ../../technical/index.md:95
+msgid "[Layers](layers.md)"
+msgstr "[Schichten](layers.md)"
+
+#: ../../technical/index.md:95
+msgid "modules of the core and how they depend on each other"
+msgstr "Module des Cores und wie sie voneinander abhängen"
+
+#: ../../technical/index.md:95
+msgid "[Adapters](adapters.md)"
+msgstr "[Adapter](adapters.md)"
+
+#: ../../technical/index.md:95
+msgid "how a format turns into elements and selectors"
+msgstr "wie ein Format zu Elementen und Selektoren wird"
+
+#: ../../technical/index.md:95
+msgid "[File format](file-format.md)"
+msgstr "[Dateiformat](file-format.md)"
+
+#: ../../technical/index.md:95
+msgid "the JSON inside `.deciwa/`"
+msgstr "das JSON in `.deciwa/`"
+
+#: ../../technical/index.md:95
+msgid "[State engine](state-engine.md)"
+msgstr "[Zustands-Engine](state-engine.md)"
+
+#: ../../technical/index.md:95
+msgid "how the state of an element is computed"
+msgstr "wie der Zustand eines Elements berechnet wird"
+
+#: ../../technical/index.md:95
+msgid "[CLI](cli.md)"
+msgstr "[CLI](cli.md)"
+
+#: ../../technical/index.md:95
+msgid "commands, element addressing, JSON output"
+msgstr "Befehle, Adressierung von Elementen, JSON-Ausgabe"
+
+#: ../../technical/index.md:95
+msgid "[Skills](skills.md)"
+msgstr "[Skills](skills.md)"
+
+#: ../../technical/index.md:95
+msgid "what the two agent skills do and how they ship"
+msgstr "was die zwei Agent-Skills tun und wie sie ausgeliefert werden"
+
+#: ../../technical/index.md:95
+msgid "[Rollout](rollout.md)"
+msgstr "[Einführung](rollout.md)"
+
+#: ../../technical/index.md:95
+msgid "how 0.1 gets into Daniel's knowledge base"
+msgstr "wie 0.1 in Daniels Wissensbasis kommt"
+
+#: ../../technical/index.md:95
+msgid "[Working on deciwa](working.md)"
+msgstr "[An deciwa arbeiten](working.md)"
+
+#: ../../technical/index.md:95
+msgid "docs as the truth, reviewing them in deciwa, from proposal to decision"
+msgstr "Docs als Wahrheit, sie in deciwa reviewen, vom Vorschlag zur Entscheidung"
+
+#: ../../technical/index.md:175
+msgid "All proposals"
+msgstr "Alle Vorschläge"
+
+#: ../../technical/index.md:183
+msgid "How the proposals relate to the decisions"
+msgstr "Wie die Vorschläge mit den Entscheidungen zusammenhängen"
+

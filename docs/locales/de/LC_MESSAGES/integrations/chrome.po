@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/chrome.md:1
+msgid "Chrome"
+msgstr "Chrome"
+
+#: ../../integrations/chrome.md:3
+msgid "*Planned for 0.3.*"
+msgstr "*Geplant für 0.3.*"
+
+#: ../../integrations/chrome.md:5
+msgid ""
+"Review any rendered page – built docs or a live website – without "
+"changing its build:"
+msgstr ""
+"Reviewe jede gerenderte Seite – gebaute Docs oder eine Live-Website –, "
+"ohne ihren Build zu ändern:"
+
+#: ../../integrations/chrome.md:8
+msgid ""
+"the extension recognises the elements of the page (block containers, "
+"headings, paragraphs, images) and adds the review UI,"
+msgstr ""
+"die Erweiterung erkennt die Elemente der Seite (Block-Container, "
+"Überschriften, Absätze, Bilder) und ergänzt die Review-Oberfläche,"
+
+#: ../../integrations/chrome.md:10
+msgid ""
+"for Sphinx pages it uses the same elements as the [Sphinx "
+"integration](sphinx/index.md),"
+msgstr ""
+"für Sphinx-Seiten nutzt sie dieselben Elemente wie die [Sphinx-"
+"Integration](sphinx/index.md),"
+
+#: ../../integrations/chrome.md:11
+msgid "feedback goes to the local CLI or, for teams, to the hosted service."
+msgstr "Feedback geht an die lokale CLI oder, für Teams, an den gehosteten Dienst."
+

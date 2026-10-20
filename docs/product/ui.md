@@ -113,7 +113,7 @@ Coloured bars for reviewed elements, grey dashed lines for required ones that ar
   file, look into it with **Show**, or load one: the panel shows what is in it (export time, last change,
   entries, authors, sources) before it replaces the current data. With a
   server everything is saved already; without one, this is how a review
-  leaves the browser – see [offline review](../integrations/sphinx/workflow.md#offline).
+  leaves the browser – see {ref}`offline review <offline>`.
 
 The panel stays open across pages.
 

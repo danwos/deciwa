@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/claude.md:1
+msgid "Claude"
+msgstr "Claude"
+
+#: ../../integrations/claude.md:3
+msgid ""
+"Claude works on your feedback and asks its questions where they belong – "
+"at the element, not in the chat."
+msgstr ""
+"Claude arbeitet dein Feedback ab und stellt seine Fragen dort, wo sie "
+"hingehören – am Element, nicht im Chat."
+
+#: ../../integrations/claude.md:6
+msgid "Today"
+msgstr "Heute"
+
+#: ../../integrations/claude.md:8
+msgid ""
+"With the prototype, ask Claude in the repository to work through the "
+"feedback. Claude then"
+msgstr ""
+"Mit dem Prototyp bittest du Claude im Repository, das Feedback "
+"abzuarbeiten. Claude"
+
+#: ../../integrations/claude.md:11
+msgid "runs `deciwa todo` and reads every open job and question,"
+msgstr "führt `deciwa todo` aus und liest jede offene Aufgabe und Frage,"
+
+#: ../../integrations/claude.md:12
+msgid ""
+"changes the sources – applies comments, fixes rejected statements, "
+"removes elements marked for deletion, never touches frozen ones,"
+msgstr ""
+"ändert die Quellen – setzt Kommentare um, korrigiert abgelehnte Aussagen,"
+" entfernt zum Löschen markierte Elemente, fasst eingefrorene nie an,"
+
+#: ../../integrations/claude.md:14
+msgid "marks each job as done with `deciwa resolve <id> --note \"…\"`,"
+msgstr "markiert jede Aufgabe mit `deciwa resolve <id> --note \"…\"` als erledigt,"
+
+#: ../../integrations/claude.md:15
+msgid "asks back on the element when something is unclear:"
+msgstr "fragt am Element nach, wenn etwas unklar ist:"
+
+#: ../../integrations/claude.md:22
+msgid "The question appears in the card of that element; answer it there."
+msgstr "Die Frage erscheint in der Karte dieses Elements; beantworte sie dort."
+
+#: ../../integrations/claude.md:24
+msgid "Agent skills (0.1)"
+msgstr "Agent-Skills (0.1)"
+
+#: ../../integrations/claude.md:26
+msgid ""
+"`deciwa-work` and `deciwa-ask` package these steps, so Claude does them "
+"without extra prompting – see [CLI and agent skills](../product/cli.md)."
+msgstr ""
+"`deciwa-work` und `deciwa-ask` bündeln diese Schritte, sodass Claude sie "
+"ohne extra Aufforderung erledigt – siehe [CLI und Agent-"
+"Skills](../product/cli.md)."
+
+#: ../../integrations/claude.md:29
+msgid "Claude UI (later)"
+msgstr "Claude-Oberfläche (später)"
+
+#: ../../integrations/claude.md:31
+msgid ""
+"Go through a file together with Claude inside the chat, with the same "
+"card and states."
+msgstr ""
+"Geh eine Datei gemeinsam mit Claude direkt im Chat durch, mit derselben "
+"Karte und denselben Zuständen."
+

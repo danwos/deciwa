@@ -1,0 +1,178 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/cli.md:1
+msgid "CLI"
+msgstr "CLI"
+
+#: ../../technical/cli.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/cli.md:5
+msgid "Proposals by Claude – not binding until Daniel approves them."
+msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
+
+#: ../../technical/cli.md:8
+msgid "Command"
+msgstr "Befehl"
+
+#: ../../technical/cli.md:8
+msgid "Does"
+msgstr "Bewirkt"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa init [--at <folder>]`"
+msgstr "`deciwa init [--at <folder>]`"
+
+#: ../../technical/cli.md:8
+msgid "create `.deciwa/`"
+msgstr "`.deciwa/` anlegen"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa elements <file>`"
+msgstr "`deciwa elements <file>`"
+
+#: ../../technical/cli.md:8
+msgid "list elements with selector, kind, line and label"
+msgstr "Elemente mit Selektor, Art, Zeile und Beschriftung auflisten"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa annotate <file> <element> --verdict <v> [--comment …]`"
+msgstr "`deciwa annotate <file> <element> --verdict <v> [--comment …]`"
+
+#: ../../technical/cli.md:8
+msgid "feedback"
+msgstr "Feedback"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa rate <file> <element> <1-5>`"
+msgstr "`deciwa rate <file> <element> <1-5>`"
+
+#: ../../technical/cli.md:8
+msgid "quality rating"
+msgstr "Qualitätsbewertung"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa request <file> <element> --to <who> --question …`"
+msgstr "`deciwa request <file> <element> --to <who> --question …`"
+
+#: ../../technical/cli.md:8
+msgid "ask someone"
+msgstr "jemanden fragen"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa answer <id> [--verdict approve|reject] [--text …]`"
+msgstr "`deciwa answer <id> [--verdict approve|reject] [--text …]`"
+
+#: ../../technical/cli.md:8
+msgid "answer a request"
+msgstr "eine Anfrage beantworten"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa show <file>`"
+msgstr "`deciwa show <file>`"
+
+#: ../../technical/cli.md:8
+msgid "every annotation of a file with its element state"
+msgstr "jede Annotation einer Datei mit dem Zustand ihres Elements"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa status [path]`"
+msgstr "`deciwa status [path]`"
+
+#: ../../technical/cli.md:8
+msgid "counts per state, coverage"
+msgstr "Anzahl pro Zustand, Abdeckung"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa todo [--for <who>]`"
+msgstr "`deciwa todo [--for <who>]`"
+
+#: ../../technical/cli.md:8
+msgid "open quick actions and requests"
+msgstr "offene Schnellaktionen und Anfragen"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa resolve <id> [--note …]`"
+msgstr "`deciwa resolve <id> [--note …]`"
+
+#: ../../technical/cli.md:8
+msgid "mark a job as done"
+msgstr "eine Aufgabe als erledigt markieren"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa diff <id>`"
+msgstr "`deciwa diff <id>`"
+
+#: ../../technical/cli.md:8
+msgid "snapshot vs. current text"
+msgstr "Schnappschuss vs. aktueller Text"
+
+#: ../../technical/cli.md:8
+msgid "`deciwa relink <id> [<element>]`"
+msgstr "`deciwa relink <id> [<element>]`"
+
+#: ../../technical/cli.md:8
+msgid "update the selectors of a moved or orphaned annotation"
+msgstr "die Selektoren einer verschobenen oder verwaisten Annotation aktualisieren"
+
+#: ../../technical/cli.md:29
+msgid "`serve`, `push` and `pull` follow in 0.2 and 0.4."
+msgstr "`serve`, `push` und `pull` folgen in 0.2 und 0.4."
+
+#: ../../technical/cli.md:31
+msgid "Addressing an element"
+msgstr "Ein Element adressieren"
+
+#: ../../technical/cli.md:33
+msgid ""
+"The element argument is a structural selector, as printed by `deciwa "
+"elements`, or a text quote:"
+msgstr ""
+"Das Element-Argument ist ein struktureller Selektor, wie ihn `deciwa "
+"elements` ausgibt, oder ein Textzitat:"
+
+#: ../../technical/cli.md:55
+#, python-brace-format
+msgid ""
+"`--json` prints `{\"deciwa\": \"0.1\", \"command\": \"<name>\", \"ok\": "
+"true, \"result\": …}`; errors print `\"ok\": false` with an `error` "
+"object (`code`, `message`). Exit codes: `0` ok, `1` error, `2` usage "
+"error. Human output may change between versions; the JSON envelope may "
+"not."
+msgstr ""
+"`--json` gibt `{\"deciwa\": \"0.1\", \"command\": \"<name>\", \"ok\": "
+"true, \"result\": …}` aus; Fehler geben `\"ok\": false` mit einem "
+"`error`-Objekt (`code`, `message`) aus. Exit-Codes: `0` ok, `1` Fehler, "
+"`2` Bedienfehler. Die Ausgabe für Menschen darf sich zwischen Versionen "
+"ändern, die JSON-Hülle nicht."
+
+#: ../../technical/cli.md:66
+msgid ""
+"`deciwa status --fail-on frozen-changed,orphaned` exits with `3` when "
+"such elements exist. deciwa still only shows – the team decides whether "
+"CI stops. Optional for 0.1."
+msgstr ""
+"`deciwa status --fail-on frozen-changed,orphaned` endet mit `3`, wenn "
+"solche Elemente existieren. deciwa zeigt trotzdem nur – das Team "
+"entscheidet, ob CI stoppt. Optional für 0.1."
+

@@ -1,0 +1,345 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 14:03+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/working.md:1
+msgid "Working on deciwa"
+msgstr "An deciwa arbeiten"
+
+#: ../../technical/working.md:3
+msgid ""
+"How the docs work and how a proposal becomes a decision. The repository "
+"and its packages: [Technical overview](index.md)."
+msgstr ""
+"Wie die Docs funktionieren und wie aus einem Vorschlag eine Entscheidung "
+"wird. Das Repository und seine Pakete: [Technischer Überblick](index.md)."
+
+#: ../../technical/working.md:6
+msgid "The docs are the truth"
+msgstr "Die Docs sind die Wahrheit"
+
+#: ../../technical/working.md:8
+msgid ""
+"These docs are the single source of truth for everyone who develops "
+"deciwa. Decisions are requirements: every feature and every piece of code"
+" must fit them. Each statement is a Sphinx-Needs object with an id and a "
+"status."
+msgstr ""
+"Diese Docs sind die einzige Quelle der Wahrheit für alle, die deciwa "
+"entwickeln. Entscheidungen sind Anforderungen: jedes Feature und jedes "
+"Stück Code muss zu ihnen passen. Jede Aussage ist ein Sphinx-Needs-Objekt"
+" mit ID und Status."
+
+#: ../../technical/working.md
+msgid "Object"
+msgstr "Objekt"
+
+#: ../../technical/working.md ../../technical/working.md:70
+msgid "Prefix"
+msgstr "Präfix"
+
+#: ../../technical/working.md
+msgid "Status"
+msgstr "Status"
+
+#: ../../technical/working.md
+msgid "Meaning"
+msgstr "Bedeutung"
+
+#: ../../technical/working.md
+msgid "Decision"
+msgstr "Entscheidung"
+
+#: ../../technical/working.md ../../technical/working.md:70
+msgid "`DEC_`"
+msgstr "`DEC_`"
+
+#: ../../technical/working.md
+msgid "`approved`"
+msgstr "`approved`"
+
+#: ../../technical/working.md
+msgid "decided by Daniel – binding"
+msgstr "von Daniel entschieden – verbindlich"
+
+#: ../../technical/working.md
+msgid "Proposal"
+msgstr "Vorschlag"
+
+#: ../../technical/working.md ../../technical/working.md:70
+msgid "`PROP_`"
+msgstr "`PROP_`"
+
+#: ../../technical/working.md
+msgid "`draft` → `review` → `approved` / `rejected`"
+msgstr "`draft` → `review` → `approved` / `rejected`"
+
+#: ../../technical/working.md
+msgid "part of the technical details of a version, not binding yet"
+msgstr "Teil der technischen Details einer Version, noch nicht verbindlich"
+
+#: ../../technical/working.md
+msgid "Question"
+msgstr "Frage"
+
+#: ../../technical/working.md ../../technical/working.md:70
+msgid "`Q_`"
+msgstr "`Q_`"
+
+#: ../../technical/working.md
+msgid "`open` → `answered`"
+msgstr "`open` → `answered`"
+
+#: ../../technical/working.md
+msgid "someone has to decide something – see [Open questions](questions.md)"
+msgstr "jemand muss etwas entscheiden – siehe [Offene Fragen](questions.md)"
+
+#: ../../technical/working.md:18
+msgid ""
+"An approved proposal becomes a decision: it gets a `DEC_` object in "
+"[Decisions](../decisions/index.md), and the technical page links to it."
+msgstr ""
+"Ein freigegebener Vorschlag wird zur Entscheidung: er bekommt ein "
+"`DEC_`-Objekt in [Entscheidungen](../decisions/index.md), und die "
+"technische Seite verlinkt darauf."
+
+#: ../../technical/working.md:21
+msgid ""
+"Product description, integrations, decisions and technical details live "
+"in `docs/` as Markdown (MyST). The HTML pages are generated; nobody edits"
+" them."
+msgstr ""
+"Produktbeschreibung, Integrationen, Entscheidungen und technische Details"
+" liegen in `docs/` als Markdown (MyST). Die HTML-Seiten werden erzeugt; "
+"niemand bearbeitet sie."
+
+#: ../../technical/working.md:31
+msgid "Published docs"
+msgstr "Veröffentlichte Docs"
+
+#: ../../technical/working.md:33
+msgid ""
+"`.github/workflows/docs.yml` checks the docs (warnings fail) on every "
+"push and pull request. From `main` it publishes them to the `gh-pages` "
+"branch of the public repository `danwos/deciwa.docs`, whose GitHub Pages "
+"serve them at <https://deciwa.danwos.dev> – the code here stays private. "
+"The published build is an offline review build without the review data of"
+" `.deciwa/`, so visitors can try deciwa on these pages in their own "
+"browser."
+msgstr ""
+"`.github/workflows/docs.yml` prüft die Docs (Warnungen lassen den Build "
+"scheitern) bei jedem Push und Pull Request. Von `main` aus veröffentlicht"
+" es sie im Branch `gh-pages` des öffentlichen Repositorys "
+"`danwos/deciwa.docs`, dessen GitHub Pages sie unter "
+"<https://deciwa.danwos.dev> ausliefern – der Code hier bleibt privat. Der"
+" veröffentlichte Build ist ein Offline-Review-Build ohne die Review-Daten"
+" aus `.deciwa/`, damit Besucher deciwa auf diesen Seiten in ihrem eigenen"
+" Browser ausprobieren können."
+
+#: ../../technical/working.md:41
+msgid "Translations"
+msgstr "Übersetzungen"
+
+#: ../../technical/working.md:43
+msgid ""
+"The docs are published in English and German; more languages can follow "
+"the same way."
+msgstr ""
+"Die Docs erscheinen auf Englisch und Deutsch; weitere Sprachen können auf"
+" demselben Weg folgen."
+
+#: ../../technical/working.md:51
+msgid ""
+"Everybody writes and changes the English Markdown. The translations live "
+"in `docs/locales/<language>/LC_MESSAGES/*.po`, one catalog per page plus "
+"`needs.po` for the titles and fields of needs. When an English paragraph "
+"changes, its translation becomes `fuzzy` and the old one stays visible "
+"until somebody updates it. English is published at the root, German in "
+"`de/`; a switcher in the sidebar leads to the same page in the other "
+"language."
+msgstr ""
+"Alle schreiben und ändern das englische Markdown. Die Übersetzungen "
+"liegen in `docs/locales/<language>/LC_MESSAGES/*.po`, ein Katalog pro "
+"Seite plus `needs.po` für Titel und Felder der Needs. Ändert sich ein "
+"englischer Absatz, wird seine Übersetzung `fuzzy`, und die alte bleibt "
+"sichtbar, bis jemand sie aktualisiert. Englisch erscheint im "
+"Wurzelverzeichnis, Deutsch unter `de/`; ein Umschalter in der "
+"Seitenleiste führt zur selben Seite in der anderen Sprache."
+
+#: ../../technical/working.md:65
+msgid ""
+"A translation is checked like any wording, but the binding statement is "
+"the English one: `.deciwa/` only holds reviews of the English pages. The "
+"German pages carry the overlay only as the offline demo for visitors."
+msgstr ""
+"Eine Übersetzung wird geprüft wie jede Formulierung, verbindlich ist aber"
+" die englische Aussage: `.deciwa/` enthält nur Reviews der englischen "
+"Seiten. Die deutschen Seiten tragen das Overlay nur als Offline-Demo für "
+"Besucher."
+
+#: ../../technical/working.md:76
+msgid ""
+"Today every label of the overlay is English. It could take its language "
+"from `<html lang>` and ship a small dictionary per language."
+msgstr ""
+"Heute ist jede Beschriftung des Overlays englisch. Es könnte seine "
+"Sprache aus `<html lang>` nehmen und pro Sprache ein kleines Wörterbuch "
+"mitbringen."
+
+#: ../../technical/working.md:80
+msgid "Update the catalogs after changing the English docs:"
+msgstr "Die Kataloge nach einer Änderung an den englischen Docs aktualisieren:"
+
+#: ../../technical/working.md:89
+msgid "Reviewing these docs in deciwa"
+msgstr "Diese Docs in deciwa reviewen"
+
+#: ../../technical/working.md:91
+msgid ""
+"These docs use the [Sphinx integration](../integrations/sphinx/index.md) "
+"themselves: `uv sync`, then `.venv/bin/deciwa serve` and open "
+"`http://127.0.0.1:4337`. What must be approved is set in "
+"`.deciwa/config.toml` (today: every need). The full loop – review, work "
+"with `deciwa todo` / `deciwa resolve`, rebuild – is described in the "
+"[workflow](../integrations/sphinx/workflow.md)."
+msgstr ""
+"Diese Docs nutzen die [Sphinx-"
+"Integration](../integrations/sphinx/index.md) selbst: `uv sync`, dann "
+"`.venv/bin/deciwa serve` und `http://127.0.0.1:4337` öffnen. Was "
+"freigegeben werden muss, steht in `.deciwa/config.toml` (heute: jedes "
+"Need). Der ganze Ablauf – reviewen, mit `deciwa todo` / `deciwa resolve` "
+"arbeiten, neu bauen – steht im "
+"[Workflow](../integrations/sphinx/workflow.md)."
+
+#: ../../technical/working.md:98
+msgid ""
+"Approving a `prop` or answering a `question` in deciwa is the decision; "
+"the proposal is then turned into a `dec` as described below."
+msgstr ""
+"Einen `prop` freizugeben oder eine `question` zu beantworten ist in "
+"deciwa die Entscheidung; der Vorschlag wird dann wie unten beschrieben zu"
+" einem `dec`."
+
+#: ../../technical/working.md:101
+msgid "From proposal to decision"
+msgstr "Vom Vorschlag zur Entscheidung"
+
+#: ../../technical/working.md:103
+msgid ""
+"The technical details of the next version live in `technical/` (today for"
+" 0.1). Every statement that needs a decision is a `prop` with status "
+"`draft`."
+msgstr ""
+"Die technischen Details der nächsten Version liegen in `technical/` "
+"(heute für 0.1). Jede Aussage, die eine Entscheidung braucht, ist ein "
+"`prop` mit Status `draft`."
+
+#: ../../technical/working.md:106
+msgid "Every open point is a `question` with `to:` naming who decides."
+msgstr ""
+"Jeder offene Punkt ist eine `question`, deren `to:` nennt, wer "
+"entscheidet."
+
+#: ../../technical/working.md:107
+msgid "When a page is ready for review, its proposals go to `review`."
+msgstr "Ist eine Seite bereit fürs Review, gehen ihre Vorschläge auf `review`."
+
+#: ../../technical/working.md:108
+msgid ""
+"Daniel decides: a proposal becomes `approved` or `rejected`, a question "
+"becomes `answered`."
+msgstr ""
+"Daniel entscheidet: ein Vorschlag wird `approved` oder `rejected`, eine "
+"Frage wird `answered`."
+
+#: ../../technical/working.md:110
+msgid ""
+"Every approved proposal gets a `dec` in `decisions/index.md` with "
+"`decided`, `reason` and `alternatives`; the product pages are updated to "
+"match. The technical page can then be shortened to what is still open."
+msgstr ""
+"Jeder freigegebene Vorschlag bekommt einen `dec` in `decisions/index.md` "
+"mit `decided`, `reason` und `alternatives`; die Produktseiten werden "
+"passend aktualisiert. Die technische Seite kann dann auf das gekürzt "
+"werden, was noch offen ist."
+
+#: ../../technical/working.md:114
+msgid "Objects"
+msgstr "Objekte"
+
+#: ../../technical/working.md:70
+msgid "Type"
+msgstr "Typ"
+
+#: ../../technical/working.md:70
+msgid "Fields"
+msgstr "Felder"
+
+#: ../../technical/working.md:70
+msgid "`dec`"
+msgstr "`dec`"
+
+#: ../../technical/working.md:70
+msgid "`decided`, `reason`, `alternatives`"
+msgstr "`decided`, `reason`, `alternatives`"
+
+#: ../../technical/working.md:70
+msgid "`prop`"
+msgstr "`prop`"
+
+#: ../../technical/working.md:70
+msgid "`refines` – the decisions it details"
+msgstr "`refines` – die Entscheidungen, die er ausführt"
+
+#: ../../technical/working.md:70
+msgid "`question`"
+msgstr "`question`"
+
+#: ../../technical/working.md:70
+msgid "`to`, `answers` / `refines`"
+msgstr "`to`, `answers` / `refines`"
+
+#: ../../technical/working.md:132
+#, python-brace-format
+msgid "Reference an object in text with `` {need}`DEC_SOMETHING` ``."
+msgstr "Ein Objekt im Text referenzierst du mit `` {need}`DEC_SOMETHING` ``."
+
+#: ../../technical/working.md:134
+msgid "Code"
+msgstr "Code"
+
+#: ../../technical/working.md:136
+#, python-brace-format
+msgid ""
+"The code is split into packages – {ref}`packages <packages>`. Logic "
+"belongs into `deciwa-core`; front ends only use `deciwa.core.Project`."
+msgstr ""
+"Der Code ist in Pakete aufgeteilt – {ref}`Pakete <packages>`. Logik "
+"gehört in `deciwa-core`; Frontends nutzen nur `deciwa.core.Project`."
+
+#: ../../technical/working.md:139
+msgid ""
+"Code follows the decisions. If code and a decision disagree, the decision"
+" wins – or a new proposal changes the decision first."
+msgstr ""
+"Code folgt den Entscheidungen. Passen Code und eine Entscheidung nicht "
+"zusammen, gewinnt die Entscheidung – oder ein neuer Vorschlag ändert "
+"zuerst die Entscheidung."
+

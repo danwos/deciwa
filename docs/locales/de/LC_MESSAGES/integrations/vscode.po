@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/vscode.md:1
+msgid "VS Code"
+msgstr "VS Code"
+
+#: ../../integrations/vscode.md:3
+msgid "*Planned for 0.2 – the first editor integration.*"
+msgstr "*Geplant für 0.2 – die erste Editor-Integration.*"
+
+#: ../../integrations/vscode.md:5
+msgid ""
+"Review in the editor and in the docs preview, with the same card, keys "
+"and states as in the browser:"
+msgstr ""
+"Review im Editor und in der Docs-Vorschau, mit derselben Karte, denselben"
+" Tasten und Zuständen wie im Browser:"
+
+#: ../../integrations/vscode.md:8
+msgid "hover outlines the element under the cursor; the card opens beside it,"
+msgstr ""
+"Überfahren umrandet das Element unter dem Cursor; die Karte öffnet sich "
+"daneben,"
+
+#: ../../integrations/vscode.md:9
+msgid "state bars in the gutter, a side panel with all feedback of the file,"
+msgstr "Zustandsbalken im Gutter, ein Seitenpanel mit allem Feedback der Datei,"
+
+#: ../../integrations/vscode.md:10
+msgid "review mode walks element by element through a file,"
+msgstr "der Review-Modus geht Element für Element durch eine Datei,"
+
+#: ../../integrations/vscode.md:11
+msgid ""
+"the extension talks to the local CLI, so feedback given here shows up in "
+"the Sphinx pages and vice versa."
+msgstr ""
+"die Erweiterung spricht mit der lokalen CLI, deshalb erscheint Feedback "
+"von hier auch auf den Sphinx-Seiten und umgekehrt."
+

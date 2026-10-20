@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../product/review-rules.md:1
+msgid "What must be approved"
+msgstr "Was freigegeben werden muss"
+
+#: ../../product/review-rules.md:3
+msgid ""
+"Not every element needs a decision. A rule says which ones must be "
+"approved; everything else can still get feedback, it just does not count."
+msgstr ""
+"Nicht jedes Element braucht eine Entscheidung. Eine Regel legt fest, "
+"welche freigegeben werden müssen; alle anderen können trotzdem Feedback "
+"bekommen, es zählt nur nicht."
+
+#: ../../product/review-rules.md:6
+msgid "Rules"
+msgstr "Regeln"
+
+#: ../../product/review-rules.md:8
+msgid ""
+"Rules name element kinds, `all`, or patterns, and can be limited to some "
+"pages:"
+msgstr ""
+"Regeln nennen Elementarten, `all` oder Muster und lassen sich auf einige "
+"Seiten beschränken:"
+
+#: ../../product/review-rules.md
+msgid "Rule"
+msgstr "Regel"
+
+#: ../../product/review-rules.md
+msgid "Must be approved"
+msgstr "Muss freigegeben werden"
+
+#: ../../product/review-rules.md
+msgid "`need`"
+msgstr "`need`"
+
+#: ../../product/review-rules.md
+msgid "every Sphinx-Needs object"
+msgstr "jedes Sphinx-Needs-Objekt"
+
+#: ../../product/review-rules.md
+msgid "`heading`, `paragraph`, `item`, `row`, `code`, `note`, `figure`"
+msgstr "`heading`, `paragraph`, `item`, `row`, `code`, `note`, `figure`"
+
+#: ../../product/review-rules.md
+msgid "every element of that kind"
+msgstr "jedes Element dieser Art"
+
+#: ../../product/review-rules.md
+msgid "`all`"
+msgstr "`all`"
+
+#: ../../product/review-rules.md
+msgid "everything"
+msgstr "alles"
+
+#: ../../product/review-rules.md
+msgid "`sphinx-needs:PROP_*`"
+msgstr "`sphinx-needs:PROP_*`"
+
+#: ../../product/review-rules.md
+msgid "every element whose selector matches the pattern"
+msgstr "jedes Element, dessen Selektor zum Muster passt"
+
+#: ../../product/review-rules.md
+msgid "paths `docs/technical/*`"
+msgstr "Pfade `docs/technical/*`"
+
+#: ../../product/review-rules.md
+msgid "only on these pages"
+msgstr "nur auf diesen Seiten"
+
+#: ../../product/review-rules.md:19
+msgid ""
+"Switch the kinds in the panel under **Must be approved**; patterns and "
+"paths are set in the "
+"[configuration](../integrations/sphinx/configuration.md)."
+msgstr ""
+"Die Arten schaltest du im Panel unter **Must be approved**; Muster und "
+"Pfade stehen in der "
+"[Konfiguration](../integrations/sphinx/configuration.md)."
+
+#: ../../product/review-rules.md:22
+msgid "What you see"
+msgstr "Was du siehst"
+
+#: ../../product/review-rules.md:24
+msgid ""
+"Elements that must be approved and have no feedback yet carry a grey "
+"dashed line beside them."
+msgstr ""
+"Elemente, die freigegeben werden müssen und noch kein Feedback haben, "
+"tragen eine graue gestrichelte Linie neben sich."
+
+#: ../../product/review-rules.md:26
+msgid ""
+"The panel lists the ones without a verdict under **To review**, page by "
+"page or for the whole project."
+msgstr ""
+"Das Panel listet die ohne Urteil unter **To review**, Seite für Seite "
+"oder für das ganze Projekt."
+
+#: ../../product/review-rules.md:28
+msgid ""
+"One bar shows two shares of the required elements: **Verdict** – how many"
+" got any verdict (approve, reject, approve & freeze, delete) – and "
+"**Quality** – how many got stars."
+msgstr ""
+"Ein Balken zeigt zwei Anteile der Pflicht-Elemente: **Verdict** – wie "
+"viele überhaupt ein Urteil bekommen haben (freigeben, ablehnen, freigeben"
+" & einfrieren, löschen) – und **Quality** – wie viele Sterne bekommen "
+"haben."
+
+#: ../../product/review-rules.md:31
+msgid "The card of such an element says **must be approved**."
+msgstr "Die Karte eines solchen Elements sagt **must be approved**."
+
+#: ../../product/review-rules.md:33
+msgid "Dashed lines beside required needs without a verdict"
+msgstr "Gestrichelte Linien neben Pflicht-Needs ohne Urteil"
+
+#: ../../product/review-rules.md:36
+msgid "Required needs without a verdict carry a grey dashed line."
+msgstr "Pflicht-Needs ohne Urteil tragen eine graue gestrichelte Linie."
+

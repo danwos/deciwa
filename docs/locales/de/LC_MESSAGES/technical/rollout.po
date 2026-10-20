@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/rollout.md:1
+msgid "Rollout in the knowledge base"
+msgstr "Einführung in der Wissensbasis"
+
+#: ../../technical/rollout.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/rollout.md:5
+msgid "Proposals by Claude – not binding until Daniel approves them."
+msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
+
+#: ../../technical/rollout.md:8
+msgid ""
+"The first real user of 0.1 is Daniel's knowledge base (a Git repository "
+"of Markdown files with `[CHECK]` and `[ASSUMPTION]` markers)."
+msgstr ""
+"Der erste echte Nutzer von 0.1 ist Daniels Wissensbasis (ein Git-"
+"Repository aus Markdown-Dateien mit `[CHECK]`- und "
+"`[ASSUMPTION]`-Markierungen)."
+
+#: ../../technical/rollout.md:16
+msgid ""
+"`deciwa init` in the root. Archive and source folders go into `[ignore]`,"
+" because they are never reviewed."
+msgstr ""
+"`deciwa init` im Wurzelverzeichnis. Archiv- und Quellenordner kommen in "
+"`[ignore]`, weil sie nie reviewt werden."
+
+#: ../../technical/rollout.md:25
+msgid ""
+"A one-off script finds every `[CHECK]` line, creates a `request` on the "
+"element that contains it (question and addressee from the marker text) "
+"and removes the marker from the text. After that, agents use `deciwa-ask`"
+" instead of writing markers."
+msgstr ""
+"Ein einmaliges Skript findet jede `[CHECK]`-Zeile, legt am Element, das "
+"sie enthält, einen `request` an (Frage und Empfänger aus dem "
+"Markierungstext) und entfernt die Markierung aus dem Text. Danach nutzen "
+"Agenten `deciwa-ask`, statt Markierungen zu schreiben."
+
+#: ../../technical/rollout.md:37
+msgid ""
+"`[CHECK]` maps directly onto a request. `[ASSUMPTION]` says \"this number"
+" has no evidence\" – it could become a request too, or stay as a marker "
+"because it must also be visible to readers of a PDF or slide built from "
+"the text."
+msgstr ""
+"`[CHECK]` lässt sich direkt auf eine Anfrage abbilden. `[ASSUMPTION]` "
+"sagt „für diese Zahl gibt es keinen Beleg“ – das könnte auch eine Anfrage"
+" werden oder als Markierung bleiben, weil es auch für Lesende eines PDFs "
+"oder einer Folie sichtbar sein muss, die aus dem Text gebaut werden."
+
+#: ../../technical/rollout.md:47
+msgid ""
+"VS Code comes in 0.2. In 0.1 reviewing happens through the CLI and "
+"through Claude (\"go through this file with me\", using the skills). "
+"Options: (a) that is enough for 0.1; (b) pull a minimal HTML overlay into"
+" 0.1, built from the clickable prototype and served by a first `deciwa "
+"serve`."
+msgstr ""
+"VS Code kommt in 0.2. In 0.1 läuft das Review über die CLI und über "
+"Claude („geh diese Datei mit mir durch“, mit den Skills). Optionen: (a) "
+"das reicht für 0.1; (b) ein minimales HTML-Overlay in 0.1 vorziehen, "
+"gebaut aus dem klickbaren Prototyp und ausgeliefert von einem ersten "
+"`deciwa serve`."
+

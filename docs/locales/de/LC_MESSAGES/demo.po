@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../demo.md:1
+msgid "Demo"
+msgstr "Demo"
+
+#: ../../demo.md:3
+msgid ""
+"There is nothing to install: deciwa already runs on these docs. Every "
+"page here is the demo – give feedback on any text, requirement or picture"
+" you see."
+msgstr ""
+"Du musst nichts installieren: deciwa läuft schon auf diesen Docs. Jede "
+"Seite hier ist die Demo – gib Feedback zu jedem Text, jeder Anforderung "
+"und jedem Bild, das du siehst."
+
+#: ../../demo.md:7
+msgid ""
+"You start it with the round **deciwa logo at the bottom right**. Hover it"
+" (on a phone: tap it) and switch on **Review**. From then on every "
+"element you point at gets an outline and a click opens its feedback card."
+msgstr ""
+"Du startest es mit dem runden **deciwa-Logo unten rechts**. Fahr mit der "
+"Maus darüber (auf dem Smartphone: tipp darauf) und schalte **Review** "
+"ein. Ab dann bekommt jedes Element, auf das du zeigst, einen Umriss, und "
+"ein Klick öffnet seine Feedback-Karte."
+
+#: ../../demo.md:11
+msgid ""
+"Your feedback stays in this browser only – nobody else sees it, and it "
+"survives reloads and page changes. **Im/Export** in the panel downloads "
+"it as a file or resets everything."
+msgstr ""
+"Dein Feedback bleibt nur in diesem Browser – niemand sonst sieht es, und "
+"es übersteht Neuladen und Seitenwechsel. **Im/Export** im Panel lädt es "
+"als Datei herunter oder setzt alles zurück."
+
+#: ../../demo.md:15
+msgid "More on using it:"
+msgstr "Mehr zur Bedienung:"
+
+#: ../../demo.md:17
+msgid ""
+"[The review UI](product/ui.md) – the button, the card, the keys and the "
+"panel"
+msgstr ""
+"[Die Review-Oberfläche](product/ui.md) – der Button, die Karte, die "
+"Tasten und das Panel"
+
+#: ../../demo.md:18
+msgid ""
+"[Three ways of working](product/ways-of-working.md) – verdicts, stars and"
+" questions from the AI"
+msgstr ""
+"[Drei Arbeitsweisen](product/ways-of-working.md) – Urteile, Sterne und "
+"Fragen der KI"
+
+#: ../../demo.md:19
+#, python-brace-format
+msgid "{ref}`Offline review <offline>` – how this demo works without a server"
+msgstr "{ref}`Offline-Review <offline>` – wie diese Demo ohne Server funktioniert"
+
+#: ../../demo.md:21
+msgid "A first round"
+msgstr "Eine erste Runde"
+
+#: ../../demo.md:23
+msgid ""
+"Everything happens on this page – the example requirements are right "
+"below the steps."
+msgstr ""
+"Alles passiert auf dieser Seite – die Beispiel-Anforderungen stehen "
+"direkt unter den Schritten."
+
+#: ../../demo.md:26
+msgid ""
+"**Switch on review** – hover the deciwa logo at the bottom right and turn"
+" on **Review**."
+msgstr ""
+"**Review einschalten** – fahr über das deciwa-Logo unten rechts und "
+"schalte **Review** ein."
+
+#: ../../demo.md:28
+#, python-brace-format
+msgid ""
+"**Approve a requirement** – click {need}`REQ_DEMO_START <REQ_DEMO_START>`"
+" and press **Approve** (key `a`). The bar beside it and the counter on "
+"the logo change."
+msgstr ""
+"**Eine Anforderung freigeben** – klick auf {need}`REQ_DEMO_START "
+"<REQ_DEMO_START>` und drück **Approve** (Taste `a`). Der Balken daneben "
+"und der Zähler am Logo ändern sich."
+
+#: ../../demo.md:31
+#, python-brace-format
+msgid ""
+"**Reject another one** – click {need}`REQ_DEMO_SPEED <REQ_DEMO_SPEED>`, "
+"write in the comment what is wrong with it and press **Reject** (key "
+"`r`)."
+msgstr ""
+"**Eine andere ablehnen** – klick auf {need}`REQ_DEMO_SPEED "
+"<REQ_DEMO_SPEED>`, schreib in den Kommentar, was daran falsch ist, und "
+"drück **Reject** (Taste `r`)."
+
+#: ../../demo.md:34
+msgid ""
+"**Rate a text** – hover this list or any paragraph and give it stars with"
+" the keys `0`–`5`."
+msgstr ""
+"**Einen Text bewerten** – fahr über diese Liste oder einen beliebigen "
+"Absatz und vergib Sterne mit den Tasten `0`–`5`."
+
+#: ../../demo.md:36
+#, python-brace-format
+msgid ""
+"**Select a few words** – mark a few words in {need}`REQ_DEMO_WATER "
+"<REQ_DEMO_WATER>` and give feedback on just those."
+msgstr ""
+"**Ein paar Wörter markieren** – markiere ein paar Wörter in "
+"{need}`REQ_DEMO_WATER <REQ_DEMO_WATER>` und gib nur dazu Feedback."
+
+#: ../../demo.md:38
+msgid ""
+"**Look at the panel** – switch on **Panel**: **This page** shows how much"
+" of the page is reviewed and what is still open."
+msgstr ""
+"**Ins Panel schauen** – schalte **Panel** ein: **This page** zeigt, wie "
+"viel der Seite schon reviewt ist und was noch offen ist."
+
+#: ../../demo.md:40
+msgid ""
+"**Run a guided review** – press **▶ Guided review** in the panel (or "
+"`v`): the card jumps from one element without a verdict to the next."
+msgstr ""
+"**Ein geführtes Review starten** – drück **▶ Guided review** im Panel "
+"(oder `v`): die Karte springt von einem Element ohne Urteil zum nächsten."
+
+#: ../../demo.md:42
+msgid ""
+"**Take it with you** – export your review under **Im/Export** and look at"
+" it with **Show**."
+msgstr ""
+"**Nimm es mit** – exportiere dein Review unter **Im/Export** und schau es"
+" dir mit **Show** an."
+
+#: ../../demo.md:45
+msgid "Example requirements"
+msgstr "Beispiel-Anforderungen"
+
+#: ../../demo.md:47
+msgid "A made-up coffee machine, only here to be reviewed."
+msgstr "Eine ausgedachte Kaffeemaschine, nur zum Reviewen da."
+

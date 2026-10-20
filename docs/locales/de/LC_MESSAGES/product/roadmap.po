@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../product/roadmap.md:1
+msgid "Roadmap"
+msgstr "Roadmap"
+
+#: ../../product/roadmap.md
+msgid "Step"
+msgstr "Schritt"
+
+#: ../../product/roadmap.md
+msgid "Content"
+msgstr "Inhalt"
+
+#: ../../product/roadmap.md
+msgid "prototype"
+msgstr "Prototyp"
+
+#: ../../product/roadmap.md
+msgid ""
+"Sphinx integration with review overlay, offline mode, CLI – "
+"[Sphinx](../integrations/sphinx/index.md)"
+msgstr ""
+"Sphinx-Integration mit Review-Overlay, Offline-Modus, CLI – "
+"[Sphinx](../integrations/sphinx/index.md)"
+
+#: ../../product/roadmap.md
+msgid "**0.1**"
+msgstr "**0.1**"
+
+#: ../../product/roadmap.md
+msgid ""
+"CLI, format, adapters Markdown, rST/Sphinx-Needs, text; skills `deciwa-"
+"work` and `deciwa-ask`; Daniel uses it in his knowledge base instead of "
+"`[CHECK]` – [technical details](../technical/index.md)"
+msgstr ""
+"CLI, Format, Adapter für Markdown, rST/Sphinx-Needs, Text; Skills "
+"`deciwa-work` und `deciwa-ask`; Daniel nutzt es in seiner Wissensbasis "
+"statt `[CHECK]` – [technische Details](../technical/index.md)"
+
+#: ../../product/roadmap.md
+msgid "0.2"
+msgstr "0.2"
+
+#: ../../product/roadmap.md
+msgid "VS Code extension (hover, card, gutter, side panel, review mode)"
+msgstr "VS-Code-Erweiterung (Überfahren, Karte, Gutter, Seitenpanel, Review-Modus)"
+
+#: ../../product/roadmap.md
+msgid "0.3"
+msgstr "0.3"
+
+#: ../../product/roadmap.md
+msgid "Chrome extension for rendered HTML; Python adapter"
+msgstr "Chrome-Erweiterung für gerendertes HTML; Python-Adapter"
+
+#: ../../product/roadmap.md
+msgid "0.4"
+msgstr "0.4"
+
+#: ../../product/roadmap.md
+msgid "hosted service MVP: sync, task list, overview, audit report"
+msgstr ""
+"MVP des gehosteten Dienstes: Synchronisierung, Aufgabenliste, Überblick, "
+"Audit-Bericht"
+
+#: ../../product/roadmap.md
+msgid "later"
+msgstr "später"
+
+#: ../../product/roadmap.md
+msgid ""
+"desktop app, Claude UI, C/JS/TS/AsciiDoc adapters, evaluations and "
+"comparisons"
+msgstr ""
+"Desktop-App, Claude-Oberfläche, Adapter für C/JS/TS/AsciiDoc, "
+"Auswertungen und Vergleiche"
+

@@ -54,4 +54,4 @@ Every other package is a front end and uses only `deciwa.core.Project`
 replace `store` without changing them.
 ```
 
-The packages themselves: [Technical overview](index.md#packages).
+The packages themselves: {ref}`Technical overview <packages>`.

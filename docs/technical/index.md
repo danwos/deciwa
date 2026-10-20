@@ -83,6 +83,8 @@ deciwa/
 └── uv.lock
 ```
 
+(packages)=
+
 ## Packages
 
 The split into packages is {need}`DEC_PACKAGES`.

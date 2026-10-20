@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/index.md:1
+msgid "Integration overview"
+msgstr "Integrationen im Überblick"
+
+#: ../../integrations/index.md:3
+#, python-brace-format
+msgid ""
+"deciwa comes to where people already work ({need}`DEC_INTEGRATIONS`). "
+"Every integration shows the same [review UI](../product/ui.md) and talks "
+"to the same CLI, so feedback given in one place shows up in all others."
+msgstr ""
+"deciwa kommt dorthin, wo man ohnehin arbeitet ({need}`DEC_INTEGRATIONS`)."
+" Jede Integration zeigt dieselbe [Review-Oberfläche](../product/ui.md) "
+"und spricht mit derselben CLI, deshalb erscheint Feedback, das an einer "
+"Stelle gegeben wurde, in allen anderen."
+
+#: ../../integrations/index.md
+msgid "Integration"
+msgstr "Integration"
+
+#: ../../integrations/index.md
+msgid "Where you review"
+msgstr "Wo du reviewst"
+
+#: ../../integrations/index.md
+msgid "Status"
+msgstr "Status"
+
+#: ../../integrations/index.md
+msgid "[Sphinx](sphinx/index.md)"
+msgstr "[Sphinx](sphinx/index.md)"
+
+#: ../../integrations/index.md
+msgid "the built docs in the browser – with Sphinx-Needs"
+msgstr "die gebauten Docs im Browser – mit Sphinx-Needs"
+
+#: ../../integrations/index.md
+msgid "prototype, usable now"
+msgstr "Prototyp, schon nutzbar"
+
+#: ../../integrations/index.md
+msgid "[VS Code](vscode.md)"
+msgstr "[VS Code](vscode.md)"
+
+#: ../../integrations/index.md
+msgid "the editor and its docs preview"
+msgstr "der Editor und seine Docs-Vorschau"
+
+#: ../../integrations/index.md
+msgid "0.2"
+msgstr "0.2"
+
+#: ../../integrations/index.md
+msgid "[Chrome](chrome.md)"
+msgstr "[Chrome](chrome.md)"
+
+#: ../../integrations/index.md
+msgid "any rendered page – docs or website"
+msgstr "jede gerenderte Seite – Docs oder Website"
+
+#: ../../integrations/index.md
+msgid "0.3"
+msgstr "0.3"
+
+#: ../../integrations/index.md
+msgid "[Claude](claude.md)"
+msgstr "[Claude](claude.md)"
+
+#: ../../integrations/index.md
+msgid "a conversation with the AI; Claude asks at the element"
+msgstr "ein Gespräch mit der KI; Claude fragt am Element"
+
+#: ../../integrations/index.md
+msgid "skills in 0.1, UI later"
+msgstr "Skills in 0.1, Oberfläche später"
+
+#: ../../integrations/index.md
+msgid "[Desktop app](desktop.md)"
+msgstr "[Desktop-App](desktop.md)"
+
+#: ../../integrations/index.md
+msgid "without a development environment"
+msgstr "ohne Entwicklungsumgebung"
+
+#: ../../integrations/index.md
+msgid "later"
+msgstr "später"
+
