@@ -107,12 +107,24 @@ body[data-theme="dark"] {
 .dwr-tools .warn { color: var(--change); font-size: 12px; }
 .dwr-tools > *:not(.brand) { transition: opacity .15s; }
 .dwr-tools .brand { cursor: pointer; }
-/* collapsed: only the round logo; hover or a click on the logo opens it */
-.dwr-tools.mini:not(:hover):not(.peek) { padding: 4px; gap: 0; border-radius: 50%; }
-.dwr-tools.mini:not(:hover):not(.peek) > *:not(.brand),
-.dwr-tools.mini:not(:hover):not(.peek) .brand .name { display: none; }
-.dwr-tools.mini:not(:hover):not(.peek) .brand { padding: 0; }
-.dwr-tools.mini:not(:hover):not(.peek) .brand img { width: 40px; height: 40px; margin: 0; }
+/* collapsed: only the round logo; hover or a click on the logo opens it.
+   On touch screens a tap triggers :hover before the click, so the pill would
+   expand under the finger and the click would land on "Panel" – there only
+   the click (.peek) opens it. */
+@media (hover: hover) {
+  .dwr-tools.mini:not(:hover):not(.peek) { padding: 4px; gap: 0; border-radius: 50%; }
+  .dwr-tools.mini:not(:hover):not(.peek) > *:not(.brand),
+  .dwr-tools.mini:not(:hover):not(.peek) .brand .name { display: none; }
+  .dwr-tools.mini:not(:hover):not(.peek) .brand { padding: 0; }
+  .dwr-tools.mini:not(:hover):not(.peek) .brand img { width: 40px; height: 40px; margin: 0; }
+}
+@media (hover: none) {
+  .dwr-tools.mini:not(.peek) { padding: 4px; gap: 0; border-radius: 50%; }
+  .dwr-tools.mini:not(.peek) > *:not(.brand),
+  .dwr-tools.mini:not(.peek) .brand .name { display: none; }
+  .dwr-tools.mini:not(.peek) .brand { padding: 0; }
+  .dwr-tools.mini:not(.peek) .brand img { width: 40px; height: 40px; margin: 0; }
+}
 
 /* feedback card */
 .dwr-card { position: absolute; z-index: 80; width: 352px; background: var(--t-surface); border: 2px solid var(--t-edge);
