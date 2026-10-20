@@ -15,7 +15,7 @@ uv sync                       # all packages (editable) and the docs tools
 | `packages/core` | `deciwa-core` – model, `.deciwa/` store, engine: all the logic |
 | `packages/server` | `deciwa-server` – review server: built site + JSON API + rebuild |
 | `packages/cli` | `deciwa-cli` – the `deciwa` command |
-| `packages/ui` | `deciwa-ui` – the review overlay (JS/CSS) for browser integrations |
+| `packages/ui` | `deciwa-ui` – the review overlay (JS/CSS) for browser integrations and the web script; sources in `js/`, `npm ci && npm run build` writes `src/deciwa/ui/static/` (committed) |
 | `packages/sphinx` | `deciwa-sphinx` – Sphinx extension (`extensions = ["deciwa.sphinx"]`) |
 | `docs/` | product description, integrations, decisions, technical details – the requirements for all code here; reviewed with deciwa itself |
 | `.deciwa/` | review data of the docs (`config.toml` sets what must be approved) |
@@ -34,6 +34,9 @@ decisions: `docs/technical/working.md`.
 
 ## mockups/
 
+- `web-demo.html` – a plain website with the web script (one `<script>` line).
+  Serve the repository root (`python3 -m http.server 4341`) and open
+  `http://localhost:4341/mockups/web-demo.html`.
 - `feedback-ui.html` – clickable mock-up of the feedback UI. Serve the folder
   (`python3 -m http.server 4330 --directory mockups`) and open
   `http://localhost:4330/feedback-ui.html`.

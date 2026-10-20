@@ -1,0 +1,14 @@
+{
+  "name": "deciwa-ui",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Sources of the deciwa review overlay; the built files live in src/deciwa/ui/static/",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10"
+  }
+}

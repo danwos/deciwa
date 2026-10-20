@@ -42,6 +42,18 @@ jobs:
       - name: Install the packages and the docs tools
         run: uv sync --locked
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build the overlay, check that the committed build is current
+        working-directory: packages/ui
+        run: |
+          npm ci
+          npm test
+          npm run build
+          git diff --exit-code -- src/deciwa/ui/static
+
       - name: Check the docs (warnings fail)
         run: uv run sphinx-build -W -E -q -b html docs docs/_build/check
 
@@ -50,6 +62,14 @@ jobs:
           uv run sphinx-build -E -q -b html
           -D deciwa_mode=offline -D deciwa_offline_annotations=0
           docs docs/_build/site
+
+      - name: Add the web script (deciwa.danwos.dev/js/<version>/deciwa.js)
+        run: |
+          v=$(node -p "require('./packages/ui/package.json').version")
+          for d in "$v" latest; do
+            mkdir -p "docs/_build/site/js/$d"
+            cp packages/ui/src/deciwa/ui/static/deciwa.js "docs/_build/site/js/$d/"
+          done
 
       - name: Resolve the docs repository
         id: target

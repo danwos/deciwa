@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northwind Consulting – web script demo</title>
+  <!-- the whole integration: one line -->
+  <script src="../packages/ui/src/deciwa/ui/static/deciwa.js" defer></script>
+  <style>
+    body { margin: 0; font: 17px/1.6 Georgia, serif; color: #222; background: #fbfaf7; }
+    header.site, footer.site { background: #1d3557; color: #fff; padding: 14px 24px; display: flex; gap: 24px; align-items: center; }
+    header.site a, footer.site a { color: #fff; }
+    header.site nav { margin-left: auto; display: flex; gap: 16px; }
+    main { max-width: 760px; margin: 0 auto; padding: 24px; }
+    .hero { padding: 32px 0; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .card { border: 2px solid #1d3557; border-radius: 10px; padding: 14px; background: #fff; }
+    .card .title { font-weight: bold; display: block; }
+    table { border-collapse: collapse; width: 100%; } td, th { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+    aside.tip { border-left: 4px solid #e76f51; padding: 8px 14px; background: #fff3ef; }
+    button.icon svg { width: 16px; height: 16px; }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <strong>Northwind</strong>
+    <nav><a href="#services">Services</a><a href="#prices">Prices</a><a href="#contact">Contact</a></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Better decisions, faster</h1>
+      <p>We help engineering teams write down what they decided and why – and keep it true while the product changes.</p>
+      <button class="icon" aria-label="play"><svg viewBox="0 0 16 16"><path d="M3 2 L14 8 L3 14 z"/></svg> Watch the video</button>
+    </section>
+
+    <h2 id="services">Services</h2>
+    <div class="cards">
+      <div class="card"><span class="title">Workshops</span><span>Two days with your team to find the decisions that matter most.</span></div>
+      <div class="card"><span class="title">Reviews</span><span>We read your requirements and mark what is unclear, outdated or missing.</span></div>
+      <div class="card"><span class="title">Tooling</span><span>Sphinx-Needs, deciwa and CI checks, set up for your repository.</span></div>
+    </div>
+
+    <h3>How a workshop runs</h3>
+    <ol>
+      <li>We collect the open questions of the team.</li>
+      <li>Every question gets an owner and a date.
+        <ul><li>Small ones are decided on the spot.</li><li>Big ones get a proposal first.</li></ul>
+      </li>
+      <li>The results land in your docs the same day.</li>
+    </ol>
+
+    <aside class="tip"><p>Tip: bring the people who have to live with the decisions, not only the ones who make them.</p></aside>
+
+    <h2 id="prices">Prices</h2>
+    <table>
+      <thead><tr><th>Offer</th><th>Duration</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr><td>Workshop</td><td>2 days</td><td>4,800 €</td></tr>
+        <tr><td>Review</td><td>per 100 pages</td><td>1,900 €</td></tr>
+      </tbody>
+    </table>
+
+    <figure>
+      <svg viewBox="0 0 300 80" width="300" height="80" role="img"><title>Decision flow</title>
+        <rect x="5" y="20" width="80" height="40" rx="6" fill="#a8dadc"/><rect x="110" y="20" width="80" height="40" rx="6" fill="#e9c46a"/><rect x="215" y="20" width="80" height="40" rx="6" fill="#2a9d8f"/></svg>
+      <figcaption>From question to proposal to decision.</figcaption>
+    </figure>
+
+    <h2 id="contact">Contact</h2>
+    <p>Write to us – we answer within one working day.</p>
+    <pre><code>hello@northwind.example</code></pre>
+    <form><input placeholder="Your e-mail"> <button>Send</button></form>
+  </main>
+  <footer class="site"><span>© 2026 Northwind</span><a href="#">Imprint</a></footer>
+</body>
+</html>

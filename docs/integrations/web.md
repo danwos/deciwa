@@ -31,7 +31,7 @@ them.
 |---|---|
 | `data-root="main"` | review only this part of the page (a CSS selector) |
 | `data-ignore=".cookie-banner, aside"` | leave these parts out |
-| `data-activate="param"` | load deciwa only when the address contains `?deciwa` – for public sites whose visitors must not see it |
+| `data-activate="param"` | show deciwa only after `?deciwa` was in the address – for public sites whose visitors must not see it; it stays on in that tab until `?deciwa=off` |
 | `data-server="http://127.0.0.1:4337"` | store feedback with a deciwa server instead of the browser (later, see [Roadmap](../product/roadmap.md)) |
 
 A page can name its source file, so the AI knows which file to change:

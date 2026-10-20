@@ -126,7 +126,7 @@ packages share the Python namespace `deciwa`.
 | `packages/core` | `deciwa-core` | `deciwa.core` | model, `.deciwa/` store, engine – states, review rules, project overview, export/import | – |
 | `packages/server` | `deciwa-server` | `deciwa.server` | local review server: serves a built site, the JSON API for the review UI, rebuilds and reloads on change; knows no build tool – the caller passes the build command | core |
 | `packages/cli` | `deciwa-cli` | `deciwa.cli` | the `deciwa` command; `deciwa serve` passes the Sphinx build to the server | core, server |
-| `packages/ui` | `deciwa-ui` | `deciwa.ui` | the review overlay (JavaScript, CSS, logo) in the danwos tool UI kit, including the offline engine; no Python logic | – |
+| `packages/ui` | `deciwa-ui` | `deciwa.ui` | the review overlay (JavaScript, CSS, logo) in the danwos tool UI kit, including the offline engine and the web script; sources in `js/`, built with `npm run build` into `static/`; no Python logic | – |
 | `packages/sphinx` | `deciwa-sphinx` | `deciwa.sphinx` | Sphinx extension: finds the elements of every page, writes the elements index, ships the review UI | core, ui |
 
 `deciwa-sphinx` does not import `deciwa-server`: a static (offline) build
