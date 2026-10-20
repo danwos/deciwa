@@ -1,79 +1,107 @@
 # deciwa
 
-**decision watcher** – point at an element of a doc, website or source file
-and say what you think of it. deciwa keeps that tied to exactly that element,
-notices when the element changes and shows at any time what is confirmed,
-open or frozen. It collects, evaluates and shows; the work itself is done by
-the AI or the developer.
+**decision watcher** – point at any part of a doc, a website or a source
+file and say what you think of it. deciwa keeps your verdict tied to exactly
+that spot, notices when it changes and shows at any time what is confirmed,
+what is still open and what must not be touched.
 
 ```{raw} html
-<figure class="diagram">
-<svg viewBox="0 0 760 330" role="img" aria-labelledby="arch-t">
-  <defs><marker id="dw-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrowhead"/></marker></defs>
-  <title id="arch-t">deciwa architecture: integrations and agent skills use the CLI, the CLI stores in .deciwa or the hosted service</title>
-  <g class="box">
-    <rect x="20" y="20" width="130" height="50" rx="10"/><text x="85" y="50">VS Code</text>
-    <rect x="165" y="20" width="130" height="50" rx="10"/><text x="230" y="50">Chrome</text>
-    <rect x="310" y="20" width="130" height="50" rx="10"/><text x="375" y="50">Claude UI</text>
-    <rect x="455" y="20" width="130" height="50" rx="10"/><text x="520" y="50">Desktop app</text>
-  </g>
-  <g class="box alt">
-    <rect x="610" y="20" width="130" height="50" rx="10"/><text x="675" y="42">agent skills</text><text x="675" y="60" class="small">work · ask</text>
-  </g>
-  <text x="302" y="92" class="label">integrations</text>
-  <g class="arrow">
-    <path d="M85 70 V120"/><path d="M230 70 V120"/><path d="M375 70 V120"/><path d="M520 70 V120"/><path d="M675 70 V120"/>
-  </g>
-  <g class="box main">
-    <rect x="20" y="125" width="720" height="80" rx="14"/>
-    <text x="380" y="157" class="strong">deciwa CLI / core library – the master</text>
-    <text x="380" y="183" class="small">format adapters · selectors and fingerprints · state engine · JSON API (--json, serve)</text>
-  </g>
-  <g class="arrow"><path d="M200 205 V250"/><path d="M560 205 V250"/></g>
-  <g class="box">
-    <rect x="40" y="255" width="320" height="60" rx="10"/>
-    <text x="200" y="280">.deciwa/ in the repository</text>
-    <text x="200" y="300" class="small">open format · Git is the history · default</text>
-  </g>
-  <g class="box warm">
-    <rect x="400" y="255" width="320" height="60" rx="10"/>
-    <text x="560" y="280">hosted service (paid)</text>
-    <text x="560" y="300" class="small">sync · task lists · evaluations · audit</text>
-  </g>
-</svg>
-<figcaption>Every front end talks to the CLI, never to the files directly.</figcaption>
+<figure class="video">
+<video src="_static/video/deciwa-product-en.mp4" poster="_static/video/deciwa-product-en.jpg" controls muted playsinline preload="metadata"></video>
+<figcaption>deciwa in 50 seconds – recorded from these docs.</figcaption>
 </figure>
 ```
 
-## How these docs work
+## Why deciwa
 
-These docs are the single source of truth for everyone who develops deciwa.
-Decisions are requirements: every feature and every piece of code must fit
-them. Each statement is a Sphinx-Needs object with an id and a status.
+Feedback usually ends up in chats, tickets and comment threads, far away
+from the text it is about. A week later nobody knows which wording was
+agreed on, and after the next edit nobody notices that an agreed sentence
+quietly changed. deciwa puts the feedback where it belongs – on the element
+itself – and keeps watching it.
 
-| Object | Prefix | Status | Meaning |
-|---|---|---|---|
-| Decision | `DEC_` | `approved` | decided by Daniel – binding |
-| Proposal | `PROP_` | `draft` → `review` → `approved` / `rejected` | part of the technical details of a version, not binding yet |
-| Question | `Q_` | `open` → `answered` | someone has to decide something |
+- **Feedback stays at the element.** A verdict on a paragraph, a
+  requirement or a single word stays with it, even when the text moves.
+- **Changes do not slip through.** An approved text that is edited later
+  shows up as `stale`, with old and new wording side by side. A frozen text
+  that changes raises an alarm.
+- **Decisions you can see.** An approved statement *is* the decision – no
+  extra list to keep in sync.
+- **The AI asks instead of guessing.** Claude puts its questions right at
+  the element; you answer with yes, no or a few words.
+- **You know where you stand.** Per page and for the whole project, deciwa
+  shows how much of what must be approved is approved.
+- **Your data stays yours.** Reviews live in an open format inside your
+  repository and are versioned with Git.
 
-An approved proposal becomes a decision: it gets a `DEC_` object in
-[Decisions](decisions/index.md), and the technical page links to it.
+## What you can do
 
-## Waiting for a decision
+| | |
+|---|---|
+| **Give feedback** | approve, reject, approve & freeze or delete – one key or click, with an optional comment – [Three ways of working](product/ways-of-working.md) |
+| **Rate quality** | zero to five stars, independent of any verdict, to find the weak spots |
+| **Answer the AI** | questions from Claude appear at the element they are about |
+| **Review anything you can point at** | requirements, headings, paragraphs, table rows, pictures, a selected word – no markers in the source – [What you can review](product/elements.md) |
+| **Decide what must be approved** | every requirement, every heading, only some pages – [What must be approved](product/review-rules.md) |
+| **Work through a page** | guided review jumps from one open element to the next – [The review UI](product/ui.md) |
+| **Keep the overview** | the panel lists all feedback, open jobs and coverage per page and project |
 
-```{needtable}
-:filter: type == "question" and status == "open"
-:columns: id, title, to, docname as "page"
-:style: table
+```{figure} _static/screens/review-page.webp
+:alt: A docs page under review: coloured bars beside the reviewed elements, the deciwa button at the bottom right
+
+The bar beside each element shows its state; the deciwa button at the bottom right counts them.
 ```
+
+## How a review goes
+
+1. **Open the result** – the built docs page, the website, the file in your
+   editor – and switch review on.
+2. **Point and decide** – hover an element, press a key: approve, reject,
+   approve & freeze, delete; add stars and a comment if you like.
+3. **Let the work happen** – an AI agent or a developer picks up the open
+   jobs, changes the text and marks them as done.
+4. **See what changed** – changed approvals come back as `stale`, a changed
+   frozen text as an alarm.
+5. **Track coverage** – watch the share of approved elements grow until the
+   page or the whole project is through.
+
+deciwa is a review and decision tool for everyone who works with docs and
+code ({need}`DEC_PURPOSE`). It collects, evaluates and shows; it does not
+watch that decisions are kept ({need}`DEC_NO_ENFORCING`). The change itself
+is made by the AI or the developer – deciwa makes sure nobody loses track of
+it.
+
+| Not deciwa | Who does it |
+|---|---|
+| Making or checking the change itself | AI agent or developer |
+| Testing whether code follows a decision | quawa, normal tests |
+| Managing facts and generating views from them | faktwerk |
+
+## Try it on these pages
+
+These docs run deciwa themselves. Hover the round deciwa button at the
+bottom right, switch on **Review** and give feedback on anything you see.
+Everything stays in your browser.
+
+## Where deciwa runs
+
+| | Where you review | Status |
+|---|---|---|
+| [Sphinx](integrations/sphinx/index.md) | built docs in the browser, with Sphinx-Needs | prototype, usable now |
+| [VS Code](integrations/vscode.md) | the editor and its docs preview | 0.2 |
+| [Chrome](integrations/chrome.md) | any rendered page – docs or website | 0.3 |
+| [Claude](integrations/claude.md) | a conversation with the AI | skills in 0.1 |
+| [Desktop app](integrations/desktop.md) | without a development environment | later |
+
+What comes when: [Roadmap](product/roadmap.md). How deciwa is built:
+[Technical overview](technical/index.md).
 
 ```{toctree}
 :caption: Product
 :maxdepth: 2
 :hidden:
 
-product/index
+What deciwa is <self>
 product/ways-of-working
 product/elements
 product/review-rules

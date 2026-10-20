@@ -5,6 +5,19 @@ its packages: [Technical overview](index.md).
 
 ## The docs are the truth
 
+These docs are the single source of truth for everyone who develops deciwa.
+Decisions are requirements: every feature and every piece of code must fit
+them. Each statement is a Sphinx-Needs object with an id and a status.
+
+| Object | Prefix | Status | Meaning |
+|---|---|---|---|
+| Decision | `DEC_` | `approved` | decided by Daniel – binding |
+| Proposal | `PROP_` | `draft` → `review` → `approved` / `rejected` | part of the technical details of a version, not binding yet |
+| Question | `Q_` | `open` → `answered` | someone has to decide something – see [Open questions](questions.md) |
+
+An approved proposal becomes a decision: it gets a `DEC_` object in
+[Decisions](../decisions/index.md), and the technical page links to it.
+
 Product description, integrations, decisions and technical details live in
 `docs/` as Markdown
 (MyST). The HTML pages are generated; nobody edits them.
