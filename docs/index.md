@@ -82,6 +82,7 @@ it.
 These docs run deciwa themselves. Hover the round deciwa button at the
 bottom right, switch on **Review** and give feedback on anything you see.
 Everything stays in your browser.
+A first round to follow: [Demo](demo.md).
 
 ## Where deciwa runs
 
@@ -102,6 +103,7 @@ What comes when: [Roadmap](product/roadmap.md). How deciwa is built:
 :hidden:
 
 What deciwa is <self>
+demo
 product/ways-of-working
 product/elements
 product/review-rules
