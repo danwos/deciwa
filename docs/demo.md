@@ -20,21 +20,48 @@ More on using it:
 
 ## A first round
 
+Everything happens on this page – the example requirements are right below
+the steps.
+
 1. **Switch on review** – hover the deciwa logo at the bottom right and turn
    on **Review**.
-2. **Approve a requirement** – open [All decisions](decisions/index.md),
-   click the Sphinx-Needs object {need}`DEC_PURPOSE <DEC_PURPOSE>` and press **Approve**
-   (key `a`). The bar beside it and the counter on the
+2. **Approve a requirement** – click {need}`REQ_DEMO_START <REQ_DEMO_START>`
+   and press **Approve** (key `a`). The bar beside it and the counter on the
    logo change.
-3. **Reject another one** – click {need}`DEC_NO_ENFORCING <DEC_NO_ENFORCING>`, write in the
-   comment what is wrong with it and press **Reject** (key `r`).
-4. **Rate a text** – hover any paragraph and give it stars with the keys
-   `0`–`5`.
-5. **Select a few words** – mark a few words in a paragraph and give
-   feedback on just those.
+3. **Reject another one** – click {need}`REQ_DEMO_SPEED <REQ_DEMO_SPEED>`,
+   write in the comment what is wrong with it and press **Reject**
+   (key `r`).
+4. **Rate a text** – hover this list or any paragraph and give it stars
+   with the keys `0`–`5`.
+5. **Select a few words** – mark a few words in
+   {need}`REQ_DEMO_WATER <REQ_DEMO_WATER>` and give feedback on just those.
 6. **Look at the panel** – switch on **Panel**: **This page** shows how much
-   of the page is reviewed, **Project** every page with what is still open.
+   of the page is reviewed and what is still open.
 7. **Run a guided review** – press **▶ Guided review** in the panel (or
-   `v`): the card jumps from one open element to the next.
+   `v`): the card jumps from one element without a verdict to the next.
 8. **Take it with you** – export your review under **Im/Export** and look at
    it with **Show**.
+
+## Example requirements
+
+A made-up coffee machine, only here to be reviewed.
+
+```{req} The machine is ready for the first coffee 60 seconds after switching on
+:id: REQ_DEMO_START
+:status: review
+```
+
+```{req} A cup of coffee is ready in under 5 seconds
+:id: REQ_DEMO_SPEED
+:status: review
+```
+
+```{req} The machine warns when the water tank holds less than 200 ml, so a full cup can still be made
+:id: REQ_DEMO_WATER
+:status: review
+```
+
+```{req} Every setting can be changed with one hand while holding a cup in the other
+:id: REQ_DEMO_ONE_HAND
+:status: review
+```

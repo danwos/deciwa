@@ -54,6 +54,8 @@ needs_types = [
     {"directive": "dec", "title": "Decision", "prefix": "DEC_", "color": "#9FE3D9", "style": "rectangle"},
     {"directive": "prop", "title": "Proposal", "prefix": "PROP_", "color": "#EFE4D4", "style": "rectangle"},
     {"directive": "question", "title": "Question", "prefix": "Q_", "color": "#F6C9BF", "style": "rectangle"},
+    # only for the examples on the demo page
+    {"directive": "req", "title": "Requirement", "prefix": "REQ_", "color": "#D9E4F2", "style": "rectangle"},
 ]
 
 STATUSES = ["approved", "draft", "review", "rejected", "open", "answered"]
