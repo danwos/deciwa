@@ -22,7 +22,7 @@ local server), never to the files directly. Every command has `--json`.
 | `deciwa export [file]` | all review data as one file |
 | `deciwa import <file> [--force]` | replace the review data with a file – refused if it is older |
 | `deciwa diff <id>` | approved vs. current wording (0.1) |
-| `deciwa push / pull` | sync with the hosted service (0.4) |
+| `deciwa push / pull` | sync with the hosted service (0.5) |
 
 Proposed details for 0.1: [CLI concept](../technical/cli.md).
 

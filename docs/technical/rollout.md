@@ -44,7 +44,7 @@ must also be visible to readers of a PDF or slide built from the text.
 :status: open
 :to: Daniel
 
-VS Code comes in 0.2. In 0.1 reviewing happens through the CLI and through
+VS Code comes in 0.3. In 0.1 reviewing happens through the CLI and through
 Claude ("go through this file with me", using the skills). Options: (a) that
 is enough for 0.1; (b) pull a minimal HTML overlay into 0.1, built from the
 clickable prototype and served by a first `deciwa serve`.

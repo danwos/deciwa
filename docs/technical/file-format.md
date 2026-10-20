@@ -9,7 +9,8 @@ Proposals by Claude – not binding until Daniel approves them.
 .deciwa/
 ├── config.toml                          optional settings
 └── annotations/
-    └── 20_facts/company/founder.md.json one file per annotated source
+    ├── 20_facts/company/founder.md.json one file per annotated source
+    └── _web/danwos.dev/services.json    web pages without a mapped source
 ```
 
 ```{prop} One annotation file per source, deterministic JSON
@@ -119,3 +120,32 @@ directives = ["req", "spec", "dec", "prop", "question"]
 [ignore]
 paths = ["90_archive/**", "_build/**"]
 ```
+
+## Web sources
+
+```{prop} Web pages without a source file are stored under their address
+:id: PROP_WEB_FILES
+:status: draft
+:refines: PROP_FILE_LAYOUT, PROP_WEB_SOURCE
+
+A page reviewed with the web script whose source is the fallback
+`web:<host><path>` is stored as `annotations/_web/<host>/<path>.json`; the
+path `/` becomes `index`. `deciwa import` applies the rules of `[web]` first,
+so mapped pages land in the file of their source. When a rule is added later,
+`deciwa import --remap` moves the annotations of `_web/` to their source
+files. Their structural selectors stay `html:…`; in the source file the
+engine finds the element by the text quote and the snapshot.
+```
+
+```toml
+[web]
+site = "danwos.dev"                                   # optional, the host of the pages
+sources = [                                           # optional, first match wins
+  { url = "/",       file = "src/content/pages/index.md" },
+  { url = "/blog/*", file = "src/content/blog/*.md" },
+  { url = "/*",      file = "src/content/pages/*.md" },
+]
+```
+
+Without `[web]` – or without `.deciwa/` at all, when only the browser is
+used – every page keeps its address.

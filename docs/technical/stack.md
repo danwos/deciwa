@@ -27,7 +27,7 @@ Sphinx-Needs, and plain text.
 rST with Sphinx-Needs is an MVP format, and only docutils parses rST fully.
 The same code then runs inside a Sphinx build to tag the rendered HTML with
 selectors – the base for review on results. The TypeScript integrations of
-0.2/0.3 talk to the CLI through `--json` and `deciwa serve`, as
+0.3/0.4 talk to the CLI through `--json` and `deciwa serve`, as
 {need}`DEC_CLI_MASTER` demands anyway. If the browser ever needs element
 finding without a local CLI, a WASM or TypeScript port of single adapters
 stays possible because the selectors are a documented format.

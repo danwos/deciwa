@@ -14,7 +14,7 @@
 
 ## Hosted service
 
-Teams can sync `.deciwa/` with the hosted service instead (0.4). It adds a
+Teams can sync `.deciwa/` with the hosted service instead (0.5). It adds a
 web UI for reviewers outside development, a task list per person,
 evaluations (coverage, ratings, weak areas, time to approval), comparisons
 between versions, a team overview, an audit report (who approved which

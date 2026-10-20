@@ -176,6 +176,38 @@ A new decision comes from an approved proposal in the technical details – see
 :alternatives: an own deciwa colour scheme.
 ```
 
+```{dec} The web script comes as 0.2, before VS Code
+:id: DEC_WEB_SCRIPT_FIRST
+:status: approved
+:decided: 2026-10-20
+:reason: The first real use is the danwos website; the Chrome extension builds on the same script.
+:alternatives: the web script as part of the Chrome extension in 0.3.
+```
+
+```{dec} One script tag is enough – deciwa always appears where it is loaded
+:id: DEC_WEB_ONE_LINE
+:status: approved
+:decided: 2026-10-20
+:reason: Quick integration and tests without prior knowledge; every setting is optional, hiding deciwa behind `?deciwa` is an opt-in.
+:alternatives: `?deciwa` in the address as the only way to load it.
+```
+
+```{dec} The web script is hosted with the docs under deciwa.danwos.dev/js/<version>/
+:id: DEC_WEB_HOSTING
+:status: approved
+:decided: 2026-10-20
+:reason: The docs workflow already publishes deciwa.danwos.dev; versioned paths allow pinning.
+:alternatives: npm with jsDelivr.
+```
+
+```{dec} Mapping pages to source files is optional; the address is the fallback
+:id: DEC_WEB_SOURCE
+:status: approved
+:decided: 2026-10-20
+:reason: deciwa must work without a configuration file; a mapping added later must not lose feedback.
+:alternatives: a required `deciwa-source` meta tag on every page.
+```
+
 ## Working on deciwa
 
 ```{dec} deciwa is one repository of separate packages: core, server, CLI, UI and one per integration

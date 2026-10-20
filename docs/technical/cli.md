@@ -26,7 +26,7 @@ Proposals by Claude – not binding until Daniel approves them.
 | `deciwa diff <id>` | snapshot vs. current text |
 | `deciwa relink <id> [<element>]` | update the selectors of a moved or orphaned annotation |
 
-`serve`, `push` and `pull` follow in 0.2 and 0.4.
+`serve` exists since the prototype; `push` and `pull` follow in 0.5.
 
 ## Addressing an element
 

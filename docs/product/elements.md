@@ -23,8 +23,8 @@ text first gives feedback on just those words ({need}`DEC_HOVER_SELECT`).
 | Sphinx (rST, Markdown) with Sphinx-Needs | need, section, paragraph, list item, table row, code block, note, picture | now (prototype) |
 | Markdown | section, paragraph, list item, table row, code block, frontmatter field | 0.1 |
 | Plain text | paragraph, line | 0.1 |
-| Python | module, class, function, method, docstring | 0.3 |
-| HTML | block containers, headings, paragraphs, images | 0.3 |
+| Python | module, class, function, method, docstring | 0.4 |
+| HTML | block containers, headings, paragraphs, images | 0.2 |
 | AsciiDoc, C, JS, TS | sections and blocks; functions, classes, structs | later |
 
 Pictures – images, figures and inline SVG diagrams – are reviewed as a whole.

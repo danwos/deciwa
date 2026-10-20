@@ -1,6 +1,6 @@
 # VS Code
 
-*Planned for 0.2 – the first editor integration.*
+*Planned for 0.3 – the first editor integration.*
 
 Review in the editor and in the docs preview, with the same card, keys and
 states as in the browser:

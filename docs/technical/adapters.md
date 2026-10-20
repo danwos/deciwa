@@ -53,6 +53,7 @@ CLI and what the file format stores.
 | rst | `sphinx-needs:REQ_042:status` | one option of a need |
 | rst | `rst:directive:Install/Linux#note1` | the first `note` directive in that section |
 | text | `text:paragraph#4` · `text:line#17` | plain text |
+| html | `html:heading:Services/Consulting` · `html:paragraph:Services/Consulting#2` | a rendered web page, found in the browser ({doc}`web`) |
 
 ```{prop} Element selectors are paths of headings plus a per-section counter
 :id: PROP_SELECTORS
@@ -103,6 +104,34 @@ fall back to the Sphinx-Needs defaults (`req`, `spec`, `impl`, `test`,
 
 Paragraphs are blocks separated by blank lines; lines are a second level.
 Everything else is free text selection.
+
+## HTML in the browser
+
+```{prop} The web script finds the elements of a rendered page itself
+:id: PROP_DOM_ADAPTER
+:status: draft
+:refines: PROP_ADAPTER_API, PROP_SELECTORS, PROP_PYTHON_CORE
+
+A small adapter in JavaScript reads the DOM of the review root and returns
+the same element list as the other adapters:
+
+- sections from the heading outline `h1`–`h6` (web pages rarely nest real
+  `<section>` elements), named by their heading path,
+- paragraphs, list items, table rows (`tr` outside `thead`), code blocks
+  (`pre`), notes (`aside`, `[role=note]`), pictures (`img`, `svg`,
+  `figure`, `picture`) – counted per section as in Markdown,
+- left out: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-hidden=true]`,
+  `script`, `style` and everything matching `data-ignore`.
+
+The fingerprint is SHA-256 over the normalised text, computed with
+`crypto.subtle` – the same value as `model.fingerprint` in Python, so the CLI
+and the browser agree on stale elements. The offline overlay switches from
+its local FNV hash to this one. Pictures are fingerprinted by `src`, `alt`
+and caption.
+
+Pages with build hints (`#deciwa-page`, as the Sphinx extension writes it)
+skip the scan and use the hints.
+```
 
 ## Free text selection
 
