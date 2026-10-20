@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 14:05+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,71 +18,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-
-#: ../../technical/index.md:1
-msgid "Technical overview"
-msgstr "Technischer Überblick"
-
-#: ../../technical/index.md:3
-msgid "Status: draft"
-msgstr "Status: Entwurf"
-
-#: ../../technical/index.md:5
-msgid ""
-"How the next version (0.1) is built – updated for every version. "
-"Proposals by Claude, 2026-10-19; nothing on these pages is binding until "
-"Daniel approves it. Questions that block work are collected in [Open "
-"questions](questions.md)."
-msgstr ""
-"Wie die nächste Version (0.1) gebaut wird – für jede Version "
-"aktualisiert. Vorschläge von Claude, 2026-10-19; nichts auf diesen Seiten"
-" ist verbindlich, bis Daniel es freigibt. Fragen, die die Arbeit "
-"blockieren, sind in [Offene Fragen](questions.md) gesammelt."
-
-#: ../../technical/index.md:10
-msgid "Goal"
-msgstr "Ziel"
-
-#: ../../technical/index.md:12
-#, python-brace-format
-msgid ""
-"Build release 0.1 ({doc}`../product/roadmap`): the CLI with the open file"
-" format, the adapters Markdown, rST/Sphinx-Needs and plain text, and the "
-"agent skills `deciwa-work` and `deciwa-ask` – good enough that Daniel "
-"uses deciwa in his knowledge base instead of `[CHECK]` markers."
-msgstr ""
-"Release 0.1 bauen ({doc}`../product/roadmap`): die CLI mit dem offenen "
-"Dateiformat, die Adapter für Markdown, rST/Sphinx-Needs und reinen Text "
-"sowie die Agent-Skills `deciwa-work` und `deciwa-ask` – gut genug, dass "
-"Daniel deciwa in seiner Wissensbasis statt `[CHECK]`-Markierungen nutzt."
-
-#: ../../technical/index.md:17
-#, python-brace-format
-msgid ""
-"**Not in 0.1:** `push` / `pull`, VS Code, Chrome, hosted service, "
-"Python/HTML adapters. The design must not block them, though – especially"
-" review on results ({need}`DEC_REVIEW_ON_RESULTS`)."
-msgstr ""
-"**Nicht in 0.1:** `push` / `pull`, VS Code, Chrome, gehosteter Dienst, "
-"Python-/HTML-Adapter. Das Design darf sie aber nicht blockieren – vor "
-"allem nicht das Review am Ergebnis ({need}`DEC_REVIEW_ON_RESULTS`)."
-
-#: ../../technical/index.md:21
-msgid "Architecture"
-msgstr "Architektur"
-
-#: ../../technical/index.md:23
-#, python-brace-format
-msgid ""
-"Every front end – the integrations as well as the agent skills – talks to"
-" the deciwa CLI and its core library, never to the files directly "
-"({need}`DEC_CLI_MASTER`). The CLI stores reviews in `.deciwa/` inside the"
-" repository or, later, in the hosted service."
-msgstr ""
-"Jedes Frontend – die Integrationen wie auch die Agent-Skills – spricht "
-"mit der deciwa-CLI und ihrer Core-Bibliothek, nie direkt mit den Dateien "
-"({need}`DEC_CLI_MASTER`). Die CLI speichert Reviews in `.deciwa/` im "
-"Repository oder später im gehosteten Dienst."
 
 #: ../../technical/index.md:28
 msgid ""
@@ -194,27 +129,6 @@ msgstr ""
 "<figcaption>Jedes Frontend spricht mit der CLI, nie direkt mit den "
 "Dateien.</figcaption>\n"
 "</figure>"
-
-#: ../../technical/index.md:68
-msgid "Repository"
-msgstr "Repository"
-
-#: ../../technical/index.md:88
-msgid "Packages"
-msgstr "Pakete"
-
-#: ../../technical/index.md:90
-#, python-brace-format
-msgid "The split into packages is {need}`DEC_PACKAGES`."
-msgstr "Die Aufteilung in Pakete ist {need}`DEC_PACKAGES`."
-
-#: ../../technical/index.md:92
-msgid ""
-"deciwa is one repository with one package per part – a uv workspace. All "
-"packages share the Python namespace `deciwa`."
-msgstr ""
-"deciwa ist ein Repository mit einem Paket pro Teil – ein uv-Workspace. "
-"Alle Pakete teilen sich den Python-Namespace `deciwa`."
 
 #: ../../technical/index.md:95
 msgid ""
@@ -329,6 +243,92 @@ msgstr ""
 "Teile beim Review mit Server miteinander sprechen.</figcaption>\n"
 "</figure>"
 
+#: ../../technical/index.md:1
+msgid "Technical overview"
+msgstr "Technischer Überblick"
+
+#: ../../technical/index.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/index.md:5
+msgid ""
+"How the next version (0.1) is built – updated for every version. "
+"Proposals by Claude, 2026-10-19; nothing on these pages is binding until "
+"Daniel approves it. Questions that block work are collected in [Open "
+"questions](questions.md)."
+msgstr ""
+"Wie die nächste Version (0.1) gebaut wird – für jede Version "
+"aktualisiert. Vorschläge von Claude, 2026-10-19; nichts auf diesen Seiten"
+" ist verbindlich, bis Daniel es freigibt. Fragen, die die Arbeit "
+"blockieren, sind in [Offene Fragen](questions.md) gesammelt."
+
+#: ../../technical/index.md:10
+msgid "Goal"
+msgstr "Ziel"
+
+#: ../../technical/index.md:12
+#, python-brace-format
+msgid ""
+"Build release 0.1 ({doc}`../product/roadmap`): the CLI with the open file"
+" format, the adapters Markdown, rST/Sphinx-Needs and plain text, and the "
+"agent skills `deciwa-work` and `deciwa-ask` – good enough that Daniel "
+"uses deciwa in his knowledge base instead of `[CHECK]` markers."
+msgstr ""
+"Release 0.1 bauen ({doc}`../product/roadmap`): die CLI mit dem offenen "
+"Dateiformat, die Adapter für Markdown, rST/Sphinx-Needs und reinen Text "
+"sowie die Agent-Skills `deciwa-work` und `deciwa-ask` – gut genug, dass "
+"Daniel deciwa in seiner Wissensbasis statt `[CHECK]`-Markierungen nutzt."
+
+#: ../../technical/index.md:17
+#, python-brace-format
+msgid ""
+"**Not in 0.1:** `push` / `pull`, VS Code, Chrome, hosted service, "
+"Python/HTML adapters. The design must not block them, though – especially"
+" review on results ({need}`DEC_REVIEW_ON_RESULTS`)."
+msgstr ""
+"**Nicht in 0.1:** `push` / `pull`, VS Code, Chrome, gehosteter Dienst, "
+"Python-/HTML-Adapter. Das Design darf sie aber nicht blockieren – vor "
+"allem nicht das Review am Ergebnis ({need}`DEC_REVIEW_ON_RESULTS`)."
+
+#: ../../technical/index.md:21
+msgid "Architecture"
+msgstr "Architektur"
+
+#: ../../technical/index.md:23
+#, python-brace-format
+msgid ""
+"Every front end – the integrations as well as the agent skills – talks to"
+" the deciwa CLI and its core library, never to the files directly "
+"({need}`DEC_CLI_MASTER`). The CLI stores reviews in `.deciwa/` inside the"
+" repository or, later, in the hosted service."
+msgstr ""
+"Jedes Frontend – die Integrationen wie auch die Agent-Skills – spricht "
+"mit der deciwa-CLI und ihrer Core-Bibliothek, nie direkt mit den Dateien "
+"({need}`DEC_CLI_MASTER`). Die CLI speichert Reviews in `.deciwa/` im "
+"Repository oder später im gehosteten Dienst."
+
+#: ../../technical/index.md:68
+msgid "Repository"
+msgstr "Repository"
+
+#: ../../technical/index.md:88
+msgid "Packages"
+msgstr "Pakete"
+
+#: ../../technical/index.md:90
+#, python-brace-format
+msgid "The split into packages is {need}`DEC_PACKAGES`."
+msgstr "Die Aufteilung in Pakete ist {need}`DEC_PACKAGES`."
+
+#: ../../technical/index.md:92
+msgid ""
+"deciwa is one repository with one package per part – a uv workspace. All "
+"packages share the Python namespace `deciwa`."
+msgstr ""
+"deciwa ist ein Repository mit einem Paket pro Teil – ein uv-Workspace. "
+"Alle Pakete teilen sich den Python-Namespace `deciwa`."
+
 #: ../../technical/index.md:95
 msgid "Folder"
 msgstr "Ordner"
@@ -436,10 +436,12 @@ msgstr "`deciwa.ui`"
 #: ../../technical/index.md:95
 msgid ""
 "the review overlay (JavaScript, CSS, logo) in the danwos tool UI kit, "
-"including the offline engine; no Python logic"
+"including the offline engine and the web script; sources in `js/`, built "
+"with `npm run build` into `static/`; no Python logic"
 msgstr ""
 "das Review-Overlay (JavaScript, CSS, Logo) im danwos-Tool-UI-Kit, "
-"inklusive der Offline-Engine; keine Python-Logik"
+"inklusive der Offline-Engine und des Web-Skripts; Quellen in `js/`, mit "
+"`npm run build` nach `static/` gebaut; keine Python-Logik"
 
 #: ../../technical/index.md:95
 msgid "`packages/sphinx`"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 14:05+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -19,23 +19,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: ../../index.md:100
+#: ../../index.md:8
+msgid ""
+"<figure class=\"video\">\n"
+"<video src=\"_static/video/deciwa-product-en.mp4\" poster=\"_static/video"
+"/deciwa-product-en.jpg\" controls muted playsinline "
+"preload=\"metadata\"></video>\n"
+"<figcaption>deciwa in 50 seconds – recorded from these docs.</figcaption>"
+"\n"
+"</figure>"
+msgstr ""
+"<figure class=\"video\">\n"
+"<video src=\"_static/video/deciwa-product-en.mp4\" poster=\"_static/video"
+"/deciwa-product-en.jpg\" controls muted playsinline "
+"preload=\"metadata\"></video>\n"
+"<figcaption>deciwa in 50 Sekunden – aufgenommen auf diesen Docs (auf "
+"Englisch).</figcaption>\n"
+"</figure>"
+
+#: ../../index.md:101
 msgid "What deciwa is"
 msgstr "Was deciwa ist"
 
-#: ../../index.md:100
+#: ../../index.md:101
 msgid "Product"
 msgstr "Produkt"
 
-#: ../../index.md:116
+#: ../../index.md:117
 msgid "Integrations"
 msgstr "Integrationen"
 
-#: ../../index.md:129
+#: ../../index.md:131
 msgid "Decisions"
 msgstr "Entscheidungen"
 
-#: ../../index.md:136
+#: ../../index.md:138
 msgid "Technical details"
 msgstr "Technische Details"
 
@@ -55,24 +73,6 @@ msgstr ""
 "bindet dein Urteil genau an diese Stelle, merkt, wenn sie sich ändert, "
 "und zeigt jederzeit, was bestätigt ist, was noch offen ist und was nicht "
 "angefasst werden darf."
-
-#: ../../index.md:8
-msgid ""
-"<figure class=\"video\">\n"
-"<video src=\"_static/video/deciwa-product-en.mp4\" poster=\"_static/video"
-"/deciwa-product-en.jpg\" controls muted playsinline "
-"preload=\"metadata\"></video>\n"
-"<figcaption>deciwa in 50 seconds – recorded from these docs.</figcaption>"
-"\n"
-"</figure>"
-msgstr ""
-"<figure class=\"video\">\n"
-"<video src=\"_static/video/deciwa-product-en.mp4\" poster=\"_static/video"
-"/deciwa-product-en.jpg\" controls muted playsinline "
-"preload=\"metadata\"></video>\n"
-"<figcaption>deciwa in 50 Sekunden – aufgenommen auf diesen Docs (auf "
-"Englisch).</figcaption>\n"
-"</figure>"
 
 #: ../../index.md:15
 msgid "Why deciwa"
@@ -385,6 +385,18 @@ msgid "the editor and its docs preview"
 msgstr "der Editor und seine Docs-Vorschau"
 
 #: ../../index.md:49
+msgid "0.3"
+msgstr "0.3"
+
+#: ../../index.md:49
+msgid "[Web script](integrations/web.md)"
+msgstr "[Web-Skript](integrations/web.md)"
+
+#: ../../index.md:49
+msgid "any website, with one line in the page"
+msgstr "jede Website, mit einer Zeile in der Seite"
+
+#: ../../index.md:49
 msgid "0.2"
 msgstr "0.2"
 
@@ -397,8 +409,8 @@ msgid "any rendered page – docs or website"
 msgstr "jede gerenderte Seite – Docs oder Website"
 
 #: ../../index.md:49
-msgid "0.3"
-msgstr "0.3"
+msgid "0.4"
+msgstr "0.4"
 
 #: ../../index.md:49
 msgid "[Claude](integrations/claude.md)"
@@ -424,7 +436,7 @@ msgstr "ohne Entwicklungsumgebung"
 msgid "later"
 msgstr "später"
 
-#: ../../index.md:97
+#: ../../index.md:98
 msgid ""
 "What comes when: [Roadmap](product/roadmap.md). How deciwa is built: "
 "[Technical overview](technical/index.md)."

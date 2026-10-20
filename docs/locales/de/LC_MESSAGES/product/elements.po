@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -127,8 +127,8 @@ msgid "module, class, function, method, docstring"
 msgstr "Modul, Klasse, Funktion, Methode, Docstring"
 
 #: ../../product/elements.md
-msgid "0.3"
-msgstr "0.3"
+msgid "0.4"
+msgstr "0.4"
 
 #: ../../product/elements.md
 msgid "HTML"
@@ -137,6 +137,10 @@ msgstr "HTML"
 #: ../../product/elements.md
 msgid "block containers, headings, paragraphs, images"
 msgstr "Block-Container, Überschriften, Absätze, Bilder"
+
+#: ../../product/elements.md
+msgid "0.2"
+msgstr "0.2"
 
 #: ../../product/elements.md
 msgid "AsciiDoc, C, JS, TS"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -160,7 +160,24 @@ msgstr "`text:paragraph#4` · `text:line#17`"
 msgid "plain text"
 msgstr "reiner Text"
 
-#: ../../technical/adapters.md:62
+#: ../../technical/adapters.md:12
+msgid "html"
+msgstr "html"
+
+#: ../../technical/adapters.md:12
+msgid ""
+"`html:heading:Services/Consulting` · "
+"`html:paragraph:Services/Consulting#2`"
+msgstr ""
+"`html:heading:Services/Consulting` · "
+"`html:paragraph:Services/Consulting#2`"
+
+#: ../../technical/adapters.md:12
+#, python-brace-format
+msgid "a rendered web page, found in the browser ({doc}`web`)"
+msgstr "eine gerenderte Webseite, im Browser gefunden ({doc}`web`)"
+
+#: ../../technical/adapters.md:63
 #, python-brace-format
 msgid ""
 "Heading paths survive moves of whole sections and edits in other "
@@ -176,11 +193,11 @@ msgstr ""
 "probiert. Doppelte Überschriften in einem Pfad bekommen ein Suffix "
 "(`Notes~2`)."
 
-#: ../../technical/adapters.md:69
+#: ../../technical/adapters.md:70
 msgid "Markdown"
 msgstr "Markdown"
 
-#: ../../technical/adapters.md:71
+#: ../../technical/adapters.md:72
 msgid ""
 "Parser: markdown-it-py (CommonMark + tables), token maps give line "
 "ranges; offsets come from the line ranges."
@@ -188,7 +205,7 @@ msgstr ""
 "Parser: markdown-it-py (CommonMark + Tabellen); Token-Maps liefern "
 "Zeilenbereiche, Offsets ergeben sich aus den Zeilenbereichen."
 
-#: ../../technical/adapters.md:73
+#: ../../technical/adapters.md:74
 msgid ""
 "Elements: heading sections, paragraphs, list items (nested), table rows, "
 "code blocks, frontmatter fields (YAML keys at the top level)."
@@ -197,11 +214,11 @@ msgstr ""
 "(verschachtelt), Tabellenzeilen, Codeblöcke, Frontmatter-Felder (YAML-"
 "Schlüssel auf oberster Ebene)."
 
-#: ../../technical/adapters.md:76
+#: ../../technical/adapters.md:77
 msgid "rST and Sphinx-Needs"
 msgstr "rST und Sphinx-Needs"
 
-#: ../../technical/adapters.md:83
+#: ../../technical/adapters.md:84
 msgid ""
 "docutils keeps source lines on every node. Unknown directives and roles "
 "(Sphinx, Sphinx-Needs, any extension) are registered as generic "
@@ -216,7 +233,7 @@ msgstr ""
 " werden am Namen erkannt; ihre `:id:` ergibt den `sphinx-"
 "needs:`-Selektor."
 
-#: ../../technical/adapters.md:96
+#: ../../technical/adapters.md:97
 msgid ""
 "Proposal: read them from `needs.json` if the project builds one, "
 "otherwise from `.deciwa/config.toml` (`needs.directives = [\"req\", "
@@ -230,11 +247,11 @@ msgstr ""
 "`impl`, `test`, `need`). OK, oder soll deciwa `conf.py` / "
 "`ubproject.toml` direkt lesen?"
 
-#: ../../technical/adapters.md:102
+#: ../../technical/adapters.md:103
 msgid "Plain text"
 msgstr "Reiner Text"
 
-#: ../../technical/adapters.md:104
+#: ../../technical/adapters.md:105
 msgid ""
 "Paragraphs are blocks separated by blank lines; lines are a second level."
 " Everything else is free text selection."
@@ -242,11 +259,72 @@ msgstr ""
 "Absätze sind durch Leerzeilen getrennte Blöcke; Zeilen sind eine zweite "
 "Ebene. Alles andere ist freie Textauswahl."
 
-#: ../../technical/adapters.md:107
+#: ../../technical/adapters.md:108
+msgid "HTML in the browser"
+msgstr "HTML im Browser"
+
+#: ../../technical/adapters.md:115
+msgid ""
+"A small adapter in JavaScript reads the DOM of the review root and "
+"returns the same element list as the other adapters:"
+msgstr ""
+"Ein kleiner Adapter in JavaScript liest das DOM der Review-Wurzel und "
+"liefert dieselbe Elementliste wie die anderen Adapter:"
+
+#: ../../technical/adapters.md:118
+msgid ""
+"sections from the heading outline `h1`–`h6` (web pages rarely nest real "
+"`<section>` elements), named by their heading path,"
+msgstr ""
+"Abschnitte aus der Überschriftengliederung `h1`–`h6` (Webseiten "
+"verschachteln selten echte `<section>`-Elemente), benannt nach ihrem "
+"Überschriftenpfad,"
+
+#: ../../technical/adapters.md:120
+msgid ""
+"paragraphs, list items, table rows (`tr` outside `thead`), code blocks "
+"(`pre`), notes (`aside`, `[role=note]`), pictures (`img`, `svg`, "
+"`figure`, `picture`) – counted per section as in Markdown,"
+msgstr ""
+"Absätze, Listenpunkte, Tabellenzeilen (`tr` außerhalb von `thead`), "
+"Codeblöcke (`pre`), Hinweise (`aside`, `[role=note]`), Bilder (`img`, "
+"`svg`, `figure`, `picture`) – pro Abschnitt gezählt wie in Markdown,"
+
+#: ../../technical/adapters.md:123
+msgid ""
+"left out: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-"
+"hidden=true]`, `script`, `style` and everything matching `data-ignore`."
+msgstr ""
+"ausgelassen: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-"
+"hidden=true]`, `script`, `style` und alles, worauf `data-ignore` passt."
+
+#: ../../technical/adapters.md:126
+msgid ""
+"The fingerprint is SHA-256 over the normalised text, computed with "
+"`crypto.subtle` – the same value as `model.fingerprint` in Python, so the"
+" CLI and the browser agree on stale elements. The offline overlay "
+"switches from its local FNV hash to this one. Pictures are fingerprinted "
+"by `src`, `alt` and caption."
+msgstr ""
+"Der Fingerprint ist SHA-256 über den normalisierten Text, berechnet mit "
+"`crypto.subtle` – derselbe Wert wie `model.fingerprint` in Python, damit "
+"CLI und Browser sich bei veralteten Elementen einig sind. Das Offline-"
+"Overlay wechselt von seinem lokalen FNV-Hash zu diesem. Bei Bildern "
+"bilden `src`, `alt` und Bildunterschrift den Fingerprint."
+
+#: ../../technical/adapters.md:132
+msgid ""
+"Pages with build hints (`#deciwa-page`, as the Sphinx extension writes "
+"it) skip the scan and use the hints."
+msgstr ""
+"Seiten mit Build-Hinweisen (`#deciwa-page`, wie die Sphinx-Erweiterung es"
+" schreibt) überspringen den Scan und nutzen die Hinweise."
+
+#: ../../technical/adapters.md:136
 msgid "Free text selection"
 msgstr "Freie Textauswahl"
 
-#: ../../technical/adapters.md:114
+#: ../../technical/adapters.md:143
 msgid ""
 "Selecting a word stores the structural selector of the element that "
 "contains it plus a `TextQuoteSelector` (exact, prefix, suffix) and a "

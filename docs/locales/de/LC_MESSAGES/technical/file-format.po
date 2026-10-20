@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -31,7 +31,7 @@ msgstr "Status: Entwurf"
 msgid "Proposals by Claude – not binding until Daniel approves them."
 msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
 
-#: ../../technical/file-format.md:20
+#: ../../technical/file-format.md:22
 msgid ""
 "The path under `annotations/` mirrors the source path relative to the "
 "folder that holds `.deciwa/`. The CLI writes sorted keys, two-space "
@@ -44,89 +44,89 @@ msgstr ""
 "Erstellungszeit und einen abschließenden Zeilenumbruch – so bleiben Git-"
 "Diffs klein und Merge-Konflikte selten."
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "Field"
 msgstr "Feld"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "Values"
 msgstr "Werte"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "Note"
 msgstr "Hinweis"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`kind`"
 msgstr "`kind`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`feedback` · `rating` · `request`"
 msgstr "`feedback` · `rating` · `request`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "the three ways of working stay separate in the data"
 msgstr "die drei Arbeitsweisen bleiben auch in den Daten getrennt"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`verdict`"
 msgstr "`verdict`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`approve` · `reject` · `freeze` · `delete` · `note`"
 msgstr "`approve` · `reject` · `freeze` · `delete` · `note`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "only for `feedback`; `note` = a comment without verdict"
 msgstr "nur für `feedback`; `note` = ein Kommentar ohne Urteil"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`stars`"
 msgstr "`stars`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "0–5"
 msgstr "0–5"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "only for `rating`"
 msgstr "nur für `rating`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`question`, `to`"
 msgstr "`question`, `to`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "text, list of authors"
 msgstr "Text, Liste von Autoren"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "only for `request`; answers are `replies` with an optional `verdict`"
 msgstr "nur für `request`; Antworten sind `replies` mit optionalem `verdict`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`snapshot`"
 msgstr "`snapshot`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "element text when the annotation was made"
 msgstr "Text des Elements, als die Annotation erstellt wurde"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "needed for `deciwa diff`, stale views and the freeze alarm"
 msgstr ""
 "nötig für `deciwa diff`, Ansichten veralteter Elemente und den Einfrier-"
 "Alarm"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`status`"
 msgstr "`status`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`open` · `resolved`"
 msgstr "`open` · `resolved`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid ""
 "jobs start `open`: delete, reject, note (a comment for the AI) and "
 "requests; approvals, freezes and ratings start `resolved`"
@@ -135,31 +135,31 @@ msgstr ""
 "KI) und Anfragen; Freigaben, Einfrierungen und Bewertungen starten "
 "`resolved`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`author`"
 msgstr "`author`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`daniel`, `agent:claude`"
 msgstr "`daniel`, `agent:claude`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "from `git config user.email` or `DECIWA_AUTHOR`"
 msgstr "aus `git config user.email` oder `DECIWA_AUTHOR`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "`id`"
 msgstr "`id`"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "8 characters, lowercase base32, random"
 msgstr "8 Zeichen, Base32 in Kleinbuchstaben, zufällig"
 
-#: ../../technical/file-format.md:26
+#: ../../technical/file-format.md:28
 msgid "short enough to type in the CLI"
 msgstr "kurz genug, um es in der CLI zu tippen"
 
-#: ../../technical/file-format.md:77
+#: ../../technical/file-format.md:79
 #, python-brace-format
 msgid ""
 "A misclick or a second thought must not pile up entries. As long as the "
@@ -179,7 +179,7 @@ msgstr ""
 "als Notiz erhalten. So endet auch ein Einfrieren: die Person gibt ein "
 "anderes Urteil ab ({need}`DEC_FREEZE_BY_VERDICT`)."
 
-#: ../../technical/file-format.md:91
+#: ../../technical/file-format.md:93
 #, python-brace-format
 msgid ""
 "Without it deciwa can tell *that* an approved or frozen text changed, but"
@@ -192,7 +192,7 @@ msgstr ""
 "Einfrier-Alarm muss die alte Formulierung zeigen ({need}`DEC_FREEZE`). "
 "Der Preis ist etwas doppelter Text in `.deciwa/`."
 
-#: ../../technical/file-format.md:101
+#: ../../technical/file-format.md:103
 msgid ""
 "`schema/deciwa-0.1.schema.json` is published with the CLI and in these "
 "docs. The CLI validates every file it reads. A new major field means a "
@@ -203,7 +203,63 @@ msgstr ""
 "Hauptfeld bedeutet eine neue Schemaversion; die CLI liest ältere "
 "Versionen und schreibt die neueste."
 
-#: ../../technical/file-format.md:106
+#: ../../technical/file-format.md:108
 msgid "config.toml"
 msgstr "config.toml"
+
+#: ../../technical/file-format.md:126
+msgid "Web sources"
+msgstr "Web-Quellen"
+
+#: ../../technical/file-format.md:133
+msgid ""
+"A page reviewed with the web script whose source is the fallback "
+"`web:<host><path>` is stored as `annotations/_web/<host>/<path>.json`; "
+"the path `/` becomes `index`, a port is written as `_<port>`, and the "
+"file keeps the address in its `source` field. `deciwa import` applies the"
+" rules of `[web]` first: a rule only counts when its file exists, so "
+"mapped pages land in the file of their source and everything else keeps "
+"its address. When a rule is added later, `deciwa remap` moves the "
+"annotations of `_web/` to their source files."
+msgstr ""
+"Eine mit dem Web-Skript reviewte Seite, deren Quelle der Fallback "
+"`web:<host><path>` ist, wird als `annotations/_web/<host>/<path>.json` "
+"gespeichert; der Pfad `/` wird zu `index`, ein Port wird als `_<port>` "
+"geschrieben, und die Datei behält die Adresse in ihrem Feld `source`. "
+"`deciwa import` wendet zuerst die Regeln von `[web]` an: eine Regel zählt"
+" nur, wenn ihre Datei existiert, also landen zugeordnete Seiten in der "
+"Datei ihrer Quelle und alles andere behält seine Adresse. Kommt später "
+"eine Regel dazu, verschiebt `deciwa remap` die Annotationen aus `_web/` "
+"in ihre Quelldateien."
+
+#: ../../technical/file-format.md:142
+msgid ""
+"An export from the web script carries the elements of its pages "
+"(selector, kind, label, text, fingerprint). The import keeps them in "
+"`.deciwa/web-pages.json` by address, so `todo`, `show` and `status` work "
+"without parsing HTML in Python; the selectors stay `html:…`, also for "
+"pages mapped to a Markdown file. Such an import replaces only the review "
+"data of the pages in the file, never the rest of the project."
+msgstr ""
+"Ein Export aus dem Web-Skript trägt die Elemente seiner Seiten mit "
+"(Selektor, Art, Label, Text, Fingerprint). Der Import legt sie nach "
+"Adresse in `.deciwa/web-pages.json` ab, damit `todo`, `show` und `status`"
+" funktionieren, ohne in Python HTML zu parsen; die Selektoren bleiben "
+"`html:…`, auch bei Seiten, die einer Markdown-Datei zugeordnet sind. Ein "
+"solcher Import ersetzt nur die Review-Daten der Seiten in der Datei, nie "
+"den Rest des Projekts."
+
+#: ../../technical/file-format.md:160
+msgid ""
+"Without `[web]` – or without `.deciwa/` at all, when only the browser is "
+"used – every page keeps its address. `site` limits the rules to pages of "
+"that host; without it they apply to every host, also `localhost` while "
+"developing. A star in `url` stands for one or more parts of the address "
+"and replaces the stars in `file` in the same order."
+msgstr ""
+"Ohne `[web]` – oder ganz ohne `.deciwa/`, wenn nur der Browser genutzt "
+"wird – behält jede Seite ihre Adresse. `site` beschränkt die Regeln auf "
+"Seiten dieses Hosts; ohne gelten sie für jeden Host, auch `localhost` "
+"beim Entwickeln. Ein Stern in `url` steht für einen oder mehrere Teile "
+"der Adresse und ersetzt die Sterne in `file` in derselben Reihenfolge."
 

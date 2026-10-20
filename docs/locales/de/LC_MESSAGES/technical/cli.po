@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -136,8 +136,8 @@ msgid "update the selectors of a moved or orphaned annotation"
 msgstr "die Selektoren einer verschobenen oder verwaisten Annotation aktualisieren"
 
 #: ../../technical/cli.md:29
-msgid "`serve`, `push` and `pull` follow in 0.2 and 0.4."
-msgstr "`serve`, `push` und `pull` folgen in 0.2 und 0.4."
+msgid "`serve` exists since the prototype; `push` and `pull` follow in 0.5."
+msgstr "`serve` gibt es seit dem Prototyp; `push` und `pull` folgen in 0.5."
 
 #: ../../technical/cli.md:31
 msgid "Addressing an element"

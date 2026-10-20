@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -68,6 +68,18 @@ msgid "the editor and its docs preview"
 msgstr "der Editor und seine Docs-Vorschau"
 
 #: ../../integrations/index.md
+msgid "0.3"
+msgstr "0.3"
+
+#: ../../integrations/index.md
+msgid "[Web script](web.md)"
+msgstr "[Web-Skript](web.md)"
+
+#: ../../integrations/index.md
+msgid "any website, with one line in the page"
+msgstr "jede Website, mit einer Zeile in der Seite"
+
+#: ../../integrations/index.md
 msgid "0.2"
 msgstr "0.2"
 
@@ -80,8 +92,8 @@ msgid "any rendered page – docs or website"
 msgstr "jede gerenderte Seite – Docs oder Website"
 
 #: ../../integrations/index.md
-msgid "0.3"
-msgstr "0.3"
+msgid "0.4"
+msgstr "0.4"
 
 #: ../../integrations/index.md
 msgid "[Claude](claude.md)"

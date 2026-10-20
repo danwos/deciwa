@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -24,8 +24,8 @@ msgid "VS Code"
 msgstr "VS Code"
 
 #: ../../integrations/vscode.md:3
-msgid "*Planned for 0.2 – the first editor integration.*"
-msgstr "*Geplant für 0.2 – die erste Editor-Integration.*"
+msgid "*Planned for 0.3 – the first editor integration.*"
+msgstr "*Geplant für 0.3 – die erste Editor-Integration.*"
 
 #: ../../integrations/vscode.md:5
 msgid ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -150,8 +150,24 @@ msgid "`deciwa import <file> [--force]`"
 msgstr "`deciwa import <file> [--force]`"
 
 #: ../../product/cli.md
-msgid "replace the review data with a file – refused if it is older"
-msgstr "die Review-Daten durch eine Datei ersetzen – abgelehnt, wenn sie älter ist"
+msgid ""
+"replace the review data with a file – refused if it is older; an export "
+"of a website replaces only its own pages"
+msgstr ""
+"die Review-Daten durch eine Datei ersetzen – abgelehnt, wenn sie älter "
+"ist; ein Export einer Website ersetzt nur ihre eigenen Seiten"
+
+#: ../../product/cli.md
+msgid "`deciwa remap`"
+msgstr "`deciwa remap`"
+
+#: ../../product/cli.md
+msgid ""
+"move feedback on web pages kept under their address to the files of new "
+"`[web]` rules"
+msgstr ""
+"Feedback zu Webseiten, das unter ihrer Adresse geführt wird, in die "
+"Dateien neuer `[web]`-Regeln verschieben"
 
 #: ../../product/cli.md
 msgid "`deciwa diff <id>`"
@@ -166,18 +182,18 @@ msgid "`deciwa push / pull`"
 msgstr "`deciwa push / pull`"
 
 #: ../../product/cli.md
-msgid "sync with the hosted service (0.4)"
-msgstr "mit dem gehosteten Dienst synchronisieren (0.4)"
+msgid "sync with the hosted service (0.5)"
+msgstr "mit dem gehosteten Dienst synchronisieren (0.5)"
 
-#: ../../product/cli.md:27
+#: ../../product/cli.md:28
 msgid "Proposed details for 0.1: [CLI concept](../technical/cli.md)."
 msgstr "Vorgeschlagene Details für 0.1: [CLI-Konzept](../technical/cli.md)."
 
-#: ../../product/cli.md:29
+#: ../../product/cli.md:30
 msgid "Agent skills"
 msgstr "Agent-Skills"
 
-#: ../../product/cli.md:31
+#: ../../product/cli.md:32
 msgid ""
 "**`deciwa-work`** – fetch `deciwa todo`, apply comments, fix rejected "
 "statements and delete elements, never touch frozen elements, `deciwa "
@@ -187,7 +203,7 @@ msgstr ""
 "abgelehnte Aussagen korrigieren und Elemente löschen, eingefrorene "
 "Elemente nie anfassen, `deciwa resolve`, ein erneutes Review anfordern."
 
-#: ../../product/cli.md:34
+#: ../../product/cli.md:35
 msgid ""
 "**`deciwa-ask`** – instead of a `[CHECK]` marker in the text, ask a "
 "question on the element."
@@ -195,7 +211,7 @@ msgstr ""
 "**`deciwa-ask`** – statt einer `[CHECK]`-Markierung im Text eine Frage am"
 " Element stellen."
 
-#: ../../product/cli.md:37
+#: ../../product/cli.md:38
 msgid "How to use them with Claude: [Claude](../integrations/claude.md)."
 msgstr "Wie du sie mit Claude nutzt: [Claude](../integrations/claude.md)."
 

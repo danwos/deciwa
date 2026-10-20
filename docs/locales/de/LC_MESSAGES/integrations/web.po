@@ -1,0 +1,253 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 18:06+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/web.md:1
+msgid "Web script"
+msgstr "Web-Skript"
+
+#: ../../integrations/web.md:3
+msgid "*Planned for 0.2 – technical details: [Web script](../technical/web.md).*"
+msgstr "*Geplant für 0.2 – technische Details: [Web-Skript](../technical/web.md).*"
+
+#: ../../integrations/web.md:5
+msgid ""
+"Review any website – built with Astro, Hugo, WordPress or by hand – "
+"without changing its build. One line in the page is enough:"
+msgstr ""
+"Reviewe jede Website – gebaut mit Astro, Hugo, WordPress oder von Hand –,"
+" ohne ihren Build zu ändern. Eine Zeile in der Seite genügt:"
+
+#: ../../integrations/web.md:12
+msgid ""
+"The deciwa button appears at the bottom right of every page that loads "
+"the script. deciwa finds the elements of the page by itself – sections, "
+"paragraphs, list items, table rows, code blocks and pictures – and shows "
+"the same [review UI](../product/ui.md) as the [Sphinx "
+"integration](sphinx/index.md)."
+msgstr ""
+"Der deciwa-Button erscheint unten rechts auf jeder Seite, die das Skript "
+"lädt. deciwa findet die Elemente der Seite selbst – Abschnitte, Absätze, "
+"Listenpunkte, Tabellenzeilen, Codeblöcke und Bilder – und zeigt dieselbe "
+"[Review-Oberfläche](../product/ui.md) wie die [Sphinx-"
+"Integration](sphinx/index.md)."
+
+#: ../../integrations/web.md:17
+msgid "What you need to know – nothing"
+msgstr "Was du wissen musst – nichts"
+
+#: ../../integrations/web.md
+msgid "Without any setting"
+msgstr "Ohne jede Einstellung"
+
+#: ../../integrations/web.md
+msgid "Elements"
+msgstr "Elemente"
+
+#: ../../integrations/web.md
+msgid ""
+"found in `<main>`, otherwise `<article>`, otherwise `<body>`; navigation,"
+" header, footer and forms are left out"
+msgstr ""
+"gefunden in `<main>`, sonst `<article>`, sonst `<body>`; Navigation, "
+"Kopf- und Fußzeile und Formulare bleiben außen vor"
+
+#: ../../integrations/web.md
+msgid "Feedback is stored"
+msgstr "Feedback wird gespeichert"
+
+#: ../../integrations/web.md
+msgid "in your browser, per website; **Export** hands it over as one file"
+msgstr "in deinem Browser, pro Website; **Export** gibt es als eine Datei weiter"
+
+#: ../../integrations/web.md
+msgid "A page is identified by"
+msgstr "Eine Seite erkennt man an"
+
+#: ../../integrations/web.md
+msgid "its address, e.g. `danwos.dev/services/`"
+msgstr "ihrer Adresse, z. B. `danwos.dev/services/`"
+
+#: ../../integrations/web.md:25
+msgid ""
+"In review mode a click selects an element, also when the element is a "
+"link or contains one – a card that is one big link opens the review card."
+" `Ctrl`/`Cmd` + click follows the link; navigation outside the content "
+"keeps working."
+msgstr ""
+"Im Review-Modus wählt ein Klick ein Element aus, auch wenn das Element "
+"ein Link ist oder einen enthält – eine Card, die ein einziger großer Link"
+" ist, öffnet die Review-Karte. `Ctrl`/`Cmd` + Klick folgt dem Link; die "
+"Navigation außerhalb des Inhalts funktioniert weiter."
+
+#: ../../integrations/web.md:30
+msgid "Optional settings"
+msgstr "Optionale Einstellungen"
+
+#: ../../integrations/web.md:32
+msgid ""
+"All settings are attributes on the script tag. Leave them out until you "
+"need them."
+msgstr ""
+"Alle Einstellungen sind Attribute am Script-Tag. Lass sie weg, bis du sie"
+" brauchst."
+
+#: ../../integrations/web.md
+msgid "Attribute"
+msgstr "Attribut"
+
+#: ../../integrations/web.md
+msgid "Effect"
+msgstr "Wirkung"
+
+#: ../../integrations/web.md
+msgid "`data-root=\"main\"`"
+msgstr "`data-root=\"main\"`"
+
+#: ../../integrations/web.md
+msgid "review only this part of the page (a CSS selector)"
+msgstr "nur diesen Teil der Seite reviewen (ein CSS-Selektor)"
+
+#: ../../integrations/web.md
+msgid "`data-ignore=\".cookie-banner, aside\"`"
+msgstr "`data-ignore=\".cookie-banner, aside\"`"
+
+#: ../../integrations/web.md
+msgid "leave these parts out"
+msgstr "diese Teile auslassen"
+
+#: ../../integrations/web.md
+msgid "`data-activate=\"param\"`"
+msgstr "`data-activate=\"param\"`"
+
+#: ../../integrations/web.md
+msgid ""
+"show deciwa only after `?deciwa` was in the address – for public sites "
+"whose visitors must not see it; it stays on in that tab until "
+"`?deciwa=off`"
+msgstr ""
+"deciwa erst zeigen, nachdem `?deciwa` in der Adresse stand – für "
+"öffentliche Websites, deren Besucher es nicht sehen sollen; es bleibt in "
+"diesem Tab an bis `?deciwa=off`"
+
+#: ../../integrations/web.md
+msgid "`data-server=\"http://127.0.0.1:4337\"`"
+msgstr "`data-server=\"http://127.0.0.1:4337\"`"
+
+#: ../../integrations/web.md
+msgid ""
+"store feedback with a deciwa server instead of the browser (later, see "
+"[Roadmap](../product/roadmap.md))"
+msgstr ""
+"Feedback bei einem deciwa-Server statt im Browser speichern (später, "
+"siehe [Roadmap](../product/roadmap.md))"
+
+#: ../../integrations/web.md:42
+msgid "A page can name its source file, so the AI knows which file to change:"
+msgstr ""
+"Eine Seite kann ihre Quelldatei nennen, damit die KI weiß, welche Datei "
+"sie ändern soll:"
+
+#: ../../integrations/web.md:48
+#, python-brace-format
+msgid ""
+"Instead of tagging every page, the repository can map addresses to files "
+"once in `.deciwa/config.toml` ({ref}`File format <web-sources>`). Both "
+"are optional: without them every page is kept under its address, and "
+"nothing is lost when a mapping is added later."
+msgstr ""
+"Statt jede Seite zu markieren, kann das Repository Adressen einmal in "
+"`.deciwa/config.toml` Dateien zuordnen ({ref}`Dateiformat <web-"
+"sources>`). Beides ist optional: ohne sie wird jede Seite unter ihrer "
+"Adresse geführt, und nichts geht verloren, wenn später eine Zuordnung "
+"dazukommt."
+
+#: ../../integrations/web.md:53
+msgid "From the browser to the repository"
+msgstr "Vom Browser ins Repository"
+
+#: ../../integrations/web.md:55
+msgid "Review the pages; feedback stays in the browser."
+msgstr "Reviewe die Seiten; das Feedback bleibt im Browser."
+
+#: ../../integrations/web.md:56
+msgid ""
+"**Export** in the panel saves one JSON file. It holds the feedback and "
+"the elements of every page this browser has seen."
+msgstr ""
+"**Export** im Panel speichert eine JSON-Datei. Sie enthält das Feedback "
+"und die Elemente jeder Seite, die dieser Browser gesehen hat."
+
+#: ../../integrations/web.md:58
+msgid ""
+"`deciwa init` once in the website's repository, then `deciwa import "
+"export.json`. It replaces the review data of the pages in the file and "
+"leaves everything else in `.deciwa/` alone – an older file is refused "
+"unless `--force` is given."
+msgstr ""
+"Einmal `deciwa init` im Repository der Website, dann `deciwa import "
+"export.json`. Es ersetzt die Review-Daten der Seiten in der Datei und "
+"lässt alles andere in `.deciwa/` unberührt – eine ältere Datei wird "
+"abgelehnt, außer mit `--force`."
+
+#: ../../integrations/web.md:62
+msgid ""
+"`deciwa todo` lists the open jobs for the AI or a developer, with the "
+"source file and the address of the page:"
+msgstr ""
+"`deciwa todo` listet die offenen Aufgaben für die KI oder einen "
+"Entwickler, mit der Quelldatei und der Adresse der Seite:"
+
+#: ../../integrations/web.md:74
+msgid "Mapping pages to files (optional)"
+msgstr "Seiten Dateien zuordnen (optional)"
+
+#: ../../integrations/web.md:76
+msgid ""
+"Without a mapping a page is kept under its address, and `deciwa todo` "
+"names the address only. Rules in `.deciwa/config.toml` tell deciwa which "
+"file a page comes from; a star stands for any part of the address and is "
+"put into the file name in the same order:"
+msgstr ""
+"Ohne Zuordnung wird eine Seite unter ihrer Adresse geführt, und `deciwa "
+"todo` nennt nur die Adresse. Regeln in `.deciwa/config.toml` sagen "
+"deciwa, aus welcher Datei eine Seite stammt; ein Stern steht für einen "
+"beliebigen Teil der Adresse und wird in derselben Reihenfolge in den "
+"Dateinamen eingesetzt:"
+
+#: ../../integrations/web.md:89
+msgid ""
+"The first rule whose file exists wins, so `/de/tools/monsterbrain` "
+"becomes `src/content/tools/de/monsterbrain.mdx`. A rule added later moves"
+" the feedback that was kept under the address: `deciwa remap`."
+msgstr ""
+"Die erste Regel, deren Datei existiert, gewinnt, also wird "
+"`/de/tools/monsterbrain` zu `src/content/tools/de/monsterbrain.mdx`. Eine"
+" später ergänzte Regel verschiebt das Feedback, das unter der Adresse "
+"geführt wurde: `deciwa remap`."
+
+#: ../../integrations/web.md:93
+msgid ""
+"The [Chrome extension](chrome.md) will use the same script, so it also "
+"works on pages that cannot be changed."
+msgstr ""
+"Die [Chrome-Erweiterung](chrome.md) wird dasselbe Skript nutzen, damit es"
+" auch auf Seiten funktioniert, die sich nicht ändern lassen."
+

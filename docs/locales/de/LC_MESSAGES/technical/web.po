@@ -1,0 +1,253 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/web.md:1
+msgid "Web script"
+msgstr "Web-Skript"
+
+#: ../../technical/web.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/web.md:5
+msgid "Proposals by Claude – not binding until Daniel approves them."
+msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
+
+#: ../../technical/web.md:8
+msgid ""
+"How the review overlay runs on any website without a build step. What "
+"users see: [Web script](../integrations/web.md)."
+msgstr ""
+"Wie das Review-Overlay ohne Build-Schritt auf jeder Website läuft. Was "
+"Nutzende sehen: [Web-Skript](../integrations/web.md)."
+
+#: ../../technical/web.md:11
+msgid ""
+"Today the overlay depends on the Sphinx build for four things: the `dw-"
+"el-<n>` classes and the `#deciwa-page` map on every page, `elements.json`"
+" (text and fingerprint of every element), `config.json` (review rules) "
+"and the source file of the page. The web script finds all of this in the "
+"browser."
+msgstr ""
+"Heute hängt das Overlay in vier Dingen vom Sphinx-Build ab: den Klassen "
+"`dw-el-<n>` und der Zuordnung `#deciwa-page` auf jeder Seite, "
+"`elements.json` (Text und Fingerprint jedes Elements), `config.json` "
+"(Review-Regeln) und der Quelldatei der Seite. Das Web-Skript findet all "
+"das im Browser."
+
+#: ../../technical/web.md:21
+#, python-brace-format
+msgid ""
+"A single `<script src=\".../deciwa.js\" defer>` without attributes shows "
+"the deciwa button on every page and works offline in the browser. No "
+"configuration file, no build step, no page mapping is needed to try it. "
+"Everything else is an optional attribute ({doc}`../integrations/web`). "
+"Decided: {need}`DEC_WEB_ONE_LINE`. `data-activate=\"param\"` is an opt-in"
+" for public sites: deciwa then loads only when the address contains "
+"`?deciwa`."
+msgstr ""
+"Ein einzelnes `<script src=\".../deciwa.js\" defer>` ohne Attribute zeigt"
+" den deciwa-Button auf jeder Seite und funktioniert offline im Browser. "
+"Zum Ausprobieren braucht es keine Konfigurationsdatei, keinen Build-"
+"Schritt und keine Seitenzuordnung. Alles andere ist ein optionales "
+"Attribut ({doc}`../integrations/web`). Entschieden: "
+"{need}`DEC_WEB_ONE_LINE`. `data-activate=\"param\"` ist ein Opt-in für "
+"öffentliche Websites: deciwa lädt dann nur, wenn die Adresse `?deciwa` "
+"enthält."
+
+#: ../../technical/web.md:41
+msgid ""
+"The parts meet in small interfaces: an element source returns the element"
+" list of the page, a store answers the calls the overlay makes today "
+"(`/api/page`, `/api/annotate`, …). The Sphinx integration keeps working "
+"unchanged and is the test that the split did not break anything."
+msgstr ""
+"Die Teile treffen sich an kleinen Schnittstellen: eine Elementquelle "
+"liefert die Elementliste der Seite, ein Speicher beantwortet die Aufrufe,"
+" die das Overlay heute macht (`/api/page`, `/api/annotate`, …). Die "
+"Sphinx-Integration funktioniert unverändert weiter und ist der Test, dass"
+" die Aufteilung nichts kaputt gemacht hat."
+
+#: ../../technical/web.md:52
+msgid ""
+"The overlay sources become ES modules in `packages/ui/js/`. esbuild (no "
+"framework) builds two files:"
+msgstr ""
+"Die Quellen des Overlays werden ES-Module in `packages/ui/js/`. esbuild "
+"(kein Framework) baut zwei Dateien:"
+
+#: ../../technical/web.md:55
+msgid ""
+"`deciwa-overlay.js` – for the Python package and the Sphinx extension, as"
+" today,"
+msgstr ""
+"`deciwa-overlay.js` – für das Python-Paket und die Sphinx-Erweiterung, "
+"wie heute,"
+
+#: ../../technical/web.md:56
+msgid ""
+"`deciwa.js` – the web script: one file with the CSS and the deciwa "
+"picture inlined."
+msgstr "`deciwa.js` – das Web-Skript: eine Datei, CSS und deciwa-Bild eingebettet."
+
+#: ../../technical/web.md:59
+msgid ""
+"On foreign pages the UI lives in a Shadow DOM, so the page's CSS cannot "
+"break the overlay and the overlay's CSS cannot change the page."
+msgstr ""
+"Auf fremden Seiten lebt die Oberfläche in einem Shadow DOM, damit das CSS"
+" der Seite das Overlay nicht kaputt machen und das CSS des Overlays die "
+"Seite nicht verändern kann."
+
+#: ../../technical/web.md:68
+#, python-brace-format
+msgid ""
+"The docs workflow publishes `deciwa.js` to "
+"`https://deciwa.danwos.dev/js/<release>/deciwa.js`, where the release is "
+"major and minor of `packages/ui/package.json` (`0.2`); "
+"`/js/latest/deciwa.js` follows the newest release. During the prototype "
+"phase every deploy overwrites the one published release – the release "
+"number is not raised yet. Once releases are raised, the builds of earlier"
+" releases are kept, so a published release never changes and sites can "
+"pin it with a Subresource Integrity hash. Decided: "
+"{need}`DEC_WEB_HOSTING`."
+msgstr ""
+"Der Docs-Workflow veröffentlicht `deciwa.js` unter "
+"`https://deciwa.danwos.dev/js/<release>/deciwa.js`, wobei das Release "
+"Major und Minor aus `packages/ui/package.json` ist (`0.2`); "
+"`/js/latest/deciwa.js` folgt dem neuesten Release. In der Prototyp-Phase "
+"überschreibt jedes Deployment das eine veröffentlichte Release – die "
+"Release-Nummer wird noch nicht erhöht. Sobald Releases erhöht werden, "
+"bleiben die Builds früherer Releases erhalten, damit sich ein "
+"veröffentlichtes Release nie ändert und Websites es mit einem "
+"Subresource-Integrity-Hash pinnen können. Entschieden: "
+"{need}`DEC_WEB_HOSTING`."
+
+#: ../../technical/web.md:83
+msgid "The source of a page is, in this order:"
+msgstr "Die Quelle einer Seite ist, in dieser Reihenfolge:"
+
+#: ../../technical/web.md:85
+msgid "`<meta name=\"deciwa-source\" content=\"…\">` on the page,"
+msgstr "`<meta name=\"deciwa-source\" content=\"…\">` auf der Seite,"
+
+#: ../../technical/web.md:86
+#, python-brace-format
+msgid ""
+"the first matching rule of `[web].sources` in `.deciwa/config.toml` "
+"(applied by the CLI on import, see {doc}`file-format`),"
+msgstr ""
+"die erste passende Regel aus `[web].sources` in `.deciwa/config.toml` "
+"(von der CLI beim Import angewendet, siehe {doc}`file-format`),"
+
+#: ../../technical/web.md:88
+msgid ""
+"the fallback, which always works: `web:<host><path>`, e.g. "
+"`web:danwos.dev/services/`. Query and fragment are dropped, `index.html` "
+"and a missing trailing slash count as the same page."
+msgstr ""
+"der Fallback, der immer funktioniert: `web:<host><path>`, z. B. "
+"`web:danwos.dev/services/`. Query und Fragment fallen weg, `index.html` "
+"und ein fehlender Schrägstrich am Ende zählen als dieselbe Seite."
+
+#: ../../technical/web.md:92
+#, python-brace-format
+msgid ""
+"The browser always stores the address; a mapping added later moves the "
+"annotations to the source file without losing any. Decided: "
+"{need}`DEC_WEB_SOURCE`."
+msgstr ""
+"Der Browser speichert immer die Adresse; eine später ergänzte Zuordnung "
+"verschiebt die Annotationen in die Quelldatei, ohne eine zu verlieren. "
+"Entschieden: {need}`DEC_WEB_SOURCE`."
+
+#: ../../technical/web.md:102
+msgid ""
+"Without a build there is no `elements.json`. The web script stores the "
+"element list of each page it has seen (selector, kind, label, text, "
+"fingerprint) in the browser, so the project panel lists all visited pages"
+" and stale elements are found when a page is opened again. An export "
+"carries this index along, so the CLI can resolve web annotations without "
+"an HTML adapter in Python. Reading `sitemap.xml` to list all pages up "
+"front can come later."
+msgstr ""
+"Ohne Build gibt es keine `elements.json`. Das Web-Skript speichert die "
+"Elementliste jeder gesehenen Seite (Selektor, Art, Label, Text, "
+"Fingerprint) im Browser, damit das Projekt-Panel alle besuchten Seiten "
+"auflistet und veraltete Elemente gefunden werden, wenn eine Seite wieder "
+"geöffnet wird. Ein Export trägt diesen Index mit, damit die CLI Web-"
+"Annotationen ohne HTML-Adapter in Python auflösen kann. `sitemap.xml` zu "
+"lesen, um alle Seiten vorab aufzulisten, kann später kommen."
+
+#: ../../technical/web.md:116
+msgid ""
+"The script scans again after client-side navigation (`popstate`, `astro"
+":page-load`, `turbo:load`) and, throttled, when a `MutationObserver` sees"
+" changes inside the review root. Open cards stay attached to their "
+"element through its selector."
+msgstr ""
+"Das Skript scannt erneut nach clientseitiger Navigation (`popstate`, "
+"`astro:page-load`, `turbo:load`) und, gedrosselt, wenn ein "
+"`MutationObserver` Änderungen innerhalb der Review-Wurzel sieht. Offene "
+"Karten bleiben über den Selektor an ihrem Element."
+
+#: ../../technical/web.md:128
+#, python-brace-format
+msgid ""
+"Proposal was: right after the prototype, before VS Code – the first real "
+"use is the danwos website, and the Chrome extension builds on it. "
+"Answered by Daniel (2026-10-20): yes, as 0.2 – see "
+"{need}`DEC_WEB_SCRIPT_FIRST`."
+msgstr ""
+"Vorschlag war: direkt nach dem Prototyp, vor VS Code – der erste echte "
+"Einsatz ist die danwos-Website, und die Chrome-Erweiterung baut darauf "
+"auf. Von Daniel beantwortet (2026-10-20): ja, als 0.2 – siehe "
+"{need}`DEC_WEB_SCRIPT_FIRST`."
+
+#: ../../technical/web.md:133
+msgid "First use: the danwos website"
+msgstr "Erster Einsatz: die danwos-Website"
+
+#: ../../technical/web.md:135
+msgid ""
+"`src/layouts/Base.astro` gets the script tag with `data-"
+"activate=\"param\"`."
+msgstr ""
+"`src/layouts/Base.astro` bekommt den Script-Tag mit `data-"
+"activate=\"param\"`."
+
+#: ../../technical/web.md:136
+msgid ""
+"The website repository gets `.deciwa/config.toml` with `[web].sources` "
+"for its content collections."
+msgstr ""
+"Das Website-Repository bekommt `.deciwa/config.toml` mit `[web].sources` "
+"für seine Content Collections."
+
+#: ../../technical/web.md:138
+msgid ""
+"The self-built feedback tool in the Astro dev toolbar "
+"(`.feedback/feedback.json`) is replaced once deciwa works there."
+msgstr ""
+"Das selbstgebaute Feedback-Tool in der Astro-Dev-Toolbar "
+"(`.feedback/feedback.json`) wird ersetzt, sobald deciwa dort "
+"funktioniert."
+

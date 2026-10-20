@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-20 16:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -44,8 +44,8 @@ msgstr ""
 "[Sphinx](../integrations/sphinx/index.md)"
 
 #: ../../product/roadmap.md
-msgid "**0.1**"
-msgstr "**0.1**"
+msgid "0.1"
+msgstr "0.1"
 
 #: ../../product/roadmap.md
 msgid ""
@@ -58,24 +58,36 @@ msgstr ""
 "statt `[CHECK]` – [technische Details](../technical/index.md)"
 
 #: ../../product/roadmap.md
-msgid "0.2"
-msgstr "0.2"
+msgid "**0.2**"
+msgstr "**0.2**"
 
 #: ../../product/roadmap.md
-msgid "VS Code extension (hover, card, gutter, side panel, review mode)"
-msgstr "VS-Code-Erweiterung (Überfahren, Karte, Gutter, Seitenpanel, Review-Modus)"
+msgid ""
+"web script: deciwa on any website with one line; first use on the danwos "
+"website – [Web script](../integrations/web.md)"
+msgstr ""
+"Web-Skript: deciwa auf jeder Website mit einer Zeile; erster Einsatz auf "
+"der danwos-Website – [Web-Skript](../integrations/web.md)"
 
 #: ../../product/roadmap.md
 msgid "0.3"
 msgstr "0.3"
 
 #: ../../product/roadmap.md
-msgid "Chrome extension for rendered HTML; Python adapter"
-msgstr "Chrome-Erweiterung für gerendertes HTML; Python-Adapter"
+msgid "VS Code extension (hover, card, gutter, side panel, review mode)"
+msgstr "VS-Code-Erweiterung (Überfahren, Karte, Gutter, Seitenpanel, Review-Modus)"
 
 #: ../../product/roadmap.md
 msgid "0.4"
 msgstr "0.4"
+
+#: ../../product/roadmap.md
+msgid "Chrome extension on top of the web script; Python adapter"
+msgstr "Chrome-Erweiterung auf Basis des Web-Skripts; Python-Adapter"
+
+#: ../../product/roadmap.md
+msgid "0.5"
+msgstr "0.5"
 
 #: ../../product/roadmap.md
 msgid "hosted service MVP: sync, task list, overview, audit report"
@@ -94,4 +106,7 @@ msgid ""
 msgstr ""
 "Desktop-App, Claude-Oberfläche, Adapter für C/JS/TS/AsciiDoc, "
 "Auswertungen und Vergleiche"
+
+#~ msgid "0.2"
+#~ msgstr "0.2"
 
