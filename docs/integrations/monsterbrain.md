@@ -73,6 +73,12 @@ before, just without review.
   state of a file, or every open job) and `deciwa_show` (open a file at an
   element).
 
+```{figure} ../_static/screens/monsterbrain-facts.webp
+:alt: monsterbrain's facts view with a fact selected and the deciwa card open
+
+The facts view in monsterbrain: a click on a fact opens it in review mode.
+```
+
 The review data is the folder's `.deciwa/`. A folder without one shows *Set
 up review* in the side panel (`deciwa init`).
 
