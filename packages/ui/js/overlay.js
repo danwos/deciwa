@@ -87,7 +87,7 @@ export function startOverlay(host) {
       const e = n.dataset && n.dataset.dwKey && byKey[n.dataset.dwKey];
       if (!e) continue;
       // a section is picked directly only through its heading
-      if (e.kind === "heading" && chain.length === 0) {
+      if (e.kind === "heading" && chain.length === 0 && !n.classList.contains("dw-range")) {
         const h = /^H[1-6]$/.test(n.tagName) ? n : n.querySelector(":scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6");
         if (!(h && h.contains(target))) continue;
       }
@@ -379,7 +379,8 @@ export function startOverlay(host) {
 
   // -- bars, counts, panel ---------------------------------------------------
   const KIND_LABELS = { need: "Sphinx-Needs objects", heading: "Headings (sections)", paragraph: "Paragraphs",
-    item: "List items", row: "Table rows", code: "Code blocks", note: "Notes, admonitions", figure: "Figures", all: "Everything" };
+    item: "List items", row: "Table rows", code: "Code blocks", note: "Notes, admonitions", figure: "Figures",
+    class: "Classes (source code)", function: "Functions, methods", all: "Everything" };
   const DONE = ["approved", "frozen"];
   const isRequired = sel => (view.required || []).includes(sel);
   const stateName = sel => view.elements[sel]?.state || "unreviewed";

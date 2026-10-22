@@ -80,7 +80,7 @@ async function startEngine(folder: string | null): Promise<void> {
 
 // -- decorations: review state per file in the tree and the change view ----------
 
-const COLORS = { requested: "#0F766E", change: "#B4462F", approved: "#4D5E22", open: "#8A6A3A" };
+const COLORS = { requested: "#0F766E", change: "#B4462F", approved: "#4D5E22", open: "#5F5A54", stale: "#8A6A3A" };
 
 function decoration(s: FileSummary): { badge?: string; color?: string; title?: string } | null {
   const parts = Object.entries(s.states).map(([state, n]) => `${n} ${state}`);
@@ -89,6 +89,8 @@ function decoration(s: FileSummary): { badge?: string; color?: string; title?: s
   const title = `deciwa: ${parts.join(" · ")}`;
   if (s.questions) return { badge: `${s.questions}?`, color: COLORS.requested, title };
   if (s.jobs) return { badge: String(s.jobs), color: COLORS.change, title };
+  const stale = (s.states["stale"] ?? 0) + (s.states["frozen, but changed"] ?? 0) + (s.states["orphaned"] ?? 0);
+  if (stale) return { badge: `${stale}!`, color: COLORS.stale, title };
   if (s.required && s.done < s.required) return { badge: `${s.done}/${s.required}`, color: COLORS.open, title };
   if (s.annotations) return { badge: "✓", color: COLORS.approved, title };
   return null;

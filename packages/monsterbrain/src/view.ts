@@ -4,7 +4,7 @@
  * come from the engine's adapter and are matched to the blocks monsterbrain
  * marks with data-line (element source "host", PROP_HOST_ELEMENTS). */
 import { startOverlay } from "../../ui/js/overlay.js";
-import { hostElements } from "../../ui/js/host.js";
+import { hostElements, unwrapRanges } from "../../ui/js/host.js";
 import { shadowCss } from "../../ui/js/shadow.js";
 import CSS from "../../ui/src/deciwa/ui/static/deciwa-overlay.css";
 import MONSTER from "../../ui/src/deciwa/ui/static/deciwa-monster.webp";
@@ -97,7 +97,9 @@ function pageStyle(): void {
 }
 
 function mountView(v: ViewContext): (() => void) | void {
-  if (v.kind !== "markdown" || v.role === "before") return;  // the old side of a diff stays read only
+  // rendered Markdown and line views (source code); the old side of a diff stays read only
+  if (v.role === "before" || (v.mode !== "lines" && v.kind !== "markdown")) return;
+  const lines = v.mode === "lines";
   let gone = false;
   let overlay: Overlay | null = null;
   let layer: HTMLElement | null = null;
@@ -107,8 +109,8 @@ function mountView(v: ViewContext): (() => void) | void {
       if (status.state !== "ready" || gone) return;
     }
     const source = (await ch.call("source", v.path)) as string;
-    const data = (await api(`/api/elements?source=${encodeURIComponent(source)}`)) as { title?: string; elements: { selector: string; kind: string; label: string; line?: number; text?: string }[] };
-    if (gone) return;
+    const data = (await api(`/api/elements?source=${encodeURIComponent(source)}`)) as { title?: string; elements: { selector: string; kind: string; label: string; line?: number; end?: number; text?: string }[] };
+    if (gone || (lines && !data.elements.length)) return;  // a file type without an adapter
     v.element.dataset.deciwaSource = source;
     pageStyle();
     layer = document.createElement("div");
@@ -121,7 +123,7 @@ function mountView(v: ViewContext): (() => void) | void {
     pendingFocus.delete(v.path);
     overlay = startOverlay({
       page: { doc: source, source, mode: "host", title: data.title || v.path.split("/").pop() },
-      elements: hostElements(v.element, data.elements),
+      elements: hostElements(v.element, data.elements, { ranges: lines }),
       mount: shadow,
       monster: MONSTER,
       article: () => v.element,
@@ -147,6 +149,7 @@ function mountView(v: ViewContext): (() => void) | void {
       if (current?.overlay === overlay) current = null;
     }
     layer?.remove();
+    if (lines) unwrapRanges(v.element);
     delete v.element.dataset.deciwaSource;
     section?.draw();
   };
@@ -164,10 +167,11 @@ function mountPanel(el: HTMLElement, p: { path: string | null; kind?: string }):
 
   const draw = (): void => {
     const on = current?.path === p.path ? current.overlay.review : reviewPref();
-    if (status.state === "ready" && p.kind === "html") {
+    const here = current?.path === p.path;
+    if (status.state === "ready" && !here && p.kind === "html") {
       head.innerHTML = `<div class="msg">Review this page with the deciwa button in the page (Shift R inside it).</div>`;
-    } else if (status.state === "ready" && p.kind !== "markdown") {
-      head.innerHTML = `<div class="msg">deciwa reviews Markdown and HTML files.</div>`;
+    } else if (status.state === "ready" && !here && p.kind !== "markdown") {
+      head.innerHTML = `<div class="msg">deciwa reviews Markdown, HTML and Python files.</div>`;
     } else if (status.state === "ready") {
       head.innerHTML = `<button class="chip${on ? " on" : ""}" data-review title="Review mode (Shift+R)">Review ${on ? "on" : "off"}</button>
         <span class="grow"></span><span class="mono">deciwa ${esc(status.engine ?? "")}</span>`;

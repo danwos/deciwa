@@ -31,6 +31,7 @@ export interface ViewContext {
   kind: string;
   role: "view" | "diff" | "before";
   rev?: string;
+  mode: "rendered" | "lines";
   element: HTMLElement;
   scroller: HTMLElement;
 }
