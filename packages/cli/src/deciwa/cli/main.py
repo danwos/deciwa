@@ -28,7 +28,16 @@ def cmd_init(args):
 
 
 def cmd_serve(args):
-    from deciwa.server import Builder, serve
+    from deciwa.server import API, Builder, serve, serve_api
+    if args.api_only:
+        try:
+            p = Project()
+        except FileNotFoundError as e:  # the host reads this instead of the handshake
+            print(json.dumps({"api": API, "error": {"code": "no-deciwa", "message": str(e)}}), flush=True)
+            sys.exit(2)
+        serve_api(p, port=args.port if args.port is not None else 0, token=args.token,
+                  watch_stdin=not args.keep_running)
+        return
     p = Project()
     # the build: Sphinx today; other integrations bring their own command
     base = [sys.executable, "-m", "sphinx", "-q", "-b", "html", str(p.docs), str(p.build)]
@@ -38,7 +47,7 @@ def cmd_serve(args):
             watch.append(Path(__import__(module, fromlist=["_"]).__file__).parent)
         except ImportError:
             pass
-    serve(p, p.build, Builder(base, base[:3] + ["-E"] + base[3:], watch), port=args.port)
+    serve(p, p.build, Builder(base, base[:3] + ["-E"] + base[3:], watch), port=args.port or 4337)
 
 
 def cmd_status(args):
@@ -156,7 +165,14 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     s = sub.add_parser("init"); s.add_argument("--at"); s.set_defaults(fn=cmd_init)
-    s = sub.add_parser("serve"); s.add_argument("--port", type=int, default=4337); s.set_defaults(fn=cmd_serve)
+    s = sub.add_parser("serve", help="review server: the built docs with the JSON API, or the API alone for a host app")
+    s.add_argument("--port", type=int, help="default 4337; with --api-only 0 = a free port")
+    s.add_argument("--api-only", action="store_true",
+                   help="only the JSON API, no build: prints a handshake line, stops when stdin closes")
+    s.add_argument("--token", help="with --api-only: the token every request must carry (default: random)")
+    s.add_argument("--keep-running", action="store_true", help="with --api-only: do not stop when stdin closes")
+    s.add_argument("--root", default=argparse.SUPPRESS, help="the folder to review (also before the command)")
+    s.set_defaults(fn=cmd_serve)
     s = sub.add_parser("status"); s.set_defaults(fn=cmd_status)
     s = sub.add_parser("todo"); s.add_argument("--for", dest="for_"); s.set_defaults(fn=cmd_todo)
     s = sub.add_parser("show"); s.add_argument("source"); s.set_defaults(fn=cmd_show)

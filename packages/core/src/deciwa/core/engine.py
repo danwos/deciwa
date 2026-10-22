@@ -10,7 +10,7 @@ import re
 from fnmatch import fnmatch
 from pathlib import Path
 
-from . import store
+from . import adapters, store
 from .model import QUICK_ACTIONS, new_annotation, new_id, normalise, now
 
 INDEX = "_deciwa/elements.json"
@@ -31,6 +31,7 @@ class Project:
         self.cfg = store.config(self.root)
         self.build = self.root / self.cfg["sphinx"]["build"]
         self.docs = self.root / self.cfg["sphinx"]["docs"]
+        self._parsed: dict[str, tuple[float, dict]] = {}  # source -> (mtime, page), adapter results
 
     def reload(self):
         """Pick up hand edits of .deciwa/config.toml."""
@@ -64,10 +65,55 @@ class Project:
         return f"{store.WEB}{host}{path}"
 
     def page_of_source(self, index: dict, source: str) -> tuple[str | None, dict]:
+        """The page of a source: from the elements index (a build, a browser), else
+        from the adapter for its file type, so plain Markdown files need no build."""
         for docname, page in index["pages"].items():
             if page["source"] == source:
                 return docname, page
+        page = self.parse(source)
+        if page:
+            return source, page
         return None, {"elements": []}
+
+    def parse(self, source: str) -> dict | None:
+        """The elements of a source file read by its adapter; None without an adapter or file."""
+        adapter = adapters.for_path(source)
+        path = self.root / source
+        if adapter is None or source.startswith(store.WEB) or not path.is_file():
+            return None
+        mtime = path.stat().st_mtime
+        cached = self._parsed.get(source)
+        if cached and cached[0] == mtime:
+            return cached[1]
+        text = path.read_text(errors="replace")
+        page = {"source": source, "title": adapter.title(text, path.name), "elements": adapter.elements(text, source)}
+        self._parsed[source] = (mtime, page)
+        return page
+
+    def pages(self) -> dict:
+        """Every page deciwa knows: the elements index, plus the files read by an
+        adapter that have review data or fall under the review paths."""
+        index = self.index()
+        pages = dict(index["pages"])
+        known = {p["source"] for p in pages.values()}
+        extra = set(store.sources(self.root))
+        for pattern in self.cfg["review"]["paths"]:
+            extra.update(p.relative_to(self.root).as_posix() for p in self.root.glob(pattern) if p.is_file())
+        for source in sorted(extra - known):
+            page = self.parse(source)
+            if page:
+                pages[source] = page
+        return pages
+
+    def host_page(self, source: str, title: str, elements: list[dict]) -> dict:
+        """Elements a host found in a page it rendered itself (an HTML file scanned in
+        the browser), kept like the pages of a website."""
+        index = store.web_pages(self.root)
+        keep = ("selector", "kind", "label", "text", "fingerprint", "parent")
+        index[source] = {"source": source, "title": title or source,
+                         "elements": [{k: e.get(k) for k in keep} for e in elements]}
+        store.save_web_pages(self.root, index)
+        return {"source": source, "elements": len(elements)}
 
     # -- review rules: which elements must be approved ---------------------
 
@@ -316,9 +362,8 @@ class Project:
     def status(self) -> dict:
         counts: dict[str, int] = {}
         total = required = done = 0
-        index = self.index()
         views = {view["source"]: view for _, view in self.all_views()}
-        for page in index["pages"].values():
+        for page in self.pages().values():
             view = views.get(page["source"], {"elements": {}, "orphans": []})
             for e in page["elements"]:
                 total += 1
@@ -336,7 +381,7 @@ class Project:
         """Overview of all pages: required coverage and every annotated or required element."""
         pages = []
         total = done = decided = rated = 0
-        index = self.index()
+        index = {"pages": self.pages()}
         order = sorted(index["pages"], key=lambda d: (d != "index", d))
         for doc in order:
             page = index["pages"][doc]
@@ -365,6 +410,38 @@ class Project:
                           "items": items, "orphans": len(view["orphans"])})
         return {"required": total, "done": done, "decided": decided, "rated": rated, "pages": pages,
                 "rules": self.cfg["review"]}
+
+    def summary(self, sources: list[str] | None = None) -> dict:
+        """Counts per file for trees and lists: states, open questions, jobs for the
+        AI, required elements and how many of them are done. Without sources: every
+        file that has review data."""
+        index = self.index()
+        out = {}
+        for source in sources if sources is not None else store.sources(self.root):
+            _, page = self.page_of_source(index, source)
+            view = self.view(source, page["elements"])
+            states: dict[str, int] = {}
+            questions = jobs = 0
+            for st in view["elements"].values():
+                states[st["state"]] = states.get(st["state"], 0) + 1
+                for a in st["annotations"]:
+                    if a["status"] != "open":
+                        continue
+                    if a["kind"] == "request":
+                        questions += 1
+                        jobs += 1
+                    elif a["kind"] == "feedback":
+                        jobs += 1
+                jobs += st["state"] == "frozen, but changed"
+            if view["orphans"]:
+                states["orphaned"] = len(view["orphans"])
+            required = set(view["required"])
+            done = sum(1 for sel in required if view["elements"].get(sel, {}).get("state") in DONE)
+            decided = sum(1 for sel in required if has_verdict(view["elements"].get(sel)))
+            out[source] = {"states": states, "questions": questions, "jobs": jobs + len(view["orphans"]),
+                           "required": len(required), "done": done, "decided": decided,
+                           "annotations": sum(len(st["annotations"]) for st in view["elements"].values()) + len(view["orphans"])}
+        return out
 
     def todo(self, for_author: str | None = None) -> list[dict]:
         jobs = []

@@ -245,6 +245,12 @@ requires-dist = [
 name = "deciwa-core"
 version = "0.0.1"
 source = { editable = "packages/core" }
+dependencies = [
+    { name = "markdown-it-py" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "markdown-it-py", specifier = ">=3" }]
 
 [[package]]
 name = "deciwa-server"
