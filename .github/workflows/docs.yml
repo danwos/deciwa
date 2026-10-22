@@ -30,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the build number is the number of commits
 
       - name: Install graphviz (needflow diagrams)
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends graphviz
@@ -52,7 +54,7 @@ jobs:
           npm ci
           npm test
           npm run build
-          git diff --exit-code -- src/deciwa/ui/static
+          node check-build.mjs
 
       - name: Check the docs (warnings fail)
         run: |
