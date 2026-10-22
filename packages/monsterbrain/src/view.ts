@@ -197,7 +197,7 @@ function mountPanel(el: HTMLElement, p: { path: string | null; kind?: string }):
     if (status.state === "ready" && !here && !page && p.kind !== "markdown" && p.kind !== "html") {
       head.innerHTML = `<div class="msg">deciwa reviews Markdown, HTML and Python files – also in the Source view.</div>`;
     } else if (status.state === "ready") {
-      head.innerHTML = `<button class="chip${on ? " on" : ""}" data-review title="Review mode (Shift+R)">Review ${on ? "on" : "off"}</button>
+      head.innerHTML = `<button class="chip${on ? " on" : ""}" data-review title="Review mode (Shift+R)">Review ${on ? "on" : "off"} <kbd>Shift R</kbd></button>
         <span class="grow"></span><span class="mono">deciwa ${esc(status.engine ?? "")}</span>`;
     } else if (status.state === "no-deciwa") {
       head.innerHTML = `<div class="msg">This folder is not reviewed with deciwa yet.</div>
