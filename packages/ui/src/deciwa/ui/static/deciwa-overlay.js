@@ -1,7 +1,7 @@
-/* deciwa review overlay 0.2.41 – built from packages/ui/js/ (npm run build), do not edit */
+/* deciwa review overlay 0.2.46 – built from packages/ui/js/ (npm run build), do not edit */
 (() => {
   // <define:__BUILD__>
-  var define_BUILD_default = { version: "0.2.41", commit: "85fc1e9", dirty: true, date: "2026-10-22" };
+  var define_BUILD_default = { version: "0.2.46", commit: "5aa3426", dirty: true, date: "2026-10-22" };
 
   // js/hash.js
   var enc = new TextEncoder();
@@ -581,6 +581,7 @@
       figure: "Figures",
       class: "Classes (source code)",
       function: "Functions, methods",
+      statement: "Statements outside functions",
       all: "Everything"
     };
     const DONE = ["approved", "frozen"];
@@ -1211,6 +1212,7 @@
       reviewOn = !reviewOn;
       savePanelPrefs();
       applyReview();
+      host.onReview?.(reviewOn);
       if (!reviewOn) {
         hoverBox.style.display = "none";
         closeCard();
