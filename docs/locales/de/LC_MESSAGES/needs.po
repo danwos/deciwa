@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"POT-Creation-Date: 2026-10-22 10:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -33,13 +33,14 @@ msgstr ""
 #: ../../decisions/index.md:69 ../../decisions/index.md:77
 #: ../../decisions/index.md:87 ../../decisions/index.md:95
 #: ../../decisions/index.md:103 ../../decisions/index.md:111
-#: ../../decisions/index.md:121 ../../decisions/index.md:129
+#: ../../decisions/index.md:119 ../../decisions/index.md:129
 #: ../../decisions/index.md:137 ../../decisions/index.md:145
-#: ../../decisions/index.md:155 ../../decisions/index.md:163
-#: ../../decisions/index.md:171 ../../decisions/index.md:179
+#: ../../decisions/index.md:153 ../../decisions/index.md:161
+#: ../../decisions/index.md:169 ../../decisions/index.md:179
 #: ../../decisions/index.md:187 ../../decisions/index.md:195
-#: ../../decisions/index.md:203 ../../decisions/index.md:213
-#: ../../decisions/index.md:221
+#: ../../decisions/index.md:203 ../../decisions/index.md:211
+#: ../../decisions/index.md:219 ../../decisions/index.md:227
+#: ../../decisions/index.md:237 ../../decisions/index.md:245
 msgid "Decision"
 msgstr "Entscheidung"
 
@@ -183,8 +184,8 @@ msgstr ""
 "Manche Formulierungen müssen jede Bearbeitung überstehen; die KI darf sie"
 " nie ändern, und deciwa schlägt Alarm, wenn sie sich trotzdem ändern."
 
-#: ../../decisions/index.md:69 ../../decisions/index.md:145
-#: ../../decisions/index.md:155
+#: ../../decisions/index.md:69 ../../decisions/index.md:153
+#: ../../decisions/index.md:179
 msgid "–"
 msgstr "–"
 
@@ -219,18 +220,37 @@ msgid "[CHECK]-style markers or ids in the text."
 msgstr "Markierungen im Stil von [CHECK] oder IDs im Text."
 
 #: ../../decisions/index.md:95
+msgid "deciwa replaces the [CHECK] markers in Daniel's knowledge base"
+msgstr "deciwa ersetzt die [CHECK]-Markierungen in Daniels Wissensbasis"
+
+#: ../../decisions/index.md:95
+#, python-brace-format
+msgid ""
+"A question at the element with addressee and state replaces a marker in "
+"the text ({need}`DEC_NO_MARKERS`); open questions show up in every "
+"integration instead of being searched with `rg`."
+msgstr ""
+"Eine Frage am Element mit Adressat und Zustand ersetzt eine Markierung im"
+" Text ({need}`DEC_NO_MARKERS`); offene Fragen erscheinen in jeder "
+"Integration, statt mit `rg` gesucht zu werden."
+
+#: ../../decisions/index.md:95
+msgid "keeping `[CHECK]` beside deciwa."
+msgstr "`[CHECK]` neben deciwa beibehalten."
+
+#: ../../decisions/index.md:103
 msgid "Formats: text, HTML, Python, C, JS, TS, rST, Markdown, AsciiDoc"
 msgstr "Formate: Text, HTML, Python, C, JS, TS, rST, Markdown, AsciiDoc"
 
-#: ../../decisions/index.md:95
+#: ../../decisions/index.md:103
 msgid "Docs-as-code plus the results and code around it."
 msgstr "Docs-as-Code plus die Ergebnisse und der Code drumherum."
 
-#: ../../decisions/index.md:95
+#: ../../decisions/index.md:103
 msgid "Markdown only."
 msgstr "nur Markdown."
 
-#: ../../decisions/index.md:103
+#: ../../decisions/index.md:111
 msgid ""
 "Format objects are highlighted on hover and directly selectable; free "
 "text selection down to single words"
@@ -238,19 +258,19 @@ msgstr ""
 "Format-Objekte werden beim Überfahren hervorgehoben und sind direkt "
 "auswählbar; freie Textauswahl bis hinunter zu einzelnen Wörtern"
 
-#: ../../decisions/index.md:103
+#: ../../decisions/index.md:111
 msgid "Pointing must be as fast as looking."
 msgstr "Zeigen muss so schnell gehen wie Hinsehen."
 
-#: ../../decisions/index.md:103
+#: ../../decisions/index.md:111
 msgid "line-based selection like a code review."
 msgstr "zeilenbasierte Auswahl wie in einem Code-Review."
 
-#: ../../decisions/index.md:111
+#: ../../decisions/index.md:119
 msgid "Reviews happen on results, not only on source"
 msgstr "Reviews finden auf den Ergebnissen statt, nicht nur im Quelltext"
 
-#: ../../decisions/index.md:111
+#: ../../decisions/index.md:119
 msgid ""
 "Rendered docs and websites are what reviewers see; deciwa must not look "
 "like a pull-request code review. The source view shows the same element."
@@ -259,15 +279,15 @@ msgstr ""
 "nicht wie ein Pull-Request-Code-Review aussehen. Die Quelltextansicht "
 "zeigt dasselbe Element."
 
-#: ../../decisions/index.md:111
+#: ../../decisions/index.md:119
 msgid "source-only review."
 msgstr "Review nur im Quelltext."
 
-#: ../../decisions/index.md:121
+#: ../../decisions/index.md:129
 msgid "The CLI is the master, with an openly documented file format"
 msgstr "Die CLI ist der Master, mit einem offen dokumentierten Dateiformat"
 
-#: ../../decisions/index.md:121
+#: ../../decisions/index.md:129
 msgid ""
 "One logic for all front ends; agents and integrations use the same "
 "commands and JSON."
@@ -275,11 +295,11 @@ msgstr ""
 "Eine Logik für alle Frontends; Agenten und Integrationen nutzen dieselben"
 " Befehle und dasselbe JSON."
 
-#: ../../decisions/index.md:121
+#: ../../decisions/index.md:129
 msgid "a web app as the core."
 msgstr "eine Web-App als Kern."
 
-#: ../../decisions/index.md:129
+#: ../../decisions/index.md:137
 msgid ""
 "All deciwa files in one .deciwa/ folder at the repository root or in a "
 "parent folder"
@@ -287,7 +307,7 @@ msgstr ""
 "Alle deciwa-Dateien in einem Ordner .deciwa/ im Wurzelverzeichnis des "
 "Repositorys oder in einem übergeordneten Ordner"
 
-#: ../../decisions/index.md:129
+#: ../../decisions/index.md:137
 msgid ""
 "The files must not get in the user's way; a parent folder covers several "
 "repositories or repositories that must stay untouched."
@@ -295,27 +315,27 @@ msgstr ""
 "Die Dateien dürfen nicht im Weg sein; ein übergeordneter Ordner deckt "
 "mehrere Repositorys ab oder Repositorys, die unberührt bleiben müssen."
 
-#: ../../decisions/index.md:129
+#: ../../decisions/index.md:137
 msgid "sidecar files next to each source."
 msgstr "Sidecar-Dateien neben jeder Quelle."
 
-#: ../../decisions/index.md:137
+#: ../../decisions/index.md:145
 msgid ".deciwa/ is committed to Git by default"
 msgstr ".deciwa/ wird standardmäßig in Git committet"
 
-#: ../../decisions/index.md:137
+#: ../../decisions/index.md:145
 msgid "Reviews are versioned together with the content."
 msgstr "Reviews werden zusammen mit dem Inhalt versioniert."
 
-#: ../../decisions/index.md:137
+#: ../../decisions/index.md:145
 msgid "git-ignored until a team decides."
 msgstr "von Git ignoriert, bis ein Team entscheidet."
 
-#: ../../decisions/index.md:145
+#: ../../decisions/index.md:153
 msgid "One or two agent skills for working with deciwa"
 msgstr "Ein oder zwei Agent-Skills für die Arbeit mit deciwa"
 
-#: ../../decisions/index.md:145
+#: ../../decisions/index.md:153
 msgid ""
 "Agents should pick up feedback and ask questions without extra prompting "
 "(deciwa-work, deciwa-ask)."
@@ -323,11 +343,64 @@ msgstr ""
 "Agenten sollen Feedback aufgreifen und Fragen stellen, ohne extra dazu "
 "aufgefordert zu werden (deciwa-work, deciwa-ask)."
 
-#: ../../decisions/index.md:155
+#: ../../decisions/index.md:161
+msgid ""
+"Host apps get deciwa as an extension that lives in this repository; the "
+"host only offers generic extension points"
+msgstr ""
+"Host-Apps bekommen deciwa als Erweiterung, die in diesem Repository "
+"liegt; der Host bietet nur allgemeine Erweiterungspunkte"
+
+#: ../../decisions/index.md:161
+msgid ""
+"deciwa is developed here only; a host such as monsterbrain or VS Code "
+"must not carry a copy of deciwa code. The same server API and overlay "
+"serve every host, only a thin adapter differs."
+msgstr ""
+"deciwa wird nur hier entwickelt; ein Host wie monsterbrain oder VS Code "
+"darf keine Kopie von deciwa-Code enthalten. Dieselbe Server-API und "
+"dasselbe Overlay bedienen jeden Host, nur ein dünner Adapter "
+"unterscheidet sich."
+
+#: ../../decisions/index.md:161
+msgid ""
+"copying the overlay and a port of the engine into the host; a deciwa "
+"integration built into the host."
+msgstr ""
+"das Overlay und eine Portierung der Engine in den Host kopieren; eine "
+"fest in den Host eingebaute deciwa-Integration."
+
+#: ../../decisions/index.md:169
+msgid ""
+"The Python parts can be shipped as a standalone binary that host apps "
+"bundle"
+msgstr ""
+"Die Python-Teile lassen sich als eigenständiges Binary ausliefern, das "
+"Host-Apps mitbringen"
+
+#: ../../decisions/index.md:169
+msgid ""
+"monsterbrain will be distributed and the VS Code extension must work "
+"without Python on the machine; users install one app, not a Python "
+"environment."
+msgstr ""
+"monsterbrain wird verteilt, und die VS-Code-Erweiterung muss ohne Python "
+"auf dem Rechner laufen; Nutzer installieren eine App, keine Python-"
+"Umgebung."
+
+#: ../../decisions/index.md:169
+msgid ""
+"Python and `uv tool install deciwa` as a prerequisite for every host; a "
+"TypeScript port of the core."
+msgstr ""
+"Python und `uv tool install deciwa` als Voraussetzung für jeden Host; "
+"eine Portierung des Kerns nach TypeScript."
+
+#: ../../decisions/index.md:179
 msgid "Integrations: VS Code, Chrome, Claude UI, desktop app"
 msgstr "Integrationen: VS Code, Chrome, Claude-Oberfläche, Desktop-App"
 
-#: ../../decisions/index.md:155
+#: ../../decisions/index.md:179
 msgid ""
 "Reviews happen where people already work – editor, browser, chat; the "
 "desktop app covers people without an IDE."
@@ -335,7 +408,7 @@ msgstr ""
 "Reviews finden dort statt, wo man ohnehin arbeitet – Editor, Browser, "
 "Chat; die Desktop-App deckt alle ohne IDE ab."
 
-#: ../../decisions/index.md:163
+#: ../../decisions/index.md:187
 msgid ""
 "Feedback card at the element is the default UI; side panel is the "
 "alternative; radial menu dropped"
@@ -343,19 +416,19 @@ msgstr ""
 "Die Feedback-Karte am Element ist die Standard-Oberfläche; das "
 "Seitenpanel ist die Alternative; das Radialmenü ist verworfen"
 
-#: ../../decisions/index.md:163
+#: ../../decisions/index.md:187
 msgid "Compared in the clickable prototype."
 msgstr "Im klickbaren Prototyp verglichen."
 
-#: ../../decisions/index.md:163
+#: ../../decisions/index.md:187
 msgid "radial menu at the cursor."
 msgstr "ein Radialmenü am Cursor."
 
-#: ../../decisions/index.md:171
+#: ../../decisions/index.md:195
 msgid "deciwa uses the danwos colours and tokens"
 msgstr "deciwa nutzt die danwos-Farben und -Tokens"
 
-#: ../../decisions/index.md:171
+#: ../../decisions/index.md:195
 msgid ""
 "Recognition across all danwos tools; the deciwa monster colours are only "
 "for pictures."
@@ -363,15 +436,15 @@ msgstr ""
 "Wiedererkennung über alle danwos-Tools hinweg; die Farben des deciwa-"
 "Monsters sind nur für Bilder."
 
-#: ../../decisions/index.md:171
+#: ../../decisions/index.md:195
 msgid "an own deciwa colour scheme."
 msgstr "ein eigenes deciwa-Farbschema."
 
-#: ../../decisions/index.md:179
+#: ../../decisions/index.md:203
 msgid "The web script comes as 0.2, before VS Code"
 msgstr "Das Web-Skript kommt als 0.2, vor VS Code"
 
-#: ../../decisions/index.md:179
+#: ../../decisions/index.md:203
 msgid ""
 "The first real use is the danwos website; the Chrome extension builds on "
 "the same script."
@@ -379,15 +452,15 @@ msgstr ""
 "Der erste echte Einsatz ist die danwos-Website; die Chrome-Erweiterung "
 "baut auf demselben Skript auf."
 
-#: ../../decisions/index.md:179
+#: ../../decisions/index.md:203
 msgid "the web script as part of the Chrome extension in 0.3."
 msgstr "das Web-Skript als Teil der Chrome-Erweiterung in 0.3."
 
-#: ../../decisions/index.md:187
+#: ../../decisions/index.md:211
 msgid "One script tag is enough – deciwa always appears where it is loaded"
 msgstr "Ein Script-Tag genügt – deciwa erscheint immer dort, wo es geladen wird"
 
-#: ../../decisions/index.md:187
+#: ../../decisions/index.md:211
 msgid ""
 "Quick integration and tests without prior knowledge; every setting is "
 "optional, hiding deciwa behind `?deciwa` is an opt-in."
@@ -395,11 +468,11 @@ msgstr ""
 "Schnelle Einbindung und Tests ohne Vorwissen; jede Einstellung ist "
 "optional, deciwa hinter `?deciwa` zu verstecken ist ein Opt-in."
 
-#: ../../decisions/index.md:187
+#: ../../decisions/index.md:211
 msgid "`?deciwa` in the address as the only way to load it."
 msgstr "`?deciwa` in der Adresse als einziger Weg, es zu laden."
 
-#: ../../decisions/index.md:195
+#: ../../decisions/index.md:219
 msgid ""
 "The web script is hosted with the docs under "
 "deciwa.danwos.dev/js/<version>/"
@@ -407,7 +480,7 @@ msgstr ""
 "Das Web-Skript wird mit der Doku unter deciwa.danwos.dev/js/<version>/ "
 "gehostet"
 
-#: ../../decisions/index.md:195
+#: ../../decisions/index.md:219
 msgid ""
 "The docs workflow already publishes deciwa.danwos.dev; versioned paths "
 "allow pinning."
@@ -415,15 +488,15 @@ msgstr ""
 "Der Docs-Workflow veröffentlicht deciwa.danwos.dev bereits; versionierte "
 "Pfade erlauben Pinning."
 
-#: ../../decisions/index.md:195
+#: ../../decisions/index.md:219
 msgid "npm with jsDelivr."
 msgstr "npm mit jsDelivr."
 
-#: ../../decisions/index.md:203
+#: ../../decisions/index.md:227
 msgid "Mapping pages to source files is optional; the address is the fallback"
 msgstr "Seiten Quelldateien zuzuordnen ist optional; die Adresse ist der Fallback"
 
-#: ../../decisions/index.md:203
+#: ../../decisions/index.md:227
 msgid ""
 "deciwa must work without a configuration file; a mapping added later must"
 " not lose feedback."
@@ -431,11 +504,11 @@ msgstr ""
 "deciwa muss ohne Konfigurationsdatei funktionieren; eine später ergänzte "
 "Zuordnung darf kein Feedback verlieren."
 
-#: ../../decisions/index.md:203
+#: ../../decisions/index.md:227
 msgid "a required `deciwa-source` meta tag on every page."
 msgstr "ein Pflicht-Meta-Tag `deciwa-source` auf jeder Seite."
 
-#: ../../decisions/index.md:213
+#: ../../decisions/index.md:237
 msgid ""
 "deciwa is one repository of separate packages: core, server, CLI, UI and "
 "one per integration"
@@ -443,7 +516,7 @@ msgstr ""
 "deciwa ist ein Repository aus getrennten Paketen: Core, Server, CLI, UI "
 "und eines pro Integration"
 
-#: ../../decisions/index.md:213
+#: ../../decisions/index.md:237
 msgid ""
 "The CLI and the server are reused by every integration; the logic stays "
 "in one place (core); integrations such as Sphinx, VS Code or Chrome stay "
@@ -453,11 +526,11 @@ msgstr ""
 "bleibt an einer Stelle (Core); Integrationen wie Sphinx, VS Code oder "
 "Chrome bleiben voneinander unabhängig."
 
-#: ../../decisions/index.md:213
+#: ../../decisions/index.md:237
 msgid "one package with everything (the first prototype, deciwa_proto)."
 msgstr "ein Paket mit allem (der erste Prototyp, deciwa_proto)."
 
-#: ../../decisions/index.md:221
+#: ../../decisions/index.md:245
 msgid ""
 "Decisions, features and concepts live in the repository as Sphinx docs "
 "with Sphinx-Needs"
@@ -465,7 +538,7 @@ msgstr ""
 "Entscheidungen, Features und Konzepte liegen im Repository als Sphinx-"
 "Docs mit Sphinx-Needs"
 
-#: ../../decisions/index.md:221
+#: ../../decisions/index.md:245
 msgid ""
 "Others develop in the repository too, and decisions act as requirements; "
 "Sphinx-Needs gives every decision an id, a status and links, and deciwa "
@@ -475,7 +548,7 @@ msgstr ""
 "Anforderungen; Sphinx-Needs gibt jeder Entscheidung eine ID, einen Status"
 " und Links, und deciwa kann später seine eigenen Docs reviewen."
 
-#: ../../decisions/index.md:221
+#: ../../decisions/index.md:245
 msgid ""
 "decisions in Daniel's knowledge base only; MkDocs Material (plain text "
 "without ids or traceability)."
@@ -524,15 +597,18 @@ msgstr "Eine kleine Adapter-Schnittstelle für alle Formate"
 #: ../../technical/file-format.md:17 ../../technical/file-format.md:28
 #: ../../technical/file-format.md:74 ../../technical/file-format.md:88
 #: ../../technical/file-format.md:98 ../../technical/file-format.md:128
-#: ../../technical/layers.md:38 ../../technical/rollout.md:11
-#: ../../technical/rollout.md:20 ../../technical/skills.md:8
-#: ../../technical/stack.md:22 ../../technical/stack.md:36
-#: ../../technical/state-engine.md:37 ../../technical/state-engine.md:59
-#: ../../technical/state-engine.md:99 ../../technical/web.md:16
-#: ../../technical/web.md:30 ../../technical/web.md:47
-#: ../../technical/web.md:63 ../../technical/web.md:78
-#: ../../technical/web.md:97 ../../technical/web.md:111
-#: ../../technical/working.md:46 ../../technical/working.md:60
+#: ../../technical/hosts.md:33 ../../technical/hosts.md:58
+#: ../../technical/hosts.md:81 ../../technical/hosts.md:102
+#: ../../technical/hosts.md:124 ../../technical/layers.md:38
+#: ../../technical/rollout.md:11 ../../technical/rollout.md:20
+#: ../../technical/skills.md:8 ../../technical/stack.md:22
+#: ../../technical/stack.md:36 ../../technical/state-engine.md:37
+#: ../../technical/state-engine.md:59 ../../technical/state-engine.md:99
+#: ../../technical/web.md:16 ../../technical/web.md:30
+#: ../../technical/web.md:47 ../../technical/web.md:63
+#: ../../technical/web.md:78 ../../technical/web.md:97
+#: ../../technical/web.md:111 ../../technical/working.md:46
+#: ../../technical/working.md:60
 msgid "Proposal"
 msgstr "Vorschlag"
 
@@ -550,11 +626,13 @@ msgstr "Der rST-Adapter parst mit docutils, ohne Sphinx auszuführen"
 msgid "Which directive names count as needs?"
 msgstr "Welche Directive-Namen zählen als Needs?"
 
-#: ../../technical/adapters.md:91 ../../technical/rollout.md:31
-#: ../../technical/rollout.md:42 ../../technical/skills.md:40
-#: ../../technical/skills.md:51 ../../technical/stack.md:52
-#: ../../technical/state-engine.md:69 ../../technical/state-engine.md:111
-#: ../../technical/web.md:122 ../../technical/working.md:70
+#: ../../technical/adapters.md:91 ../../technical/hosts.md:134
+#: ../../technical/hosts.md:146 ../../technical/rollout.md:31
+#: ../../technical/rollout.md:42 ../../technical/rollout.md:53
+#: ../../technical/skills.md:40 ../../technical/skills.md:51
+#: ../../technical/stack.md:52 ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:111 ../../technical/web.md:122
+#: ../../technical/working.md:70
 msgid "Question"
 msgstr "Frage"
 
@@ -606,6 +684,38 @@ msgstr "Ein JSON Schema ist der dokumentierte Vertrag"
 msgid "Web pages without a source file are stored under their address"
 msgstr "Webseiten ohne Quelldatei werden unter ihrer Adresse gespeichert"
 
+#: ../../technical/hosts.md:33
+msgid "deciwa serve --api-only: the JSON API for a folder, without a build"
+msgstr "deciwa serve --api-only: die JSON-API für einen Ordner, ohne Build"
+
+#: ../../technical/hosts.md:58
+msgid ""
+"A third element source for the overlay: the host renders, the adapter "
+"names the elements"
+msgstr ""
+"Eine dritte Elementquelle für das Overlay: der Host rendert, der Adapter "
+"benennt die Elemente"
+
+#: ../../technical/hosts.md:81
+msgid "One TypeScript client for all hosts"
+msgstr "Ein TypeScript-Client für alle Hosts"
+
+#: ../../technical/hosts.md:102
+msgid "The engine is built with PyInstaller, one folder per platform"
+msgstr "Die Engine wird mit PyInstaller gebaut, ein Ordner pro Plattform"
+
+#: ../../technical/hosts.md:124
+msgid "VS Code ships one package per platform with the engine inside"
+msgstr "VS Code bekommt ein Paket pro Plattform mit der Engine darin"
+
+#: ../../technical/hosts.md:134
+msgid "Which tool builds the standalone engine?"
+msgstr "Welches Werkzeug baut die eigenständige Engine?"
+
+#: ../../technical/hosts.md:146
+msgid "Does monsterbrain come before VS Code?"
+msgstr "Kommt monsterbrain vor VS Code?"
+
 #: ../../technical/layers.md:38
 msgid "The core is split into layers with a strict dependency direction"
 msgstr "Der Core ist in Schichten mit strenger Abhängigkeitsrichtung aufgeteilt"
@@ -623,6 +733,10 @@ msgid "Does deciwa replace [CHECK] and [ASSUMPTION], or only [CHECK]?"
 msgstr "Ersetzt deciwa [CHECK] und [ASSUMPTION] oder nur [CHECK]?"
 
 #: ../../technical/rollout.md:42
+msgid "Does [ASSUMPTION] become a request too?"
+msgstr "Wird auch [ASSUMPTION] zu einer Anfrage?"
+
+#: ../../technical/rollout.md:53
 msgid "How does Daniel review in 0.1 without an editor integration?"
 msgstr "Wie reviewt Daniel in 0.1 ohne Editor-Integration?"
 

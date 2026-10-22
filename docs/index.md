@@ -125,6 +125,7 @@ integrations/web
 integrations/vscode
 integrations/chrome
 integrations/claude
+integrations/monsterbrain
 integrations/desktop
 ```
 
@@ -150,6 +151,7 @@ technical/web
 technical/cli
 technical/skills
 technical/rollout
+technical/hosts
 technical/questions
 technical/working
 ```

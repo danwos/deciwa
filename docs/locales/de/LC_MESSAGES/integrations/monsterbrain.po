@@ -1,0 +1,95 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-22 10:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../integrations/monsterbrain.md:1
+msgid "monsterbrain"
+msgstr "monsterbrain"
+
+#: ../../integrations/monsterbrain.md:3
+msgid "*Planned – technical details: [Host apps](../technical/hosts.md).*"
+msgstr "*Geplant – technische Details: [Host-Apps](../technical/hosts.md).*"
+
+#: ../../integrations/monsterbrain.md:5
+msgid ""
+"monsterbrain is the danwos desktop app for keeping track of a knowledge "
+"folder: file tree, the file rendered for its type, links and metadata, "
+"and a change view that shows what agents changed. deciwa adds the review "
+"to it:"
+msgstr ""
+"monsterbrain ist die Desktop-App von danwos, um den Überblick über einen "
+"Wissensordner zu behalten: Dateibaum, die Datei passend zu ihrem Typ "
+"dargestellt, Links und Metadaten und eine Änderungsansicht, die zeigt, "
+"was Agenten geändert haben. deciwa ergänzt das Review:"
+
+#: ../../integrations/monsterbrain.md:9
+msgid ""
+"**review on the rendered file** – Markdown, HTML and the new side of a "
+"diff get the same bars, card and keys as in the browser,"
+msgstr ""
+"**Review an der dargestellten Datei** – Markdown, HTML und die neue Seite"
+" eines Diffs bekommen dieselben Balken, dieselbe Karte und dieselben "
+"Tasten wie im Browser,"
+
+#: ../../integrations/monsterbrain.md:11
+msgid ""
+"**state in the tree and the change view** – each file shows how much of "
+"it is open, approved, stale or frozen, and which questions wait for an "
+"answer,"
+msgstr ""
+"**Zustand im Baum und in der Änderungsansicht** – jede Datei zeigt, wie "
+"viel davon offen, freigegeben, veraltet oder eingefroren ist und welche "
+"Fragen auf eine Antwort warten,"
+
+#: ../../integrations/monsterbrain.md:13
+msgid "**feedback of the active file** in monsterbrain's right panel,"
+msgstr "**Feedback der aktiven Datei** im rechten Bereich von monsterbrain,"
+
+#: ../../integrations/monsterbrain.md:14
+#, python-brace-format
+msgid ""
+"**questions instead of `[CHECK]` markers** ({need}`DEC_REPLACES_CHECK`) –"
+" what the AI asks shows up at the element and in the change view,"
+msgstr ""
+"**Fragen statt `[CHECK]`-Markierungen** ({need}`DEC_REPLACES_CHECK`) – "
+"was die KI fragt, erscheint am Element und in der Änderungsansicht,"
+
+#: ../../integrations/monsterbrain.md:16
+msgid ""
+"**same data as everywhere else** – feedback goes to `.deciwa/` in the "
+"folder, so `deciwa todo`, Claude and the other integrations see it."
+msgstr ""
+"**dieselben Daten wie überall** – Feedback landet in `.deciwa/` im "
+"Ordner, sodass `deciwa todo`, Claude und die anderen Integrationen es "
+"sehen."
+
+#: ../../integrations/monsterbrain.md:19
+#, python-brace-format
+msgid ""
+"deciwa comes as a monsterbrain extension and brings its engine along – no"
+" Python, no terminal ({need}`DEC_HOST_EXTENSIONS`, "
+"{need}`DEC_STANDALONE_ENGINE`). Without the extension monsterbrain works "
+"as before, just without review."
+msgstr ""
+"deciwa kommt als monsterbrain-Erweiterung und bringt seine Engine mit – "
+"kein Python, kein Terminal ({need}`DEC_HOST_EXTENSIONS`, "
+"{need}`DEC_STANDALONE_ENGINE`). Ohne die Erweiterung funktioniert "
+"monsterbrain wie bisher, nur ohne Review."
+

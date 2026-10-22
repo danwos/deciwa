@@ -14,9 +14,10 @@ format, the adapters Markdown, rST/Sphinx-Needs and plain text, and the
 agent skills `deciwa-work` and `deciwa-ask` – good enough that Daniel uses
 deciwa in his knowledge base instead of `[CHECK]` markers.
 
-**Not in 0.1:** `push` / `pull`, VS Code, Chrome, hosted
-service, Python/HTML adapters. The design must not block them, though –
-especially review on results ({need}`DEC_REVIEW_ON_RESULTS`).
+**Not in 0.1:** `push` / `pull`, VS Code, Chrome, monsterbrain, hosted
+service, Python/HTML adapters, the standalone engine. The design must not
+block them, though – especially review on results
+({need}`DEC_REVIEW_ON_RESULTS`) and host apps ({doc}`hosts`).
 
 ## Architecture
 

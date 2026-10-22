@@ -9,4 +9,7 @@ states as in the browser:
 - state bars in the gutter, a side panel with all feedback of the file,
 - review mode walks element by element through a file,
 - the extension talks to the local CLI, so feedback given here shows up in
-  the Sphinx pages and vice versa.
+  the Sphinx pages and vice versa,
+- it brings the deciwa engine along – no Python needed – and shares the
+  engine, client and overlay with [monsterbrain](monsterbrain.md)
+  ([Host apps](../technical/hosts.md)).

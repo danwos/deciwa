@@ -92,6 +92,14 @@ A new decision comes from an approved proposal in the technical details – see
 :alternatives: [CHECK]-style markers or ids in the text.
 ```
 
+```{dec} deciwa replaces the [CHECK] markers in Daniel's knowledge base
+:id: DEC_REPLACES_CHECK
+:status: approved
+:decided: 2026-10-22
+:reason: A question at the element with addressee and state replaces a marker in the text ({need}`DEC_NO_MARKERS`); open questions show up in every integration instead of being searched with `rg`.
+:alternatives: keeping `[CHECK]` beside deciwa.
+```
+
 ```{dec} Formats: text, HTML, Python, C, JS, TS, rST, Markdown, AsciiDoc
 :id: DEC_FORMATS
 :status: approved
@@ -148,6 +156,22 @@ A new decision comes from an approved proposal in the technical details – see
 :decided: 2026-10-17
 :reason: Agents should pick up feedback and ask questions without extra prompting (deciwa-work, deciwa-ask).
 :alternatives: –
+```
+
+```{dec} Host apps get deciwa as an extension that lives in this repository; the host only offers generic extension points
+:id: DEC_HOST_EXTENSIONS
+:status: approved
+:decided: 2026-10-22
+:reason: deciwa is developed here only; a host such as monsterbrain or VS Code must not carry a copy of deciwa code. The same server API and overlay serve every host, only a thin adapter differs.
+:alternatives: copying the overlay and a port of the engine into the host; a deciwa integration built into the host.
+```
+
+```{dec} The Python parts can be shipped as a standalone binary that host apps bundle
+:id: DEC_STANDALONE_ENGINE
+:status: approved
+:decided: 2026-10-22
+:reason: monsterbrain will be distributed and the VS Code extension must work without Python on the machine; users install one app, not a Python environment.
+:alternatives: Python and `uv tool install deciwa` as a prerequisite for every host; a TypeScript port of the core.
 ```
 
 ## UI and integrations

@@ -30,13 +30,24 @@ instead of writing markers.
 
 ```{question} Does deciwa replace [CHECK] and [ASSUMPTION], or only [CHECK]?
 :id: Q_MARKERS
+:status: answered
+:to: Daniel
+:refines: PROP_ROLLOUT_MIGRATE
+
+Answered by Daniel (2026-10-22): deciwa replaces `[CHECK]` – see
+{need}`DEC_REPLACES_CHECK`. `[ASSUMPTION]` is still open:
+{need}`Q_ASSUMPTION`.
+```
+
+```{question} Does [ASSUMPTION] become a request too?
+:id: Q_ASSUMPTION
 :status: open
 :to: Daniel
 :refines: PROP_ROLLOUT_MIGRATE
 
-`[CHECK]` maps directly onto a request. `[ASSUMPTION]` says "this number has
-no evidence" – it could become a request too, or stay as a marker because it
-must also be visible to readers of a PDF or slide built from the text.
+`[ASSUMPTION]` says "this number has no evidence". It could become a
+request, or stay as a marker because it must also be visible to readers of
+a PDF or slide built from the text.
 ```
 
 ```{question} How does Daniel review in 0.1 without an editor integration?

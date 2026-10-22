@@ -1,0 +1,403 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, danwos
+# This file is distributed under the same license as the deciwa package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: deciwa \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-22 10:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../technical/hosts.md:1
+msgid "Host apps and the standalone engine"
+msgstr "Host-Apps und die eigenständige Engine"
+
+#: ../../technical/hosts.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/hosts.md:5
+msgid ""
+"Proposals by Claude, 2026-10-22 – not binding until Daniel approves them."
+" Not part of 0.1, but 0.1 must not block it."
+msgstr ""
+"Vorschläge von Claude, 2026-10-22 – nicht verbindlich, bis Daniel sie "
+"freigibt. Nicht Teil von 0.1, aber 0.1 darf es nicht blockieren."
+
+#: ../../technical/hosts.md:9
+msgid ""
+"A **host** is an app that renders content itself and shows deciwa inside "
+"it: [monsterbrain](../integrations/monsterbrain.md) first, then [VS "
+"Code](../integrations/vscode.md). Two decisions frame this page:"
+msgstr ""
+"Ein **Host** ist eine App, die Inhalte selbst darstellt und deciwa darin "
+"zeigt: zuerst [monsterbrain](../integrations/monsterbrain.md), dann [VS "
+"Code](../integrations/vscode.md). Zwei Entscheidungen bilden den Rahmen "
+"dieser Seite:"
+
+#: ../../technical/hosts.md:13
+#, python-brace-format
+msgid ""
+"{need}`DEC_HOST_EXTENSIONS` – the host only offers generic extension "
+"points; everything deciwa-specific is an extension in this repository."
+msgstr ""
+"{need}`DEC_HOST_EXTENSIONS` – der Host bietet nur allgemeine "
+"Erweiterungspunkte; alles, was deciwa betrifft, ist eine Erweiterung in "
+"diesem Repository."
+
+#: ../../technical/hosts.md:15
+#, python-brace-format
+msgid ""
+"{need}`DEC_STANDALONE_ENGINE` – the Python parts ship as a standalone "
+"binary, so a host works without Python on the machine."
+msgstr ""
+"{need}`DEC_STANDALONE_ENGINE` – die Python-Teile werden als "
+"eigenständiges Binary ausgeliefert, sodass ein Host ohne Python auf dem "
+"Rechner funktioniert."
+
+#: ../../technical/hosts.md:18
+msgid "Parts"
+msgstr "Teile"
+
+#: ../../technical/hosts.md:3
+msgid "Part"
+msgstr "Teil"
+
+#: ../../technical/hosts.md:3
+msgid "Where"
+msgstr "Wo"
+
+#: ../../technical/hosts.md:3
+msgid "Task"
+msgstr "Aufgabe"
+
+#: ../../technical/hosts.md:3
+msgid "engine"
+msgstr "Engine"
+
+#: ../../technical/hosts.md:3
+msgid "`deciwa` binary: core, CLI, server and the overlay files"
+msgstr "`deciwa`-Binary: Kern, CLI, Server und die Overlay-Dateien"
+
+#: ../../technical/hosts.md:3
+msgid "all logic, `.deciwa/`, the JSON API"
+msgstr "die gesamte Logik, `.deciwa/`, die JSON-API"
+
+#: ../../technical/hosts.md:3
+msgid "client"
+msgstr "Client"
+
+#: ../../technical/hosts.md:3
+msgid "`packages/client` (TypeScript, npm)"
+msgstr "`packages/client` (TypeScript, npm)"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"find, start and stop the engine, check its version, typed calls to the "
+"JSON API"
+msgstr ""
+"Engine finden, starten und stoppen, ihre Version prüfen, typisierte "
+"Aufrufe der JSON-API"
+
+#: ../../technical/hosts.md:3
+msgid "overlay"
+msgstr "Overlay"
+
+#: ../../technical/hosts.md:3
+msgid "`packages/ui`"
+msgstr "`packages/ui`"
+
+#: ../../technical/hosts.md:3
+msgid "card, panel, bars, guided review – with a third element source for hosts"
+msgstr ""
+"Karte, Panel, Balken, geführtes Review – mit einer dritten Elementquelle "
+"für Hosts"
+
+#: ../../technical/hosts.md:3
+msgid "host adapter"
+msgstr "Host-Adapter"
+
+#: ../../technical/hosts.md:3
+msgid "`packages/monsterbrain`, later `packages/vscode`"
+msgstr "`packages/monsterbrain`, später `packages/vscode`"
+
+#: ../../technical/hosts.md:3
+msgid "maps the host's extension points to client and overlay – small, no logic"
+msgstr ""
+"verbindet die Erweiterungspunkte des Hosts mit Client und Overlay – "
+"klein, ohne Logik"
+
+#: ../../technical/hosts.md:27
+#, python-brace-format
+msgid ""
+"The host adapters depend on client and overlay, never on each other "
+"({need}`DEC_PACKAGES`). Logic stays in `deciwa-core` "
+"({need}`DEC_CLI_MASTER`); the TypeScript parts only call the engine."
+msgstr ""
+"Die Host-Adapter hängen von Client und Overlay ab, nie voneinander "
+"({need}`DEC_PACKAGES`). Die Logik bleibt in `deciwa-core` "
+"({need}`DEC_CLI_MASTER`); die TypeScript-Teile rufen nur die Engine auf."
+
+#: ../../technical/hosts.md:31
+msgid "Engine as a server for a host"
+msgstr "Engine als Server für einen Host"
+
+#: ../../technical/hosts.md:38
+msgid ""
+"`deciwa serve --api-only --root <folder> --port 0` serves the JSON API "
+"and no site; a host renders the content itself."
+msgstr ""
+"`deciwa serve --api-only --root <folder> --port 0` stellt die JSON-API "
+"bereit und keine Website; ein Host stellt die Inhalte selbst dar."
+
+#: ../../technical/hosts.md:41
+#, python-brace-format
+msgid ""
+"**Handshake:** on start the engine prints one JSON line to stdout – "
+"`{\"port\": …, \"token\": \"…\", \"api\": 1}`. Port 0 picks a free port; "
+"every request must carry the token, so other local pages cannot call the "
+"API."
+msgstr ""
+"**Handshake:** beim Start schreibt die Engine eine JSON-Zeile nach stdout"
+" – `{\"port\": …, \"token\": \"…\", \"api\": 1}`. Port 0 wählt einen "
+"freien Port; jede Anfrage muss das Token mitschicken, damit andere lokale"
+" Seiten die API nicht aufrufen können."
+
+#: ../../technical/hosts.md:44
+msgid ""
+"**Lifetime:** the engine stops when its stdin closes, so it never "
+"outlives the host."
+msgstr ""
+"**Lebensdauer:** die Engine beendet sich, wenn ihr stdin geschlossen "
+"wird, und läuft so nie länger als der Host."
+
+#: ../../technical/hosts.md:46
+msgid ""
+"**New endpoints** next to the ones of today (`/api/page`, "
+"`/api/annotate`, …):"
+msgstr "**Neue Endpunkte** neben den heutigen (`/api/page`, `/api/annotate`, …):"
+
+#: ../../technical/hosts.md:48
+msgid ""
+"`/api/elements?source=<path>` – the adapter's elements of a file with "
+"selector, kind, label and line range,"
+msgstr ""
+"`/api/elements?source=<path>` – die Elemente einer Datei laut Adapter mit"
+" Selektor, Art, Bezeichnung und Zeilenbereich,"
+
+#: ../../technical/hosts.md:50
+msgid ""
+"`/api/summary?sources=<path>,…` – counts per file and state (open, "
+"approved, stale, frozen, questions) for badges in trees and lists,"
+msgstr ""
+"`/api/summary?sources=<path>,…` – Anzahlen pro Datei und Zustand (offen, "
+"freigegeben, veraltet, eingefroren, Fragen) für Kennzeichen in Bäumen und"
+" Listen,"
+
+#: ../../technical/hosts.md:52
+msgid ""
+"`/api/events` – server-sent events when `.deciwa/` or a reviewed source "
+"changes, so the host refreshes instead of polling."
+msgstr ""
+"`/api/events` – Server-Sent Events, wenn sich `.deciwa/` oder eine "
+"geprüfte Quelle ändert, damit der Host aktualisiert, statt abzufragen."
+
+#: ../../technical/hosts.md:56
+msgid "Overlay in a host"
+msgstr "Overlay in einem Host"
+
+#: ../../technical/hosts.md:63
+msgid ""
+"Next to Sphinx and the DOM scan, the overlay gets the element source "
+"`host`. The host marks its rendered view:"
+msgstr ""
+"Neben Sphinx und dem DOM-Scan bekommt das Overlay die Elementquelle "
+"`host`. Der Host markiert seine dargestellte Ansicht:"
+
+#: ../../technical/hosts.md:66
+msgid ""
+"the container carries `data-deciwa-source=\"<path relative to the "
+"root>\"`,"
+msgstr "der Container trägt `data-deciwa-source=\"<Pfad relativ zur Wurzel>\"`,"
+
+#: ../../technical/hosts.md:67
+msgid ""
+"every block carries `data-line=\"<first source line, 0-based>\"` – what "
+"markdown-it does with its token maps and what the VS Code Markdown "
+"preview already does."
+msgstr ""
+"jeder Block trägt `data-line=\"<erste Quellzeile, ab 0>\"` – so wie "
+"markdown-it es mit seinen Token-Maps macht und wie es die Markdown-"
+"Vorschau von VS Code schon tut."
+
+#: ../../technical/hosts.md:71
+msgid ""
+"The overlay loads `/api/elements?source=…` and matches each block to the "
+"adapter element that starts on that line. Feedback then gets the same "
+"selectors as in the CLI (`md:paragraph:Career/Advisor#2`), so `deciwa "
+"todo` points at the source line. Blocks without a match are not "
+"reviewable. Rendered HTML files keep the DOM scan of the web script, with"
+" the file path as source."
+msgstr ""
+"Das Overlay lädt `/api/elements?source=…` und ordnet jeden Block dem "
+"Adapter-Element zu, das in dieser Zeile beginnt. Feedback bekommt dann "
+"dieselben Selektoren wie in der CLI (`md:paragraph:Career/Advisor#2`), "
+"sodass `deciwa todo` auf die Quellzeile zeigt. Blöcke ohne Treffer sind "
+"nicht prüfbar. Dargestellte HTML-Dateien behalten den DOM-Scan des Web-"
+"Skripts, mit dem Dateipfad als Quelle."
+
+#: ../../technical/hosts.md:78
+msgid ""
+"In a diff the overlay runs on the new side only; the old side is read "
+"only."
+msgstr ""
+"In einem Diff läuft das Overlay nur auf der neuen Seite; die alte Seite "
+"ist nur lesbar."
+
+#: ../../technical/hosts.md:86
+msgid "`packages/client` (npm `@danwos/deciwa-client`):"
+msgstr "`packages/client` (npm `@danwos/deciwa-client`):"
+
+#: ../../technical/hosts.md:88
+msgid ""
+"**finds the engine** in this order: a path from the host's settings, the "
+"binary bundled with the host, `deciwa` on `PATH`,"
+msgstr ""
+"**findet die Engine** in dieser Reihenfolge: ein Pfad aus den "
+"Einstellungen des Hosts, das mit dem Host gelieferte Binary, `deciwa` im "
+"`PATH`,"
+
+#: ../../technical/hosts.md:90
+msgid ""
+"**starts** it with `serve --api-only`, reads the handshake, restarts it "
+"after a crash,"
+msgstr ""
+"**startet** sie mit `serve --api-only`, liest den Handshake, startet sie "
+"nach einem Absturz neu,"
+
+#: ../../technical/hosts.md:92
+msgid ""
+"**checks the version:** `/api/version` returns the app version and the "
+"API major; a host refuses an engine with another major and says why,"
+msgstr ""
+"**prüft die Version:** `/api/version` liefert die App-Version und die "
+"Hauptversion der API; ein Host lehnt eine Engine mit anderer Hauptversion"
+" ab und sagt, warum,"
+
+#: ../../technical/hosts.md:94
+msgid "**typed calls** for every endpoint and the event stream."
+msgstr "**typisierte Aufrufe** für jeden Endpunkt und den Ereignisstrom."
+
+#: ../../technical/hosts.md:96
+msgid ""
+"monsterbrain and VS Code use the same client; only the adapter that puts "
+"the results into the host's UI differs."
+msgstr ""
+"monsterbrain und VS Code nutzen denselben Client; nur der Adapter, der "
+"die Ergebnisse in die Oberfläche des Hosts bringt, unterscheidet sich."
+
+#: ../../technical/hosts.md:100
+msgid "Standalone engine"
+msgstr "Eigenständige Engine"
+
+#: ../../technical/hosts.md:107
+msgid ""
+"**Content:** `deciwa-core`, `-server`, `-cli` and the overlay files of "
+"`deciwa-ui`. Not `deciwa-sphinx`: Sphinx builds keep running in the docs "
+"project's own Python environment."
+msgstr ""
+"**Inhalt:** `deciwa-core`, `-server`, `-cli` und die Overlay-Dateien von "
+"`deciwa-ui`. Nicht `deciwa-sphinx`: Sphinx-Builds laufen weiter in der "
+"eigenen Python-Umgebung des Doku-Projekts."
+
+#: ../../technical/hosts.md:110
+msgid ""
+"**Form:** PyInstaller *one-folder* (starts fast; *one-file* unpacks on "
+"every start), so the host can sign every file inside."
+msgstr ""
+"**Form:** PyInstaller *one-folder* (startet schnell; *one-file* entpackt "
+"bei jedem Start), damit der Host jede Datei darin signieren kann."
+
+#: ../../technical/hosts.md:112
+msgid ""
+"**Platforms:** linux-x64, linux-arm64, macos-arm64, macos-x64, "
+"windows-x64 – built in GitHub Actions on each platform, smoke-tested with"
+" `deciwa --version` and `serve --api-only` against a test folder."
+msgstr ""
+"**Plattformen:** linux-x64, linux-arm64, macos-arm64, macos-x64, "
+"windows-x64 – gebaut in GitHub Actions auf jeder Plattform, kurz getestet"
+" mit `deciwa --version` und `serve --api-only` gegen einen Testordner."
+
+#: ../../technical/hosts.md:115
+msgid ""
+"**Release:** a zip per platform in the releases of `danwos/deciwa`. A "
+"host pins an engine version and fetches it at its own build time; it "
+"never downloads code at run time."
+msgstr ""
+"**Release:** ein Zip pro Plattform in den Releases von `danwos/deciwa`. "
+"Ein Host legt eine Engine-Version fest und holt sie beim eigenen Build; "
+"er lädt nie zur Laufzeit Code herunter."
+
+#: ../../technical/hosts.md:118
+msgid ""
+"**Signing:** the host signs the bundled engine together with its own code"
+" (Apple notarisation requires every binary inside the app to be signed)."
+msgstr ""
+"**Signieren:** der Host signiert die mitgelieferte Engine zusammen mit "
+"seinem eigenen Code (die Notarisierung bei Apple verlangt, dass jedes "
+"Binary in der App signiert ist)."
+
+#: ../../technical/hosts.md:120
+msgid ""
+"**Size:** expected 20–40 MB per platform; to be measured with the first "
+"build."
+msgstr ""
+"**Größe:** erwartet 20–40 MB pro Plattform; mit dem ersten Build zu "
+"messen."
+
+#: ../../technical/hosts.md:129
+msgid ""
+"`vsce package --target <platform>` builds one extension package per "
+"platform, each with its engine. A universal package without engine uses "
+"`deciwa` on `PATH` – for platforms without a build."
+msgstr ""
+"`vsce package --target <platform>` baut ein Erweiterungspaket pro "
+"Plattform, jedes mit seiner Engine. Ein universelles Paket ohne Engine "
+"nutzt `deciwa` im `PATH` – für Plattformen ohne Build."
+
+#: ../../technical/hosts.md:140
+msgid ""
+"Proposal: PyInstaller – widely used, simple, no C compiler. Alternatives:"
+" Nuitka (compiles to C: faster and smaller, but long builds and a C "
+"compiler per platform); python-build-standalone plus the installed "
+"packages (no freezing problems, but bigger and many loose files)."
+msgstr ""
+"Vorschlag: PyInstaller – weit verbreitet, einfach, kein C-Compiler. "
+"Alternativen: Nuitka (übersetzt nach C: schneller und kleiner, aber lange"
+" Builds und ein C-Compiler pro Plattform); python-build-standalone plus "
+"die installierten Pakete (keine Probleme beim Einfrieren, aber größer und"
+" viele lose Dateien)."
+
+#: ../../technical/hosts.md:152
+#, python-brace-format
+msgid ""
+"Proposal: yes. Daniel uses monsterbrain daily on his knowledge base, "
+"which is also the first use of 0.1 ({doc}`rollout`). It tests the API "
+"server, the host element source and the client that VS Code needs later."
+msgstr ""
+"Vorschlag: ja. Daniel nutzt monsterbrain täglich für seine Wissensbasis, "
+"die auch der erste Einsatz von 0.1 ist ({doc}`rollout`). Es testet den "
+"API-Server, die Host-Elementquelle und den Client, die VS Code später "
+"braucht."
+
