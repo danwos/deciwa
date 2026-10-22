@@ -26,6 +26,7 @@ default-groups = ["docs"]
 
 [tool.uv.workspace]
 members = ["packages/*"]
+exclude = ["packages/client", "packages/monsterbrain"]  # npm packages
 
 [tool.uv.sources]
 deciwa-cli = { workspace = true }
