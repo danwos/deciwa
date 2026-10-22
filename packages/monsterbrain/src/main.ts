@@ -157,6 +157,11 @@ export function activate(c: HostContext): void {
     await startEngine(root);
     return status;
   });
+  // review mode between the window and rendered HTML pages: the window switches it, the page reports it
+  ctx.handle("relay", (event, data) => {
+    if (event !== "frame-review" && event !== "frame-state") throw new Error(`cannot relay ${event}`);
+    ctx.emit(String(event), data);
+  }, { frames: true });
   // open the file of a source (another page of the project) and show the element
   ctx.handle("open", async (source, selector) => {
     const path = toPath(String(source));

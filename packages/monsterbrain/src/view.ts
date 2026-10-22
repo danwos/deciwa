@@ -32,8 +32,12 @@ const PREFS = "deciwa-panel";  // the overlay keeps review mode here
 
 let status: Status = { state: "starting" };
 let current: { path: string; source: string; overlay: Overlay } | null = null;
-let section: { path: string | null; slot: HTMLElement; draw: () => void } | null = null;
+let section: { path: string | null; kind?: string; slot: HTMLElement; draw: () => void } | null = null;
 const pendingFocus = new Map<string, string>();
+// views mounted while the engine was not ready yet: attached as soon as it is
+const waiting = new Set<() => void>();
+// rendered HTML pages: review mode of each page, as the page reports it
+const frames = new Map<string, boolean>();
 
 const ch = window.mbx.register("deciwa", {
   mountView,
@@ -51,9 +55,18 @@ const ch = window.mbx.register("deciwa", {
 
 const api = (path: string, body?: unknown): Promise<unknown> => ch.call("api", path, body ?? null);
 
-ch.on("status", (s) => {
-  status = s as Status;
+function setStatus(s: Status): void {
+  status = s;
+  if (status.state === "ready") for (const attach of [...waiting]) attach();
   section?.draw();
+}
+ch.on("status", (s) => setStatus(s as Status));
+ch.on("frame-state", (d) => {
+  const { path, review, ready } = d as { path: string; review: boolean; ready?: boolean };
+  frames.set(path, review);
+  // a page that just loaded follows monsterbrain's review mode
+  if (ready && reviewPref() !== review) void ch.call("relay", "frame-review", { path, on: reviewPref() });
+  if (section?.path === path) section.draw();
 });
 ch.on("changed", () => {
   void current?.overlay.refresh();
@@ -68,23 +81,29 @@ ch.on("focus", (d) => {
     section?.draw();
   } else pendingFocus.set(path, selector);
 });
-void ch.call("status").then((s) => {
-  status = s as Status;
-  section?.draw();
-});
+void ch.call("status").then((s) => setStatus(s as Status));
 
 function reviewPref(): boolean {
   try { return JSON.parse(localStorage.getItem(PREFS) || "{}").review === true; } catch { return false; }
 }
 
+function setReviewPref(on: boolean): void {
+  try {
+    const p = JSON.parse(localStorage.getItem(PREFS) || "{}");
+    localStorage.setItem(PREFS, JSON.stringify({ ...p, review: on }));
+  } catch { /* storage blocked */ }
+}
+
+/** Review mode on/off – for the file on screen: a Markdown or code view, or a rendered HTML page. */
 function toggleReview(): void {
-  if (current) current.overlay.toggleReview();
-  else {
-    try {
-      const p = JSON.parse(localStorage.getItem(PREFS) || "{}");
-      localStorage.setItem(PREFS, JSON.stringify({ ...p, review: !p.review }));
-    } catch { /* storage blocked */ }
-  }
+  const path = section?.path ?? null;
+  if (current && (!path || current.path === path)) current.overlay.toggleReview();  // the overlay keeps the setting
+  else if (path && frames.has(path)) {
+    const on = !frames.get(path);
+    setReviewPref(on);
+    frames.set(path, on);
+    void ch.call("relay", "frame-review", { path, on });
+  } else setReviewPref(!reviewPref());
   section?.draw();
 }
 
@@ -101,13 +120,16 @@ function mountView(v: ViewContext): (() => void) | void {
   if (v.role === "before" || (v.mode !== "lines" && v.kind !== "markdown")) return;
   const lines = v.mode === "lines";
   let gone = false;
+  let started = false;
   let overlay: Overlay | null = null;
   let layer: HTMLElement | null = null;
-  void (async () => {
-    if (status.state !== "ready") {
-      status = (await ch.call("status")) as Status;
-      if (status.state !== "ready" || gone) return;
-    }
+  const attach = (): void => {
+    if (gone || started || status.state !== "ready") return;
+    started = true;
+    waiting.delete(attach);
+    void open().catch((e) => console.error("deciwa:", e));
+  };
+  const open = async (): Promise<void> => {
     const source = (await ch.call("source", v.path)) as string;
     const data = (await api(`/api/elements?source=${encodeURIComponent(source)}`)) as { title?: string; elements: { selector: string; kind: string; label: string; line?: number; end?: number; text?: string }[] };
     if (gone || (lines && !data.elements.length)) return;  // a file type without an adapter
@@ -141,9 +163,12 @@ function mountView(v: ViewContext): (() => void) | void {
     if (focus) overlay.setReview(true);
     current = { path: v.path, source, overlay };
     section?.draw();
-  })().catch((e) => console.error("deciwa:", e));
+  };
+  waiting.add(attach);
+  attach();
   return () => {
     gone = true;
+    waiting.delete(attach);
     if (overlay) {
       overlay.destroy();
       if (current?.overlay === overlay) current = null;
@@ -166,12 +191,11 @@ function mountPanel(el: HTMLElement, p: { path: string | null; kind?: string }):
   let docked: Overlay | null = null;
 
   const draw = (): void => {
-    const on = current?.path === p.path ? current.overlay.review : reviewPref();
     const here = current?.path === p.path;
-    if (status.state === "ready" && !here && p.kind === "html") {
-      head.innerHTML = `<div class="msg">Review this page with the deciwa button in the page (Shift R inside it).</div>`;
-    } else if (status.state === "ready" && !here && p.kind !== "markdown") {
-      head.innerHTML = `<div class="msg">deciwa reviews Markdown, HTML and Python files.</div>`;
+    const page = !here && p.path !== null && frames.has(p.path);
+    const on = here ? current!.overlay.review : page ? frames.get(p.path!)! : reviewPref();
+    if (status.state === "ready" && !here && !page && p.kind !== "markdown" && p.kind !== "html") {
+      head.innerHTML = `<div class="msg">deciwa reviews Markdown, HTML and Python files – also in the Source view.</div>`;
     } else if (status.state === "ready") {
       head.innerHTML = `<button class="chip${on ? " on" : ""}" data-review title="Review mode (Shift+R)">Review ${on ? "on" : "off"}</button>
         <span class="grow"></span><span class="mono">deciwa ${esc(status.engine ?? "")}</span>`;
@@ -196,9 +220,10 @@ function mountPanel(el: HTMLElement, p: { path: string | null; kind?: string }):
       docked = want;
       want?.dock(slot);
     }
-    if (!want && status.state === "ready" && p.kind !== "markdown") slot.innerHTML = "";
+    if (!want && page) slot.innerHTML = `<div class="msg">The page's own deciwa panel: the deciwa button at its bottom right.</div>`;
+    else if (!want) slot.innerHTML = "";
   };
-  section = { path: p.path, slot, draw };
+  section = { path: p.path, kind: p.kind, slot, draw };
   draw();
   return () => {
     docked?.undock();

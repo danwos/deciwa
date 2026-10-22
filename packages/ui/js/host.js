@@ -30,15 +30,16 @@ export function hostElements(container, elements, { ranges = false } = {}) {
     byLine.get(line).push(n);
   }
   const used = new Set();
-  const fits = (n, kind) => !used.has(n) && n.matches(TAGS[kind] || "*");
+  // an element that names its tag (HTML adapter) only matches that tag
+  const fits = (n, kind, tag) => !used.has(n) && (tag ? n.tagName.toLowerCase() === tag : n.matches(TAGS[kind] || "*"));
   let pool = null;  // every block once, for the text fallback
   const out = [];
   for (const e of elements) {
-    let node = e.line ? (byLine.get(e.line - 1) || []).find(n => fits(n, e.kind)) : null;
+    let node = e.line ? (byLine.get(e.line - 1) || []).find(n => fits(n, e.kind, e.tag)) : null;
     if (!node && e.text) {
       pool ||= [...container.querySelectorAll(Object.values(TAGS).join(", "))];
       const want = normalise(e.kind === "heading" ? e.label : e.text);
-      node = pool.find(n => fits(n, e.kind) && normalise(n.textContent) === want) || null;
+      node = pool.find(n => fits(n, e.kind, e.tag) && normalise(n.textContent) === want) || null;
     }
     if (!node) continue;
     used.add(node);

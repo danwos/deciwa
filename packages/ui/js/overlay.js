@@ -18,6 +18,7 @@
  *   tools: false      no floating tool pill – the host shows review mode and counts
  *   openDoc({doc, source}, selector)   open another page in the host
  *   focus             selector to open at start
+ *   onReview(on)      review mode was switched
  * startOverlay returns {update, refresh, destroy, dock, undock, setReview, toggleReview, focus, review}. */
 import { sha256 } from "./hash.js";
 
@@ -380,7 +381,8 @@ export function startOverlay(host) {
   // -- bars, counts, panel ---------------------------------------------------
   const KIND_LABELS = { need: "Sphinx-Needs objects", heading: "Headings (sections)", paragraph: "Paragraphs",
     item: "List items", row: "Table rows", code: "Code blocks", note: "Notes, admonitions", figure: "Figures",
-    class: "Classes (source code)", function: "Functions, methods", all: "Everything" };
+    class: "Classes (source code)", function: "Functions, methods", statement: "Statements outside functions",
+    all: "Everything" };
   const DONE = ["approved", "frozen"];
   const isRequired = sel => (view.required || []).includes(sel);
   const stateName = sel => view.elements[sel]?.state || "unreviewed";
@@ -924,6 +926,7 @@ export function startOverlay(host) {
     reviewOn = !reviewOn;
     savePanelPrefs();
     applyReview();
+    host.onReview?.(reviewOn);
     if (!reviewOn) { hoverBox.style.display = "none"; closeCard(); }
   }
   function togglePanel() {
