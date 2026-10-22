@@ -16,7 +16,7 @@ from .model import QUICK_ACTIONS, new_annotation, new_id, normalise, now
 INDEX = "_deciwa/elements.json"
 
 # element kinds a review rule can name; "all" means every element
-KINDS = ("need", "heading", "paragraph", "item", "row", "code", "note", "figure")
+KINDS = ("need", "heading", "paragraph", "item", "row", "code", "note", "figure", "class", "function")
 DONE = ("approved", "frozen")
 VERDICTS_ = ("approve", "reject", "freeze", "delete", "rephrase", "details")
 

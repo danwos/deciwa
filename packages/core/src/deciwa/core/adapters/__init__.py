@@ -8,9 +8,9 @@ parent``.
 
 from __future__ import annotations
 
-from . import markdown
+from . import markdown, python
 
-ADAPTERS = {".md": markdown, ".markdown": markdown}
+ADAPTERS = {".md": markdown, ".markdown": markdown, ".py": python, ".pyi": python}
 
 
 def for_path(path: str):
@@ -19,4 +19,4 @@ def for_path(path: str):
     return ADAPTERS.get(path[dot:].lower()) if dot >= 0 else None
 
 
-__all__ = ["ADAPTERS", "for_path", "markdown"]
+__all__ = ["ADAPTERS", "for_path", "markdown", "python"]

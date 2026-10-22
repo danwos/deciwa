@@ -39,7 +39,7 @@ def config(root: Path) -> dict:
 SECTION_HELP = {
     "review": [
         "# required: what must be approved – element kinds (need, heading, paragraph, item,",
-        "# row, code, note, figure), \"all\", or selector patterns like \"sphinx-needs:PROP_*\".",
+        "# row, code, note, figure, class, function), \"all\", or selector patterns like \"sphinx-needs:PROP_*\".",
         "# paths: optional, only these sources, e.g. [\"docs/technical/*\"]. Everything else",
         "# can still get feedback; it just does not count.",
     ],
