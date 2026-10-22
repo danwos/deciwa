@@ -1,7 +1,7 @@
-/* deciwa review overlay 0.2.33 – built from packages/ui/js/ (npm run build), do not edit */
+/* deciwa review overlay 0.2.37 – built from packages/ui/js/ (npm run build), do not edit */
 (() => {
   // <define:__BUILD__>
-  var define_BUILD_default = { version: "0.2.33", commit: "eb6b58b", dirty: true, date: "2026-10-22" };
+  var define_BUILD_default = { version: "0.2.37", commit: "b6b822b", dirty: false, date: "2026-10-22" };
 
   // js/hash.js
   var enc = new TextEncoder();
