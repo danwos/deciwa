@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 10:22+0200\n"
+"POT-Creation-Date: 2026-10-22 13:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -24,8 +24,12 @@ msgid "monsterbrain"
 msgstr "monsterbrain"
 
 #: ../../integrations/monsterbrain.md:3
-msgid "*Planned – technical details: [Host apps](../technical/hosts.md).*"
-msgstr "*Geplant – technische Details: [Host-Apps](../technical/hosts.md).*"
+msgid ""
+"*Available for development setups – technical details: [Host "
+"apps](../technical/hosts.md).*"
+msgstr ""
+"*Verfügbar für Entwicklungs-Setups – technische Details: [Host-"
+"Apps](../technical/hosts.md).*"
 
 #: ../../integrations/monsterbrain.md:5
 msgid ""
@@ -92,4 +96,100 @@ msgstr ""
 "kein Python, kein Terminal ({need}`DEC_HOST_EXTENSIONS`, "
 "{need}`DEC_STANDALONE_ENGINE`). Ohne die Erweiterung funktioniert "
 "monsterbrain wie bisher, nur ohne Review."
+
+#: ../../integrations/monsterbrain.md:24
+msgid "In monsterbrain"
+msgstr "In monsterbrain"
+
+#: ../../integrations/monsterbrain.md:26
+msgid ""
+"**Review mode** – `Shift R` or the switch in the side panel. Then the "
+"keys of the review UI work on the rendered file: `a r f d` for a verdict,"
+" `0–5` for stars, `n` for a comment, `v` guided review, `j k` next and "
+"previous element. Outside review mode monsterbrain keeps its own keys."
+msgstr ""
+"**Review-Modus** – `Shift R` oder der Schalter im Seitenpanel. Dann "
+"wirken die Tasten der Review-Oberfläche auf die dargestellte Datei: `a r "
+"f d` für ein Urteil, `0–5` für Sterne, `n` für einen Kommentar, `v` "
+"geführtes Review, `j k` nächstes und vorheriges Element. Außerhalb des "
+"Review-Modus behält monsterbrain seine eigenen Tasten."
+
+#: ../../integrations/monsterbrain.md:30
+msgid ""
+"**Side panel** – the section *Review · deciwa* holds the deciwa panel of "
+"the file: what is open, approved, stale, the questions, the whole "
+"project."
+msgstr ""
+"**Seitenpanel** – der Abschnitt *Review · deciwa* enthält das deciwa-"
+"Panel der Datei: was offen, freigegeben oder veraltet ist, die Fragen, "
+"das ganze Projekt."
+
+#: ../../integrations/monsterbrain.md:32
+msgid ""
+"**Tree and change view** – a mark per file: `2?` open questions, a number"
+" for jobs for the AI, `3/5` required elements approved, `✓` all reviewed."
+msgstr ""
+"**Baum und Änderungsansicht** – eine Markierung je Datei: `2?` offene "
+"Fragen, eine Zahl für Aufgaben für die KI, `3/5` freigegebene "
+"Pflichtelemente, `✓` alles geprüft."
+
+#: ../../integrations/monsterbrain.md:34
+msgid ""
+"**Diffs** – the new side of a rendered or side-by-side diff is "
+"reviewable; an approved paragraph that changed shows as stale."
+msgstr ""
+"**Diffs** – die neue Seite eines dargestellten oder nebeneinander "
+"gezeigten Diffs ist prüfbar; ein freigegebener Absatz, der sich geändert "
+"hat, erscheint als veraltet."
+
+#: ../../integrations/monsterbrain.md:36
+msgid "**HTML files** – the page gets the deciwa button inside its frame."
+msgstr "**HTML-Dateien** – die Seite bekommt den deciwa-Knopf in ihrem Frame."
+
+#: ../../integrations/monsterbrain.md:37
+msgid ""
+"**Claude** – monsterbrain's MCP server gains `deciwa_feedback` (the "
+"review state of a file, or every open job) and `deciwa_show` (open a file"
+" at an element)."
+msgstr ""
+"**Claude** – der MCP-Server von monsterbrain bekommt `deciwa_feedback` "
+"(der Review-Stand einer Datei oder alle offenen Aufgaben) und "
+"`deciwa_show` (eine Datei an einem Element öffnen)."
+
+#: ../../integrations/monsterbrain.md:41
+msgid ""
+"The review data is the folder's `.deciwa/`. A folder without one shows "
+"*Set up review* in the side panel (`deciwa init`)."
+msgstr ""
+"Die Review-Daten sind das `.deciwa/` des Ordners. Ein Ordner ohne zeigt "
+"im Seitenpanel *Set up review* (`deciwa init`)."
+
+#: ../../integrations/monsterbrain.md:44
+msgid "Setting up (development)"
+msgstr "Einrichten (Entwicklung)"
+
+#: ../../integrations/monsterbrain.md:46
+msgid ""
+"Until the standalone engine exists, the extension uses the engine of a "
+"deciwa checkout:"
+msgstr ""
+"Bis es die eigenständige Engine gibt, nutzt die Erweiterung die Engine "
+"eines deciwa-Checkouts:"
+
+#: ../../integrations/monsterbrain.md:54
+#, python-brace-format
+msgid ""
+"In monsterbrain: settings (`Ctrl ,`) → *Extensions* → *Add folder …* → "
+"`~/workspace/deciwa/packages/monsterbrain`, then *Restart to apply*. The "
+"extension finds the engine in `.venv` of the checkout; another one can be"
+" set in monsterbrain's `settings.json`: `{\"path\": "
+"\"…/packages/monsterbrain\", \"options\": {\"enginePath\": "
+"\"/path/to/deciwa\"}}`."
+msgstr ""
+"In monsterbrain: Einstellungen (`Ctrl ,`) → *Extensions* → *Add folder …*"
+" → `~/workspace/deciwa/packages/monsterbrain`, dann *Restart to apply*. "
+"Die Erweiterung findet die Engine im `.venv` des Checkouts; eine andere "
+"lässt sich in der `settings.json` von monsterbrain setzen: `{\"path\": "
+"\"…/packages/monsterbrain\", \"options\": {\"enginePath\": "
+"\"/pfad/zu/deciwa\"}}`."
 

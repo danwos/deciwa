@@ -26,7 +26,8 @@ Proposals by Claude – not binding until Daniel approves them.
 | `deciwa diff <id>` | snapshot vs. current text |
 | `deciwa relink <id> [<element>]` | update the selectors of a moved or orphaned annotation |
 
-`serve` exists since the prototype; `push` and `pull` follow in 0.5.
+`serve` exists since the prototype; `serve --api-only` serves only the JSON
+API for a host app ([Host apps](hosts.md)); `push` and `pull` follow in 0.5.
 
 ## Addressing an element
 

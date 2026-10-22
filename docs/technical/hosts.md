@@ -1,9 +1,11 @@
 # Host apps and the standalone engine
 
-:::{admonition} Status: draft
+:::{admonition} Status: hosts decided, standalone engine draft
 :class: status-draft
-Proposals by Claude, 2026-10-22 – not binding until Daniel approves them.
-Not part of 0.1, but 0.1 must not block it.
+The engine server, the host element source and the client are decided
+(2026-10-22) and built; monsterbrain is the first host
+({need}`DEC_HOST_ORDER`). The standalone engine further down is still a
+proposal.
 :::
 
 A **host** is an app that renders content itself and shows deciwa inside
@@ -20,8 +22,8 @@ it: [monsterbrain](../integrations/monsterbrain.md) first, then
 | Part | Where | Task |
 |---|---|---|
 | engine | `deciwa` binary: core, CLI, server and the overlay files | all logic, `.deciwa/`, the JSON API |
-| client | `packages/client` (TypeScript, npm) | find, start and stop the engine, check its version, typed calls to the JSON API |
-| overlay | `packages/ui` | card, panel, bars, guided review – with a third element source for hosts |
+| client | `packages/client` (TypeScript, npm `@danwos/deciwa-client`) | find, start and stop the engine, check its version, typed calls to the JSON API |
+| overlay | `packages/ui` | card, panel, bars, guided review – with a third element source for hosts (`js/host.js`) |
 | host adapter | `packages/monsterbrain`, later `packages/vscode` | maps the host's extension points to client and overlay – small, no logic |
 
 The host adapters depend on client and overlay, never on each other
@@ -30,72 +32,90 @@ the TypeScript parts only call the engine.
 
 ## Engine as a server for a host
 
-```{prop} deciwa serve --api-only: the JSON API for a folder, without a build
-:id: PROP_SERVE_API_ONLY
-:status: draft
-:refines: DEC_HOST_EXTENSIONS, DEC_CLI_MASTER
+{need}`DEC_SERVE_API_ONLY`
 
-`deciwa serve --api-only --root <folder> --port 0` serves the JSON API and
-no site; a host renders the content itself.
-
-- **Handshake:** on start the engine prints one JSON line to stdout –
-  `{"port": …, "token": "…", "api": 1}`. Port 0 picks a free port; every
-  request must carry the token, so other local pages cannot call the API.
-- **Lifetime:** the engine stops when its stdin closes, so it never
-  outlives the host.
-- **New endpoints** next to the ones of today (`/api/page`, `/api/annotate`,
-  …):
-  - `/api/elements?source=<path>` – the adapter's elements of a file with
-    selector, kind, label and line range,
-  - `/api/summary?sources=<path>,…` – counts per file and state (open,
-    approved, stale, frozen, questions) for badges in trees and lists,
-  - `/api/events` – server-sent events when `.deciwa/` or a reviewed source
-    changes, so the host refreshes instead of polling.
+```console
+$ deciwa serve --api-only --root <folder> --port 0
+{"deciwa": "0.0.1", "api": 1, "port": 41873, "token": "…", "root": "/home/daniel/brain"}
 ```
+
+- **Handshake:** the first line on stdout. `root` is the folder that holds
+  `.deciwa/` – it may lie above the folder the host opened; the host maps its
+  paths by the difference. Without `.deciwa/` the line is
+  `{"api": 1, "error": {"code": "no-deciwa", …}}` and the engine exits with 2;
+  the host can then offer `deciwa init --at <folder>`.
+- **Token:** every request carries the header `X-Deciwa-Token`; other local
+  pages cannot call the API. `--token` or `DECIWA_TOKEN` set it, otherwise it
+  is random.
+- **Lifetime:** the engine stops when its stdin closes, so it never outlives
+  the host. `--keep-running` turns this off (for trying it in a terminal).
+- **No site:** everything outside `/api/` answers 404.
+
+Endpoints for hosts, next to the ones of the review server (`/api/page`,
+`/api/annotate`, `/api/reply`, `/api/project`, `/api/todo`, …):
+
+| Endpoint | Returns |
+|---|---|
+| `GET /api/version` | `app` (engine version), `api` (major of the JSON API), `root` |
+| `GET /api/elements?source=<path>` | the elements of a file with selector, kind, label, line, text and fingerprint – from the elements index of a build, else from the adapter for the file type |
+| `POST /api/elements` `{source, title, elements}` | keeps the elements of a page the host scanned itself (rendered HTML), like the pages of a website in `.deciwa/web-pages.json` |
+| `GET /api/summary[?sources=a,b]` | per file: counts per state, open questions, jobs for the AI, required and done – without `sources` for every file with review data |
+| `GET /api/events` | server-sent events `{"type": "changed", "sources": […], "review": …, "config": …}` when `.deciwa/` or a reviewed file changes |
+
+Files without a build are read by their adapter on the fly
+([Adapters](adapters.md)), so a plain Markdown folder such as a knowledge
+base needs no Sphinx: `deciwa todo`, `show` and the project overview cover
+every file with review data and every file under `review.paths`.
 
 ## Overlay in a host
 
-```{prop} A third element source for the overlay: the host renders, the adapter names the elements
-:id: PROP_HOST_ELEMENTS
-:status: draft
-:refines: PROP_OVERLAY_PARTS, DEC_REVIEW_ON_RESULTS
+{need}`DEC_HOST_ELEMENTS`
 
-Next to Sphinx and the DOM scan, the overlay gets the element source
-`host`. The host marks its rendered view:
+The host marks its rendered view:
 
-- the container carries `data-deciwa-source="<path relative to the root>"`,
 - every block carries `data-line="<first source line, 0-based>"` – what
   markdown-it does with its token maps and what the VS Code Markdown preview
-  already does.
+  already does; lines count the frontmatter,
+- the host adapter sets `data-deciwa-source="<path relative to the root>"`
+  on the container.
 
-The overlay loads `/api/elements?source=…` and matches each block to the
-adapter element that starts on that line. Feedback then gets the same
-selectors as in the CLI (`md:paragraph:Career/Advisor#2`), so `deciwa todo`
-points at the source line. Blocks without a match are not reviewable.
-Rendered HTML files keep the DOM scan of the web script, with the file path
-as source.
+`hostElements()` in `packages/ui/js/host.js` loads nothing itself: the
+adapter passes the elements from `/api/elements`, and each is matched to the
+block of its kind that starts on its line (heading → `h1`–`h6`, paragraph →
+`p`, item → `li`, row → `tr`, code → `pre`). Elements of a build index whose
+lines are not exact (Sphinx) fall back to their text. Blocks without a match
+are not reviewable.
+
+`startOverlay()` takes a few options for hosts: `api` (calls go through the
+host, not `fetch`), `scroller` (the element the content scrolls in; the UI is
+mounted inside it), `keys: "review"` (keys only in review mode – the host keeps
+its own shortcuts), `tools: false` (no floating pill), `openDoc` (open another
+file in the host) and `focus`. It returns `dock()` / `undock()` to put the
+panel into the host's side panel, `setReview()`, `focus()`, `refresh()` and
+`destroy()`.
 
 In a diff the overlay runs on the new side only; the old side is read only.
-```
+Rendered HTML files keep the DOM scan of the web script, with the file path
+as source; their elements go to the engine with `POST /api/elements`.
 
-```{prop} One TypeScript client for all hosts
-:id: PROP_CLIENT_PACKAGE
-:status: draft
-:refines: DEC_HOST_EXTENSIONS, DEC_STANDALONE_ENGINE
+## Client
 
-`packages/client` (npm `@danwos/deciwa-client`):
+{need}`DEC_CLIENT_PACKAGE`
 
-- **finds the engine** in this order: a path from the host's settings, the
-  binary bundled with the host, `deciwa` on `PATH`,
-- **starts** it with `serve --api-only`, reads the handshake, restarts it
-  after a crash,
-- **checks the version:** `/api/version` returns the app version and the API
-  major; a host refuses an engine with another major and says why,
-- **typed calls** for every endpoint and the event stream.
+`packages/client` (`@danwos/deciwa-client`) runs in Node – the host's main or
+extension process, never in a page, so the token stays there:
 
-monsterbrain and VS Code use the same client; only the adapter that puts the
-results into the host's UI differs.
-```
+- `findEngine()` – the path from the host's settings, the engines bundled
+  with the host, then `deciwa` on `PATH`,
+- `new Engine({root, enginePath, bundled}).start()` – starts
+  `serve --api-only`, reads the handshake, refuses another API major
+  (`api-mismatch`), restarts after a crash (at most three times a minute),
+- typed calls (`elements`, `page`, `summary`, `todo`, `annotate`, `hostPage`,
+  `call` for any endpoint) and `events()` with reconnect,
+- `initFolder()` – `deciwa init --at <folder>`.
+
+`npm test` in `packages/client` starts the engine of the checkout against a
+temporary folder.
 
 ## Standalone engine
 
@@ -141,15 +161,4 @@ Proposal: PyInstaller – widely used, simple, no C compiler. Alternatives:
 Nuitka (compiles to C: faster and smaller, but long builds and a C compiler
 per platform); python-build-standalone plus the installed packages (no
 freezing problems, but bigger and many loose files).
-```
-
-```{question} Does monsterbrain come before VS Code?
-:id: Q_HOST_ORDER
-:status: open
-:to: Daniel
-:refines: DEC_HOST_EXTENSIONS
-
-Proposal: yes. Daniel uses monsterbrain daily on his knowledge base, which
-is also the first use of 0.1 ({doc}`rollout`). It tests the API server,
-the host element source and the client that VS Code needs later.
 ```

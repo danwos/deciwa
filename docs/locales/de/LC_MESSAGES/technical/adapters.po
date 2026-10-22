@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"POT-Creation-Date: 2026-10-22 13:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -215,10 +215,37 @@ msgstr ""
 "Schlüssel auf oberster Ebene)."
 
 #: ../../technical/adapters.md:77
+#, python-brace-format
+msgid ""
+"Built first, for host apps ({need}`DEC_HOST_ELEMENTS`): "
+"`deciwa.core.adapters.markdown` returns the elements as dicts in the "
+"shape of the Sphinx elements index (`selector`, `kind`, `label`, `line`, "
+"`end`, `text`, `fingerprint`, `parent`) – sections, paragraphs, list "
+"items, table rows, code blocks and pictures. Frontmatter fields and "
+"character offsets are still missing. The text of an element is what a "
+"reader sees (inline markup removed), as in the Sphinx and browser "
+"adapters, so a quote selected in a rendered view is found in it; a "
+"changed link target alone does not make an element stale. Lines are "
+"1-based and count the frontmatter. The engine uses the adapter for every "
+"file that no build index knows."
+msgstr ""
+"Als Erstes gebaut, für Host-Apps ({need}`DEC_HOST_ELEMENTS`): "
+"`deciwa.core.adapters.markdown` liefert die Elemente als Dicts in der "
+"Form des Sphinx-Elementindex (`selector`, `kind`, `label`, `line`, `end`,"
+" `text`, `fingerprint`, `parent`) – Abschnitte, Absätze, Listenpunkte, "
+"Tabellenzeilen, Codeblöcke und Bilder. Frontmatter-Felder und Zeichen-"
+"Offsets fehlen noch. Der Text eines Elements ist das, was Lesende sehen "
+"(ohne Inline-Markup), wie in den Sphinx- und Browser-Adaptern; so wird "
+"ein in einer dargestellten Ansicht markiertes Zitat darin gefunden, und "
+"ein geändertes Linkziel allein macht ein Element nicht veraltet. Zeilen "
+"zählen ab 1 und schließen die Frontmatter ein. Die Engine nutzt den "
+"Adapter für jede Datei, die kein Build-Index kennt."
+
+#: ../../technical/adapters.md:88
 msgid "rST and Sphinx-Needs"
 msgstr "rST und Sphinx-Needs"
 
-#: ../../technical/adapters.md:84
+#: ../../technical/adapters.md:95
 msgid ""
 "docutils keeps source lines on every node. Unknown directives and roles "
 "(Sphinx, Sphinx-Needs, any extension) are registered as generic "
@@ -233,7 +260,7 @@ msgstr ""
 " werden am Namen erkannt; ihre `:id:` ergibt den `sphinx-"
 "needs:`-Selektor."
 
-#: ../../technical/adapters.md:97
+#: ../../technical/adapters.md:108
 msgid ""
 "Proposal: read them from `needs.json` if the project builds one, "
 "otherwise from `.deciwa/config.toml` (`needs.directives = [\"req\", "
@@ -247,11 +274,11 @@ msgstr ""
 "`impl`, `test`, `need`). OK, oder soll deciwa `conf.py` / "
 "`ubproject.toml` direkt lesen?"
 
-#: ../../technical/adapters.md:103
+#: ../../technical/adapters.md:114
 msgid "Plain text"
 msgstr "Reiner Text"
 
-#: ../../technical/adapters.md:105
+#: ../../technical/adapters.md:116
 msgid ""
 "Paragraphs are blocks separated by blank lines; lines are a second level."
 " Everything else is free text selection."
@@ -259,11 +286,11 @@ msgstr ""
 "Absätze sind durch Leerzeilen getrennte Blöcke; Zeilen sind eine zweite "
 "Ebene. Alles andere ist freie Textauswahl."
 
-#: ../../technical/adapters.md:108
+#: ../../technical/adapters.md:119
 msgid "HTML in the browser"
 msgstr "HTML im Browser"
 
-#: ../../technical/adapters.md:115
+#: ../../technical/adapters.md:126
 msgid ""
 "A small adapter in JavaScript reads the DOM of the review root and "
 "returns the same element list as the other adapters:"
@@ -271,7 +298,7 @@ msgstr ""
 "Ein kleiner Adapter in JavaScript liest das DOM der Review-Wurzel und "
 "liefert dieselbe Elementliste wie die anderen Adapter:"
 
-#: ../../technical/adapters.md:118
+#: ../../technical/adapters.md:129
 msgid ""
 "sections from the heading outline `h1`–`h6` (web pages rarely nest real "
 "`<section>` elements), named by their heading path,"
@@ -280,7 +307,7 @@ msgstr ""
 "verschachteln selten echte `<section>`-Elemente), benannt nach ihrem "
 "Überschriftenpfad,"
 
-#: ../../technical/adapters.md:120
+#: ../../technical/adapters.md:131
 msgid ""
 "paragraphs, list items, table rows (`tr` outside `thead`), code blocks "
 "(`pre`), notes (`aside`, `[role=note]`), pictures (`img`, `svg`, "
@@ -290,7 +317,7 @@ msgstr ""
 "Codeblöcke (`pre`), Hinweise (`aside`, `[role=note]`), Bilder (`img`, "
 "`svg`, `figure`, `picture`) – pro Abschnitt gezählt wie in Markdown,"
 
-#: ../../technical/adapters.md:123
+#: ../../technical/adapters.md:134
 msgid ""
 "left out: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-"
 "hidden=true]`, `script`, `style` and everything matching `data-ignore`."
@@ -298,7 +325,7 @@ msgstr ""
 "ausgelassen: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-"
 "hidden=true]`, `script`, `style` und alles, worauf `data-ignore` passt."
 
-#: ../../technical/adapters.md:126
+#: ../../technical/adapters.md:137
 msgid ""
 "The fingerprint is SHA-256 over the normalised text, computed with "
 "`crypto.subtle` – the same value as `model.fingerprint` in Python, so the"
@@ -312,7 +339,7 @@ msgstr ""
 "Overlay wechselt von seinem lokalen FNV-Hash zu diesem. Bei Bildern "
 "bilden `src`, `alt` und Bildunterschrift den Fingerprint."
 
-#: ../../technical/adapters.md:132
+#: ../../technical/adapters.md:143
 msgid ""
 "Pages with build hints (`#deciwa-page`, as the Sphinx extension writes "
 "it) skip the scan and use the hints."
@@ -320,11 +347,11 @@ msgstr ""
 "Seiten mit Build-Hinweisen (`#deciwa-page`, wie die Sphinx-Erweiterung es"
 " schreibt) überspringen den Scan und nutzen die Hinweise."
 
-#: ../../technical/adapters.md:136
+#: ../../technical/adapters.md:147
 msgid "Free text selection"
 msgstr "Freie Textauswahl"
 
-#: ../../technical/adapters.md:143
+#: ../../technical/adapters.md:154
 msgid ""
 "Selecting a word stores the structural selector of the element that "
 "contains it plus a `TextQuoteSelector` (exact, prefix, suffix) and a "

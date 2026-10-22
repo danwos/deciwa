@@ -75,7 +75,9 @@ deciwa/
 │   ├── server/          deciwa-server   review server
 │   ├── cli/             deciwa-cli      the deciwa command
 │   ├── ui/              deciwa-ui       review overlay (JS/CSS)
-│   └── sphinx/          deciwa-sphinx   Sphinx extension
+│   ├── sphinx/          deciwa-sphinx   Sphinx extension
+│   ├── client/          @danwos/deciwa-client   engine client for host apps (TypeScript)
+│   └── monsterbrain/    deciwa-monsterbrain     the monsterbrain extension
 ├── docs/                these docs – product, integrations, decisions,
 │                        technical details
 ├── .deciwa/             review data of these docs (config.toml: what must be approved)
@@ -131,6 +133,8 @@ packages share the Python namespace `deciwa`.
 | `packages/cli` | `deciwa-cli` | `deciwa.cli` | the `deciwa` command; `deciwa serve` passes the Sphinx build to the server | core, server |
 | `packages/ui` | `deciwa-ui` | `deciwa.ui` | the review overlay (JavaScript, CSS, logo) in the danwos tool UI kit, including the offline engine and the web script; sources in `js/`, built with `npm run build` into `static/`; no Python logic | – |
 | `packages/sphinx` | `deciwa-sphinx` | `deciwa.sphinx` | Sphinx extension: finds the elements of every page, writes the elements index, ships the review UI | core, ui |
+| `packages/client` | `@danwos/deciwa-client` (npm) | – | finds, starts and checks the engine for a host app, typed calls to the JSON API ([Host apps](hosts.md)) | the engine (`deciwa serve --api-only`) |
+| `packages/monsterbrain` | `deciwa-monsterbrain` (npm, private) | – | the monsterbrain extension: overlay on rendered files, side panel, marks in the tree, MCP tools; `npm run build` bundles client and overlay into `dist/` | client, ui |
 
 `deciwa-sphinx` does not import `deciwa-server`: a static (offline) build
 needs no server. With `deciwa serve`, the server runs the Sphinx build, and

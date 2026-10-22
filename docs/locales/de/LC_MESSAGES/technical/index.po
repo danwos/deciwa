@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 10:22+0200\n"
+"POT-Creation-Date: 2026-10-22 13:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -130,7 +130,7 @@ msgstr ""
 "Dateien.</figcaption>\n"
 "</figure>"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid ""
 "<figure class=\"diagram\">\n"
 "<svg viewBox=\"0 0 760 340\" role=\"img\" aria-labelledby=\"pkg-t\">\n"
@@ -314,16 +314,16 @@ msgstr ""
 msgid "Repository"
 msgstr "Repository"
 
-#: ../../technical/index.md:89
+#: ../../technical/index.md:91
 msgid "Packages"
 msgstr "Pakete"
 
-#: ../../technical/index.md:91
+#: ../../technical/index.md:93
 #, python-brace-format
 msgid "The split into packages is {need}`DEC_PACKAGES`."
 msgstr "Die Aufteilung in Pakete ist {need}`DEC_PACKAGES`."
 
-#: ../../technical/index.md:93
+#: ../../technical/index.md:95
 msgid ""
 "deciwa is one repository with one package per part – a uv workspace. All "
 "packages share the Python namespace `deciwa`."
@@ -331,39 +331,39 @@ msgstr ""
 "deciwa ist ein Repository mit einem Paket pro Teil – ein uv-Workspace. "
 "Alle Pakete teilen sich den Python-Namespace `deciwa`."
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "Folder"
 msgstr "Ordner"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "Distribution"
 msgstr "Distribution"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "Import"
 msgstr "Import"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "Contains"
 msgstr "Enthält"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "Depends on"
 msgstr "Hängt ab von"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`packages/core`"
 msgstr "`packages/core`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa-core`"
 msgstr "`deciwa-core`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa.core`"
 msgstr "`deciwa.core`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid ""
 "model, `.deciwa/` store, engine – states, review rules, project overview,"
 " export/import"
@@ -371,23 +371,23 @@ msgstr ""
 "Modell, `.deciwa/`-Store, Engine – Zustände, Review-Regeln, "
 "Projektüberblick, Export/Import"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "–"
 msgstr "–"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`packages/server`"
 msgstr "`packages/server`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa-server`"
 msgstr "`deciwa-server`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa.server`"
 msgstr "`deciwa.server`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid ""
 "local review server: serves a built site, the JSON API for the review UI,"
 " rebuilds and reloads on change; knows no build tool – the caller passes "
@@ -397,45 +397,45 @@ msgstr ""
 "die Review-Oberfläche, baut bei Änderungen neu und lädt neu; kennt kein "
 "Build-Tool – der Aufrufer übergibt den Build-Befehl"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "core"
 msgstr "core"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`packages/cli`"
 msgstr "`packages/cli`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa-cli`"
 msgstr "`deciwa-cli`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa.cli`"
 msgstr "`deciwa.cli`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "the `deciwa` command; `deciwa serve` passes the Sphinx build to the server"
 msgstr ""
 "der Befehl `deciwa`; `deciwa serve` übergibt den Sphinx-Build an den "
 "Server"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "core, server"
 msgstr "core, server"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`packages/ui`"
 msgstr "`packages/ui`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa-ui`"
 msgstr "`deciwa-ui`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa.ui`"
 msgstr "`deciwa.ui`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid ""
 "the review overlay (JavaScript, CSS, logo) in the danwos tool UI kit, "
 "including the offline engine and the web script; sources in `js/`, built "
@@ -445,19 +445,19 @@ msgstr ""
 "inklusive der Offline-Engine und des Web-Skripts; Quellen in `js/`, mit "
 "`npm run build` nach `static/` gebaut; keine Python-Logik"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`packages/sphinx`"
 msgstr "`packages/sphinx`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa-sphinx`"
 msgstr "`deciwa-sphinx`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "`deciwa.sphinx`"
 msgstr "`deciwa.sphinx`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid ""
 "Sphinx extension: finds the elements of every page, writes the elements "
 "index, ships the review UI"
@@ -465,11 +465,53 @@ msgstr ""
 "Sphinx-Erweiterung: findet die Elemente jeder Seite, schreibt den "
 "Elemente-Index, liefert die Review-Oberfläche mit"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "core, ui"
 msgstr "core, ui"
 
-#: ../../technical/index.md:135
+#: ../../technical/index.md:98
+msgid "`packages/client`"
+msgstr "`packages/client`"
+
+#: ../../technical/index.md:98
+msgid "`@danwos/deciwa-client` (npm)"
+msgstr "`@danwos/deciwa-client` (npm)"
+
+#: ../../technical/index.md:98
+msgid ""
+"finds, starts and checks the engine for a host app, typed calls to the "
+"JSON API ([Host apps](hosts.md))"
+msgstr ""
+"findet, startet und prüft die Engine für eine Host-App, typisierte "
+"Aufrufe der JSON-API ([Host-Apps](hosts.md))"
+
+#: ../../technical/index.md:98
+msgid "the engine (`deciwa serve --api-only`)"
+msgstr "die Engine (`deciwa serve --api-only`)"
+
+#: ../../technical/index.md:98
+msgid "`packages/monsterbrain`"
+msgstr "`packages/monsterbrain`"
+
+#: ../../technical/index.md:98
+msgid "`deciwa-monsterbrain` (npm, private)"
+msgstr "`deciwa-monsterbrain` (npm, privat)"
+
+#: ../../technical/index.md:98
+msgid ""
+"the monsterbrain extension: overlay on rendered files, side panel, marks "
+"in the tree, MCP tools; `npm run build` bundles client and overlay into "
+"`dist/`"
+msgstr ""
+"die monsterbrain-Erweiterung: Overlay auf dargestellten Dateien, "
+"Seitenpanel, Markierungen im Baum, MCP-Tools; `npm run build` bündelt "
+"Client und Overlay nach `dist/`"
+
+#: ../../technical/index.md:98
+msgid "client, ui"
+msgstr "client, ui"
+
+#: ../../technical/index.md:139
 msgid ""
 "`deciwa-sphinx` does not import `deciwa-server`: a static (offline) build"
 " needs no server. With `deciwa serve`, the server runs the Sphinx build, "
@@ -480,11 +522,11 @@ msgstr ""
 "Server den Sphinx-Build aus, und die Review-Oberfläche in den Seiten "
 "spricht mit der JSON-API des Servers."
 
-#: ../../technical/index.md:139
+#: ../../technical/index.md:143
 msgid "Rules:"
 msgstr "Regeln:"
 
-#: ../../technical/index.md:141
+#: ../../technical/index.md:145
 msgid ""
 "Logic lives in `deciwa-core` only. The offline engine in `deciwa-ui` "
 "mirrors its rules for reviews without a server and must be kept in step."
@@ -493,7 +535,7 @@ msgstr ""
 "spiegelt ihre Regeln für Reviews ohne Server und muss mit ihr Schritt "
 "halten."
 
-#: ../../technical/index.md:143
+#: ../../technical/index.md:147
 msgid ""
 "`deciwa-server` and `deciwa-cli` are reused by every integration that "
 "reviews in a browser or calls the CLI."
@@ -501,7 +543,7 @@ msgstr ""
 "`deciwa-server` und `deciwa-cli` werden von jeder Integration "
 "wiederverwendet, die im Browser reviewt oder die CLI aufruft."
 
-#: ../../technical/index.md:145
+#: ../../technical/index.md:149
 msgid ""
 "An integration package depends on `deciwa-core` and, for a browser UI, on"
 " `deciwa-ui` – never on another integration."
@@ -509,103 +551,103 @@ msgstr ""
 "Ein Integrationspaket hängt von `deciwa-core` und, für eine Browser-"
 "Oberfläche, von `deciwa-ui` ab – nie von einer anderen Integration."
 
-#: ../../technical/index.md:148
+#: ../../technical/index.md:152
 msgid "Setting up"
 msgstr "Einrichten"
 
-#: ../../technical/index.md:155
+#: ../../technical/index.md:159
 msgid "Using deciwa in another Sphinx project:"
 msgstr "deciwa in einem anderen Sphinx-Projekt nutzen:"
 
-#: ../../technical/index.md:162
+#: ../../technical/index.md:166
 msgid "Pages"
 msgstr "Seiten"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "Page"
 msgstr "Seite"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "Decides"
 msgstr "Entscheidet"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[Stack](stack.md)"
 msgstr "[Stack](stack.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "language, packaging, tooling"
 msgstr "Sprache, Packaging, Tooling"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[Layers](layers.md)"
 msgstr "[Schichten](layers.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "modules of the core and how they depend on each other"
 msgstr "Module des Cores und wie sie voneinander abhängen"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[Adapters](adapters.md)"
 msgstr "[Adapter](adapters.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "how a format turns into elements and selectors"
 msgstr "wie ein Format zu Elementen und Selektoren wird"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[File format](file-format.md)"
 msgstr "[Dateiformat](file-format.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "the JSON inside `.deciwa/`"
 msgstr "das JSON in `.deciwa/`"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[State engine](state-engine.md)"
 msgstr "[Zustands-Engine](state-engine.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "how the state of an element is computed"
 msgstr "wie der Zustand eines Elements berechnet wird"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[CLI](cli.md)"
 msgstr "[CLI](cli.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "commands, element addressing, JSON output"
 msgstr "Befehle, Adressierung von Elementen, JSON-Ausgabe"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[Skills](skills.md)"
 msgstr "[Skills](skills.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "what the two agent skills do and how they ship"
 msgstr "was die zwei Agent-Skills tun und wie sie ausgeliefert werden"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[Rollout](rollout.md)"
 msgstr "[Einführung](rollout.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "how 0.1 gets into Daniel's knowledge base"
 msgstr "wie 0.1 in Daniels Wissensbasis kommt"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "[Working on deciwa](working.md)"
 msgstr "[An deciwa arbeiten](working.md)"
 
-#: ../../technical/index.md:96
+#: ../../technical/index.md:98
 msgid "docs as the truth, reviewing them in deciwa, from proposal to decision"
 msgstr "Docs als Wahrheit, sie in deciwa reviewen, vom Vorschlag zur Entscheidung"
 
-#: ../../technical/index.md:176
+#: ../../technical/index.md:180
 msgid "All proposals"
 msgstr "Alle Vorschläge"
 
-#: ../../technical/index.md:184
+#: ../../technical/index.md:188
 msgid "How the proposals relate to the decisions"
 msgstr "Wie die Vorschläge mit den Entscheidungen zusammenhängen"
 

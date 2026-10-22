@@ -74,6 +74,17 @@ engine tries next. Duplicate heading names in one path get a suffix
 - Elements: heading sections, paragraphs, list items (nested), table rows,
   code blocks, frontmatter fields (YAML keys at the top level).
 
+Built first, for host apps ({need}`DEC_HOST_ELEMENTS`):
+`deciwa.core.adapters.markdown` returns the elements as dicts in the shape of
+the Sphinx elements index (`selector`, `kind`, `label`, `line`, `end`, `text`,
+`fingerprint`, `parent`) – sections, paragraphs, list items, table rows, code
+blocks and pictures. Frontmatter fields and character offsets are still
+missing. The text of an element is what a reader sees (inline markup
+removed), as in the Sphinx and browser adapters, so a quote selected in a
+rendered view is found in it; a changed link target alone does not make an
+element stale. Lines are 1-based and count the frontmatter. The engine uses
+the adapter for every file that no build index knows.
+
 ## rST and Sphinx-Needs
 
 ```{prop} The rST adapter parses with docutils, without running Sphinx

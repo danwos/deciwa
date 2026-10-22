@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"POT-Creation-Date: 2026-10-22 13:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -136,14 +136,20 @@ msgid "update the selectors of a moved or orphaned annotation"
 msgstr "die Selektoren einer verschobenen oder verwaisten Annotation aktualisieren"
 
 #: ../../technical/cli.md:29
-msgid "`serve` exists since the prototype; `push` and `pull` follow in 0.5."
-msgstr "`serve` gibt es seit dem Prototyp; `push` und `pull` folgen in 0.5."
+msgid ""
+"`serve` exists since the prototype; `serve --api-only` serves only the "
+"JSON API for a host app ([Host apps](hosts.md)); `push` and `pull` follow"
+" in 0.5."
+msgstr ""
+"`serve` gibt es seit dem Prototyp; `serve --api-only` liefert nur die "
+"JSON-API für eine Host-App ([Host-Apps](hosts.md)); `push` und `pull` "
+"folgen in 0.5."
 
-#: ../../technical/cli.md:31
+#: ../../technical/cli.md:32
 msgid "Addressing an element"
 msgstr "Ein Element adressieren"
 
-#: ../../technical/cli.md:33
+#: ../../technical/cli.md:34
 msgid ""
 "The element argument is a structural selector, as printed by `deciwa "
 "elements`, or a text quote:"
@@ -151,7 +157,7 @@ msgstr ""
 "Das Element-Argument ist ein struktureller Selektor, wie ihn `deciwa "
 "elements` ausgibt, oder ein Textzitat:"
 
-#: ../../technical/cli.md:55
+#: ../../technical/cli.md:56
 #, python-brace-format
 msgid ""
 "`--json` prints `{\"deciwa\": \"0.1\", \"command\": \"<name>\", \"ok\": "
@@ -166,7 +172,7 @@ msgstr ""
 "`2` Bedienfehler. Die Ausgabe für Menschen darf sich zwischen Versionen "
 "ändern, die JSON-Hülle nicht."
 
-#: ../../technical/cli.md:66
+#: ../../technical/cli.md:67
 msgid ""
 "`deciwa status --fail-on frozen-changed,orphaned` exits with `3` when "
 "such elements exist. deciwa still only shows – the team decides whether "

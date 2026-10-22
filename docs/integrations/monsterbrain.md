@@ -1,6 +1,6 @@
 # monsterbrain
 
-*Planned – technical details: [Host apps](../technical/hosts.md).*
+*Available for development setups – technical details: [Host apps](../technical/hosts.md).*
 
 monsterbrain is the danwos desktop app for keeping track of a knowledge
 folder: file tree, the file rendered for its type, links and metadata, and a
@@ -20,3 +20,39 @@ deciwa comes as a monsterbrain extension and brings its engine along – no
 Python, no terminal ({need}`DEC_HOST_EXTENSIONS`,
 {need}`DEC_STANDALONE_ENGINE`). Without the extension monsterbrain works as
 before, just without review.
+
+## In monsterbrain
+
+- **Review mode** – `Shift R` or the switch in the side panel. Then the keys
+  of the review UI work on the rendered file: `a r f d` for a verdict, `0–5`
+  for stars, `n` for a comment, `v` guided review, `j k` next and previous
+  element. Outside review mode monsterbrain keeps its own keys.
+- **Side panel** – the section *Review · deciwa* holds the deciwa panel of the
+  file: what is open, approved, stale, the questions, the whole project.
+- **Tree and change view** – a mark per file: `2?` open questions, a number
+  for jobs for the AI, `3/5` required elements approved, `✓` all reviewed.
+- **Diffs** – the new side of a rendered or side-by-side diff is reviewable;
+  an approved paragraph that changed shows as stale.
+- **HTML files** – the page gets the deciwa button inside its frame.
+- **Claude** – monsterbrain's MCP server gains `deciwa_feedback` (the review
+  state of a file, or every open job) and `deciwa_show` (open a file at an
+  element).
+
+The review data is the folder's `.deciwa/`. A folder without one shows *Set
+up review* in the side panel (`deciwa init`).
+
+## Setting up (development)
+
+Until the standalone engine exists, the extension uses the engine of a
+deciwa checkout:
+
+```console
+$ cd ~/workspace/deciwa && uv sync
+$ cd packages/monsterbrain && npm ci && npm run build
+```
+
+In monsterbrain: settings (`Ctrl ,`) → *Extensions* → *Add folder …* →
+`~/workspace/deciwa/packages/monsterbrain`, then *Restart to apply*. The
+extension finds the engine in `.venv` of the checkout; another one can be set
+in monsterbrain's `settings.json`:
+`{"path": "…/packages/monsterbrain", "options": {"enginePath": "/path/to/deciwa"}}`.

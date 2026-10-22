@@ -17,6 +17,8 @@ uv sync                       # all packages (editable) and the docs tools
 | `packages/cli` | `deciwa-cli` – the `deciwa` command |
 | `packages/ui` | `deciwa-ui` – the review overlay (JS/CSS) for browser integrations and the web script; sources in `js/`, `npm ci && npm run build` writes `src/deciwa/ui/static/` (committed) |
 | `packages/sphinx` | `deciwa-sphinx` – Sphinx extension (`extensions = ["deciwa.sphinx"]`) |
+| `packages/client` | `@danwos/deciwa-client` – finds, starts and calls the engine for host apps (TypeScript); `npm ci && npm run build && npm test` |
+| `packages/monsterbrain` | the monsterbrain extension; `npm ci && npm run build`, then add the folder in monsterbrain's settings – `docs/integrations/monsterbrain.md` |
 | `docs/` | product description, integrations, decisions, technical details – the requirements for all code here; reviewed with deciwa itself |
 | `.deciwa/` | review data of the docs (`config.toml` sets what must be approved) |
 | `mockups/` | the first clickable mock-up of the feedback UI and the demo recorder |

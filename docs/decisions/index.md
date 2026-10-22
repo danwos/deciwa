@@ -174,6 +174,38 @@ A new decision comes from an approved proposal in the technical details – see
 :alternatives: Python and `uv tool install deciwa` as a prerequisite for every host; a TypeScript port of the core.
 ```
 
+```{dec} A host talks to deciwa serve --api-only: the JSON API for one folder, no build, token and handshake, stops with the host
+:id: DEC_SERVE_API_ONLY
+:status: approved
+:decided: 2026-10-22
+:reason: A host renders the content itself and only needs the engine's logic; port 0 and a token keep several hosts and other local pages apart; closing stdin ends the engine, so it never outlives its host.
+:alternatives: the full `deciwa serve` with a built site; the engine as a Python library inside the host.
+```
+
+```{dec} In a host the overlay gets its elements from the engine's adapter, matched to the blocks the host marks with their source line
+:id: DEC_HOST_ELEMENTS
+:status: approved
+:decided: 2026-10-22
+:reason: The host renders, the adapter knows the elements – feedback gets the same selectors as in the CLI, so `deciwa todo` points at the source line. Rendered HTML files keep the DOM scan with the file path as source.
+:alternatives: a DOM scan of the host's rendering (other selectors than the CLI); the host sending its own element list.
+```
+
+```{dec} One TypeScript client for all hosts finds, starts and checks the engine and calls its API
+:id: DEC_CLIENT_PACKAGE
+:status: approved
+:decided: 2026-10-22
+:reason: monsterbrain and VS Code need the same engine handling; only the adapter that puts the results into the host's UI differs.
+:alternatives: every host adapter talking to the engine on its own.
+```
+
+```{dec} monsterbrain is the first host, before VS Code
+:id: DEC_HOST_ORDER
+:status: approved
+:decided: 2026-10-22
+:reason: Daniel uses monsterbrain daily on his knowledge base, the first use of deciwa; it tests the API server, the host element source and the client that VS Code needs later.
+:alternatives: VS Code first.
+```
+
 ## UI and integrations
 
 ```{dec} Integrations: VS Code, Chrome, Claude UI, desktop app
