@@ -301,3 +301,8 @@ body.dwr-on article a { cursor: alias; }
   .dwr-panel { width: 100vw; border-left: 0; }
   .dwr-tools { right: 10px; bottom: 10px; }
 }
+
+/* panel docked in a host app's own side panel */
+.dwr-panel.docked { position: static; display: block; width: auto; max-width: 100%; z-index: auto; border: 2px solid var(--t-edge);
+  border-radius: 12px; overflow: hidden; padding-bottom: 8px; background: var(--t-surface); }
+.dwr-panel.docked .tbar { position: relative; }

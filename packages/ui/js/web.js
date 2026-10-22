@@ -3,6 +3,7 @@
  * review stays in this browser, the UI lives in a Shadow DOM. */
 import { startOverlay } from "./overlay.js";
 import { scan, findRoot } from "./dom.js";
+import { shadowCss } from "./shadow.js";
 import CSS from "../src/deciwa/ui/static/deciwa-overlay.css";
 import MONSTER from "../src/deciwa/ui/static/deciwa-monster.webp";
 
@@ -39,10 +40,7 @@ function remember(page, elements) {
 }
 
 // inside the shadow root the tokens hang on the host instead of :root and body
-const shadowCss = ":host { all: initial; }\n" + CSS
-  .replace(/:root\b/g, ":host")
-  .replace(/body\[data-theme="dark"\]/g, ':host([data-theme="dark"])')
-  .replace(/body:not\(\[data-theme="light"\]\)/g, ':host(:not([data-theme="light"]))');
+const SHADOW_CSS = shadowCss(CSS);
 const PAGE_CSS = "body.dwr-on [data-dw-key] { cursor: pointer; } body.dwr-on [data-dw-key] a { cursor: alias; }";
 
 async function start() {
@@ -50,7 +48,7 @@ async function start() {
   hostEl.id = "deciwa";
   hostEl.style.cssText = "position:absolute;top:0;left:0;width:0;height:0;z-index:2147483000;";
   const shadow = hostEl.attachShadow({ mode: "open" });
-  shadow.innerHTML = `<style>${shadowCss}</style>`;
+  shadow.innerHTML = `<style>${SHADOW_CSS}</style>`;
   const pageStyle = document.createElement("style");
   pageStyle.textContent = PAGE_CSS;
   const attach = () => {

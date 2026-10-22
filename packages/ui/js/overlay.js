@@ -10,11 +10,39 @@
  *   docUrl(doc) address of another page
  *   storageKey  localStorage key of the offline review
  *   loadData()  offline data: {elements, annotations, config}
- *   exportPages true: exports carry the elements index (no build has one) */
+ *   exportPages true: exports carry the elements index (no build has one)
+ * A host app (PROP_HOST_ELEMENTS) can also hand over:
+ *   api(path, body)   calls the engine itself (no fetch from the page, no polling)
+ *   scroller          the element the content scrolls in; the UI is mounted inside it
+ *   keys: "review"    keys only while review mode is on; the host has its own for the rest
+ *   tools: false      no floating tool pill – the host shows review mode and counts
+ *   openDoc({doc, source}, selector)   open another page in the host
+ *   focus             selector to open at start
+ * startOverlay returns {update, refresh, destroy, dock, undock, setReview, toggleReview, focus, review}. */
 import { sha256 } from "./hash.js";
 
 export function startOverlay(host) {
   let PAGE = host.page;
+  const hostKeys = host.keys === "review";
+
+  // listeners on document and window, removed again by destroy()
+  const listeners = [];
+  function on(target, type, fn, opts) { target.addEventListener(type, fn, opts); listeners.push([target, type, fn, opts]); }
+  let destroyed = false;
+
+  // where the content scrolls: the window, or a host's scroll box (the UI then lives inside it)
+  const scroller = host.scroller || null;
+  function frame() {  // the visible content area in viewport coordinates
+    if (!scroller) return { left: 0, top: 0, right: innerWidth, bottom: innerHeight, width: innerWidth, height: innerHeight };
+    return scroller.getBoundingClientRect();
+  }
+  function origin() {  // add to a viewport point to get its position in the UI layer
+    if (!scroller) return { x: scrollX, y: scrollY };
+    const r = scroller.getBoundingClientRect();
+    return { x: scroller.scrollLeft - r.left - scroller.clientLeft, y: scroller.scrollTop - r.top - scroller.clientTop };
+  }
+  const scrollView = opts => (scroller || window).scrollBy(opts);
+  const contentHeight = () => scroller ? scroller.scrollHeight : document.documentElement.scrollHeight;
 
   // verdict buttons in the card, in this order; a comment alone is sent as a note
   const ACTS = {
@@ -51,7 +79,7 @@ export function startOverlay(host) {
   }
   setElements(host.elements);
   // events from inside a shadow root reach the document with the host as target
-  const inUI = ev => ev.composedPath().includes(ui);
+  const inUI = ev => { const path = ev.composedPath(); return path.includes(ui) || path.includes(panel); };
 
   function elementAt(target, up = 0) {
     const chain = [];
@@ -86,6 +114,7 @@ export function startOverlay(host) {
       <button class="x" title="Close (Esc)">×</button></div><div class="tools"><button class="btn" data-copy>Copy</button></div><pre></pre></div></div>
     <div class="dwr-toast"></div>`;
   host.mount.appendChild(ui);
+  if (host.tools === false) ui.querySelector(".dwr-tools").style.display = "none";
   const $ = s => ui.querySelector(s);
   const hoverBox = $(".dwr-box.hover"), focusBox = $(".dwr-box.focus"), card = $(".dwr-card");
   const panel = $(".dwr-panel"), bars = $(".dwr-bars");
@@ -96,9 +125,10 @@ export function startOverlay(host) {
   const panelPrefs = (() => { try { return JSON.parse(localStorage.getItem(PANEL_KEY)) || {}; } catch (_) { return {}; } })();
   let panelTab = ["project", "files", "help"].includes(panelPrefs.tab) ? panelPrefs.tab : "page";
   function savePanelPrefs() {
-    try { localStorage.setItem(PANEL_KEY, JSON.stringify({ open: document.querySelector(".dwr-panel").classList.contains("on"), tab: panelTab, review: reviewOn, guided })); } catch (_) {}
+    try { localStorage.setItem(PANEL_KEY, JSON.stringify({ open: docked ? panelPrefs.open === true : panel.classList.contains("on"), tab: panelTab, review: reviewOn, guided })); } catch (_) {}
   }
   let guided = panelPrefs.guided === true;  // guided review: walk the required elements without a verdict
+  let docked = false;  // the panel lives in the host's own side panel
   let online = false, reviewOn = panelPrefs.review === true, hovered = null, current = null, quote = null, version = null;
 
   function toast(msg) {
@@ -107,8 +137,8 @@ export function startOverlay(host) {
   }
 
   function place(box, node) {
-    const r = node.getBoundingClientRect();
-    Object.assign(box.style, { display: "block", left: `${r.left + scrollX - 4}px`, top: `${r.top + scrollY - 3}px`,
+    const r = node.getBoundingClientRect(), o = origin();
+    Object.assign(box.style, { display: "block", left: `${r.left + o.x - 4}px`, top: `${r.top + o.y - 3}px`,
       width: `${r.width + 8}px`, height: `${r.height + 6}px` });
   }
 
@@ -120,6 +150,7 @@ export function startOverlay(host) {
 
   async function api(path, body) {
     if (mode === "offline") return Offline.call(path, body);
+    if (host.api) return host.api(path, body);
     const res = await fetch(path, body ? { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body) } : undefined);
     const data = await res.json();
@@ -329,7 +360,7 @@ export function startOverlay(host) {
         const item = pg.items.find(i => i.required && !i.decided);
         if (!item) continue;
         if (pg.doc === PAGE.doc) return goTo(null, item.selector);
-        return goTo(pg.doc, item.selector);
+        return goTo(pg.doc, item.selector, pg.source);
       }
     } catch (_) {}
     toast("Done – every required element has a verdict");
@@ -358,7 +389,8 @@ export function startOverlay(host) {
   function drawBars() {
     bars.innerHTML = "";
     const article = host.article() || document.body;
-    const left = article.getBoundingClientRect().left + scrollX - 14;
+    const o = origin();
+    const left = article.getBoundingClientRect().left + o.x - 14;
     const sels = new Set([...Object.keys(view.elements), ...(view.required || [])]);
     for (const sel of sels) {
       const e = bySel[sel]; if (!e) continue;
@@ -366,7 +398,7 @@ export function startOverlay(host) {
       const r = e.node.getBoundingClientRect();
       const b = document.createElement("div");
       b.className = "dwr-bar" + (st?.requested ? " req" : "") + (st ? "" : " todo");
-      Object.assign(b.style, { left: `${left}px`, top: `${r.top + scrollY}px`, height: `${Math.max(r.height, 14)}px` });
+      Object.assign(b.style, { left: `${left}px`, top: `${r.top + o.y}px`, height: `${Math.max(r.height, 14)}px` });
       if (st) b.style.background = cv(STATE_C[st.state]);
       b.title = st ? `${st.state}${st.stars != null ? ` · ${st.stars} ★` : ""}${st.requested ? " · question open" : ""}`
                    : "must be approved – not reviewed yet";
@@ -462,18 +494,19 @@ export function startOverlay(host) {
         (y.required && !y.decided) - (x.required && !x.decided) || ORDER.indexOf(x.state) - ORDER.indexOf(y.state));
       html += `<details class="pg"${pg.doc === PAGE.doc || open ? " open" : ""}>
         <summary><b>${esc(pg.title)}</b><span>${pg.required ? `${pg.decided}/${pg.required} · ${pg.rated}★` : ""}${pg.orphans ? ` · ${pg.orphans} orphaned` : ""}</span></summary>
-        ${items.map(i => `<div class="item${i.required ? " required" : ""}" data-doc="${esc(pg.doc)}" data-sel="${esc(i.selector)}" style="--c:${cv(STATE_C[i.state])}">
+        ${items.map(i => `<div class="item${i.required ? " required" : ""}" data-doc="${esc(pg.doc)}" data-src="${esc(pg.source)}" data-sel="${esc(i.selector)}" style="--c:${cv(STATE_C[i.state])}">
           <div class="t"><b>${esc(i.label)}</b><span>${esc(i.state)}${i.stars != null ? " · " + i.stars + "★" : ""}${i.requested ? " · ?" : ""}</span></div>
           ${i.last ? `<div class="c">${esc(LABELS[i.last] || i.last)}</div>` : ""}</div>`).join("")}
       </details>`;
     }
     if (quiet.length) html += `<h4>No feedback · ${quiet.length} pages</h4><div class="quiet">${quiet.map(pg =>
-      `<a href="${esc(host.docUrl(pg.doc))}">${esc(pg.title)}</a>`).join("")}</div>`;
+      `<a href="${host.openDoc ? "#" : esc(host.docUrl(pg.doc))}" data-doc="${esc(pg.doc)}" data-src="${esc(pg.source)}">${esc(pg.title)}</a>`).join("")}</div>`;
     return html;
   }
 
-  function goTo(doc, sel) {
+  function goTo(doc, sel, source) {
     if (doc && doc !== PAGE.doc) {
+      if (host.openDoc) return host.openDoc({ doc, source }, sel);
       location.href = `${host.docUrl(doc)}#deciwa=${encodeURIComponent(sel)}`;
       return;
     }
@@ -488,14 +521,14 @@ export function startOverlay(host) {
   }
 
   function showInView(node, extra) {
-    const r = node.getBoundingClientRect();
-    let top = r.top, bottom = r.bottom;
-    if (extra) { const c = extra.getBoundingClientRect(); top = Math.min(top, c.top); bottom = Math.max(bottom, c.bottom); }
-    const room = innerHeight - 90;  // keep clear of the deciwa button
+    const r = node.getBoundingClientRect(), f = frame();
+    let top = r.top - f.top, bottom = r.bottom - f.top;
+    if (extra) { const c = extra.getBoundingClientRect(); top = Math.min(top, c.top - f.top); bottom = Math.max(bottom, c.bottom - f.top); }
+    const room = f.height - (host.tools === false ? 16 : 90);  // keep clear of the deciwa button
     if (top >= 8 && bottom <= room) return;  // already visible – no scrolling at all
     const h = bottom - top;
     const delta = h <= room - 8 ? top - (room - h) / 2 : top - 16;  // centre the pair, or start at its top
-    scrollBy({ top: delta, behavior: Math.abs(delta) > innerHeight * 2 ? "instant" : "smooth" });
+    scrollView({ top: delta, behavior: Math.abs(delta) > f.height * 2 ? "instant" : "smooth" });
   }
 
   // -- import / export --------------------------------------------------------
@@ -617,15 +650,15 @@ export function startOverlay(host) {
         <span class="hint">${Offline.count()} entries in this browser</span>
         <button class="btn" data-tab="files">Im/Export</button></div>` : "";
     panel.innerHTML = `<div class="tbar"><img class="logo" src="${MONSTER}" alt=""><div class="kind">deciwa</div>
-        <b>${tab === "project" ? "Whole project" : tab === "files" ? "Import and export" : tab === "help" ? "Help" : esc(document.title.split(" - ")[0])}</b>
-        <button class="x" title="Close (Shift+P)">×</button>
+        <b>${tab === "project" ? "Whole project" : tab === "files" ? "Import and export" : tab === "help" ? "Help" : esc(PAGE.title || document.title.split(" - ")[0])}</b>
+        ${docked ? "" : `<button class="x" title="Close (Shift+P)">×</button>`}
         <div class="tabs"><button data-tab="page" class="${tab === "page" ? "on" : ""}">This page</button><button data-tab="project" class="${tab === "project" ? "on" : ""}">Project</button><button data-tab="files" class="${tab === "files" ? "on" : ""}">Im/Export</button><button data-tab="help" class="help ${tab === "help" ? "on" : ""}" title="Help (F1)" aria-label="Help">?</button></div></div>
       <div class="inner">${offline}${body}</div>`;
     if (tab === "files") wireFiles();
     panel.querySelector("[data-guided]")?.addEventListener("click", () => setGuided(!guided));
     panel.querySelectorAll("details").forEach((d, n) => { d.dataset.k = d.classList.contains("rules") ? "rules" : "pg" + n; });
     panel.querySelectorAll("details[data-k]").forEach(d => { if (openDetails.includes(d.dataset.k) && d.dataset.k === "rules") d.open = true; });
-    panel.querySelector(".x").onclick = togglePanel;
+    if (!docked) panel.querySelector(".x").onclick = togglePanel;
     panel.querySelectorAll("[data-tab]").forEach(b => b.onclick = () => { panelTab = b.dataset.tab; savePanelPrefs(); drawPanel(); });
     panel.querySelectorAll(".kinds input").forEach(cb => cb.onchange = async () => {
       const kinds = [...panel.querySelectorAll(".kinds input:checked")].map(i => i.value);
@@ -633,8 +666,12 @@ export function startOverlay(host) {
       catch (err) { toast(err.message); }
     });
     panel.querySelectorAll(".item[data-sel]").forEach(it => it.onclick = () => {
-      if (innerWidth <= 560 && panel.classList.contains("on")) togglePanel();  // on a phone the panel covers the page
-      goTo(it.dataset.doc, it.dataset.sel);
+      if (!docked && innerWidth <= 560 && panel.classList.contains("on")) togglePanel();  // on a phone the panel covers the page
+      goTo(it.dataset.doc, it.dataset.sel, it.dataset.src);
+    });
+    if (host.openDoc) panel.querySelectorAll(".quiet a[data-doc]").forEach(a => a.onclick = ev => {
+      ev.preventDefault();
+      goTo(a.dataset.doc, null, a.dataset.src);
     });
   }
 
@@ -707,26 +744,26 @@ export function startOverlay(host) {
   // otherwise below it – above only when the page ends too soon
   function placeCard(e, scroll) {
     if (card.classList.contains("moved")) return;  // the reviewer put it somewhere else
-    const r = e.node.getBoundingClientRect();
+    const r = e.node.getBoundingClientRect(), f = frame(), o = origin();
     const article = host.article()?.getBoundingClientRect() || r;
-    const right = innerWidth - (panel.classList.contains("on") ? panel.offsetWidth + 12 : 0);
+    const right = f.right - (!docked && panel.classList.contains("on") ? panel.offsetWidth + 12 : 0);
     const w = card.offsetWidth, h = card.offsetHeight, gap = 12;
     let left, top;
     if (article.right + 16 + w <= right) {
       left = article.right + 16;
       top = r.top;
     } else {
-      left = Math.max(8, Math.min(r.left, right - w - 8));
-      const below = r.bottom + scrollY + gap;
-      const docEnd = document.documentElement.scrollHeight;
-      top = below + h <= docEnd - 8 || r.top + scrollY - h - gap < 0 ? r.bottom + gap : r.top - h - gap;
+      left = Math.max(f.left + 8, Math.min(r.left, right - w - 8));
+      const below = r.bottom + o.y + gap;
+      const docEnd = contentHeight();
+      top = below + h <= docEnd - 8 || r.top + o.y - h - gap < 0 ? r.bottom + gap : r.top - h - gap;
     }
-    card.style.left = `${left + scrollX}px`;
-    card.style.top = `${top + scrollY}px`;
+    card.style.left = `${left + o.x}px`;
+    card.style.top = `${top + o.y}px`;
     if (scroll) {  // bring the card into view, keeping as much of the element visible as possible
       const cr = card.getBoundingClientRect();
-      if (cr.bottom > innerHeight - 70) scrollBy({ top: cr.bottom - innerHeight + 80, behavior: "smooth" });
-      else if (cr.top < 8) scrollBy({ top: cr.top - 16, behavior: "smooth" });
+      if (cr.bottom > f.bottom - 70) scrollView({ top: cr.bottom - f.bottom + 80, behavior: "smooth" });
+      else if (cr.top < f.top + 8) scrollView({ top: cr.top - f.top - 16, behavior: "smooth" });
     }
   }
 
@@ -741,9 +778,10 @@ export function startOverlay(host) {
     bar.setPointerCapture(ev.pointerId);
     const move = m => {
       card.classList.add("moved");
-      const maxLeft = scrollX + innerWidth - card.offsetWidth - 4;
-      card.style.left = `${Math.max(scrollX + 4, Math.min(maxLeft, left0 + m.clientX - startX))}px`;
-      card.style.top = `${Math.max(scrollY + 4, top0 + m.clientY - startY)}px`;
+      const f = frame(), o = origin();
+      const maxLeft = o.x + f.right - card.offsetWidth - 4;
+      card.style.left = `${Math.max(o.x + f.left + 4, Math.min(maxLeft, left0 + m.clientX - startX))}px`;
+      card.style.top = `${Math.max(o.y + f.top + 4, top0 + m.clientY - startY)}px`;
     };
     const up = () => {
       card.classList.remove("dragging");
@@ -811,12 +849,12 @@ export function startOverlay(host) {
     return u && !u.node.contains(link) ? u : null;
   }
   const pick = (ev, link, up) => (link && linkedElement(ev, link, up)) || elementAt(ev.target, up);
-  document.addEventListener("mousedown", () => { blockClick = false; }, true);
-  document.addEventListener("click", ev => {
+  on(document, "mousedown", () => { blockClick = false; }, true);
+  on(document, "click", ev => {
     if (blockClick) { ev.preventDefault(); ev.stopPropagation(); blockClick = false; }
   }, true);
 
-  document.addEventListener("mousemove", ev => {
+  on(document, "mousemove", ev => {
     if (!reviewOn || inUI(ev)) return;
     const e = pick(ev, ev.target.closest("a[href]"), ev.altKey ? 1 : 0);
     hovered = e;
@@ -825,7 +863,7 @@ export function startOverlay(host) {
     hoverBox.querySelector(".tag").textContent = e.selector;
   });
 
-  document.addEventListener("mouseup", ev => {
+  on(document, "mouseup", ev => {
     if (!reviewOn || inUI(ev) || ev.button !== 0) return;
     if (ev.target.closest(".needs_collapse")) return;  // the need's own metadata toggle
     const link = ev.target.closest("a[href]");
@@ -838,29 +876,33 @@ export function startOverlay(host) {
     openCard(e);
   });
 
-  document.addEventListener("keydown", ev => {
+  on(document, "keydown", ev => {
     const t0 = ev.composedPath()[0];
     const typing = t0.closest && t0.closest("textarea, input, select, [contenteditable]");
+    // in a host, a key deciwa uses is not seen by the host's own shortcuts
+    const mine = () => { ev.preventDefault(); if (hostKeys) ev.stopPropagation(); };
     if (ev.key === "Escape") { closeModal(); closeCard(); return; }
-    if (ev.key === "F1") { ev.preventDefault(); showHelp(); return; }
+    if (hostKeys && !reviewOn) return;  // the host owns the keys outside review mode
+    if (ev.key === "F1") { if (hostKeys) return; ev.preventDefault(); showHelp(); return; }
     if (typing) return;
-    if (ev.shiftKey && ev.key === "R") { toggleReview(); return; }
-    if (ev.shiftKey && ev.key === "P") { togglePanel(); return; }
+    if (ev.shiftKey && ev.key === "R") { if (hostKeys) return; toggleReview(); return; }
+    if (ev.shiftKey && ev.key === "P") { if (hostKeys) return; togglePanel(); return; }
     if (ev.ctrlKey || ev.metaKey || ev.altKey || ev.shiftKey) return;
-    if (ev.key === "v") { ev.preventDefault(); setGuided(!guided); return; }
+    if (ev.key === "v") { mine(); setGuided(!guided); return; }
     if (!reviewOn) return;
-    if (ev.key === "j" || ev.key === "k") { ev.preventDefault(); guideStep(ev.key === "j" ? 1 : -1); return; }
+    if (ev.key === "j" || ev.key === "k") { mine(); guideStep(ev.key === "j" ? 1 : -1); return; }
     const target = current || hovered;
     if (!target) return;
     if (KEY2ACT[ev.key]) {
-      ev.preventDefault(); ev.stopPropagation();
+      mine(); ev.stopPropagation();
       if (!current) openCard(target);
       act(KEY2ACT[ev.key]);
     } else if (ev.key === "n") {
-      ev.preventDefault();
+      mine();
       if (!current) openCard(target);
       card.querySelector("textarea").focus();
     } else if (/^[0-5]$/.test(ev.key)) {
+      mine();
       if (!current) openCard(target);
       save("rating", { stars: +ev.key });
     }
@@ -884,6 +926,7 @@ export function startOverlay(host) {
     if (!reviewOn) { hoverBox.style.display = "none"; closeCard(); }
   }
   function togglePanel() {
+    if (docked) return;
     panel.classList.toggle("on");
     if (current) openCard(current);
     $('[data-t="panel"]').classList.toggle("on", panel.classList.contains("on"));
@@ -907,7 +950,7 @@ export function startOverlay(host) {
       if (hovered && hoverBox.style.display === "block") place(hoverBox, hovered.node);
     });
   }
-  addEventListener("resize", relayout);
+  on(window, "resize", relayout);
   const ro = "ResizeObserver" in window ? new ResizeObserver(relayout) : null;
   function observe() {
     ro?.observe(document.body);
@@ -920,11 +963,13 @@ export function startOverlay(host) {
   // -- live reload after a rebuild ---------------------------------------------
   const SCROLL_KEY = "deciwa-scroll:" + location.pathname;
   try {
-    const y = sessionStorage.getItem(SCROLL_KEY);
-    if (y !== null) { sessionStorage.removeItem(SCROLL_KEY); addEventListener("load", () => scrollTo(0, +y)); }
+    const y = host.api ? null : sessionStorage.getItem(SCROLL_KEY);
+    if (y !== null) { sessionStorage.removeItem(SCROLL_KEY); on(window, "load", () => scrollTo(0, +y)); }
   } catch (_) { /* storage blocked */ }
 
+  let pollTimer = null;
   async function poll() {
+    if (destroyed) return;
     try {
       const v = await (await fetch("/api/version", { cache: "no-store" })).json();
       if (version !== null && v.version !== version && !v.building) {
@@ -934,19 +979,22 @@ export function startOverlay(host) {
       }
       if (!v.building) version = v.version;
     } catch (_) { /* server gone */ }
-    setTimeout(poll, 1500);
+    pollTimer = setTimeout(poll, 1500);
   }
 
   applyReview();
   if (panelPrefs.open) { panel.classList.add("on"); $('[data-t="panel"]').classList.add("on"); }
   updateTools();
   refresh().then(() => {
-    if (online && mode === "server") poll();
-    const m = location.hash.match(/^#deciwa=(.+)$/);
-    if (m) { history.replaceState(null, "", location.pathname + location.search); goTo(null, decodeURIComponent(m[1])); }
+    if (destroyed) return;
+    if (online && mode === "server" && !host.api) poll();
+    const m = host.focus ? null : location.hash.match(/^#deciwa=(.+)$/);
+    if (m) history.replaceState(null, "", location.pathname + location.search);
+    const focus = host.focus || (m && decodeURIComponent(m[1]));
+    if (focus) goTo(null, focus);
     else if (guided && reviewOn) guideStep(1);
   });
-  addEventListener("load", relayout);
+  on(window, "load", relayout);
 
   // the page changed (client-side navigation, new content): new elements, same UI
   function update(list, page) {
@@ -959,5 +1007,34 @@ export function startOverlay(host) {
     observe();
     refresh();
   }
-  return { update };
+
+  // -- for hosts ------------------------------------------------------------------
+  // put the panel into the host's own side panel (inside an element of class "dwr")
+  function dock(el) {
+    docked = true;
+    el.appendChild(panel);
+    panel.classList.add("docked", "on");
+    drawPanel();
+    if (current) placeCard(current, false);
+  }
+  function undock() {
+    if (!docked) return;
+    docked = false;
+    panel.classList.remove("docked");
+    panel.classList.toggle("on", panelPrefs.open === true);
+    ui.appendChild(panel);
+  }
+  function setReview(on_) { if (on_ !== reviewOn) toggleReview(); }
+  function destroy() {
+    destroyed = true;
+    for (const [t, type, fn, opts] of listeners) t.removeEventListener(type, fn, opts);
+    ro?.disconnect();
+    clearTimeout(pollTimer);
+    for (const e of els) delete e.node.dataset.dwKey;
+    document.body.classList.remove("dwr-on");
+    panel.remove();
+    ui.remove();
+  }
+  return { update, refresh, destroy, dock, undock, setReview, toggleReview, focus: sel => goTo(null, sel),
+    get review() { return reviewOn; } };
 }

@@ -1,7 +1,7 @@
-/* deciwa review overlay 0.2.32 – built from packages/ui/js/ (npm run build), do not edit */
+/* deciwa review overlay 0.2.33 – built from packages/ui/js/ (npm run build), do not edit */
 (() => {
   // <define:__BUILD__>
-  var define_BUILD_default = { version: "0.2.32", commit: "626b6aa", dirty: false, date: "2026-10-22" };
+  var define_BUILD_default = { version: "0.2.33", commit: "eb6b58b", dirty: true, date: "2026-10-22" };
 
   // js/hash.js
   var enc = new TextEncoder();
@@ -128,6 +128,25 @@
   // js/overlay.js
   function startOverlay(host) {
     let PAGE = host.page;
+    const hostKeys = host.keys === "review";
+    const listeners = [];
+    function on(target, type, fn, opts) {
+      target.addEventListener(type, fn, opts);
+      listeners.push([target, type, fn, opts]);
+    }
+    let destroyed = false;
+    const scroller = host.scroller || null;
+    function frame() {
+      if (!scroller) return { left: 0, top: 0, right: innerWidth, bottom: innerHeight, width: innerWidth, height: innerHeight };
+      return scroller.getBoundingClientRect();
+    }
+    function origin() {
+      if (!scroller) return { x: scrollX, y: scrollY };
+      const r = scroller.getBoundingClientRect();
+      return { x: scroller.scrollLeft - r.left - scroller.clientLeft, y: scroller.scrollTop - r.top - scroller.clientTop };
+    }
+    const scrollView = (opts) => (scroller || window).scrollBy(opts);
+    const contentHeight = () => scroller ? scroller.scrollHeight : document.documentElement.scrollHeight;
     const ACTS = {
       approve: { label: "Approve", ico: "\u2713", key: "a", c: "approved", tip: "Confirm the statement \u2013 it becomes a decision" },
       reject: { label: "Reject", ico: "\u2717", key: "r", c: "rejected", tip: "The statement is wrong" },
@@ -177,7 +196,10 @@
       byKey = Object.fromEntries(els.map((e) => [e.key, e]));
     }
     setElements(host.elements);
-    const inUI = (ev) => ev.composedPath().includes(ui);
+    const inUI = (ev) => {
+      const path = ev.composedPath();
+      return path.includes(ui) || path.includes(panel);
+    };
     function elementAt(target, up = 0) {
       const chain = [];
       for (let n = target; n && n !== document.body; n = n.parentElement) {
@@ -208,6 +230,7 @@
       <button class="x" title="Close (Esc)">\xD7</button></div><div class="tools"><button class="btn" data-copy>Copy</button></div><pre></pre></div></div>
     <div class="dwr-toast"></div>`;
     host.mount.appendChild(ui);
+    if (host.tools === false) ui.querySelector(".dwr-tools").style.display = "none";
     const $ = (s) => ui.querySelector(s);
     const hoverBox = $(".dwr-box.hover"), focusBox = $(".dwr-box.focus"), card = $(".dwr-card");
     const panel = $(".dwr-panel"), bars = $(".dwr-bars");
@@ -223,11 +246,12 @@
     let panelTab = ["project", "files", "help"].includes(panelPrefs.tab) ? panelPrefs.tab : "page";
     function savePanelPrefs() {
       try {
-        localStorage.setItem(PANEL_KEY, JSON.stringify({ open: document.querySelector(".dwr-panel").classList.contains("on"), tab: panelTab, review: reviewOn, guided }));
+        localStorage.setItem(PANEL_KEY, JSON.stringify({ open: docked ? panelPrefs.open === true : panel.classList.contains("on"), tab: panelTab, review: reviewOn, guided }));
       } catch (_) {
       }
     }
     let guided = panelPrefs.guided === true;
+    let docked = false;
     let online = false, reviewOn = panelPrefs.review === true, hovered = null, current = null, quote = null, version = null;
     function toast(msg) {
       const t = $(".dwr-toast");
@@ -237,11 +261,11 @@
       toast.t = setTimeout(() => t.classList.remove("on"), 1800);
     }
     function place(box, node) {
-      const r = node.getBoundingClientRect();
+      const r = node.getBoundingClientRect(), o = origin();
       Object.assign(box.style, {
         display: "block",
-        left: `${r.left + scrollX - 4}px`,
-        top: `${r.top + scrollY - 3}px`,
+        left: `${r.left + o.x - 4}px`,
+        top: `${r.top + o.y - 3}px`,
         width: `${r.width + 8}px`,
         height: `${r.height + 6}px`
       });
@@ -249,6 +273,7 @@
     let mode = "server";
     async function api(path, body) {
       if (mode === "offline") return Offline.call(path, body);
+      if (host.api) return host.api(path, body);
       const res = await fetch(path, body ? {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -525,19 +550,19 @@
           const item2 = pg.items.find((i) => i.required && !i.decided);
           if (!item2) continue;
           if (pg.doc === PAGE.doc) return goTo(null, item2.selector);
-          return goTo(pg.doc, item2.selector);
+          return goTo(pg.doc, item2.selector, pg.source);
         }
       } catch (_) {
       }
       toast("Done \u2013 every required element has a verdict");
       setGuided(false);
     }
-    function setGuided(on) {
-      guided = on;
-      if (on && !reviewOn) toggleReview();
+    function setGuided(on2) {
+      guided = on2;
+      if (on2 && !reviewOn) toggleReview();
       savePanelPrefs();
       if (panel.classList.contains("on")) drawPanel();
-      if (on) {
+      if (on2) {
         if (current && pending().includes(current)) openCard(current, false);
         else {
           closeCard();
@@ -563,7 +588,8 @@
     function drawBars() {
       bars.innerHTML = "";
       const article = host.article() || document.body;
-      const left = article.getBoundingClientRect().left + scrollX - 14;
+      const o = origin();
+      const left = article.getBoundingClientRect().left + o.x - 14;
       const sels = /* @__PURE__ */ new Set([...Object.keys(view.elements), ...view.required || []]);
       for (const sel of sels) {
         const e = bySel[sel];
@@ -572,7 +598,7 @@
         const r = e.node.getBoundingClientRect();
         const b = document.createElement("div");
         b.className = "dwr-bar" + (st?.requested ? " req" : "") + (st ? "" : " todo");
-        Object.assign(b.style, { left: `${left}px`, top: `${r.top + scrollY}px`, height: `${Math.max(r.height, 14)}px` });
+        Object.assign(b.style, { left: `${left}px`, top: `${r.top + o.y}px`, height: `${Math.max(r.height, 14)}px` });
         if (st) b.style.background = cv(STATE_C[st.state]);
         b.title = st ? `${st.state}${st.stars != null ? ` \xB7 ${st.stars} \u2605` : ""}${st.requested ? " \xB7 question open" : ""}` : "must be approved \u2013 not reviewed yet";
         b.onclick = () => openCard(e);
@@ -663,16 +689,17 @@
         const items = pg.items.slice().sort((x, y) => (y.required && !y.decided) - (x.required && !x.decided) || ORDER.indexOf(x.state) - ORDER.indexOf(y.state));
         html += `<details class="pg"${pg.doc === PAGE.doc || open ? " open" : ""}>
         <summary><b>${esc(pg.title)}</b><span>${pg.required ? `${pg.decided}/${pg.required} \xB7 ${pg.rated}\u2605` : ""}${pg.orphans ? ` \xB7 ${pg.orphans} orphaned` : ""}</span></summary>
-        ${items.map((i) => `<div class="item${i.required ? " required" : ""}" data-doc="${esc(pg.doc)}" data-sel="${esc(i.selector)}" style="--c:${cv(STATE_C[i.state])}">
+        ${items.map((i) => `<div class="item${i.required ? " required" : ""}" data-doc="${esc(pg.doc)}" data-src="${esc(pg.source)}" data-sel="${esc(i.selector)}" style="--c:${cv(STATE_C[i.state])}">
           <div class="t"><b>${esc(i.label)}</b><span>${esc(i.state)}${i.stars != null ? " \xB7 " + i.stars + "\u2605" : ""}${i.requested ? " \xB7 ?" : ""}</span></div>
           ${i.last ? `<div class="c">${esc(LABELS[i.last] || i.last)}</div>` : ""}</div>`).join("")}
       </details>`;
       }
-      if (quiet.length) html += `<h4>No feedback \xB7 ${quiet.length} pages</h4><div class="quiet">${quiet.map((pg) => `<a href="${esc(host.docUrl(pg.doc))}">${esc(pg.title)}</a>`).join("")}</div>`;
+      if (quiet.length) html += `<h4>No feedback \xB7 ${quiet.length} pages</h4><div class="quiet">${quiet.map((pg) => `<a href="${host.openDoc ? "#" : esc(host.docUrl(pg.doc))}" data-doc="${esc(pg.doc)}" data-src="${esc(pg.source)}">${esc(pg.title)}</a>`).join("")}</div>`;
       return html;
     }
-    function goTo(doc, sel) {
+    function goTo(doc, sel, source) {
       if (doc && doc !== PAGE.doc) {
+        if (host.openDoc) return host.openDoc({ doc, source }, sel);
         location.href = `${host.docUrl(doc)}#deciwa=${encodeURIComponent(sel)}`;
         return;
       }
@@ -688,18 +715,18 @@
       showInView(e.node, reviewOn ? card : null);
     }
     function showInView(node, extra) {
-      const r = node.getBoundingClientRect();
-      let top = r.top, bottom = r.bottom;
+      const r = node.getBoundingClientRect(), f = frame();
+      let top = r.top - f.top, bottom = r.bottom - f.top;
       if (extra) {
         const c = extra.getBoundingClientRect();
-        top = Math.min(top, c.top);
-        bottom = Math.max(bottom, c.bottom);
+        top = Math.min(top, c.top - f.top);
+        bottom = Math.max(bottom, c.bottom - f.top);
       }
-      const room = innerHeight - 90;
+      const room = f.height - (host.tools === false ? 16 : 90);
       if (top >= 8 && bottom <= room) return;
       const h = bottom - top;
       const delta = h <= room - 8 ? top - (room - h) / 2 : top - 16;
-      scrollBy({ top: delta, behavior: Math.abs(delta) > innerHeight * 2 ? "instant" : "smooth" });
+      scrollView({ top: delta, behavior: Math.abs(delta) > f.height * 2 ? "instant" : "smooth" });
     }
     let picked = null;
     const fmt = (t) => t ? t.replace("T", " ").replace("Z", " UTC") : "\u2013";
@@ -865,8 +892,8 @@
         <span class="hint">${Offline.count()} entries in this browser</span>
         <button class="btn" data-tab="files">Im/Export</button></div>` : "";
       panel.innerHTML = `<div class="tbar"><img class="logo" src="${MONSTER}" alt=""><div class="kind">deciwa</div>
-        <b>${tab === "project" ? "Whole project" : tab === "files" ? "Import and export" : tab === "help" ? "Help" : esc(document.title.split(" - ")[0])}</b>
-        <button class="x" title="Close (Shift+P)">\xD7</button>
+        <b>${tab === "project" ? "Whole project" : tab === "files" ? "Import and export" : tab === "help" ? "Help" : esc(PAGE.title || document.title.split(" - ")[0])}</b>
+        ${docked ? "" : `<button class="x" title="Close (Shift+P)">\xD7</button>`}
         <div class="tabs"><button data-tab="page" class="${tab === "page" ? "on" : ""}">This page</button><button data-tab="project" class="${tab === "project" ? "on" : ""}">Project</button><button data-tab="files" class="${tab === "files" ? "on" : ""}">Im/Export</button><button data-tab="help" class="help ${tab === "help" ? "on" : ""}" title="Help (F1)" aria-label="Help">?</button></div></div>
       <div class="inner">${offline}${body}</div>`;
       if (tab === "files") wireFiles();
@@ -877,7 +904,7 @@
       panel.querySelectorAll("details[data-k]").forEach((d) => {
         if (openDetails.includes(d.dataset.k) && d.dataset.k === "rules") d.open = true;
       });
-      panel.querySelector(".x").onclick = togglePanel;
+      if (!docked) panel.querySelector(".x").onclick = togglePanel;
       panel.querySelectorAll("[data-tab]").forEach((b) => b.onclick = () => {
         panelTab = b.dataset.tab;
         savePanelPrefs();
@@ -894,8 +921,12 @@
         }
       });
       panel.querySelectorAll(".item[data-sel]").forEach((it) => it.onclick = () => {
-        if (innerWidth <= 560 && panel.classList.contains("on")) togglePanel();
-        goTo(it.dataset.doc, it.dataset.sel);
+        if (!docked && innerWidth <= 560 && panel.classList.contains("on")) togglePanel();
+        goTo(it.dataset.doc, it.dataset.sel, it.dataset.src);
+      });
+      if (host.openDoc) panel.querySelectorAll(".quiet a[data-doc]").forEach((a) => a.onclick = (ev) => {
+        ev.preventDefault();
+        goTo(a.dataset.doc, null, a.dataset.src);
       });
     }
     function diff(a, b) {
@@ -958,26 +989,26 @@
     }
     function placeCard(e, scroll) {
       if (card.classList.contains("moved")) return;
-      const r = e.node.getBoundingClientRect();
+      const r = e.node.getBoundingClientRect(), f = frame(), o = origin();
       const article = host.article()?.getBoundingClientRect() || r;
-      const right = innerWidth - (panel.classList.contains("on") ? panel.offsetWidth + 12 : 0);
+      const right = f.right - (!docked && panel.classList.contains("on") ? panel.offsetWidth + 12 : 0);
       const w = card.offsetWidth, h = card.offsetHeight, gap = 12;
       let left, top;
       if (article.right + 16 + w <= right) {
         left = article.right + 16;
         top = r.top;
       } else {
-        left = Math.max(8, Math.min(r.left, right - w - 8));
-        const below = r.bottom + scrollY + gap;
-        const docEnd = document.documentElement.scrollHeight;
-        top = below + h <= docEnd - 8 || r.top + scrollY - h - gap < 0 ? r.bottom + gap : r.top - h - gap;
+        left = Math.max(f.left + 8, Math.min(r.left, right - w - 8));
+        const below = r.bottom + o.y + gap;
+        const docEnd = contentHeight();
+        top = below + h <= docEnd - 8 || r.top + o.y - h - gap < 0 ? r.bottom + gap : r.top - h - gap;
       }
-      card.style.left = `${left + scrollX}px`;
-      card.style.top = `${top + scrollY}px`;
+      card.style.left = `${left + o.x}px`;
+      card.style.top = `${top + o.y}px`;
       if (scroll) {
         const cr = card.getBoundingClientRect();
-        if (cr.bottom > innerHeight - 70) scrollBy({ top: cr.bottom - innerHeight + 80, behavior: "smooth" });
-        else if (cr.top < 8) scrollBy({ top: cr.top - 16, behavior: "smooth" });
+        if (cr.bottom > f.bottom - 70) scrollView({ top: cr.bottom - f.bottom + 80, behavior: "smooth" });
+        else if (cr.top < f.top + 8) scrollView({ top: cr.top - f.top - 16, behavior: "smooth" });
       }
     }
     card.addEventListener("pointerdown", (ev) => {
@@ -990,9 +1021,10 @@
       bar.setPointerCapture(ev.pointerId);
       const move = (m) => {
         card.classList.add("moved");
-        const maxLeft = scrollX + innerWidth - card.offsetWidth - 4;
-        card.style.left = `${Math.max(scrollX + 4, Math.min(maxLeft, left0 + m.clientX - startX))}px`;
-        card.style.top = `${Math.max(scrollY + 4, top0 + m.clientY - startY)}px`;
+        const f = frame(), o = origin();
+        const maxLeft = o.x + f.right - card.offsetWidth - 4;
+        card.style.left = `${Math.max(o.x + f.left + 4, Math.min(maxLeft, left0 + m.clientX - startX))}px`;
+        card.style.top = `${Math.max(o.y + f.top + 4, top0 + m.clientY - startY)}px`;
       };
       const up = () => {
         card.classList.remove("dragging");
@@ -1068,17 +1100,17 @@
       return u && !u.node.contains(link) ? u : null;
     }
     const pick = (ev, link, up) => link && linkedElement(ev, link, up) || elementAt(ev.target, up);
-    document.addEventListener("mousedown", () => {
+    on(document, "mousedown", () => {
       blockClick = false;
     }, true);
-    document.addEventListener("click", (ev) => {
+    on(document, "click", (ev) => {
       if (blockClick) {
         ev.preventDefault();
         ev.stopPropagation();
         blockClick = false;
       }
     }, true);
-    document.addEventListener("mousemove", (ev) => {
+    on(document, "mousemove", (ev) => {
       if (!reviewOn || inUI(ev)) return;
       const e = pick(ev, ev.target.closest("a[href]"), ev.altKey ? 1 : 0);
       hovered = e;
@@ -1089,7 +1121,7 @@
       place(hoverBox, e.node);
       hoverBox.querySelector(".tag").textContent = e.selector;
     });
-    document.addEventListener("mouseup", (ev) => {
+    on(document, "mouseup", (ev) => {
       if (!reviewOn || inUI(ev) || ev.button !== 0) return;
       if (ev.target.closest(".needs_collapse")) return;
       const link = ev.target.closest("a[href]");
@@ -1104,52 +1136,61 @@
       if (!quote && getSelection() && !getSelection().isCollapsed) return;
       openCard(e);
     });
-    document.addEventListener("keydown", (ev) => {
+    on(document, "keydown", (ev) => {
       const t0 = ev.composedPath()[0];
       const typing = t0.closest && t0.closest("textarea, input, select, [contenteditable]");
+      const mine = () => {
+        ev.preventDefault();
+        if (hostKeys) ev.stopPropagation();
+      };
       if (ev.key === "Escape") {
         closeModal();
         closeCard();
         return;
       }
+      if (hostKeys && !reviewOn) return;
       if (ev.key === "F1") {
+        if (hostKeys) return;
         ev.preventDefault();
         showHelp();
         return;
       }
       if (typing) return;
       if (ev.shiftKey && ev.key === "R") {
+        if (hostKeys) return;
         toggleReview();
         return;
       }
       if (ev.shiftKey && ev.key === "P") {
+        if (hostKeys) return;
         togglePanel();
         return;
       }
       if (ev.ctrlKey || ev.metaKey || ev.altKey || ev.shiftKey) return;
       if (ev.key === "v") {
-        ev.preventDefault();
+        mine();
         setGuided(!guided);
         return;
       }
       if (!reviewOn) return;
       if (ev.key === "j" || ev.key === "k") {
-        ev.preventDefault();
+        mine();
         guideStep(ev.key === "j" ? 1 : -1);
         return;
       }
       const target = current || hovered;
       if (!target) return;
       if (KEY2ACT[ev.key]) {
-        ev.preventDefault();
+        mine();
         ev.stopPropagation();
         if (!current) openCard(target);
         act(KEY2ACT[ev.key]);
       } else if (ev.key === "n") {
-        ev.preventDefault();
+        mine();
         if (!current) openCard(target);
         card.querySelector("textarea").focus();
       } else if (/^[0-5]$/.test(ev.key)) {
+        mine();
         if (!current) openCard(target);
         save("rating", { stars: +ev.key });
       }
@@ -1174,6 +1215,7 @@
       }
     }
     function togglePanel() {
+      if (docked) return;
       panel.classList.toggle("on");
       if (current) openCard(current);
       $('[data-t="panel"]').classList.toggle("on", panel.classList.contains("on"));
@@ -1205,7 +1247,7 @@
         if (hovered && hoverBox.style.display === "block") place(hoverBox, hovered.node);
       });
     }
-    addEventListener("resize", relayout);
+    on(window, "resize", relayout);
     const ro = "ResizeObserver" in window ? new ResizeObserver(relayout) : null;
     function observe() {
       ro?.observe(document.body);
@@ -1216,14 +1258,16 @@
     document.fonts?.ready.then(relayout);
     const SCROLL_KEY = "deciwa-scroll:" + location.pathname;
     try {
-      const y = sessionStorage.getItem(SCROLL_KEY);
+      const y = host.api ? null : sessionStorage.getItem(SCROLL_KEY);
       if (y !== null) {
         sessionStorage.removeItem(SCROLL_KEY);
-        addEventListener("load", () => scrollTo(0, +y));
+        on(window, "load", () => scrollTo(0, +y));
       }
     } catch (_) {
     }
+    let pollTimer = null;
     async function poll() {
+      if (destroyed) return;
       try {
         const v = await (await fetch("/api/version", { cache: "no-store" })).json();
         if (version !== null && v.version !== version && !v.building) {
@@ -1237,7 +1281,7 @@
         if (!v.building) version = v.version;
       } catch (_) {
       }
-      setTimeout(poll, 1500);
+      pollTimer = setTimeout(poll, 1500);
     }
     applyReview();
     if (panelPrefs.open) {
@@ -1246,14 +1290,15 @@
     }
     updateTools();
     refresh().then(() => {
-      if (online && mode === "server") poll();
-      const m = location.hash.match(/^#deciwa=(.+)$/);
-      if (m) {
-        history.replaceState(null, "", location.pathname + location.search);
-        goTo(null, decodeURIComponent(m[1]));
-      } else if (guided && reviewOn) guideStep(1);
+      if (destroyed) return;
+      if (online && mode === "server" && !host.api) poll();
+      const m = host.focus ? null : location.hash.match(/^#deciwa=(.+)$/);
+      if (m) history.replaceState(null, "", location.pathname + location.search);
+      const focus = host.focus || m && decodeURIComponent(m[1]);
+      if (focus) goTo(null, focus);
+      else if (guided && reviewOn) guideStep(1);
     });
-    addEventListener("load", relayout);
+    on(window, "load", relayout);
     function update(list, page) {
       if (page) PAGE = page;
       const keep = current && list.find((e) => e.selector === current.selector && e.node);
@@ -1265,7 +1310,46 @@
       observe();
       refresh();
     }
-    return { update };
+    function dock(el) {
+      docked = true;
+      el.appendChild(panel);
+      panel.classList.add("docked", "on");
+      drawPanel();
+      if (current) placeCard(current, false);
+    }
+    function undock() {
+      if (!docked) return;
+      docked = false;
+      panel.classList.remove("docked");
+      panel.classList.toggle("on", panelPrefs.open === true);
+      ui.appendChild(panel);
+    }
+    function setReview(on_) {
+      if (on_ !== reviewOn) toggleReview();
+    }
+    function destroy() {
+      destroyed = true;
+      for (const [t, type, fn, opts] of listeners) t.removeEventListener(type, fn, opts);
+      ro?.disconnect();
+      clearTimeout(pollTimer);
+      for (const e of els) delete e.node.dataset.dwKey;
+      document.body.classList.remove("dwr-on");
+      panel.remove();
+      ui.remove();
+    }
+    return {
+      update,
+      refresh,
+      destroy,
+      dock,
+      undock,
+      setReview,
+      toggleReview,
+      focus: (sel) => goTo(null, sel),
+      get review() {
+        return reviewOn;
+      }
+    };
   }
 
   // js/sphinx.js
