@@ -1,7 +1,7 @@
-/* deciwa review overlay 0.2.37 – built from packages/ui/js/ (npm run build), do not edit */
+/* deciwa review overlay 0.2.41 – built from packages/ui/js/ (npm run build), do not edit */
 (() => {
   // <define:__BUILD__>
-  var define_BUILD_default = { version: "0.2.37", commit: "b6b822b", dirty: false, date: "2026-10-22" };
+  var define_BUILD_default = { version: "0.2.41", commit: "85fc1e9", dirty: true, date: "2026-10-22" };
 
   // js/hash.js
   var enc = new TextEncoder();
@@ -205,7 +205,7 @@
       for (let n = target; n && n !== document.body; n = n.parentElement) {
         const e = n.dataset && n.dataset.dwKey && byKey[n.dataset.dwKey];
         if (!e) continue;
-        if (e.kind === "heading" && chain.length === 0) {
+        if (e.kind === "heading" && chain.length === 0 && !n.classList.contains("dw-range")) {
           const h = /^H[1-6]$/.test(n.tagName) ? n : n.querySelector(":scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6");
           if (!(h && h.contains(target))) continue;
         }
@@ -579,6 +579,8 @@
       code: "Code blocks",
       note: "Notes, admonitions",
       figure: "Figures",
+      class: "Classes (source code)",
+      function: "Functions, methods",
       all: "Everything"
     };
     const DONE = ["approved", "frozen"];
