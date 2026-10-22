@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 14:28+0200\n"
+"POT-Creation-Date: 2026-10-22 14:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -54,6 +54,14 @@ msgstr ""
 
 #: ../../integrations/monsterbrain.md:11
 msgid ""
+"**review on source code** – Python files and the source of Markdown and "
+"HTML files, element by element,"
+msgstr ""
+"**Review am Quelltext** – Python-Dateien und der Quelltext von Markdown- "
+"und HTML-Dateien, Element für Element,"
+
+#: ../../integrations/monsterbrain.md:13
+msgid ""
 "**state in the tree and the change view** – each file shows how much of "
 "it is open, approved, stale or frozen, and which questions wait for an "
 "answer,"
@@ -62,11 +70,11 @@ msgstr ""
 "viel davon offen, freigegeben, veraltet oder eingefroren ist und welche "
 "Fragen auf eine Antwort warten,"
 
-#: ../../integrations/monsterbrain.md:13
+#: ../../integrations/monsterbrain.md:15
 msgid "**feedback of the active file** in monsterbrain's right panel,"
 msgstr "**Feedback der aktiven Datei** im rechten Bereich von monsterbrain,"
 
-#: ../../integrations/monsterbrain.md:14
+#: ../../integrations/monsterbrain.md:16
 #, python-brace-format
 msgid ""
 "**questions instead of `[CHECK]` markers** ({need}`DEC_REPLACES_CHECK`) –"
@@ -75,7 +83,7 @@ msgstr ""
 "**Fragen statt `[CHECK]`-Markierungen** ({need}`DEC_REPLACES_CHECK`) – "
 "was die KI fragt, erscheint am Element und in der Änderungsansicht,"
 
-#: ../../integrations/monsterbrain.md:16
+#: ../../integrations/monsterbrain.md:18
 msgid ""
 "**same data as everywhere else** – feedback goes to `.deciwa/` in the "
 "folder, so `deciwa todo`, Claude and the other integrations see it."
@@ -84,7 +92,7 @@ msgstr ""
 "Ordner, sodass `deciwa todo`, Claude und die anderen Integrationen es "
 "sehen."
 
-#: ../../integrations/monsterbrain.md:19
+#: ../../integrations/monsterbrain.md:21
 #, python-brace-format
 msgid ""
 "deciwa comes as a monsterbrain extension and brings its engine along – no"
@@ -97,24 +105,26 @@ msgstr ""
 "{need}`DEC_STANDALONE_ENGINE`). Ohne die Erweiterung funktioniert "
 "monsterbrain wie bisher, nur ohne Review."
 
-#: ../../integrations/monsterbrain.md:24
+#: ../../integrations/monsterbrain.md:26
 msgid "In monsterbrain"
 msgstr "In monsterbrain"
 
-#: ../../integrations/monsterbrain.md:26
+#: ../../integrations/monsterbrain.md:28
 msgid ""
-"**Review mode** – `Shift R` or the switch in the side panel. Then the "
-"keys of the review UI work on the rendered file: `a r f d` for a verdict,"
-" `0–5` for stars, `n` for a comment, `v` guided review, `j k` next and "
-"previous element. Outside review mode monsterbrain keeps its own keys."
+"**Review mode** – `Shift R` or the switch *Review on/off* next to View · "
+"Source · Diff; it shows when the file is reviewable. Then the keys of the"
+" review UI work on the rendered file: `a r f d` for a verdict, `0–5` for "
+"stars, `n` for a comment, `v` guided review, `j k` next and previous "
+"element. Outside review mode monsterbrain keeps its own keys."
 msgstr ""
-"**Review-Modus** – `Shift R` oder der Schalter im Seitenpanel. Dann "
-"wirken die Tasten der Review-Oberfläche auf die dargestellte Datei: `a r "
-"f d` für ein Urteil, `0–5` für Sterne, `n` für einen Kommentar, `v` "
-"geführtes Review, `j k` nächstes und vorheriges Element. Außerhalb des "
-"Review-Modus behält monsterbrain seine eigenen Tasten."
+"**Review-Modus** – `Shift R` oder der Schalter *Review on/off* neben View"
+" · Source · Diff; er erscheint, wenn die Datei prüfbar ist. Dann wirken "
+"die Tasten der Review-Oberfläche auf die dargestellte Datei: `a r f d` "
+"für ein Urteil, `0–5` für Sterne, `n` für einen Kommentar, `v` geführtes "
+"Review, `j k` nächstes und vorheriges Element. Außerhalb des Review-Modus"
+" behält monsterbrain seine eigenen Tasten."
 
-#: ../../integrations/monsterbrain.md:30
+#: ../../integrations/monsterbrain.md:33
 msgid ""
 "**Side panel** – the section *Review · deciwa* holds the deciwa panel of "
 "the file: what is open, approved, stale, the questions, the whole "
@@ -124,7 +134,7 @@ msgstr ""
 "Panel der Datei: was offen, freigegeben oder veraltet ist, die Fragen, "
 "das ganze Projekt."
 
-#: ../../integrations/monsterbrain.md:32
+#: ../../integrations/monsterbrain.md:35
 msgid ""
 "**Tree and change view** – a mark per file: `2?` open questions, a number"
 " for jobs for the AI, `3/5` required elements approved, `✓` all reviewed."
@@ -133,7 +143,7 @@ msgstr ""
 "Fragen, eine Zahl für Aufgaben für die KI, `3/5` freigegebene "
 "Pflichtelemente, `✓` alles geprüft."
 
-#: ../../integrations/monsterbrain.md:34
+#: ../../integrations/monsterbrain.md:37
 msgid ""
 "**Diffs** – the new side of a rendered or side-by-side diff is "
 "reviewable; an approved paragraph that changed shows as stale."
@@ -142,7 +152,7 @@ msgstr ""
 "gezeigten Diffs ist prüfbar; ein freigegebener Absatz, der sich geändert "
 "hat, erscheint als veraltet."
 
-#: ../../integrations/monsterbrain.md:36
+#: ../../integrations/monsterbrain.md:39
 msgid ""
 "**Source code** – Python files in the code view: classes, functions, "
 "methods and the statements outside functions (imports, assignments, `if "
@@ -157,17 +167,17 @@ msgstr ""
 "als veraltet. Der Tab *Source* einer Markdown- oder HTML-Datei "
 "funktioniert genauso, Zeile für Zeile."
 
-#: ../../integrations/monsterbrain.md:41
+#: ../../integrations/monsterbrain.md:44
 msgid ""
 "**HTML files** – the rendered page is reviewable with the same elements "
-"as its source; the review switch in the side panel and `Shift R` work for"
-" the page, the page's own deciwa button opens its panel."
+"as its source; the review switch and `Shift R` work for the page, the "
+"page's own deciwa button opens its panel."
 msgstr ""
 "**HTML-Dateien** – die dargestellte Seite ist mit denselben Elementen "
-"prüfbar wie ihr Quelltext; der Review-Schalter im Seitenpanel und `Shift "
-"R` wirken auf die Seite, der deciwa-Knopf in der Seite öffnet ihr Panel."
+"prüfbar wie ihr Quelltext; der Review-Schalter und `Shift R` wirken auf "
+"die Seite, der deciwa-Knopf in der Seite öffnet ihr Panel."
 
-#: ../../integrations/monsterbrain.md:44
+#: ../../integrations/monsterbrain.md:47
 msgid ""
 "**Claude** – monsterbrain's MCP server gains `deciwa_feedback` (the "
 "review state of a file, or every open job) and `deciwa_show` (open a file"
@@ -177,7 +187,7 @@ msgstr ""
 "(der Review-Stand einer Datei oder alle offenen Aufgaben) und "
 "`deciwa_show` (eine Datei an einem Element öffnen)."
 
-#: ../../integrations/monsterbrain.md:48
+#: ../../integrations/monsterbrain.md:51
 msgid ""
 "The review data is the folder's `.deciwa/`. A folder without one shows "
 "*Set up review* in the side panel (`deciwa init`)."
@@ -185,11 +195,11 @@ msgstr ""
 "Die Review-Daten sind das `.deciwa/` des Ordners. Ein Ordner ohne zeigt "
 "im Seitenpanel *Set up review* (`deciwa init`)."
 
-#: ../../integrations/monsterbrain.md:51
+#: ../../integrations/monsterbrain.md:54
 msgid "Setting up (development)"
 msgstr "Einrichten (Entwicklung)"
 
-#: ../../integrations/monsterbrain.md:53
+#: ../../integrations/monsterbrain.md:56
 msgid ""
 "Until the standalone engine exists, the extension uses the engine of a "
 "deciwa checkout:"
@@ -197,7 +207,7 @@ msgstr ""
 "Bis es die eigenständige Engine gibt, nutzt die Erweiterung die Engine "
 "eines deciwa-Checkouts:"
 
-#: ../../integrations/monsterbrain.md:61
+#: ../../integrations/monsterbrain.md:64
 #, python-brace-format
 msgid ""
 "In monsterbrain: settings (`Ctrl ,`) → *Extensions* → *Add folder …* → "

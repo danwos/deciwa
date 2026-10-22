@@ -8,6 +8,8 @@ change view that shows what agents changed. deciwa adds the review to it:
 
 - **review on the rendered file** – Markdown, HTML and the new side of a
   diff get the same bars, card and keys as in the browser,
+- **review on source code** – Python files and the source of Markdown and
+  HTML files, element by element,
 - **state in the tree and the change view** – each file shows how much of it
   is open, approved, stale or frozen, and which questions wait for an answer,
 - **feedback of the active file** in monsterbrain's right panel,
@@ -23,7 +25,8 @@ before, just without review.
 
 ## In monsterbrain
 
-- **Review mode** – `Shift R` or the switch in the side panel. Then the keys
+- **Review mode** – `Shift R` or the switch *Review on/off* next to
+  View · Source · Diff; it shows when the file is reviewable. Then the keys
   of the review UI work on the rendered file: `a r f d` for a verdict, `0–5`
   for stars, `n` for a comment, `v` guided review, `j k` next and previous
   element. Outside review mode monsterbrain keeps its own keys.
@@ -39,8 +42,8 @@ before, just without review.
   an approved function that changes shows as stale. The *Source* tab of a
   Markdown or HTML file works the same way, line by line.
 - **HTML files** – the rendered page is reviewable with the same elements as
-  its source; the review switch in the side panel and `Shift R` work for the
-  page, the page's own deciwa button opens its panel.
+  its source; the review switch and `Shift R` work for the page, the page's
+  own deciwa button opens its panel.
 - **Claude** – monsterbrain's MCP server gains `deciwa_feedback` (the review
   state of a file, or every open job) and `deciwa_show` (open a file at an
   element).

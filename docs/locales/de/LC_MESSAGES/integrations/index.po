@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 10:22+0200\n"
+"POT-Creation-Date: 2026-10-22 14:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -108,12 +108,14 @@ msgid "[monsterbrain](monsterbrain.md)"
 msgstr "[monsterbrain](monsterbrain.md)"
 
 #: ../../integrations/index.md
-msgid "the rendered files and the change view of the danwos desktop app"
-msgstr "die dargestellten Dateien und die Änderungsansicht der danwos-Desktop-App"
+msgid "rendered files, source code and the change view of the danwos desktop app"
+msgstr ""
+"dargestellte Dateien, Quelltext und die Änderungsansicht der danwos-"
+"Desktop-App"
 
 #: ../../integrations/index.md
-msgid "planned"
-msgstr "geplant"
+msgid "available (development setup)"
+msgstr "verfügbar (Entwicklungs-Setup)"
 
 #: ../../integrations/index.md
 msgid "[Desktop app](desktop.md)"
@@ -126,4 +128,7 @@ msgstr "ohne Entwicklungsumgebung"
 #: ../../integrations/index.md
 msgid "later"
 msgstr "später"
+
+#~ msgid "planned"
+#~ msgstr "geplant"
 

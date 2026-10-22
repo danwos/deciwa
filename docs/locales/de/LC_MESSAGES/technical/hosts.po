@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 14:28+0200\n"
+"POT-Creation-Date: 2026-10-22 14:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -394,15 +394,143 @@ msgstr ""
 "gehen."
 
 #: ../../technical/hosts.md:109
+msgid "The monsterbrain extension"
+msgstr "Die monsterbrain-Erweiterung"
+
+#: ../../technical/hosts.md:111
+msgid ""
+"`packages/monsterbrain` maps monsterbrain's extension interface v0 "
+"(`docs/extensions.md` in the monsterbrain repository) to client and "
+"overlay:"
+msgstr ""
+"`packages/monsterbrain` verbindet die Erweiterungsschnittstelle v0 von "
+"monsterbrain (`docs/extensions.md` im monsterbrain-Repository) mit Client"
+" und Overlay:"
+
+#: ../../technical/hosts.md:3
+msgid "monsterbrain extension point"
+msgstr "Erweiterungspunkt von monsterbrain"
+
+#: ../../technical/hosts.md:3
+msgid "deciwa uses it for"
+msgstr "deciwa nutzt ihn für"
+
+#: ../../technical/hosts.md:3
+msgid "background process (`onRoot`, `deactivate`)"
+msgstr "Hintergrundprozess (`onRoot`, `deactivate`)"
+
+#: ../../technical/hosts.md:3
+msgid "start the engine for the open folder, stop it with the app"
+msgstr "die Engine für den offenen Ordner starten, mit der App beenden"
+
+#: ../../technical/hosts.md:3
+msgid "calls and events"
+msgstr "Aufrufe und Ereignisse"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"the window's API calls go through the main process (the token stays "
+"there); change events refresh overlays and marks"
+msgstr ""
+"die API-Aufrufe des Fensters laufen über den Hauptprozess (der Token "
+"bleibt dort); Änderungsereignisse aktualisieren Overlays und Markierungen"
+
+#: ../../technical/hosts.md:3
+msgid "view injection (`mountView`)"
+msgstr "Einbindung in Ansichten (`mountView`)"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"overlay on rendered Markdown (`mode: \"rendered\"`) and on code views "
+"(`mode: \"lines\"`, line ranges) – not on the old side of a diff"
+msgstr ""
+"Overlay auf dargestelltem Markdown (`mode: \"rendered\"`) und auf Code-"
+"Ansichten (`mode: \"lines\"`, Zeilenbereiche) – nicht auf der alten Seite"
+" eines Diffs"
+
+#: ../../technical/hosts.md:3
+msgid "frame scripts"
+msgstr "Frame-Skripte"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"overlay in rendered HTML pages; monsterbrain marks start tags with `data-"
+"line`; calls from pages reach only reading and feedback"
+msgstr ""
+"Overlay in dargestellten HTML-Seiten; monsterbrain markiert Start-Tags "
+"mit `data-line`; Aufrufe aus Seiten erreichen nur Lesen und Feedback"
+
+#: ../../technical/hosts.md:3
+msgid "panel section"
+msgstr "Panel-Abschnitt"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"the deciwa panel of the file, docked (`dock()`), or *Set up review* for a"
+" folder without `.deciwa/`"
+msgstr ""
+"das deciwa-Panel der Datei, angedockt (`dock()`), oder *Set up review* "
+"für einen Ordner ohne `.deciwa/`"
+
+#: ../../technical/hosts.md:3
+msgid "toolbar"
+msgstr "Werkzeugleiste"
+
+#: ../../technical/hosts.md:3
+msgid "the switch *Review on/off* next to View · Source · Diff"
+msgstr "der Schalter *Review on/off* neben View · Source · Diff"
+
+#: ../../technical/hosts.md:3
+msgid "decorations"
+msgstr "Markierungen"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"marks in tree and change view from `/api/summary`: `2?` questions, a "
+"number for jobs, `1!` stale, `3/5` required, `✓`"
+msgstr ""
+"Markierungen in Baum und Änderungsansicht aus `/api/summary`: `2?` "
+"Fragen, eine Zahl für Aufgaben, `1!` veraltet, `3/5` Pflicht, `✓`"
+
+#: ../../technical/hosts.md:3
+msgid "commands"
+msgstr "Befehle"
+
+#: ../../technical/hosts.md:3
+msgid "`Shift R` (review mode); the overlay's keys listed in monsterbrain's help"
+msgstr ""
+"`Shift R` (Review-Modus); die Tasten des Overlays in der Hilfe von "
+"monsterbrain"
+
+#: ../../technical/hosts.md:3
+msgid "MCP tools"
+msgstr "MCP-Tools"
+
+#: ../../technical/hosts.md:3
+msgid "`deciwa_feedback`, `deciwa_show`"
+msgstr "`deciwa_feedback`, `deciwa_show`"
+
+#: ../../technical/hosts.md:126
+msgid ""
+"Views opened while the engine is still starting attach as soon as it is "
+"ready. Review mode is one setting for all files: the overlay keeps it, "
+"and rendered HTML pages follow it."
+msgstr ""
+"Ansichten, die geöffnet werden, während die Engine noch startet, "
+"verbinden sich, sobald sie bereit ist. Der Review-Modus ist eine "
+"Einstellung für alle Dateien: das Overlay merkt ihn sich, und "
+"dargestellte HTML-Seiten folgen ihm."
+
+#: ../../technical/hosts.md:130
 msgid "Client"
 msgstr "Client"
 
-#: ../../technical/hosts.md:111
+#: ../../technical/hosts.md:132
 #, python-brace-format
 msgid "{need}`DEC_CLIENT_PACKAGE`"
 msgstr "{need}`DEC_CLIENT_PACKAGE`"
 
-#: ../../technical/hosts.md:113
+#: ../../technical/hosts.md:134
 msgid ""
 "`packages/client` (`@danwos/deciwa-client`) runs in Node – the host's "
 "main or extension process, never in a page, so the token stays there:"
@@ -411,7 +539,7 @@ msgstr ""
 "oder Erweiterungsprozess des Hosts, nie in einer Seite, so bleibt der "
 "Token dort:"
 
-#: ../../technical/hosts.md:116
+#: ../../technical/hosts.md:137
 msgid ""
 "`findEngine()` – the path from the host's settings, the engines bundled "
 "with the host, then `deciwa` on `PATH`,"
@@ -419,7 +547,7 @@ msgstr ""
 "`findEngine()` – der Pfad aus den Einstellungen des Hosts, die mit dem "
 "Host gelieferten Engines, dann `deciwa` im `PATH`,"
 
-#: ../../technical/hosts.md:118
+#: ../../technical/hosts.md:139
 #, python-brace-format
 msgid ""
 "`new Engine({root, enginePath, bundled}).start()` – starts `serve --api-"
@@ -431,7 +559,7 @@ msgstr ""
 "mismatch`), startet nach einem Absturz neu (höchstens dreimal pro "
 "Minute),"
 
-#: ../../technical/hosts.md:121
+#: ../../technical/hosts.md:142
 msgid ""
 "typed calls (`elements`, `page`, `summary`, `todo`, `annotate`, "
 "`hostPage`, `call` for any endpoint) and `events()` with reconnect,"
@@ -440,11 +568,11 @@ msgstr ""
 "`hostPage`, `call` für jeden Endpunkt) und `events()` mit "
 "Wiederverbindung,"
 
-#: ../../technical/hosts.md:123
+#: ../../technical/hosts.md:144
 msgid "`initFolder()` – `deciwa init --at <folder>`."
 msgstr "`initFolder()` – `deciwa init --at <ordner>`."
 
-#: ../../technical/hosts.md:125
+#: ../../technical/hosts.md:146
 msgid ""
 "`npm test` in `packages/client` starts the engine of the checkout against"
 " a temporary folder."
@@ -452,11 +580,11 @@ msgstr ""
 "`npm test` in `packages/client` startet die Engine des Checkouts gegen "
 "einen temporären Ordner."
 
-#: ../../technical/hosts.md:128
+#: ../../technical/hosts.md:149
 msgid "Standalone engine"
 msgstr "Eigenständige Engine"
 
-#: ../../technical/hosts.md:135
+#: ../../technical/hosts.md:156
 msgid ""
 "**Content:** `deciwa-core`, `-server`, `-cli` and the overlay files of "
 "`deciwa-ui`. Not `deciwa-sphinx`: Sphinx builds keep running in the docs "
@@ -466,7 +594,7 @@ msgstr ""
 "`deciwa-ui`. Nicht `deciwa-sphinx`: Sphinx-Builds laufen weiter in der "
 "eigenen Python-Umgebung des Doku-Projekts."
 
-#: ../../technical/hosts.md:138
+#: ../../technical/hosts.md:159
 msgid ""
 "**Form:** PyInstaller *one-folder* (starts fast; *one-file* unpacks on "
 "every start), so the host can sign every file inside."
@@ -474,7 +602,7 @@ msgstr ""
 "**Form:** PyInstaller *one-folder* (startet schnell; *one-file* entpackt "
 "bei jedem Start), damit der Host jede Datei darin signieren kann."
 
-#: ../../technical/hosts.md:140
+#: ../../technical/hosts.md:161
 msgid ""
 "**Platforms:** linux-x64, linux-arm64, macos-arm64, macos-x64, "
 "windows-x64 – built in GitHub Actions on each platform, smoke-tested with"
@@ -484,7 +612,7 @@ msgstr ""
 "windows-x64 – gebaut in GitHub Actions auf jeder Plattform, kurz getestet"
 " mit `deciwa --version` und `serve --api-only` gegen einen Testordner."
 
-#: ../../technical/hosts.md:143
+#: ../../technical/hosts.md:164
 msgid ""
 "**Release:** a zip per platform in the releases of `danwos/deciwa`. A "
 "host pins an engine version and fetches it at its own build time; it "
@@ -494,7 +622,7 @@ msgstr ""
 "Ein Host legt eine Engine-Version fest und holt sie beim eigenen Build; "
 "er lädt nie zur Laufzeit Code herunter."
 
-#: ../../technical/hosts.md:146
+#: ../../technical/hosts.md:167
 msgid ""
 "**Signing:** the host signs the bundled engine together with its own code"
 " (Apple notarisation requires every binary inside the app to be signed)."
@@ -503,7 +631,7 @@ msgstr ""
 "seinem eigenen Code (die Notarisierung bei Apple verlangt, dass jedes "
 "Binary in der App signiert ist)."
 
-#: ../../technical/hosts.md:148
+#: ../../technical/hosts.md:169
 msgid ""
 "**Size:** expected 20–40 MB per platform; to be measured with the first "
 "build."
@@ -511,7 +639,7 @@ msgstr ""
 "**Größe:** erwartet 20–40 MB pro Plattform; mit dem ersten Build zu "
 "messen."
 
-#: ../../technical/hosts.md:157
+#: ../../technical/hosts.md:178
 msgid ""
 "`vsce package --target <platform>` builds one extension package per "
 "platform, each with its engine. A universal package without engine uses "
@@ -521,7 +649,7 @@ msgstr ""
 "Plattform, jedes mit seiner Engine. Ein universelles Paket ohne Engine "
 "nutzt `deciwa` im `PATH` – für Plattformen ohne Build."
 
-#: ../../technical/hosts.md:168
+#: ../../technical/hosts.md:189
 msgid ""
 "Proposal: PyInstaller – widely used, simple, no C compiler. Alternatives:"
 " Nuitka (compiles to C: faster and smaller, but long builds and a C "

@@ -106,6 +106,27 @@ tag ({need}`DEC_HTML_ADAPTER`). Only a page the adapter cannot read falls
 back to the DOM scan of the web script, whose elements go to the engine with
 `POST /api/elements`.
 
+## The monsterbrain extension
+
+`packages/monsterbrain` maps monsterbrain's extension interface v0
+(`docs/extensions.md` in the monsterbrain repository) to client and overlay:
+
+| monsterbrain extension point | deciwa uses it for |
+|---|---|
+| background process (`onRoot`, `deactivate`) | start the engine for the open folder, stop it with the app |
+| calls and events | the window's API calls go through the main process (the token stays there); change events refresh overlays and marks |
+| view injection (`mountView`) | overlay on rendered Markdown (`mode: "rendered"`) and on code views (`mode: "lines"`, line ranges) – not on the old side of a diff |
+| frame scripts | overlay in rendered HTML pages; monsterbrain marks start tags with `data-line`; calls from pages reach only reading and feedback |
+| panel section | the deciwa panel of the file, docked (`dock()`), or *Set up review* for a folder without `.deciwa/` |
+| toolbar | the switch *Review on/off* next to View · Source · Diff |
+| decorations | marks in tree and change view from `/api/summary`: `2?` questions, a number for jobs, `1!` stale, `3/5` required, `✓` |
+| commands | `Shift R` (review mode); the overlay's keys listed in monsterbrain's help |
+| MCP tools | `deciwa_feedback`, `deciwa_show` |
+
+Views opened while the engine is still starting attach as soon as it is
+ready. Review mode is one setting for all files: the overlay keeps it, and
+rendered HTML pages follow it.
+
 ## Client
 
 {need}`DEC_CLIENT_PACKAGE`
