@@ -22,7 +22,31 @@ export interface HostContext {
     run(args: Record<string, unknown>): unknown;
   }): void;
   open(path: string, opts?: { tab?: "view" | "source" | "diff"; highlight?: string; newTab?: boolean }): Promise<unknown>;
+  /** the concepts a file belongs to – its own concept folder first, then those listing it under results: */
+  concepts(path: string): Promise<Concept[]>;
+  /** hand a request to the Claude session of the open folder (only on a click of the user) */
+  agent(req: { action: string; prompt: string; meta?: Record<string, string> }): Promise<{ sent: boolean; session?: string; started?: boolean }>;
   log(...args: unknown[]): void;
+}
+
+/** A brain concept as monsterbrain knows it (10_concepts/<folder>/concept.md). */
+export interface Concept {
+  folder: string;
+  title: string;
+  open: boolean;
+  status?: string;
+  results: { raw: string; path?: string; abs?: string; exists: boolean; dir: boolean }[];
+}
+
+/** What "Inform Claude" covers for a file. */
+export interface ReviewScope {
+  kind: "concept" | "file";
+  /** the concept's title, or the file */
+  title: string;
+  /** files and folders, relative to the open folder */
+  paths: string[];
+  /** review entries newer than the last hand-over (kept while monsterbrain runs) */
+  active: boolean;
 }
 
 /** A rendered view monsterbrain offers. */

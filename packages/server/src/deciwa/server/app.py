@@ -238,7 +238,8 @@ class Handler(SimpleHTTPRequestHandler):
         if url.path == "/api/status":
             return self._call(p.status)
         if url.path == "/api/todo":
-            return self._call(lambda: p.todo(q.get("for")))
+            sources = [s for s in q["sources"].split(",") if s] if "sources" in q else None
+            return self._call(lambda: p.todo(q.get("for"), sources))
         self._json({"ok": False, "error": "unknown endpoint"}, 404)
 
     def do_POST(self):

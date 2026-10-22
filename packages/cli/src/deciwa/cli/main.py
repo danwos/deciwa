@@ -72,7 +72,16 @@ def cmd_todo(args):
                 print(f"          ? {j['question']}")
             if j.get("comment"):
                 print(f"          “{j['comment']}”")
-    _out(args, "todo", Project().todo(args.for_), human)
+    p = Project()
+    _out(args, "todo", p.todo(args.for_, [_source(p, x) for x in args.paths] if args.paths else None), human)
+
+
+def _source(p, path: str) -> str:
+    """A path given on the command line → root-relative source; paths that exist from here count from here."""
+    here = Path(path).resolve()
+    if here.exists() and here.is_relative_to(p.root.resolve()):
+        return here.relative_to(p.root.resolve()).as_posix()
+    return path.strip("/").removeprefix("./")
 
 
 def cmd_show(args):
@@ -174,7 +183,8 @@ def main(argv=None):
     s.add_argument("--root", default=argparse.SUPPRESS, help="the folder to review (also before the command)")
     s.set_defaults(fn=cmd_serve)
     s = sub.add_parser("status"); s.set_defaults(fn=cmd_status)
-    s = sub.add_parser("todo"); s.add_argument("--for", dest="for_"); s.set_defaults(fn=cmd_todo)
+    s = sub.add_parser("todo", help="open jobs and questions; with paths only those of these files or folders")
+    s.add_argument("paths", nargs="*"); s.add_argument("--for", dest="for_"); s.set_defaults(fn=cmd_todo)
     s = sub.add_parser("show"); s.add_argument("source"); s.set_defaults(fn=cmd_show)
     s = sub.add_parser("elements"); s.add_argument("source"); s.set_defaults(fn=cmd_elements)
     for name, fn in (("annotate", cmd_annotate), ("rate", cmd_rate), ("request", cmd_request)):

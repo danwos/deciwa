@@ -13,7 +13,7 @@ local server), never to the files directly. Every command has `--json`.
 | `deciwa elements <file>` | the elements of a source, with their selectors |
 | `deciwa show <file>` | all feedback of a source with the element states |
 | `deciwa status` | states and coverage of the whole project |
-| `deciwa todo` | open jobs for the AI or developer, and open questions |
+| `deciwa todo [path …]` | open jobs for the AI or developer, and open questions – with paths only those of these files or folders |
 | `deciwa annotate <file> <element> --verdict … [--comment …]` | give feedback |
 | `deciwa rate <file> <element> <0-5>` | give stars |
 | `deciwa request <file> <element> --to … --question …` | ask someone about an element |

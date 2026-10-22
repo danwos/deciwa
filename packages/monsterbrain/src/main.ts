@@ -4,7 +4,7 @@
  * everything comes from the engine through the client (DEC_HOST_EXTENSIONS). */
 import { Engine, EngineError, findEngine, initFolder, type FileSummary, type Handshake } from "@danwos/deciwa-client";
 import { join, relative, sep } from "node:path";
-import type { HostContext, Status } from "./types";
+import type { HostContext, ReviewScope, Status } from "./types";
 
 let ctx: HostContext;
 let engine: Engine | null = null;
@@ -125,6 +125,71 @@ async function decorate(): Promise<void> {
   }
 }
 
+// -- Inform Claude ------------------------------------------------------------------
+// The button next to the review switch tells the Claude session of the folder about the
+// review (monsterbrain's ctx.agent). Scope: the file's open concept when that concept –
+// its folder or a file it lists under results: – has review entries newer than the last
+// hand-over; else the file alone. No review state of its own: every entry carries its
+// `created` time, Claude reads what is newer itself. The time of the last hand-over is
+// only kept while monsterbrain runs.
+
+const informedAt = new Map<string, string>();  // scope (its first path) → ISO time of the last hand-over
+const stamp = (): string => new Date().toISOString().slice(0, 19) + "Z";  // the engine's format
+const under = (source: string, paths: string[]): boolean =>
+  paths.some((p) => source === p || source.startsWith(p.replace(/\/+$/, "") + "/"));
+
+/** Sources with review data in these paths, and the newest entry people made there (feedback, rating, question, reply). */
+async function reviewed(paths: string[]): Promise<{ sources: string[]; newest: string }> {
+  const wanted = paths.map(toSource);
+  const sources = Object.keys(await engine!.summary()).filter((s) => under(s, wanted));
+  let newest = "";
+  for (const source of sources) {
+    const view = await engine!.page(source);
+    const anns = [...Object.values(view.elements).flatMap((e) => e.annotations), ...view.orphans];
+    for (const a of anns)
+      for (const e of [a, ...(a.replies ?? [])])
+        if (!e.author.startsWith("agent:") && e.created > newest) newest = e.created;
+  }
+  return { sources, newest };
+}
+
+type Scope = ReviewScope & { sources: string[]; since?: string };
+
+async function reviewScope(path: string): Promise<Scope | null> {
+  if (!engine) return null;
+  const concepts = (await ctx.concepts(path)).filter((c) => c.open);
+  // a hand-over of a concept also covers its files
+  let since = informedAt.get(path) ?? "";
+  for (const c of concepts) {
+    const paths = [c.folder, ...c.results.filter((r) => r.path && r.exists).map((r) => r.path!)];
+    const told = informedAt.get(c.folder) ?? "";
+    if (told > since) since = told;
+    const r = await reviewed(paths);
+    if (r.newest > told) return { kind: "concept", title: c.title, paths, active: true, sources: r.sources, since: told || undefined };
+  }
+  const r = await reviewed([path]);
+  return { kind: "file", title: path, paths: [path], active: r.newest > since, sources: r.sources, since: since || undefined };
+}
+
+function reviewPrompt(s: Scope, exe: string, engineRoot: string): string {
+  const cli = `${exe} --root ${engineRoot}`;
+  const what = s.kind === "concept" ? `the concept "${s.title}" (${s.paths[0]} and its results)` : s.title;
+  return [
+    `I reviewed ${what} in deciwa. Stay within that scope.`,
+    "",
+    `1. Read the review of each file: ${s.sources.map((src) => `\`${cli} --json show ${src}\``).join(", ")}. ` +
+      (s.since
+        ? `Entries and replies with \`created\` after ${s.since} are new since I last informed you; the rest you know.`
+        : "Every entry and reply carries its `created` time – what is newer than what you handled in this session is new."),
+    "2. Approvals are confirmation – if you were waiting for one, go on with that work. Read answers to your questions.",
+    `3. Open jobs: \`${cli} todo ${s.paths.map((p) => join(root!, p)).join(" ")}\` – apply comments, fix rejected statements, ` +
+      "remove elements marked for deletion, restore frozen ones that changed; never touch frozen elements otherwise. " +
+      `Mark each done: \`${cli} resolve <id> --note "…" --author agent:claude\`.`,
+    `4. Anything unclear: ask at the element – \`${cli} request <file> <element> --to daniel --question "…" --author agent:claude\` – instead of guessing.`,
+    "5. Show me the result in monsterbrain (show_changes) and sum up what you did.",
+  ].join("\n");
+}
+
 // -- activation ---------------------------------------------------------------------
 
 const FRAME_GET = ["/api/page", "/api/project", "/api/elements", "/api/summary"];
@@ -170,6 +235,28 @@ export function activate(c: HostContext): void {
     ctx.emit("focus", { path, selector: selector ?? null });
     return path;
   }, { frames: true });
+
+  ctx.handle("review-scope", async (path): Promise<ReviewScope | null> => {
+    const s = await reviewScope(String(path));
+    return s && { kind: s.kind, title: s.title, paths: s.paths, active: s.active };
+  });
+  ctx.handle("review-to-claude", async (path) => {
+    const scope = await reviewScope(String(path));
+    if (!scope?.active) throw new Error("nothing new for Claude here");
+    const exe = findEngine({ enginePath: enginePath(), bundled: bundled() });
+    if (!exe || !status.engineRoot) throw new Error("deciwa engine not found");
+    const at = stamp();
+    const result = await ctx.agent({
+      action: "deciwa_review",
+      prompt: reviewPrompt(scope, exe, status.engineRoot),
+      meta: { scope: scope.kind, path: scope.paths[0] },
+    });
+    if (result.sent || result.started) {
+      informedAt.set(scope.paths[0], at);
+      ctx.emit("changed", { type: "changed", sources: [], paths: [] });  // the button greys out
+    }
+    return result;
+  });
 
   ctx.tool({
     name: "deciwa_feedback",

@@ -44,7 +44,16 @@ before, just without review.
 - **HTML files** – the rendered page is reviewable with the same elements as
   its source; the review switch and `Shift R` work for the page, the page's
   own deciwa button opens its panel.
-- **Claude** – monsterbrain's MCP server gains `deciwa_feedback` (the review
+- **Inform Claude** – the button next to the review switch tells the
+  Claude session of the folder about the review (monsterbrain's agent
+  actions). It covers the file's open concept when that concept – its folder
+  or a file it lists under `results:` – has review entries newer than the
+  last hand-over, else the file alone. Approvals count: Claude may be waiting
+  for one. Claude reads the entries itself (`deciwa show`, `deciwa todo`);
+  their `created` times tell it what is new. The button is greyed out while
+  nothing is new and only a click starts it; the time of the last hand-over
+  is kept only while monsterbrain runs – deciwa stores nothing for it.
+- **Claude tools** – monsterbrain's MCP server gains `deciwa_feedback` (the review
   state of a file, or every open job) and `deciwa_show` (open a file at an
   element).
 

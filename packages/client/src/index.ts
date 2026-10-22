@@ -321,8 +321,13 @@ export class Engine {
     return this.call(sources ? `/api/summary?sources=${sources.map(encodeURIComponent).join(",")}` : "/api/summary");
   }
 
-  todo(forAuthor?: string): Promise<Job[]> {
-    return this.call(forAuthor ? `/api/todo?for=${encodeURIComponent(forAuthor)}` : "/api/todo");
+  /** Open jobs and questions; with sources only those of these files or folders (root-relative). */
+  todo(forAuthor?: string, sources?: string[]): Promise<Job[]> {
+    const q = new URLSearchParams();
+    if (forAuthor) q.set("for", forAuthor);
+    if (sources) q.set("sources", sources.join(","));
+    const s = q.toString();
+    return this.call(s ? `/api/todo?${s}` : "/api/todo");
   }
 
   annotate(a: { source: string; selector: string; kind: string; [field: string]: unknown }): Promise<Annotation> {

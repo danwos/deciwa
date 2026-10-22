@@ -446,9 +446,12 @@ class Project:
                            "annotations": sum(len(st["annotations"]) for st in view["elements"].values()) + len(view["orphans"])}
         return out
 
-    def todo(self, for_author: str | None = None) -> list[dict]:
+    def todo(self, for_author: str | None = None, sources: list[str] | None = None) -> list[dict]:
+        """Open jobs and questions; with sources only those of these files or folders (root-relative)."""
         jobs = []
         for page, view in self.all_views():
+            if sources is not None and not _under(view["source"], sources):
+                continue
             lines = {e["selector"]: e.get("line") for e in page["elements"]}
             for sel, st in view["elements"].items():
                 for a in st["annotations"]:
@@ -474,6 +477,11 @@ class Project:
                 jobs.append({"job": "relink", "id": o["id"], "source": view["source"],
                              "element": o["target"]["selectors"][0]["value"], "quote": o["target"]["snapshot"]})
         return jobs
+
+
+def _under(source: str, paths: list[str]) -> bool:
+    """Whether a source is one of these files or lies in one of these folders (root-relative)."""
+    return any(source == s or source.startswith(s + "/") for s in (p.strip("/") for p in paths) if s)
 
 
 def _match_url(pattern: str, path: str) -> list[str] | None:

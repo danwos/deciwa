@@ -94,6 +94,22 @@ class ProjectWithoutBuild(unittest.TestCase):
             self.assertEqual(p.summary()["notes/a.md"]["states"].get("stale"), 1)
             self.assertIn("notes/a.md", p.pages())
 
+    def test_todo_for_paths(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / ".deciwa" / "annotations").mkdir(parents=True)
+            for f in ("notes/a.md", "notes/sub/b.md", "other/c.md"):
+                (root / f).parent.mkdir(parents=True, exist_ok=True)
+                (root / f).write_text(DOC)
+                Project(root).add(f, "md:paragraph:Title#1", "feedback", verdict="reject", comment="no")
+            p = Project(root)
+            sources = lambda paths: sorted(j["source"] for j in p.todo(sources=paths))
+            self.assertEqual(sources(None), ["notes/a.md", "notes/sub/b.md", "other/c.md"])
+            self.assertEqual(sources(["notes/sub"]), ["notes/sub/b.md"])
+            self.assertEqual(sources(["notes/", "other/c.md"]), ["notes/a.md", "notes/sub/b.md", "other/c.md"])
+            self.assertEqual(sources(["note"]), [])
+
+
 
 if __name__ == "__main__":
     unittest.main()

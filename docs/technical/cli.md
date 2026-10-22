@@ -21,7 +21,7 @@ Proposals by Claude – not binding until Daniel approves them.
 | `deciwa answer <id> [--verdict approve\|reject] [--text …]` | answer a request |
 | `deciwa show <file>` | every annotation of a file with its element state |
 | `deciwa status [path]` | counts per state, coverage |
-| `deciwa todo [--for <who>]` | open quick actions and requests |
+| `deciwa todo [path …] [--for <who>]` | open quick actions and requests; paths (files or folders, from the current folder or the project root) limit them |
 | `deciwa resolve <id> [--note …]` | mark a job as done |
 | `deciwa diff <id>` | snapshot vs. current text |
 | `deciwa relink <id> [<element>]` | update the selectors of a moved or orphaned annotation |
