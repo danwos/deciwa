@@ -94,6 +94,11 @@ file in the host) and `focus`. It returns `dock()` / `undock()` to put the
 panel into the host's side panel, `setReview()`, `focus()`, `refresh()` and
 `destroy()`.
 
+Line views (source code): the host marks every line with `data-line`; with
+`hostElements(container, elements, {ranges: true})` the lines from `line` to
+`end` of each element are grouped into one block, nested as the elements
+are, so methods sit inside their class. `unwrapRanges()` undoes it.
+
 In a diff the overlay runs on the new side only; the old side is read only.
 Rendered HTML files keep the DOM scan of the web script, with the file path
 as source; their elements go to the engine with `POST /api/elements`.

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 13:53+0200\n"
+"POT-Creation-Date: 2026-10-22 14:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -361,6 +361,21 @@ msgstr ""
 "`refresh()` und `destroy()`."
 
 #: ../../technical/hosts.md:97
+#, python-brace-format
+msgid ""
+"Line views (source code): the host marks every line with `data-line`; "
+"with `hostElements(container, elements, {ranges: true})` the lines from "
+"`line` to `end` of each element are grouped into one block, nested as the"
+" elements are, so methods sit inside their class. `unwrapRanges()` undoes"
+" it."
+msgstr ""
+"Zeilenansichten (Quelltext): der Host markiert jede Zeile mit `data-"
+"line`; mit `hostElements(container, elements, {ranges: true})` werden die"
+" Zeilen von `line` bis `end` jedes Elements zu einem Block "
+"zusammengefasst, verschachtelt wie die Elemente, sodass Methoden in ihrer"
+" Klasse liegen. `unwrapRanges()` macht das rückgängig."
+
+#: ../../technical/hosts.md:102
 msgid ""
 "In a diff the overlay runs on the new side only; the old side is read "
 "only. Rendered HTML files keep the DOM scan of the web script, with the "
@@ -372,16 +387,16 @@ msgstr ""
 "Skripts, mit dem Dateipfad als Quelle; ihre Elemente gehen mit `POST "
 "/api/elements` an die Engine."
 
-#: ../../technical/hosts.md:101
+#: ../../technical/hosts.md:106
 msgid "Client"
 msgstr "Client"
 
-#: ../../technical/hosts.md:103
+#: ../../technical/hosts.md:108
 #, python-brace-format
 msgid "{need}`DEC_CLIENT_PACKAGE`"
 msgstr "{need}`DEC_CLIENT_PACKAGE`"
 
-#: ../../technical/hosts.md:105
+#: ../../technical/hosts.md:110
 msgid ""
 "`packages/client` (`@danwos/deciwa-client`) runs in Node – the host's "
 "main or extension process, never in a page, so the token stays there:"
@@ -390,7 +405,7 @@ msgstr ""
 "oder Erweiterungsprozess des Hosts, nie in einer Seite, so bleibt der "
 "Token dort:"
 
-#: ../../technical/hosts.md:108
+#: ../../technical/hosts.md:113
 msgid ""
 "`findEngine()` – the path from the host's settings, the engines bundled "
 "with the host, then `deciwa` on `PATH`,"
@@ -398,7 +413,7 @@ msgstr ""
 "`findEngine()` – der Pfad aus den Einstellungen des Hosts, die mit dem "
 "Host gelieferten Engines, dann `deciwa` im `PATH`,"
 
-#: ../../technical/hosts.md:110
+#: ../../technical/hosts.md:115
 #, python-brace-format
 msgid ""
 "`new Engine({root, enginePath, bundled}).start()` – starts `serve --api-"
@@ -410,7 +425,7 @@ msgstr ""
 "mismatch`), startet nach einem Absturz neu (höchstens dreimal pro "
 "Minute),"
 
-#: ../../technical/hosts.md:113
+#: ../../technical/hosts.md:118
 msgid ""
 "typed calls (`elements`, `page`, `summary`, `todo`, `annotate`, "
 "`hostPage`, `call` for any endpoint) and `events()` with reconnect,"
@@ -419,11 +434,11 @@ msgstr ""
 "`hostPage`, `call` für jeden Endpunkt) und `events()` mit "
 "Wiederverbindung,"
 
-#: ../../technical/hosts.md:115
+#: ../../technical/hosts.md:120
 msgid "`initFolder()` – `deciwa init --at <folder>`."
 msgstr "`initFolder()` – `deciwa init --at <ordner>`."
 
-#: ../../technical/hosts.md:117
+#: ../../technical/hosts.md:122
 msgid ""
 "`npm test` in `packages/client` starts the engine of the checkout against"
 " a temporary folder."
@@ -431,11 +446,11 @@ msgstr ""
 "`npm test` in `packages/client` startet die Engine des Checkouts gegen "
 "einen temporären Ordner."
 
-#: ../../technical/hosts.md:120
+#: ../../technical/hosts.md:125
 msgid "Standalone engine"
 msgstr "Eigenständige Engine"
 
-#: ../../technical/hosts.md:127
+#: ../../technical/hosts.md:132
 msgid ""
 "**Content:** `deciwa-core`, `-server`, `-cli` and the overlay files of "
 "`deciwa-ui`. Not `deciwa-sphinx`: Sphinx builds keep running in the docs "
@@ -445,7 +460,7 @@ msgstr ""
 "`deciwa-ui`. Nicht `deciwa-sphinx`: Sphinx-Builds laufen weiter in der "
 "eigenen Python-Umgebung des Doku-Projekts."
 
-#: ../../technical/hosts.md:130
+#: ../../technical/hosts.md:135
 msgid ""
 "**Form:** PyInstaller *one-folder* (starts fast; *one-file* unpacks on "
 "every start), so the host can sign every file inside."
@@ -453,7 +468,7 @@ msgstr ""
 "**Form:** PyInstaller *one-folder* (startet schnell; *one-file* entpackt "
 "bei jedem Start), damit der Host jede Datei darin signieren kann."
 
-#: ../../technical/hosts.md:132
+#: ../../technical/hosts.md:137
 msgid ""
 "**Platforms:** linux-x64, linux-arm64, macos-arm64, macos-x64, "
 "windows-x64 – built in GitHub Actions on each platform, smoke-tested with"
@@ -463,7 +478,7 @@ msgstr ""
 "windows-x64 – gebaut in GitHub Actions auf jeder Plattform, kurz getestet"
 " mit `deciwa --version` und `serve --api-only` gegen einen Testordner."
 
-#: ../../technical/hosts.md:135
+#: ../../technical/hosts.md:140
 msgid ""
 "**Release:** a zip per platform in the releases of `danwos/deciwa`. A "
 "host pins an engine version and fetches it at its own build time; it "
@@ -473,7 +488,7 @@ msgstr ""
 "Ein Host legt eine Engine-Version fest und holt sie beim eigenen Build; "
 "er lädt nie zur Laufzeit Code herunter."
 
-#: ../../technical/hosts.md:138
+#: ../../technical/hosts.md:143
 msgid ""
 "**Signing:** the host signs the bundled engine together with its own code"
 " (Apple notarisation requires every binary inside the app to be signed)."
@@ -482,7 +497,7 @@ msgstr ""
 "seinem eigenen Code (die Notarisierung bei Apple verlangt, dass jedes "
 "Binary in der App signiert ist)."
 
-#: ../../technical/hosts.md:140
+#: ../../technical/hosts.md:145
 msgid ""
 "**Size:** expected 20–40 MB per platform; to be measured with the first "
 "build."
@@ -490,7 +505,7 @@ msgstr ""
 "**Größe:** erwartet 20–40 MB pro Plattform; mit dem ersten Build zu "
 "messen."
 
-#: ../../technical/hosts.md:149
+#: ../../technical/hosts.md:154
 msgid ""
 "`vsce package --target <platform>` builds one extension package per "
 "platform, each with its engine. A universal package without engine uses "
@@ -500,7 +515,7 @@ msgstr ""
 "Plattform, jedes mit seiner Engine. Ein universelles Paket ohne Engine "
 "nutzt `deciwa` im `PATH` – für Plattformen ohne Build."
 
-#: ../../technical/hosts.md:160
+#: ../../technical/hosts.md:165
 msgid ""
 "Proposal: PyInstaller – widely used, simple, no C compiler. Alternatives:"
 " Nuitka (compiles to C: faster and smaller, but long builds and a C "

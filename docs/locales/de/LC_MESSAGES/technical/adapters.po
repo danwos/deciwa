@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 13:53+0200\n"
+"POT-Creation-Date: 2026-10-22 14:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -177,7 +177,24 @@ msgstr ""
 msgid "a rendered web page, found in the browser ({doc}`web`)"
 msgstr "eine gerenderte Webseite, im Browser gefunden ({doc}`web`)"
 
-#: ../../technical/adapters.md:63
+#: ../../technical/adapters.md:12
+msgid "py"
+msgstr "py"
+
+#: ../../technical/adapters.md:12
+msgid "`py:class:Engine` · `py:function:Engine.start` · `py:function:main`"
+msgstr "`py:class:Engine` · `py:function:Engine.start` · `py:function:main`"
+
+#: ../../technical/adapters.md:12
+#, python-brace-format
+msgid ""
+"a class, method or function, named by its path in the code "
+"({need}`DEC_PYTHON_ADAPTER`)"
+msgstr ""
+"eine Klasse, Methode oder Funktion, benannt nach ihrem Pfad im Code "
+"({need}`DEC_PYTHON_ADAPTER`)"
+
+#: ../../technical/adapters.md:64
 #, python-brace-format
 msgid ""
 "Heading paths survive moves of whole sections and edits in other "
@@ -193,11 +210,11 @@ msgstr ""
 "probiert. Doppelte Überschriften in einem Pfad bekommen ein Suffix "
 "(`Notes~2`)."
 
-#: ../../technical/adapters.md:70
+#: ../../technical/adapters.md:71
 msgid "Markdown"
 msgstr "Markdown"
 
-#: ../../technical/adapters.md:72
+#: ../../technical/adapters.md:73
 msgid ""
 "Parser: markdown-it-py (CommonMark + tables), token maps give line "
 "ranges; offsets come from the line ranges."
@@ -205,7 +222,7 @@ msgstr ""
 "Parser: markdown-it-py (CommonMark + Tabellen); Token-Maps liefern "
 "Zeilenbereiche, Offsets ergeben sich aus den Zeilenbereichen."
 
-#: ../../technical/adapters.md:74
+#: ../../technical/adapters.md:75
 msgid ""
 "Elements: heading sections, paragraphs, list items (nested), table rows, "
 "code blocks, frontmatter fields (YAML keys at the top level)."
@@ -214,7 +231,7 @@ msgstr ""
 "(verschachtelt), Tabellenzeilen, Codeblöcke, Frontmatter-Felder (YAML-"
 "Schlüssel auf oberster Ebene)."
 
-#: ../../technical/adapters.md:77
+#: ../../technical/adapters.md:78
 #, python-brace-format
 msgid ""
 "Built first, for host apps ({need}`DEC_HOST_ELEMENTS`): "
@@ -241,11 +258,11 @@ msgstr ""
 "zählen ab 1 und schließen die Frontmatter ein. Die Engine nutzt den "
 "Adapter für jede Datei, die kein Build-Index kennt."
 
-#: ../../technical/adapters.md:88
+#: ../../technical/adapters.md:89
 msgid "rST and Sphinx-Needs"
 msgstr "rST und Sphinx-Needs"
 
-#: ../../technical/adapters.md:95
+#: ../../technical/adapters.md:96
 msgid ""
 "docutils keeps source lines on every node. Unknown directives and roles "
 "(Sphinx, Sphinx-Needs, any extension) are registered as generic "
@@ -260,7 +277,7 @@ msgstr ""
 " werden am Namen erkannt; ihre `:id:` ergibt den `sphinx-"
 "needs:`-Selektor."
 
-#: ../../technical/adapters.md:108
+#: ../../technical/adapters.md:109
 msgid ""
 "Proposal: read them from `needs.json` if the project builds one, "
 "otherwise from `.deciwa/config.toml` (`needs.directives = [\"req\", "
@@ -274,11 +291,88 @@ msgstr ""
 "`impl`, `test`, `need`). OK, oder soll deciwa `conf.py` / "
 "`ubproject.toml` direkt lesen?"
 
-#: ../../technical/adapters.md:114
+#: ../../technical/adapters.md:115
+msgid "Python"
+msgstr "Python"
+
+#: ../../technical/adapters.md:117
+#, python-brace-format
+msgid ""
+"{need}`DEC_PYTHON_ADAPTER` – `deciwa.core.adapters.python` reads `.py` "
+"and `.pyi` files with the standard library `ast`:"
+msgstr ""
+"{need}`DEC_PYTHON_ADAPTER` – `deciwa.core.adapters.python` liest `.py`- "
+"und `.pyi`-Dateien mit `ast` aus der Standardbibliothek:"
+
+#: ../../technical/adapters.md:120
+msgid ""
+"Elements: classes, functions and methods, nested as in the code (a "
+"method's parent is its class, a nested function's parent the function "
+"around it); definitions inside `if`, `try` or `with` blocks count at "
+"their level."
+msgstr ""
+"Elemente: Klassen, Funktionen und Methoden, verschachtelt wie im Code "
+"(das Elternelement einer Methode ist ihre Klasse, das einer inneren "
+"Funktion die Funktion darum); Definitionen in `if`-, `try`- oder "
+"`with`-Blöcken zählen auf ihrer Ebene."
+
+#: ../../technical/adapters.md:123
+msgid ""
+"Selectors: `py:<class|function>:<path>` – `py:function:Engine.start`; a "
+"second definition with the same path (a property setter, a redefinition) "
+"gets `~2`."
+msgstr ""
+"Selektoren: `py:<class|function>:<path>` – `py:function:Engine.start`; "
+"eine zweite Definition mit demselben Pfad (ein Property-Setter, eine "
+"Neudefinition) bekommt `~2`."
+
+#: ../../technical/adapters.md:125
+msgid ""
+"Text: the source of the definition, decorators included – any change to "
+"an approved function makes it stale. Label: its first line (`def "
+"start(self) -> Handshake:`)."
+msgstr ""
+"Text: der Quelltext der Definition, Dekoratoren eingeschlossen – jede "
+"Änderung an einer freigegebenen Funktion macht sie veraltet. Bezeichnung:"
+" ihre erste Zeile (`def start(self) -> Handshake:`)."
+
+#: ../../technical/adapters.md:128
+msgid "Lines: `line` is the first line (the first decorator), `end` the last one."
+msgstr ""
+"Zeilen: `line` ist die erste Zeile (der erste Dekorator), `end` die "
+"letzte."
+
+#: ../../technical/adapters.md:129
+msgid "A file with a syntax error has no elements."
+msgstr "Eine Datei mit Syntaxfehler hat keine Elemente."
+
+#: ../../technical/adapters.md:130
+msgid "The element kinds `class` and `function` can be named in the review rules."
+msgstr ""
+"Die Elementarten `class` und `function` lassen sich in den Review-Regeln "
+"nennen."
+
+#: ../../technical/adapters.md:132
+msgid ""
+"Not yet: comments and module-level constants as elements; JS, TS and C "
+"(tree-sitter, next)."
+msgstr ""
+"Noch nicht: Kommentare und Konstanten auf Modulebene als Elemente; JS, TS"
+" und C (tree-sitter, als Nächstes)."
+
+#: ../../technical/adapters.md:135
+msgid ""
+"In a host the lines of each element are grouped into one block of the "
+"code view ([Host apps](hosts.md))."
+msgstr ""
+"In einem Host werden die Zeilen jedes Elements zu einem Block der Code-"
+"Ansicht zusammengefasst ([Host-Apps](hosts.md))."
+
+#: ../../technical/adapters.md:138
 msgid "Plain text"
 msgstr "Reiner Text"
 
-#: ../../technical/adapters.md:116
+#: ../../technical/adapters.md:140
 msgid ""
 "Paragraphs are blocks separated by blank lines; lines are a second level."
 " Everything else is free text selection."
@@ -286,11 +380,11 @@ msgstr ""
 "Absätze sind durch Leerzeilen getrennte Blöcke; Zeilen sind eine zweite "
 "Ebene. Alles andere ist freie Textauswahl."
 
-#: ../../technical/adapters.md:119
+#: ../../technical/adapters.md:143
 msgid "HTML in the browser"
 msgstr "HTML im Browser"
 
-#: ../../technical/adapters.md:126
+#: ../../technical/adapters.md:150
 msgid ""
 "A small adapter in JavaScript reads the DOM of the review root and "
 "returns the same element list as the other adapters:"
@@ -298,7 +392,7 @@ msgstr ""
 "Ein kleiner Adapter in JavaScript liest das DOM der Review-Wurzel und "
 "liefert dieselbe Elementliste wie die anderen Adapter:"
 
-#: ../../technical/adapters.md:129
+#: ../../technical/adapters.md:153
 msgid ""
 "sections from the heading outline `h1`–`h6` (web pages rarely nest real "
 "`<section>` elements), named by their heading path,"
@@ -307,7 +401,7 @@ msgstr ""
 "verschachteln selten echte `<section>`-Elemente), benannt nach ihrem "
 "Überschriftenpfad,"
 
-#: ../../technical/adapters.md:131
+#: ../../technical/adapters.md:155
 msgid ""
 "paragraphs, list items, table rows (`tr` outside `thead`), code blocks "
 "(`pre`), notes (`aside`, `[role=note]`), pictures (`img`, `svg`, "
@@ -317,7 +411,7 @@ msgstr ""
 "Codeblöcke (`pre`), Hinweise (`aside`, `[role=note]`), Bilder (`img`, "
 "`svg`, `figure`, `picture`) – pro Abschnitt gezählt wie in Markdown,"
 
-#: ../../technical/adapters.md:134
+#: ../../technical/adapters.md:158
 msgid ""
 "left out: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-"
 "hidden=true]`, `script`, `style` and everything matching `data-ignore`."
@@ -325,7 +419,7 @@ msgstr ""
 "ausgelassen: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-"
 "hidden=true]`, `script`, `style` und alles, worauf `data-ignore` passt."
 
-#: ../../technical/adapters.md:137
+#: ../../technical/adapters.md:161
 msgid ""
 "The fingerprint is SHA-256 over the normalised text, computed with "
 "`crypto.subtle` – the same value as `model.fingerprint` in Python, so the"
@@ -339,7 +433,7 @@ msgstr ""
 "Overlay wechselt von seinem lokalen FNV-Hash zu diesem. Bei Bildern "
 "bilden `src`, `alt` und Bildunterschrift den Fingerprint."
 
-#: ../../technical/adapters.md:143
+#: ../../technical/adapters.md:167
 msgid ""
 "Pages with build hints (`#deciwa-page`, as the Sphinx extension writes "
 "it) skip the scan and use the hints."
@@ -347,11 +441,11 @@ msgstr ""
 "Seiten mit Build-Hinweisen (`#deciwa-page`, wie die Sphinx-Erweiterung es"
 " schreibt) überspringen den Scan und nutzen die Hinweise."
 
-#: ../../technical/adapters.md:147
+#: ../../technical/adapters.md:171
 msgid "Free text selection"
 msgstr "Freie Textauswahl"
 
-#: ../../technical/adapters.md:154
+#: ../../technical/adapters.md:178
 msgid ""
 "Selecting a word stores the structural selector of the element that "
 "contains it plus a `TextQuoteSelector` (exact, prefix, suffix) and a "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 09:36+0200\n"
+"POT-Creation-Date: 2026-10-22 14:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -53,7 +53,21 @@ msgstr ""
 "deciwa auf jeder Website mit einer Zeile; im Einsatz auf der danwos-"
 "Website"
 
-#: ../../product/roadmap.md:10
+#: ../../product/roadmap.md
+msgid "[monsterbrain](../integrations/monsterbrain.md)"
+msgstr "[monsterbrain](../integrations/monsterbrain.md)"
+
+#: ../../product/roadmap.md
+msgid ""
+"review in the desktop app on Markdown, HTML and Python files, in diffs, "
+"with marks in the tree; Markdown and Python adapters; `deciwa serve "
+"--api-only` (development setup until the standalone engine)"
+msgstr ""
+"Review in der Desktop-App auf Markdown-, HTML- und Python-Dateien, in "
+"Diffs, mit Markierungen im Baum; Markdown- und Python-Adapter; `deciwa "
+"serve --api-only` (Entwicklungs-Setup bis zur eigenständigen Engine)"
+
+#: ../../product/roadmap.md:11
 msgid "Next"
 msgstr "Als Nächstes"
 
@@ -89,8 +103,8 @@ msgid "0.4"
 msgstr "0.4"
 
 #: ../../product/roadmap.md
-msgid "Chrome extension on top of the web script; Python adapter"
-msgstr "Chrome-Erweiterung auf Basis des Web-Skripts; Python-Adapter"
+msgid "Chrome extension on top of the web script"
+msgstr "Chrome-Erweiterung auf Basis des Web-Skripts"
 
 #: ../../product/roadmap.md
 msgid "0.5"
@@ -108,8 +122,9 @@ msgstr "später"
 
 #: ../../product/roadmap.md
 msgid ""
-"desktop app, Claude UI, C/JS/TS/AsciiDoc adapters, evaluations and "
-"comparisons"
+"desktop app, Claude UI, JS/TS/C adapters (tree-sitter), AsciiDoc, "
+"evaluations and comparisons"
 msgstr ""
-"Desktop-App, Claude-Oberfläche, Adapter für C/JS/TS/AsciiDoc, "
-"Auswertungen und Vergleiche"
+"Desktop-App, Claude-Oberfläche, Adapter für JS/TS/C (tree-sitter), "
+"AsciiDoc, Auswertungen und Vergleiche"
+

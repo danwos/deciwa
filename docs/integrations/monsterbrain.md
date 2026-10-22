@@ -33,6 +33,10 @@ before, just without review.
   for jobs for the AI, `3/5` required elements approved, `✓` all reviewed.
 - **Diffs** – the new side of a rendered or side-by-side diff is reviewable;
   an approved paragraph that changed shows as stale.
+- **Source code** – Python files in the code view: classes, functions and
+  methods are elements (`Alt` click for the class around a method); an
+  approved function that changes shows as stale. The *Source* tab of a
+  Markdown file works the same way, line by line.
 - **HTML files** – the page gets the deciwa button inside its frame.
 - **Claude** – monsterbrain's MCP server gains `deciwa_feedback` (the review
   state of a file, or every open job) and `deciwa_show` (open a file at an

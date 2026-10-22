@@ -54,6 +54,7 @@ CLI and what the file format stores.
 | rst | `rst:directive:Install/Linux#note1` | the first `note` directive in that section |
 | text | `text:paragraph#4` · `text:line#17` | plain text |
 | html | `html:heading:Services/Consulting` · `html:paragraph:Services/Consulting#2` | a rendered web page, found in the browser ({doc}`web`) |
+| py | `py:class:Engine` · `py:function:Engine.start` · `py:function:main` | a class, method or function, named by its path in the code ({need}`DEC_PYTHON_ADAPTER`) |
 
 ```{prop} Element selectors are paths of headings plus a per-section counter
 :id: PROP_SELECTORS
@@ -110,6 +111,29 @@ from `.deciwa/config.toml` (`needs.directives = ["req", "spec", ...]`), and
 fall back to the Sphinx-Needs defaults (`req`, `spec`, `impl`, `test`,
 `need`). OK, or should deciwa read `conf.py` / `ubproject.toml` directly?
 ```
+
+## Python
+
+{need}`DEC_PYTHON_ADAPTER` – `deciwa.core.adapters.python` reads `.py` and
+`.pyi` files with the standard library `ast`:
+
+- Elements: classes, functions and methods, nested as in the code (a method's
+  parent is its class, a nested function's parent the function around it);
+  definitions inside `if`, `try` or `with` blocks count at their level.
+- Selectors: `py:<class|function>:<path>` – `py:function:Engine.start`; a second
+  definition with the same path (a property setter, a redefinition) gets `~2`.
+- Text: the source of the definition, decorators included – any change to an
+  approved function makes it stale. Label: its first line
+  (`def start(self) -> Handshake:`).
+- Lines: `line` is the first line (the first decorator), `end` the last one.
+- A file with a syntax error has no elements.
+- The element kinds `class` and `function` can be named in the review rules.
+
+Not yet: comments and module-level constants as elements; JS, TS and C
+(tree-sitter, next).
+
+In a host the lines of each element are grouped into one block of the code
+view ([Host apps](hosts.md)).
 
 ## Plain text
 

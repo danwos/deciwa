@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 13:53+0200\n"
+"POT-Creation-Date: 2026-10-22 14:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -143,10 +143,22 @@ msgstr ""
 "hat, erscheint als veraltet."
 
 #: ../../integrations/monsterbrain.md:36
+msgid ""
+"**Source code** – Python files in the code view: classes, functions and "
+"methods are elements (`Alt` click for the class around a method); an "
+"approved function that changes shows as stale. The *Source* tab of a "
+"Markdown file works the same way, line by line."
+msgstr ""
+"**Quelltext** – Python-Dateien in der Code-Ansicht: Klassen, Funktionen "
+"und Methoden sind Elemente (`Alt`-Klick für die Klasse um eine Methode); "
+"eine freigegebene Funktion, die sich ändert, erscheint als veraltet. Der "
+"Tab *Source* einer Markdown-Datei funktioniert genauso, Zeile für Zeile."
+
+#: ../../integrations/monsterbrain.md:40
 msgid "**HTML files** – the page gets the deciwa button inside its frame."
 msgstr "**HTML-Dateien** – die Seite bekommt den deciwa-Knopf in ihrem Frame."
 
-#: ../../integrations/monsterbrain.md:37
+#: ../../integrations/monsterbrain.md:41
 msgid ""
 "**Claude** – monsterbrain's MCP server gains `deciwa_feedback` (the "
 "review state of a file, or every open job) and `deciwa_show` (open a file"
@@ -156,7 +168,7 @@ msgstr ""
 "(der Review-Stand einer Datei oder alle offenen Aufgaben) und "
 "`deciwa_show` (eine Datei an einem Element öffnen)."
 
-#: ../../integrations/monsterbrain.md:41
+#: ../../integrations/monsterbrain.md:45
 msgid ""
 "The review data is the folder's `.deciwa/`. A folder without one shows "
 "*Set up review* in the side panel (`deciwa init`)."
@@ -164,11 +176,11 @@ msgstr ""
 "Die Review-Daten sind das `.deciwa/` des Ordners. Ein Ordner ohne zeigt "
 "im Seitenpanel *Set up review* (`deciwa init`)."
 
-#: ../../integrations/monsterbrain.md:44
+#: ../../integrations/monsterbrain.md:48
 msgid "Setting up (development)"
 msgstr "Einrichten (Entwicklung)"
 
-#: ../../integrations/monsterbrain.md:46
+#: ../../integrations/monsterbrain.md:50
 msgid ""
 "Until the standalone engine exists, the extension uses the engine of a "
 "deciwa checkout:"
@@ -176,7 +188,7 @@ msgstr ""
 "Bis es die eigenständige Engine gibt, nutzt die Erweiterung die Engine "
 "eines deciwa-Checkouts:"
 
-#: ../../integrations/monsterbrain.md:54
+#: ../../integrations/monsterbrain.md:58
 #, python-brace-format
 msgid ""
 "In monsterbrain: settings (`Ctrl ,`) → *Extensions* → *Add folder …* → "

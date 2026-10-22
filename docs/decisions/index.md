@@ -198,6 +198,14 @@ A new decision comes from an approved proposal in the technical details – see
 :alternatives: every host adapter talking to the engine on its own.
 ```
 
+```{dec} Python source is reviewed per class, function and method, read with the standard library ast
+:id: DEC_PYTHON_ADAPTER
+:status: approved
+:decided: 2026-10-22
+:reason: Code repositories are reviewed in monsterbrain next to the knowledge base; ast gives exact line ranges without a new dependency. The Python adapter moves up from 0.4; JS, TS and C follow with tree-sitter.
+:alternatives: tree-sitter for all languages at once (more dependencies, a bigger standalone engine); review of single lines only.
+```
+
 ```{dec} monsterbrain is the first host, before VS Code
 :id: DEC_HOST_ORDER
 :status: approved
