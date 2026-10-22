@@ -1,0 +1,24 @@
+{
+  "name": "deciwa-monsterbrain",
+  "version": "0.1.0",
+  "private": true,
+  "description": "deciwa in monsterbrain: review on rendered files, feedback in the side panel, state in the tree – a monsterbrain extension",
+  "type": "module",
+  "monsterbrain": {
+    "id": "deciwa",
+    "name": "deciwa",
+    "api": 0,
+    "main": "dist/main.cjs",
+    "view": "dist/view.js",
+    "frame": "dist/frame.js"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "0.25.10",
+    "typescript": "^5.6.3"
+  }
+}

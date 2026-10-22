@@ -1,0 +1,24 @@
+{
+  "name": "@danwos/deciwa-client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Finds, starts and stops the deciwa engine for a host app and calls its JSON API – shared by monsterbrain and VS Code",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "0.25.10",
+    "typescript": "^5.6.3"
+  }
+}
