@@ -33,7 +33,12 @@ const PREFS = "deciwa-panel";  // the overlay keeps review mode here
 let status: Status = { state: "starting" };
 let current: { path: string; source: string; overlay: Overlay } | null = null;
 let section: { path: string | null; kind?: string; slot: HTMLElement; draw: () => void } | null = null;
+let toolbar: { path: string | null; kind?: string; draw: () => void } | null = null;
 const pendingFocus = new Map<string, string>();
+const redraw = (): void => {
+  section?.draw();
+  toolbar?.draw();
+};
 // views mounted while the engine was not ready yet: attached as soon as it is
 const waiting = new Set<() => void>();
 // rendered HTML pages: review mode of each page, as the page reports it
@@ -42,6 +47,7 @@ const frames = new Map<string, boolean>();
 const ch = window.mbx.register("deciwa", {
   mountView,
   panel: { title: "Review · deciwa", mount: mountPanel },
+  toolbar: { mount: mountToolbar },
   commands: [
     { id: "review", title: "review mode on/off", key: "Shift+R", run: toggleReview },
     { id: "verdicts", title: "approve · reject · freeze · delete (review mode)", key: "a r f d" },
@@ -58,7 +64,7 @@ const api = (path: string, body?: unknown): Promise<unknown> => ch.call("api", p
 function setStatus(s: Status): void {
   status = s;
   if (status.state === "ready") for (const attach of [...waiting]) attach();
-  section?.draw();
+  redraw();
 }
 ch.on("status", (s) => setStatus(s as Status));
 ch.on("frame-state", (d) => {
@@ -66,11 +72,11 @@ ch.on("frame-state", (d) => {
   frames.set(path, review);
   // a page that just loaded follows monsterbrain's review mode
   if (ready && reviewPref() !== review) void ch.call("relay", "frame-review", { path, on: reviewPref() });
-  if (section?.path === path) section.draw();
+  if (section?.path === path || toolbar?.path === path) redraw();
 });
 ch.on("changed", () => {
   void current?.overlay.refresh();
-  section?.draw();
+  redraw();
 });
 ch.on("focus", (d) => {
   const { path, selector } = d as { path: string; selector: string | null };
@@ -78,7 +84,7 @@ ch.on("focus", (d) => {
   if (current?.path === path) {
     current.overlay.setReview(true);
     current.overlay.focus(selector);
-    section?.draw();
+    redraw();
   } else pendingFocus.set(path, selector);
 });
 void ch.call("status").then((s) => setStatus(s as Status));
@@ -96,7 +102,7 @@ function setReviewPref(on: boolean): void {
 
 /** Review mode on/off – for the file on screen: a Markdown or code view, or a rendered HTML page. */
 function toggleReview(): void {
-  const path = section?.path ?? null;
+  const path = toolbar?.path ?? section?.path ?? null;
   if (current && (!path || current.path === path)) current.overlay.toggleReview();  // the overlay keeps the setting
   else if (path && frames.has(path)) {
     const on = !frames.get(path);
@@ -104,7 +110,7 @@ function toggleReview(): void {
     frames.set(path, on);
     void ch.call("relay", "frame-review", { path, on });
   } else setReviewPref(!reviewPref());
-  section?.draw();
+  redraw();
 }
 
 function pageStyle(): void {
@@ -162,7 +168,7 @@ function mountView(v: ViewContext): (() => void) | void {
     }) as Overlay;
     if (focus) overlay.setReview(true);
     current = { path: v.path, source, overlay };
-    section?.draw();
+    redraw();
   };
   waiting.add(attach);
   attach();
@@ -176,7 +182,36 @@ function mountView(v: ViewContext): (() => void) | void {
     layer?.remove();
     if (lines) unwrapRanges(v.element);
     delete v.element.dataset.deciwaSource;
-    section?.draw();
+    redraw();
+  };
+}
+
+/** Whether a file has review on screen: its own overlay (Markdown, code) or a rendered HTML page. */
+function reviewable(path: string | null): { here: boolean; page: boolean; on: boolean } {
+  const here = !!current && current.path === path;
+  const page = !here && path !== null && frames.has(path);
+  return { here, page, on: here ? current!.overlay.review : page ? frames.get(path!)! : reviewPref() };
+}
+
+/** The review switch in the head of the file, next to View / Source / Diff. */
+function mountToolbar(el: HTMLElement, p: { path: string | null; kind?: string }): () => void {
+  const root = el.shadowRoot ?? el.attachShadow({ mode: "open" });
+  root.innerHTML = `<style>${STYLE} .dwr { display: inline-flex; } .dwr .chip { padding: 3px 10px; }</style><span class="dwr"></span>`;
+  const box = root.querySelector<HTMLElement>(".dwr")!;
+  const draw = (): void => {
+    const { here, page, on } = reviewable(p.path);
+    if (status.state !== "ready" || (!here && !page)) {
+      box.innerHTML = "";
+      return;
+    }
+    box.innerHTML = `<button class="chip${on ? " on" : ""}" title="Review mode with deciwa (Shift+R)">Review ${on ? "on" : "off"} <kbd>Shift R</kbd></button>`;
+    box.querySelector("button")!.addEventListener("click", toggleReview);
+  };
+  toolbar = { path: p.path, kind: p.kind, draw };
+  draw();
+  return () => {
+    if (toolbar?.draw === draw) toolbar = null;
+    root.innerHTML = "";
   };
 }
 
@@ -191,14 +226,11 @@ function mountPanel(el: HTMLElement, p: { path: string | null; kind?: string }):
   let docked: Overlay | null = null;
 
   const draw = (): void => {
-    const here = current?.path === p.path;
-    const page = !here && p.path !== null && frames.has(p.path);
-    const on = here ? current!.overlay.review : page ? frames.get(p.path!)! : reviewPref();
+    const { here, page } = reviewable(p.path);
     if (status.state === "ready" && !here && !page && p.kind !== "markdown" && p.kind !== "html") {
       head.innerHTML = `<div class="msg">deciwa reviews Markdown, HTML and Python files – also in the Source view.</div>`;
     } else if (status.state === "ready") {
-      head.innerHTML = `<button class="chip${on ? " on" : ""}" data-review title="Review mode (Shift+R)">Review ${on ? "on" : "off"} <kbd>Shift R</kbd></button>
-        <span class="grow"></span><span class="mono">deciwa ${esc(status.engine ?? "")}</span>`;
+      head.innerHTML = `<span class="grow"></span><span class="mono">deciwa ${esc(status.engine ?? "")}</span>`;
     } else if (status.state === "no-deciwa") {
       head.innerHTML = `<div class="msg">This folder is not reviewed with deciwa yet.</div>
         <button class="btn primary" data-init>Set up review</button>`;

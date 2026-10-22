@@ -44,6 +44,7 @@ export interface Channel {
 export interface Contribution {
   mountView?(v: ViewContext): void | (() => void);
   panel?: { title: string; mount(el: HTMLElement, p: { path: string | null; kind?: string }): void | (() => void) };
+  toolbar?: { mount(el: HTMLElement, p: { path: string | null; kind?: string }): void | (() => void) };
   commands?: { id: string; title: string; key?: string; run?: () => void }[];
 }
 
