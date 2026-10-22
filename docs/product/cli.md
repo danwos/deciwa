@@ -13,6 +13,8 @@ local server), never to the files directly. Every command has `--json`.
 | `deciwa elements <file>` | the elements of a source, with their selectors |
 | `deciwa show <file>` | all feedback of a source with the element states |
 | `deciwa status` | states and coverage of the whole project |
+| `deciwa facts [path …] [--group …]` | the facts of the facts files: counts per group, folder and file; with `--group` (e.g. `stale`) the facts of that group |
+| `deciwa approve-facts <path …>` | approve every fact of these files or folders that is not approved yet, and each file as a whole – facts with an open question or job stay |
 | `deciwa todo [path …]` | open jobs for the AI or developer, and open questions – with paths only those of these files or folders |
 | `deciwa annotate <file> <element> --verdict … [--comment …]` | give feedback |
 | `deciwa rate <file> <element> <0-5>` | give stars |

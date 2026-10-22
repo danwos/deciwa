@@ -33,6 +33,10 @@ def config(root: Path) -> dict:
     review = cfg.setdefault("review", {})
     review.setdefault("required", [])
     review.setdefault("paths", [])
+    facts = cfg.setdefault("facts", {})
+    facts.setdefault("paths", ["20_facts/*.md", "*/20_facts/*.md"])
+    facts.setdefault("exclude", ["*/_index.md", "_index.md"])
+    facts.setdefault("kinds", ["item", "row", "paragraph"])
     return cfg
 
 
@@ -43,6 +47,10 @@ SECTION_HELP = {
         "# or selector patterns like \"sphinx-needs:PROP_*\".",
         "# paths: optional, only these sources, e.g. [\"docs/technical/*\"]. Everything else",
         "# can still get feedback; it just does not count.",
+    ],
+    "facts": [
+        "# The facts view (DEC_FACT_BLOCKS): which files hold facts and which elements",
+        "# are one fact each. paths and exclude are patterns (* also matches /).",
     ],
 }
 

@@ -433,7 +433,7 @@ export function startOverlay(host) {
 
   function item(sel, state, text) {
     return `<div class="item${isRequired(sel) ? " required" : ""}" data-sel="${esc(sel)}" style="--c:${cv(STATE_C[state])}">
-      <div class="t"><b>${esc(bySel[sel]?.label || sel)}</b><span>${esc(state)}${view.elements[sel]?.stars != null ? " · " + view.elements[sel].stars + "★" : ""}</span></div>
+      <div class="t"><b>${esc(bySel[sel]?.label || (sel === "file:" ? "Whole file" : sel))}</b><span>${esc(state)}${view.elements[sel]?.stars != null ? " · " + view.elements[sel].stars + "★" : ""}</span></div>
       ${text ? `<div class="c">${esc(text)}</div>` : ""}</div>`;
   }
 

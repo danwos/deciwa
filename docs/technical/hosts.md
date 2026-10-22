@@ -60,6 +60,8 @@ Endpoints for hosts, next to the ones of the review server (`/api/page`,
 | `GET /api/elements?source=<path>` | the elements of a file with selector, kind, label, line, text and fingerprint – from the elements index of a build, else from the adapter for the file type |
 | `POST /api/elements` `{source, title, elements}` | keeps the elements of a page the host scanned itself (rendered HTML), like the pages of a website in `.deciwa/web-pages.json` |
 | `GET /api/summary[?sources=a,b]` | per file: counts per state, open questions, jobs for the AI, required and done – without `sources` for every file with review data |
+| `GET /api/facts[?sources=a,b]` | the facts of facts files (`[facts]` in the configuration): per file its facts with selector, kind, label, heading path, line, state and group, the state of the whole-file approval (`file:`) and the counts per group – without `sources` every facts file |
+| `POST /api/approve-facts` `{sources}` | approve every fact of these facts files that is not approved yet, and each file as a whole |
 | `GET /api/events` | server-sent events `{"type": "changed", "sources": […], "review": …, "config": …}` when `.deciwa/` or a reviewed file changes |
 
 Files without a build are read by their adapter on the fly
@@ -129,6 +131,7 @@ back to the DOM scan of the web script, whose elements go to the engine with
 | toolbar | the switch *Review on/off* next to View · Source · Diff |
 | decorations | marks in tree and change view from `/api/summary`: `2?` questions, a number for jobs, `1!` stale, `3/5` required, `✓` |
 | commands | `Shift R` (review mode); the overlay's keys listed in monsterbrain's help |
+| children of side bar views | the facts view: the facts of every file from `/api/facts`, a click selects the fact in review mode, the action *Approve all facts* (`Shift A`) |
 | MCP tools | `deciwa_feedback`, `deciwa_show` |
 
 Views opened while the engine is still starting attach as soon as it is

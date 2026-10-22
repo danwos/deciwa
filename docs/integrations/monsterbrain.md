@@ -14,6 +14,8 @@ change view that shows what agents changed. deciwa adds the review to it:
 - **state in the tree and the change view** – each file shows how much of it
   is open, approved, stale or frozen, and which questions wait for an answer,
 - **feedback of the active file** in monsterbrain's right panel,
+- **the facts view** – every fact of the facts files with its state, approved
+  one by one or a whole file at once ({need}`DEC_FACT_BLOCKS`),
 - **questions instead of `[CHECK]` markers** ({need}`DEC_REPLACES_CHECK`) –
   what the AI asks shows up at the element and in the change view,
 - **same data as everywhere else** – feedback goes to `.deciwa/` in the
@@ -51,6 +53,13 @@ before, just without review.
 - **HTML files** – the rendered page is reviewable with the same elements as
   its source; the review switch and `Shift R` work for the page, the page's
   own deciwa button opens its panel.
+- **Facts** (`Ctrl 4`) – deciwa fills monsterbrain's facts view: every list
+  item, table row and free paragraph of a file in `20_facts/` with its group
+  (approved, open, stale, question, unverified), counted per folder and file.
+  A click on a fact opens the file there in review mode, so `a` approves it;
+  `✓` on a file or folder, or `Shift A` on the active file, approves every
+  fact not approved yet and the file as a whole. A whole-file approval shows
+  `✓` at the file and gets stale (`✓!`) on any change.
 - **Inform Claude** – the button next to the review switch tells the
   Claude session of the folder about the review (monsterbrain's agent
   actions). It covers the file's open concept when that concept – its folder

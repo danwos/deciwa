@@ -76,12 +76,51 @@ def cmd_todo(args):
     _out(args, "todo", p.todo(args.for_, [_source(p, x) for x in args.paths] if args.paths else None), human)
 
 
+def cmd_facts(args):
+    p = Project()
+    paths = [_source(p, x) for x in args.paths] if args.paths else None
+    result = p.facts(p.fact_files(paths))
+    if args.group:
+        result["files"] = [dict(f, facts=[x for x in f["facts"] if x["group"] == args.group]) for f in result["files"]]
+        result["files"] = [f for f in result["files"] if f["facts"]]
+
+    def counts(c: dict) -> str:
+        return " · ".join(f"{n} {g}" for g, n in c.items() if n) or "no facts"
+
+    def human(r):
+        if args.group:
+            for f in r["files"]:
+                for x in f["facts"]:
+                    print(f"{f['source']}:{x['line'] or '?'}  {x['state']:12} {x['label']}")
+            return
+        print(f"{r['facts']} facts – {counts(r['counts'])}")
+        folders: dict[str, dict] = {}
+        for f in r["files"]:
+            c = folders.setdefault(f["source"].rsplit("/", 1)[0] if "/" in f["source"] else ".", {})
+            for g, n in f["counts"].items():
+                c[g] = c.get(g, 0) + n
+        for folder, c in sorted(folders.items()):
+            print(f"  {folder}/  {counts(c)}")
+            for f in r["files"]:
+                if (f["source"].rsplit("/", 1)[0] if "/" in f["source"] else ".") == folder:
+                    whole = "" if f["file"] == "unreviewed" else f"  [file {f['file']}]"
+                    print(f"      {f['source'].rsplit('/', 1)[-1]:34} {counts(f['counts'])}{whole}")
+    _out(args, "facts", result, human)
+
+
 def _source(p, path: str) -> str:
     """A path given on the command line → root-relative source; paths that exist from here count from here."""
     here = Path(path).resolve()
     if here.exists() and here.is_relative_to(p.root.resolve()):
         return here.relative_to(p.root.resolve()).as_posix()
     return path.strip("/").removeprefix("./")
+
+
+def cmd_approve_facts(args):
+    p = Project()
+    files = p.fact_files([_source(p, x) for x in args.paths])
+    _out(args, "approve-facts", p.approve_facts(files, args.author),
+         lambda r: print(f"{r['approved']} approved in {r['files']} files"))
 
 
 def cmd_show(args):
@@ -185,6 +224,13 @@ def main(argv=None):
     s = sub.add_parser("status"); s.set_defaults(fn=cmd_status)
     s = sub.add_parser("todo", help="open jobs and questions; with paths only those of these files or folders")
     s.add_argument("paths", nargs="*"); s.add_argument("--for", dest="for_"); s.set_defaults(fn=cmd_todo)
+    s = sub.add_parser("facts", help="the facts of the facts files and their state, counted per folder and file")
+    s.add_argument("paths", nargs="*")
+    s.add_argument("--group", choices=["approved", "open", "stale", "question", "unverified"],
+                   help="list the facts of one group instead of counting")
+    s.set_defaults(fn=cmd_facts)
+    s = sub.add_parser("approve-facts", help="approve every fact of these files or folders that is not approved yet")
+    s.add_argument("paths", nargs="+"); s.add_argument("--author"); s.set_defaults(fn=cmd_approve_facts)
     s = sub.add_parser("show"); s.add_argument("source"); s.set_defaults(fn=cmd_show)
     s = sub.add_parser("elements"); s.add_argument("source"); s.set_defaults(fn=cmd_elements)
     for name, fn in (("annotate", cmd_annotate), ("rate", cmd_rate), ("request", cmd_request)):

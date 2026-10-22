@@ -30,6 +30,36 @@ are set in the [configuration](../integrations/sphinx/configuration.md).
   **Quality** – how many got stars.
 - The card of such an element says **must be approved**.
 
+## Facts
+
+A knowledge base keeps its verified facts in facts files – by default every
+Markdown file in a `20_facts/` folder, without the folder indexes
+(`_index.md`). In them every list item, table row and free paragraph is one
+fact ({need}`DEC_FACT_BLOCKS`), and each one counts in a group:
+
+| Group | The fact … |
+|---|---|
+| approved | is approved (or frozen) and unchanged since |
+| open | has no verdict yet, or a job for the AI |
+| stale | changed since it was approved |
+| question | has an open question |
+| unverified | holds an `[ASSUMPTION]` marker – an approval confirms the mark, not the fact |
+
+A facts file can also be approved **as a whole**; that approval gets stale on
+any change in the file, the facts inside keep their own state. `deciwa facts`
+counts the groups per folder and file, `deciwa approve-facts` approves every
+fact that is not approved yet. In monsterbrain the facts view shows them file
+by file ([monsterbrain](../integrations/monsterbrain.md)).
+
+Which files and kinds count is set in `.deciwa/config.toml`:
+
+```toml
+[facts]
+paths = ["20_facts/*.md", "*/20_facts/*.md"]   # * also matches /
+exclude = ["*/_index.md", "_index.md"]
+kinds = ["item", "row", "paragraph"]
+```
+
 ```{figure} ../_static/screens/required.webp
 :alt: Dashed lines beside required needs without a verdict
 

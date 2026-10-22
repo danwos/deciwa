@@ -1,7 +1,7 @@
-/* deciwa review overlay 0.2.52 – built from packages/ui/js/ (npm run build), do not edit */
+/* deciwa review overlay 0.2.53 – built from packages/ui/js/ (npm run build), do not edit */
 (() => {
   // <define:__BUILD__>
-  var define_BUILD_default = { version: "0.2.52", commit: "949df7c", dirty: true, date: "2026-10-22" };
+  var define_BUILD_default = { version: "0.2.53", commit: "4e7a10e", dirty: true, date: "2026-10-22" };
 
   // js/hash.js
   var enc = new TextEncoder();
@@ -627,7 +627,7 @@
     }
     function item(sel, state, text) {
       return `<div class="item${isRequired(sel) ? " required" : ""}" data-sel="${esc(sel)}" style="--c:${cv(STATE_C[state])}">
-      <div class="t"><b>${esc(bySel[sel]?.label || sel)}</b><span>${esc(state)}${view.elements[sel]?.stars != null ? " \xB7 " + view.elements[sel].stars + "\u2605" : ""}</span></div>
+      <div class="t"><b>${esc(bySel[sel]?.label || (sel === "file:" ? "Whole file" : sel))}</b><span>${esc(state)}${view.elements[sel]?.stars != null ? " \xB7 " + view.elements[sel].stars + "\u2605" : ""}</span></div>
       ${text ? `<div class="c">${esc(text)}</div>` : ""}</div>`;
     }
     const ORDER = ["frozen, but changed", "changes requested", "rejected", "requested", "stale", "unreviewed", "approved", "frozen"];

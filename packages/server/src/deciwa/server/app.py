@@ -237,6 +237,9 @@ class Handler(SimpleHTTPRequestHandler):
             return self._call(p.project)
         if url.path == "/api/status":
             return self._call(p.status)
+        if url.path == "/api/facts":
+            sources = [s for s in q["sources"].split(",") if s] if "sources" in q else None
+            return self._call(lambda: p.facts(sources))
         if url.path == "/api/todo":
             sources = [s for s in q["sources"].split(",") if s] if "sources" in q else None
             return self._call(lambda: p.todo(q.get("for"), sources))
@@ -255,6 +258,7 @@ class Handler(SimpleHTTPRequestHandler):
             "/api/reply": lambda: p.reply(data["id"], data.get("text", ""), data.get("verdict"), data.get("status")),
             "/api/delete": lambda: p.delete(data["id"]),
             "/api/rules": lambda: p.set_required(data["required"]),
+            "/api/approve-facts": lambda: p.approve_facts(data["sources"], data.get("author")),
             "/api/import": lambda: p.import_data(data.get("data", {}), bool(data.get("force"))),
             "/api/elements": lambda: p.host_page(data["source"], data.get("title", ""), data["elements"]),
         }

@@ -4,7 +4,7 @@
  * everything comes from the engine through the client (DEC_HOST_EXTENSIONS). */
 import { Engine, EngineError, findEngine, initFolder, type FileSummary, type Handshake } from "@danwos/deciwa-client";
 import { join, relative, sep } from "node:path";
-import type { HostContext, ReviewScope, Status } from "./types";
+import type { ChildList, FactsResult, HostContext, ReviewScope, Status } from "./types";
 
 let ctx: HostContext;
 let engine: Engine | null = null;
@@ -55,6 +55,7 @@ async function startEngine(folder: string | null): Promise<void> {
         prefix = relative(h.root, folder).split(sep).join("/");
         setStatus({ state: "ready", engine: h.deciwa, engineRoot: h.root, prefix });
         void decorate();
+        ctx.childrenChanged("facts");
       },
       onFail: (err) => setStatus({ state: "error", message: err.message }),
     });
@@ -75,6 +76,7 @@ async function startEngine(folder: string | null): Promise<void> {
     const paths = ev.sources.map(toPath).filter((p): p is string => p !== null);
     ctx.emit("changed", { ...ev, paths });
     void decorate();
+    ctx.childrenChanged("facts");
   });
 }
 
@@ -123,6 +125,40 @@ async function decorate(): Promise<void> {
       void decorate();
     }
   }
+}
+
+// -- facts view: every fact of a facts file with its group (DEC_FACT_BLOCKS) ---------
+// The engine decides which files hold facts, which elements are one fact each and what
+// a state means (approved, open, stale, question, unverified); here only colours and labels.
+
+const FACT_GROUPS: Record<string, { label: string; color: string }> = {
+  approved: { label: "approved", color: COLORS.approved },
+  open: { label: "open", color: "#B9B2A8" },
+  stale: { label: "stale", color: COLORS.stale },
+  question: { label: "question", color: COLORS.requested },
+  unverified: { label: "unverified", color: "#D8C3A5" },
+};
+const FILE_MARK: Record<string, { badge: string; color: string; title: string }> = {
+  approved: { badge: "✓", color: COLORS.approved, title: "deciwa: the file as a whole is approved" },
+  stale: { badge: "✓!", color: COLORS.stale, title: "deciwa: the file changed since it was approved as a whole" },
+};
+
+async function factChildren(paths: string[]): Promise<ChildList> {
+  const out: ChildList = { groups: [], files: {}, marks: {} };
+  if (!engine || status.state !== "ready") return out;
+  const sources = paths.map(toSource);
+  const r = await engine.call<FactsResult>(`/api/facts?sources=${sources.map(encodeURIComponent).join(",")}`);
+  out.groups = r.groups.map((id) => ({ id, ...(FACT_GROUPS[id] ?? { label: id, color: COLORS.open }) }));
+  for (const f of r.files) {
+    const path = toPath(f.source);
+    if (path === null) continue;
+    out.files[path] = f.facts.map((x) => ({
+      id: x.selector, label: x.label, context: x.context || undefined, line: x.line ?? undefined, group: x.group,
+      title: `${x.label}\n${x.kind} · ${x.state}${x.assumption ? " · [ASSUMPTION]" : ""}`,
+    }));
+    if (FILE_MARK[f.file]) out.marks![path] = FILE_MARK[f.file];
+  }
+  return out;
 }
 
 // -- Inform Claude ------------------------------------------------------------------
@@ -256,6 +292,22 @@ export function activate(c: HostContext): void {
       ctx.emit("changed", { type: "changed", sources: [], paths: [] });  // the button greys out
     }
     return result;
+  });
+
+  ctx.children("facts", {
+    list: (paths) => factChildren(paths),
+    // a fact selected in the facts view: the overlay switches to review mode and selects it
+    select: (path, id) => ctx.emit("focus", { path, selector: id }),
+    actions: [{
+      id: "approve-facts",
+      title: "Approve all facts",
+      key: "Shift+A",
+      confirm: "Approve every fact of {n} file(s) that is not approved yet, and each file as a whole? Facts with an open question or job stay as they are.",
+      run: async (paths) => {
+        if (!engine) throw new Error("deciwa is not running for this folder");
+        return engine.call("/api/approve-facts", { sources: paths.map(toSource) });
+      },
+    }],
   });
 
   ctx.tool({

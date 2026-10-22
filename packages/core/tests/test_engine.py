@@ -70,3 +70,55 @@ class OrphanJobs(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Facts(unittest.TestCase):
+    DOC = "---\nsummary: s\n---\n\n# Founder\n\nIntro.\n\n## Career\n\n- one\n- two [ASSUMPTION]\n\n| a | b |\n|---|---|\n| x | y |\n"
+
+    def facts_project(self):
+        tmp = tempfile.TemporaryDirectory()
+        root = Path(tmp.name)
+        (root / ".deciwa" / "annotations").mkdir(parents=True)
+        (root / "20_facts" / "company").mkdir(parents=True)
+        (root / "20_facts" / "company" / "founder.md").write_text(self.DOC)
+        (root / "20_facts" / "_index.md").write_text("# Facts\n\n- [company](company/)\n")
+        (root / "notes.md").write_text("# Notes\n\n- not a fact\n")
+        return Project(root), root, tmp
+
+    def test_fact_files_and_kinds(self):
+        p, root, tmp = self.facts_project()
+        with tmp:
+            self.assertEqual(p.fact_files(), ["20_facts/company/founder.md"])
+            f = p.facts()["files"][0]
+            self.assertEqual([(x["kind"], x["context"], x["group"]) for x in f["facts"]],
+                             [("paragraph", "", "open"), ("item", "Career", "open"),
+                              ("item", "Career", "unverified"), ("row", "Career", "open")])
+            self.assertEqual(f["file"], "unreviewed")
+            # the whole-file element only exists in facts files
+            self.assertNotIn("file:", [e["selector"] for e in p.parse("notes.md")["elements"]])
+
+    def test_file_approval_stale_on_any_change_facts_stay(self):
+        p, root, tmp = self.facts_project()
+        src = "20_facts/company/founder.md"
+        with tmp:
+            r = p.approve_facts([src])
+            self.assertEqual(r["approved"], 5)  # four facts and the file
+            f = p.facts([src])["files"][0]
+            self.assertEqual(f["file"], "approved")
+            self.assertEqual(f["counts"], {"approved": 3, "open": 0, "stale": 0, "question": 0, "unverified": 1})
+            (root / src).write_text(self.DOC.replace("summary: s", "summary: t").replace("- one", "- one!"))
+            f = p.facts([src])["files"][0]
+            self.assertEqual(f["file"], "stale")
+            self.assertEqual({x["label"]: x["group"] for x in f["facts"]},
+                             {"Intro.": "approved", "one!": "stale", "two [ASSUMPTION]": "unverified", "x | y": "approved"})
+
+    def test_approve_leaves_questions_alone(self):
+        p, root, tmp = self.facts_project()
+        src = "20_facts/company/founder.md"
+        with tmp:
+            p.add(src, "md:item:Founder/Career#1", "request", question="Still true?")
+            p.approve_facts([src])
+            groups = [x["group"] for x in p.facts([src])["files"][0]["facts"]]
+            self.assertEqual(groups, ["approved", "question", "unverified", "approved"])
+            with self.assertRaises(ValueError):
+                p.approve_facts(["notes.md"])

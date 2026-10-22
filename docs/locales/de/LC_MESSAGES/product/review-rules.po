@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 13:55+0200\n"
+"POT-Creation-Date: 2026-10-22 19:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -138,10 +138,100 @@ msgid "The card of such an element says **must be approved**."
 msgstr "Die Karte eines solchen Elements sagt **must be approved**."
 
 #: ../../product/review-rules.md:33
+msgid "Facts"
+msgstr "Fakten"
+
+#: ../../product/review-rules.md:35
+#, python-brace-format
+msgid ""
+"A knowledge base keeps its verified facts in facts files – by default "
+"every Markdown file in a `20_facts/` folder, without the folder indexes "
+"(`_index.md`). In them every list item, table row and free paragraph is "
+"one fact ({need}`DEC_FACT_BLOCKS`), and each one counts in a group:"
+msgstr ""
+"Eine Wissensbasis hält ihre geprüften Fakten in Faktendateien – "
+"standardmäßig jede Markdown-Datei in einem `20_facts/`-Ordner, ohne die "
+"Verzeichnisse (`_index.md`). Darin ist jeder Listenpunkt, jede "
+"Tabellenzeile und jeder freie Absatz ein Fakt ({need}`DEC_FACT_BLOCKS`), "
+"und jedes zählt in einer Gruppe:"
+
+#: ../../product/review-rules.md
+msgid "Group"
+msgstr "Gruppe"
+
+#: ../../product/review-rules.md
+msgid "The fact …"
+msgstr "Das Fakt …"
+
+#: ../../product/review-rules.md
+msgid "approved"
+msgstr "approved"
+
+#: ../../product/review-rules.md
+msgid "is approved (or frozen) and unchanged since"
+msgstr "ist freigegeben (oder eingefroren) und seitdem unverändert"
+
+#: ../../product/review-rules.md
+msgid "open"
+msgstr "open"
+
+#: ../../product/review-rules.md
+msgid "has no verdict yet, or a job for the AI"
+msgstr "hat noch kein Urteil oder einen Auftrag für die KI"
+
+#: ../../product/review-rules.md
+msgid "stale"
+msgstr "stale"
+
+#: ../../product/review-rules.md
+msgid "changed since it was approved"
+msgstr "hat sich seit der Freigabe geändert"
+
+#: ../../product/review-rules.md
+msgid "question"
+msgstr "question"
+
+#: ../../product/review-rules.md
+msgid "has an open question"
+msgstr "hat eine offene Frage"
+
+#: ../../product/review-rules.md
+msgid "unverified"
+msgstr "unverified"
+
+#: ../../product/review-rules.md
+msgid ""
+"holds an `[ASSUMPTION]` marker – an approval confirms the mark, not the "
+"fact"
+msgstr ""
+"enthält einen `[ASSUMPTION]`-Marker – eine Freigabe bestätigt die "
+"Markierung, nicht das Fakt"
+
+#: ../../product/review-rules.md:48
+msgid ""
+"A facts file can also be approved **as a whole**; that approval gets "
+"stale on any change in the file, the facts inside keep their own state. "
+"`deciwa facts` counts the groups per folder and file, `deciwa approve-"
+"facts` approves every fact that is not approved yet. In monsterbrain the "
+"facts view shows them file by file "
+"([monsterbrain](../integrations/monsterbrain.md))."
+msgstr ""
+"Eine Faktendatei kann auch **als Ganzes** freigegeben werden; diese "
+"Freigabe veraltet bei jeder Änderung der Datei, die Fakten darin behalten"
+" ihren eigenen Zustand. `deciwa facts` zählt die Gruppen je Ordner und "
+"Datei, `deciwa approve-facts` gibt jedes noch nicht freigegebene Fakt "
+"frei. In monsterbrain zeigt die Fakten-Ansicht sie Datei für Datei "
+"([monsterbrain](../integrations/monsterbrain.md))."
+
+#: ../../product/review-rules.md:54
+msgid "Which files and kinds count is set in `.deciwa/config.toml`:"
+msgstr "Welche Dateien und Arten zählen, steht in `.deciwa/config.toml`:"
+
+#: ../../product/review-rules.md:63
 msgid "Dashed lines beside required needs without a verdict"
 msgstr "Gestrichelte Linien neben Pflicht-Needs ohne Urteil"
 
-#: ../../product/review-rules.md:36
+#: ../../product/review-rules.md:66
 msgid "Required needs without a verdict carry a grey dashed line."
 msgstr "Pflicht-Needs ohne Urteil tragen eine graue gestrichelte Linie."
 

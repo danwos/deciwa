@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 18:52+0200\n"
+"POT-Creation-Date: 2026-10-22 19:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -270,6 +270,35 @@ msgstr ""
 "und erledigt – ohne `sources` für jede Datei mit Review-Daten"
 
 #: ../../technical/hosts.md:3
+msgid "`GET /api/facts[?sources=a,b]`"
+msgstr "`GET /api/facts[?sources=a,b]`"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"the facts of facts files (`[facts]` in the configuration): per file its "
+"facts with selector, kind, label, heading path, line, state and group, "
+"the state of the whole-file approval (`file:`) and the counts per group –"
+" without `sources` every facts file"
+msgstr ""
+"die Fakten von Faktendateien (`[facts]` in der Konfiguration): je Datei "
+"ihre Fakten mit Selektor, Art, Label, Überschriftenpfad, Zeile, Zustand "
+"und Gruppe, der Zustand der Freigabe der ganzen Datei (`file:`) und die "
+"Zahlen je Gruppe – ohne `sources` jede Faktendatei"
+
+#: ../../technical/hosts.md:3
+#, python-brace-format
+msgid "`POST /api/approve-facts` `{sources}`"
+msgstr "`POST /api/approve-facts` `{sources}`"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"approve every fact of these facts files that is not approved yet, and "
+"each file as a whole"
+msgstr ""
+"jedes noch nicht freigegebene Fakt dieser Faktendateien freigeben, und "
+"jede Datei als Ganzes"
+
+#: ../../technical/hosts.md:3
 msgid "`GET /api/events`"
 msgstr "`GET /api/events`"
 
@@ -282,7 +311,7 @@ msgstr ""
 "Server-Sent Events `{\"type\": \"changed\", \"sources\": […], \"review\":"
 " …, \"config\": …}`, wenn sich `.deciwa/` oder eine geprüfte Datei ändert"
 
-#: ../../technical/hosts.md:65
+#: ../../technical/hosts.md:67
 msgid ""
 "Files without a build are read by their adapter on the fly "
 "([Adapters](adapters.md)), so a plain Markdown folder such as a knowledge"
@@ -294,20 +323,20 @@ msgstr ""
 "Sphinx: `deciwa todo`, `show` und die Projektübersicht umfassen jede "
 "Datei mit Review-Daten und jede Datei unter `review.paths`."
 
-#: ../../technical/hosts.md:70
+#: ../../technical/hosts.md:72
 msgid "Overlay in a host"
 msgstr "Overlay in einem Host"
 
-#: ../../technical/hosts.md:72
+#: ../../technical/hosts.md:74
 #, python-brace-format
 msgid "{need}`DEC_HOST_ELEMENTS`"
 msgstr "{need}`DEC_HOST_ELEMENTS`"
 
-#: ../../technical/hosts.md:74
+#: ../../technical/hosts.md:76
 msgid "The host marks its rendered view:"
 msgstr "Der Host markiert seine dargestellte Ansicht:"
 
-#: ../../technical/hosts.md:76
+#: ../../technical/hosts.md:78
 msgid ""
 "every block carries `data-line=\"<first source line, 0-based>\"` – what "
 "markdown-it does with its token maps and what the VS Code Markdown "
@@ -317,7 +346,7 @@ msgstr ""
 "markdown-it es mit seinen Token-Maps macht und wie es die Markdown-"
 "Vorschau von VS Code schon tut; die Zeilen zählen die Frontmatter mit,"
 
-#: ../../technical/hosts.md:79
+#: ../../technical/hosts.md:81
 msgid ""
 "the host adapter sets `data-deciwa-source=\"<path relative to the "
 "root>\"` on the container."
@@ -325,7 +354,7 @@ msgstr ""
 "der Host-Adapter setzt `data-deciwa-source=\"<Pfad relativ zur Wurzel>\"`"
 " auf den Container."
 
-#: ../../technical/hosts.md:82
+#: ../../technical/hosts.md:84
 msgid ""
 "`hostElements()` in `packages/ui/js/host.js` loads nothing itself: the "
 "adapter passes the elements from `/api/elements`, and each is matched to "
@@ -341,7 +370,7 @@ msgstr ""
 " Elemente eines Build-Index ohne genaue Zeilen (Sphinx) werden über ihren"
 " Text gefunden. Blöcke ohne Treffer sind nicht prüfbar."
 
-#: ../../technical/hosts.md:89
+#: ../../technical/hosts.md:91
 msgid ""
 "`startOverlay()` takes a few options for hosts: `api` (calls go through "
 "the host, not `fetch`), `scroller` (the element the content scrolls in; "
@@ -362,7 +391,7 @@ msgstr ""
 "`refresh()` und `destroy()`. Baumansichten geben außerdem `reveal(node)` "
 "mit (siehe unten)."
 
-#: ../../technical/hosts.md:97
+#: ../../technical/hosts.md:99
 #, python-brace-format
 msgid ""
 "Line views (source code): the host marks every line with `data-line`; "
@@ -377,7 +406,7 @@ msgstr ""
 "zusammengefasst, verschachtelt wie die Elemente, sodass Methoden in ihrer"
 " Klasse liegen. `unwrapRanges()` macht das rückgängig."
 
-#: ../../technical/hosts.md:102
+#: ../../technical/hosts.md:104
 #, python-brace-format
 msgid ""
 "Tree views (JSON, YAML): the host marks every node of the tree with "
@@ -398,7 +427,7 @@ msgstr ""
 "oder öffnet, und der Host klappt die Knoten darum herum auf. Die "
 "Zustandsbalken überspringen versteckte Elemente."
 
-#: ../../technical/hosts.md:110
+#: ../../technical/hosts.md:112
 #, python-brace-format
 msgid ""
 "In a diff the overlay runs on the new side only; the old side is read "
@@ -416,11 +445,11 @@ msgstr ""
 "Skripts zurück, dessen Elemente mit `POST /api/elements` an die Engine "
 "gehen."
 
-#: ../../technical/hosts.md:117
+#: ../../technical/hosts.md:119
 msgid "The monsterbrain extension"
 msgstr "Die monsterbrain-Erweiterung"
 
-#: ../../technical/hosts.md:119
+#: ../../technical/hosts.md:121
 msgid ""
 "`packages/monsterbrain` maps monsterbrain's extension interface v0 "
 "(`docs/extensions.md` in the monsterbrain repository) to client and "
@@ -530,6 +559,20 @@ msgstr ""
 "monsterbrain"
 
 #: ../../technical/hosts.md:3
+msgid "children of side bar views"
+msgstr "Kinder von Ansichten der Seitenleiste"
+
+#: ../../technical/hosts.md:3
+msgid ""
+"the facts view: the facts of every file from `/api/facts`, a click "
+"selects the fact in review mode, the action *Approve all facts* (`Shift "
+"A`)"
+msgstr ""
+"die Fakten-Ansicht: die Fakten jeder Datei aus `/api/facts`, ein Klick "
+"wählt das Fakt im Review-Modus aus, die Aktion *Approve all facts* "
+"(`Shift A`)"
+
+#: ../../technical/hosts.md:3
 msgid "MCP tools"
 msgstr "MCP-Tools"
 
@@ -537,7 +580,7 @@ msgstr "MCP-Tools"
 msgid "`deciwa_feedback`, `deciwa_show`"
 msgstr "`deciwa_feedback`, `deciwa_show`"
 
-#: ../../technical/hosts.md:134
+#: ../../technical/hosts.md:137
 msgid ""
 "Views opened while the engine is still starting attach as soon as it is "
 "ready. Review mode is one setting for all files: the overlay keeps it, "
@@ -548,16 +591,16 @@ msgstr ""
 "Einstellung für alle Dateien: das Overlay merkt ihn sich, und "
 "dargestellte HTML-Seiten folgen ihm."
 
-#: ../../technical/hosts.md:138
+#: ../../technical/hosts.md:141
 msgid "Client"
 msgstr "Client"
 
-#: ../../technical/hosts.md:140
+#: ../../technical/hosts.md:143
 #, python-brace-format
 msgid "{need}`DEC_CLIENT_PACKAGE`"
 msgstr "{need}`DEC_CLIENT_PACKAGE`"
 
-#: ../../technical/hosts.md:142
+#: ../../technical/hosts.md:145
 msgid ""
 "`packages/client` (`@danwos/deciwa-client`) runs in Node – the host's "
 "main or extension process, never in a page, so the token stays there:"
@@ -566,7 +609,7 @@ msgstr ""
 "oder Erweiterungsprozess des Hosts, nie in einer Seite, so bleibt der "
 "Token dort:"
 
-#: ../../technical/hosts.md:145
+#: ../../technical/hosts.md:148
 msgid ""
 "`findEngine()` – the path from the host's settings, the engines bundled "
 "with the host, then `deciwa` on `PATH`,"
@@ -574,7 +617,7 @@ msgstr ""
 "`findEngine()` – der Pfad aus den Einstellungen des Hosts, die mit dem "
 "Host gelieferten Engines, dann `deciwa` im `PATH`,"
 
-#: ../../technical/hosts.md:147
+#: ../../technical/hosts.md:150
 #, python-brace-format
 msgid ""
 "`new Engine({root, enginePath, bundled}).start()` – starts `serve --api-"
@@ -586,7 +629,7 @@ msgstr ""
 "mismatch`), startet nach einem Absturz neu (höchstens dreimal pro "
 "Minute),"
 
-#: ../../technical/hosts.md:150
+#: ../../technical/hosts.md:153
 msgid ""
 "typed calls (`elements`, `page`, `summary`, `todo`, `annotate`, "
 "`hostPage`, `call` for any endpoint) and `events()` with reconnect,"
@@ -595,11 +638,11 @@ msgstr ""
 "`hostPage`, `call` für jeden Endpunkt) und `events()` mit "
 "Wiederverbindung,"
 
-#: ../../technical/hosts.md:152
+#: ../../technical/hosts.md:155
 msgid "`initFolder()` – `deciwa init --at <folder>`."
 msgstr "`initFolder()` – `deciwa init --at <ordner>`."
 
-#: ../../technical/hosts.md:154
+#: ../../technical/hosts.md:157
 msgid ""
 "`npm test` in `packages/client` starts the engine of the checkout against"
 " a temporary folder."
@@ -607,11 +650,11 @@ msgstr ""
 "`npm test` in `packages/client` startet die Engine des Checkouts gegen "
 "einen temporären Ordner."
 
-#: ../../technical/hosts.md:157
+#: ../../technical/hosts.md:160
 msgid "Standalone engine"
 msgstr "Eigenständige Engine"
 
-#: ../../technical/hosts.md:164
+#: ../../technical/hosts.md:167
 msgid ""
 "**Content:** `deciwa-core`, `-server`, `-cli` and the overlay files of "
 "`deciwa-ui`. Not `deciwa-sphinx`: Sphinx builds keep running in the docs "
@@ -621,7 +664,7 @@ msgstr ""
 "`deciwa-ui`. Nicht `deciwa-sphinx`: Sphinx-Builds laufen weiter in der "
 "eigenen Python-Umgebung des Doku-Projekts."
 
-#: ../../technical/hosts.md:167
+#: ../../technical/hosts.md:170
 msgid ""
 "**Form:** PyInstaller *one-folder* (starts fast; *one-file* unpacks on "
 "every start), so the host can sign every file inside."
@@ -629,7 +672,7 @@ msgstr ""
 "**Form:** PyInstaller *one-folder* (startet schnell; *one-file* entpackt "
 "bei jedem Start), damit der Host jede Datei darin signieren kann."
 
-#: ../../technical/hosts.md:169
+#: ../../technical/hosts.md:172
 msgid ""
 "**Platforms:** linux-x64, linux-arm64, macos-arm64, macos-x64, "
 "windows-x64 – built in GitHub Actions on each platform, smoke-tested with"
@@ -639,7 +682,7 @@ msgstr ""
 "windows-x64 – gebaut in GitHub Actions auf jeder Plattform, kurz getestet"
 " mit `deciwa --version` und `serve --api-only` gegen einen Testordner."
 
-#: ../../technical/hosts.md:172
+#: ../../technical/hosts.md:175
 msgid ""
 "**Release:** a zip per platform in the releases of `danwos/deciwa`. A "
 "host pins an engine version and fetches it at its own build time; it "
@@ -649,7 +692,7 @@ msgstr ""
 "Ein Host legt eine Engine-Version fest und holt sie beim eigenen Build; "
 "er lädt nie zur Laufzeit Code herunter."
 
-#: ../../technical/hosts.md:175
+#: ../../technical/hosts.md:178
 msgid ""
 "**Signing:** the host signs the bundled engine together with its own code"
 " (Apple notarisation requires every binary inside the app to be signed)."
@@ -658,7 +701,7 @@ msgstr ""
 "seinem eigenen Code (die Notarisierung bei Apple verlangt, dass jedes "
 "Binary in der App signiert ist)."
 
-#: ../../technical/hosts.md:177
+#: ../../technical/hosts.md:180
 msgid ""
 "**Size:** expected 20–40 MB per platform; to be measured with the first "
 "build."
@@ -666,7 +709,7 @@ msgstr ""
 "**Größe:** erwartet 20–40 MB pro Plattform; mit dem ersten Build zu "
 "messen."
 
-#: ../../technical/hosts.md:186
+#: ../../technical/hosts.md:189
 msgid ""
 "`vsce package --target <platform>` builds one extension package per "
 "platform, each with its engine. A universal package without engine uses "
@@ -676,7 +719,7 @@ msgstr ""
 "Plattform, jedes mit seiner Engine. Ein universelles Paket ohne Engine "
 "nutzt `deciwa` im `PATH` – für Plattformen ohne Build."
 
-#: ../../technical/hosts.md:197
+#: ../../technical/hosts.md:200
 msgid ""
 "Proposal: PyInstaller – widely used, simple, no C compiler. Alternatives:"
 " Nuitka (compiles to C: faster and smaller, but long builds and a C "

@@ -26,7 +26,38 @@ export interface HostContext {
   concepts(path: string): Promise<Concept[]>;
   /** hand a request to the Claude session of the open folder (only on a click of the user) */
   agent(req: { action: string; prompt: string; meta?: Record<string, string> }): Promise<{ sent: boolean; session?: string; started?: boolean }>;
+  /** fill the file nodes of a side bar view with children (monsterbrain's facts view) */
+  children(view: "facts", provider: {
+    list(paths: string[]): Promise<ChildList>;
+    select?(path: string, id: string): void | Promise<void>;
+    actions?: { id: string; title: string; key?: string; confirm?: string; run(paths: string[]): unknown }[];
+  }): void;
+  /** monsterbrain asks the providers of the view again */
+  childrenChanged(view: "facts"): void;
   log(...args: unknown[]): void;
+}
+
+/** Children of file nodes, as monsterbrain's facts view shows them. */
+export interface ChildList {
+  groups: { id: string; label: string; color: string }[];
+  files: Record<string, { id: string; label: string; context?: string; line?: number; group?: string; title?: string }[]>;
+  marks?: Record<string, { badge?: string; color?: string; title?: string }>;
+}
+
+/** The facts of some files, from the engine (/api/facts). */
+export interface FactsResult {
+  groups: string[];
+  counts: Record<string, number>;
+  facts: number;
+  files: {
+    source: string;
+    title: string;
+    file: string;
+    orphans: number;
+    counts: Record<string, number>;
+    facts: { selector: string; kind: string; label: string; context: string; line: number | null; state: string;
+      group: string; assumption: boolean }[];
+  }[];
 }
 
 /** A brain concept as monsterbrain knows it (10_concepts/<folder>/concept.md). */

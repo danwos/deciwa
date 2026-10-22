@@ -11,7 +11,7 @@ from fnmatch import fnmatch
 from pathlib import Path
 
 from . import adapters, store
-from .model import QUICK_ACTIONS, new_annotation, new_id, normalise, now
+from .model import QUICK_ACTIONS, fingerprint, new_annotation, new_id, normalise, now
 
 INDEX = "_deciwa/elements.json"
 
@@ -19,6 +19,10 @@ INDEX = "_deciwa/elements.json"
 KINDS = ("need", "heading", "paragraph", "item", "row", "code", "note", "figure", "class", "function", "statement",
          "object", "array", "value")
 DONE = ("approved", "frozen")
+FILE = "file:"  # the whole file of a facts file: one approval for all of it (DEC_FACT_BLOCKS)
+# groups of the facts view, in this order: what a fact's state means for Daniel
+FACT_GROUPS = ("approved", "open", "stale", "question", "unverified")
+ASSUMPTION = "[ASSUMPTION]"
 VERDICTS_ = ("approve", "reject", "freeze", "delete", "rephrase", "details")
 
 
@@ -91,6 +95,11 @@ class Project:
             return cached[1]
         text = path.read_text(errors="replace")
         page = {"source": source, "title": adapter.title(text, path.name), "elements": adapter.elements(text, source)}
+        if self.is_fact_file(source):
+            # the whole file, frontmatter included: any change makes its approval stale
+            page["elements"].append({"key": "file", "selector": FILE, "kind": "file", "label": page["title"],
+                                     "line": 1, "end": text.count("\n") + 1, "text": text,
+                                     "fingerprint": fingerprint(text), "parent": None})
         self._parsed[source] = (mtime, page)
         return page
 
@@ -142,6 +151,87 @@ class Project:
         self.cfg["review"]["required"] = list(kinds) + patterns
         store.save_config(self.root, self.cfg)
         return self.cfg["review"]
+
+    # -- facts: files that hold facts, one element per fact (DEC_FACT_BLOCKS) --
+
+    def is_fact_file(self, source: str) -> bool:
+        rules = self.cfg["facts"]
+        return (any(fnmatch(source, p) for p in rules["paths"])
+                and not any(fnmatch(source, p) for p in rules["exclude"]))
+
+    def fact_files(self, paths: list[str] | None = None) -> list[str]:
+        """Every facts file of the project, or only those in these files or folders."""
+        out = []
+        for p in self.root.rglob("*"):
+            rel = p.relative_to(self.root)
+            if rel.parts[0] in (store.FOLDER, "node_modules", ".git") or not p.is_file():
+                continue
+            source = rel.as_posix()
+            if self.is_fact_file(source) and adapters.for_path(source) and (paths is None or _under(source, paths)):
+                out.append(source)
+        return sorted(out)
+
+    @staticmethod
+    def fact_group(st: dict | None, assumption: bool) -> str:
+        state = st["state"] if st else "unreviewed"
+        if st and st["requested"]:
+            return "question"
+        if state in ("stale", "frozen, but changed"):
+            return "stale"
+        if assumption:
+            return "unverified"  # marked as not backed – approving it confirms the mark, not the fact
+        if state in DONE:
+            return "approved"
+        return "open"
+
+    def facts(self, sources: list[str] | None = None) -> dict:
+        """The facts of these files (default: every facts file): per file its facts with their
+        state and group, the state of the file approval, and the counts per group."""
+        index = self.index()
+        kinds = self.cfg["facts"]["kinds"]
+        files = []
+        total = {g: 0 for g in FACT_GROUPS}
+        for source in sources if sources is not None else self.fact_files():
+            _, page = self.page_of_source(index, source)
+            view = self.view(source, page["elements"])
+            facts = []
+            counts = {g: 0 for g in FACT_GROUPS}
+            for e in page["elements"]:
+                if e["kind"] not in kinds:
+                    continue
+                st = view["elements"].get(e["selector"])
+                assumption = ASSUMPTION in e["text"]
+                group = self.fact_group(st, assumption)
+                counts[group] += 1
+                facts.append({"selector": e["selector"], "kind": e["kind"], "label": e["label"],
+                              "context": _context(e["selector"]), "line": e.get("line"), "end": e.get("end"),
+                              "state": st["state"] if st else "unreviewed", "group": group,
+                              "assumption": assumption})
+            for g, n in counts.items():
+                total[g] += n
+            whole = view["elements"].get(FILE)
+            files.append({"source": source, "title": page.get("title", source), "facts": facts, "counts": counts,
+                          "file": whole["state"] if whole else "unreviewed", "orphans": len(view["orphans"])})
+        return {"groups": list(FACT_GROUPS), "counts": total, "facts": sum(total.values()), "files": files}
+
+    def approve_facts(self, sources: list[str], author: str | None = None) -> dict:
+        """Approve every fact of these files that is not approved yet, and each file as a whole.
+        Facts with an open question, an open job or a reject are left alone – they wait for an answer."""
+        approved = 0
+        for source in sources:
+            if not self.is_fact_file(source):
+                raise ValueError(f"{source} is not a facts file")
+            _, page = self.page_of_source(self.index(), source)
+            view = self.view(source, page["elements"])
+            kinds = self.cfg["facts"]["kinds"] + ["file"]
+            for e in page["elements"]:
+                st = view["elements"].get(e["selector"])
+                if e["kind"] not in kinds or (st and (st["requested"] or st["state"] in
+                                                      DONE + ("changes requested", "rejected"))):
+                    continue
+                self.add(source, e["selector"], "feedback", author=author, verdict="approve")
+                approved += 1
+        return {"approved": approved, "files": len(sources)}
 
     # -- resolving and states ----------------------------------------------
 
@@ -497,6 +587,15 @@ class Project:
                 jobs.append({"job": "relink", "id": o["id"], "source": view["source"],
                              "element": o["target"]["selectors"][0]["value"], "quote": o["target"]["snapshot"]})
         return jobs
+
+
+def _context(selector: str) -> str:
+    """The heading path of a Markdown element without the document title:
+    md:item:Founder/Career#3 → Career."""
+    if not selector.startswith("md:"):
+        return ""
+    path = selector.split(":", 2)[2].rsplit("#", 1)[0]
+    return " / ".join(path.split("/")[1:])
 
 
 def _under(source: str, paths: list[str]) -> bool:

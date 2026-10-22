@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 18:52+0200\n"
+"POT-Creation-Date: 2026-10-22 19:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -88,6 +88,31 @@ msgstr "`deciwa status`"
 #: ../../product/cli.md
 msgid "states and coverage of the whole project"
 msgstr "Zustände und Abdeckung des ganzen Projekts"
+
+#: ../../product/cli.md
+msgid "`deciwa facts [path …] [--group …]`"
+msgstr "`deciwa facts [path …] [--group …]`"
+
+#: ../../product/cli.md
+msgid ""
+"the facts of the facts files: counts per group, folder and file; with "
+"`--group` (e.g. `stale`) the facts of that group"
+msgstr ""
+"die Fakten der Faktendateien: Zahlen je Gruppe, Ordner und Datei; mit "
+"`--group` (z. B. `stale`) die Fakten dieser Gruppe"
+
+#: ../../product/cli.md
+msgid "`deciwa approve-facts <path …>`"
+msgstr "`deciwa approve-facts <path …>`"
+
+#: ../../product/cli.md
+msgid ""
+"approve every fact of these files or folders that is not approved yet, "
+"and each file as a whole – facts with an open question or job stay"
+msgstr ""
+"jedes noch nicht freigegebene Fakt dieser Dateien oder Ordner freigeben, "
+"und jede Datei als Ganzes – Fakten mit offener Frage oder offenem Auftrag"
+" bleiben"
 
 #: ../../product/cli.md
 msgid "`deciwa todo [path …]`"
@@ -189,15 +214,15 @@ msgstr "`deciwa push / pull`"
 msgid "sync with the hosted service (0.5)"
 msgstr "mit dem gehosteten Dienst synchronisieren (0.5)"
 
-#: ../../product/cli.md:28
+#: ../../product/cli.md:30
 msgid "Proposed details for 0.1: [CLI concept](../technical/cli.md)."
 msgstr "Vorgeschlagene Details für 0.1: [CLI-Konzept](../technical/cli.md)."
 
-#: ../../product/cli.md:30
+#: ../../product/cli.md:32
 msgid "Agent skills"
 msgstr "Agent-Skills"
 
-#: ../../product/cli.md:32
+#: ../../product/cli.md:34
 msgid ""
 "**`deciwa-work`** – fetch `deciwa todo`, apply comments, fix rejected "
 "statements and delete elements, never touch frozen elements, `deciwa "
@@ -207,7 +232,7 @@ msgstr ""
 "abgelehnte Aussagen korrigieren und Elemente löschen, eingefrorene "
 "Elemente nie anfassen, `deciwa resolve`, ein erneutes Review anfordern."
 
-#: ../../product/cli.md:35
+#: ../../product/cli.md:37
 msgid ""
 "**`deciwa-ask`** – instead of a `[CHECK]` marker in the text, ask a "
 "question on the element."
@@ -215,7 +240,7 @@ msgstr ""
 "**`deciwa-ask`** – statt einer `[CHECK]`-Markierung im Text eine Frage am"
 " Element stellen."
 
-#: ../../product/cli.md:38
+#: ../../product/cli.md:40
 msgid "How to use them with Claude: [Claude](../integrations/claude.md)."
 msgstr "Wie du sie mit Claude nutzt: [Claude](../integrations/claude.md)."
 

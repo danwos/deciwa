@@ -214,6 +214,14 @@ A new decision comes from an approved proposal in the technical details – see
 :alternatives: the DOM scan of the rendered page only (no source lines, no review of the code).
 ```
 
+```{dec} A fact is a structural block of a facts file – a list item, a table row or a free paragraph – not a meaning found in the text
+:id: DEC_FACT_BLOCKS
+:status: approved
+:decided: 2026-10-22
+:reason: The selectors and fingerprints of the Markdown adapter make every block reviewable without markup, the same on every run; an AI that finds the facts by meaning cuts differently each time and approvals lose their anchor. The brain is written in bullets and tables already, with one fact per list item as the writing rule. A facts file can also be approved as a whole; that approval gets stale on any change in the file, while the approvals of its facts stay per fact.
+:alternatives: a whole section as one fact (fewer, coarser approvals); explicit markup with an id per fact; facts extracted by AI.
+```
+
 ```{dec} JSON and YAML files are reviewed value by value; selectors are JSON Pointers
 :id: DEC_DATA_ADAPTERS
 :status: approved
