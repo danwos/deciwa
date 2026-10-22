@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"POT-Creation-Date: 2026-10-22 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -23,51 +23,58 @@ msgstr ""
 msgid "Roadmap"
 msgstr "Roadmap"
 
-#: ../../product/roadmap.md
-msgid "Step"
-msgstr "Schritt"
+#: ../../product/roadmap.md:3
+msgid "Available"
+msgstr "Verfügbar"
 
 #: ../../product/roadmap.md
 msgid "Content"
 msgstr "Inhalt"
 
 #: ../../product/roadmap.md
-msgid "prototype"
-msgstr "Prototyp"
+msgid "[Sphinx](../integrations/sphinx/index.md)"
+msgstr "[Sphinx](../integrations/sphinx/index.md)"
 
 #: ../../product/roadmap.md
 msgid ""
-"Sphinx integration with review overlay, offline mode, CLI – "
-"[Sphinx](../integrations/sphinx/index.md)"
+"Sphinx integration with review overlay and offline mode; CLI with "
+"`serve`, `todo`, `resolve`, export and import"
 msgstr ""
-"Sphinx-Integration mit Review-Overlay, Offline-Modus, CLI – "
-"[Sphinx](../integrations/sphinx/index.md)"
+"Sphinx-Integration mit Review-Overlay und Offline-Modus; CLI mit `serve`,"
+" `todo`, `resolve`, Export und Import"
 
 #: ../../product/roadmap.md
-msgid "0.1"
-msgstr "0.1"
+msgid "[Web script](../integrations/web.md)"
+msgstr "[Web-Skript](../integrations/web.md)"
+
+#: ../../product/roadmap.md
+msgid "deciwa on any website with one line; in use on the danwos website"
+msgstr ""
+"deciwa auf jeder Website mit einer Zeile; im Einsatz auf der danwos-"
+"Website"
+
+#: ../../product/roadmap.md:10
+msgid "Next"
+msgstr "Als Nächstes"
+
+#: ../../product/roadmap.md
+msgid "Step"
+msgstr "Schritt"
+
+#: ../../product/roadmap.md
+msgid "**0.1**"
+msgstr "**0.1**"
 
 #: ../../product/roadmap.md
 msgid ""
-"CLI, format, adapters Markdown, rST/Sphinx-Needs, text; skills `deciwa-"
-"work` and `deciwa-ask`; Daniel uses it in his knowledge base instead of "
-"`[CHECK]` – [technical details](../technical/index.md)"
+"file format, adapters Markdown, rST/Sphinx-Needs, text; `deciwa diff`; "
+"skills `deciwa-work` and `deciwa-ask`; Daniel uses it in his knowledge "
+"base instead of `[CHECK]` – [technical details](../technical/index.md)"
 msgstr ""
-"CLI, Format, Adapter für Markdown, rST/Sphinx-Needs, Text; Skills "
-"`deciwa-work` und `deciwa-ask`; Daniel nutzt es in seiner Wissensbasis "
-"statt `[CHECK]` – [technische Details](../technical/index.md)"
-
-#: ../../product/roadmap.md
-msgid "**0.2**"
-msgstr "**0.2**"
-
-#: ../../product/roadmap.md
-msgid ""
-"web script: deciwa on any website with one line; first use on the danwos "
-"website – [Web script](../integrations/web.md)"
-msgstr ""
-"Web-Skript: deciwa auf jeder Website mit einer Zeile; erster Einsatz auf "
-"der danwos-Website – [Web-Skript](../integrations/web.md)"
+"Dateiformat, Adapter für Markdown, rST/Sphinx-Needs, Text; `deciwa diff`;"
+" Skills `deciwa-work` und `deciwa-ask`; Daniel nutzt es in seiner "
+"Wissensbasis statt `[CHECK]` – [technische "
+"Details](../technical/index.md)"
 
 #: ../../product/roadmap.md
 msgid "0.3"
@@ -106,7 +113,3 @@ msgid ""
 msgstr ""
 "Desktop-App, Claude-Oberfläche, Adapter für C/JS/TS/AsciiDoc, "
 "Auswertungen und Vergleiche"
-
-#~ msgid "0.2"
-#~ msgstr "0.2"
-

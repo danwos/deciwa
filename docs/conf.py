@@ -42,8 +42,18 @@ def _languages(app, config):
     ]
 
 
+def _gettext(app):
+    """Sphinx-Needs writes needs.json with its own builder at the end of every
+    build; on the gettext environment that builder fails. The catalogs need
+    neither needs.json nor the rendered needflow diagrams."""
+    if app.builder.name == "gettext":
+        app.config.needs_build_json = False
+        app.config.suppress_warnings = [*app.config.suppress_warnings, "needs.needflow"]
+
+
 def setup(app):
     app.connect("config-inited", _languages)
+    app.connect("builder-inited", _gettext)
 
 # -- Theme -------------------------------------------------------------------
 

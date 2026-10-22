@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 14:05+0200\n"
+"POT-Creation-Date: 2026-10-22 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,18 +18,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-
-#: ../../technical/layers.md:1
-msgid "Layers"
-msgstr "Schichten"
-
-#: ../../technical/layers.md:3
-msgid "Status: draft"
-msgstr "Status: Entwurf"
-
-#: ../../technical/layers.md:5
-msgid "Proposals by Claude – not binding until Daniel approves them."
-msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
 
 #: ../../technical/layers.md:8
 msgid ""
@@ -46,10 +34,10 @@ msgid ""
 "x=\"135\" y=\"44\">cli</text><text x=\"135\" y=\"62\" "
 "class=\"small\">click commands, --json</text>\n"
 "    <rect x=\"265\" y=\"20\" width=\"230\" height=\"56\" rx=\"10\"/><text"
-" x=\"380\" y=\"44\">server (0.2)</text><text x=\"380\" y=\"62\" "
+" x=\"380\" y=\"44\">server</text><text x=\"380\" y=\"62\" "
 "class=\"small\">deciwa serve, JSON API</text>\n"
 "    <rect x=\"510\" y=\"20\" width=\"230\" height=\"56\" rx=\"10\"/><text"
-" x=\"625\" y=\"44\">sphinx (0.3)</text><text x=\"625\" y=\"62\" "
+" x=\"625\" y=\"44\">sphinx</text><text x=\"625\" y=\"62\" "
 "class=\"small\">tags rendered HTML</text>\n"
 "  </g>\n"
 "  <g class=\"arrow\"><path d=\"M135 76 V120\"/><path d=\"M380 76 "
@@ -96,10 +84,10 @@ msgstr ""
 "x=\"135\" y=\"44\">cli</text><text x=\"135\" y=\"62\" class=\"small"
 "\">click-Befehle, --json</text>\n"
 "    <rect x=\"265\" y=\"20\" width=\"230\" height=\"56\" rx=\"10\"/><text"
-" x=\"380\" y=\"44\">server (0.2)</text><text x=\"380\" y=\"62\" "
+" x=\"380\" y=\"44\">server</text><text x=\"380\" y=\"62\" "
 "class=\"small\">deciwa serve, JSON API</text>\n"
 "    <rect x=\"510\" y=\"20\" width=\"230\" height=\"56\" rx=\"10\"/><text"
-" x=\"625\" y=\"44\">sphinx (0.3)</text><text x=\"625\" y=\"62\" "
+" x=\"625\" y=\"44\">sphinx</text><text x=\"625\" y=\"62\" "
 "class=\"small\">markiert gerendertes HTML</text>\n"
 "  </g>\n"
 "  <g class=\"arrow\"><path d=\"M135 76 V120\"/><path d=\"M380 76 "
@@ -133,6 +121,18 @@ msgstr ""
 "zeigt nach oben.</figcaption>\n"
 "</figure>"
 
+#: ../../technical/layers.md:1
+msgid "Layers"
+msgstr "Schichten"
+
+#: ../../technical/layers.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/layers.md:5
+msgid "Proposals by Claude – not binding until Daniel approves them."
+msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
+
 #: ../../technical/layers.md:43
 msgid "Inside `deciwa.core`:"
 msgstr "Innerhalb von `deciwa.core`:"
@@ -151,4 +151,3 @@ msgstr ""
 #, python-brace-format
 msgid "The packages themselves: {ref}`Technical overview <packages>`."
 msgstr "Die Pakete selbst: {ref}`Technischer Überblick <packages>`."
-

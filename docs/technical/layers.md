@@ -12,8 +12,8 @@ Proposals by Claude – not binding until Daniel approves them.
   <title id="layers-t">Core layers: cli and server on top, engine in the middle, adapters and store below, model at the bottom</title>
   <g class="box alt">
     <rect x="20" y="20" width="230" height="56" rx="10"/><text x="135" y="44">cli</text><text x="135" y="62" class="small">click commands, --json</text>
-    <rect x="265" y="20" width="230" height="56" rx="10"/><text x="380" y="44">server (0.2)</text><text x="380" y="62" class="small">deciwa serve, JSON API</text>
-    <rect x="510" y="20" width="230" height="56" rx="10"/><text x="625" y="44">sphinx (0.3)</text><text x="625" y="62" class="small">tags rendered HTML</text>
+    <rect x="265" y="20" width="230" height="56" rx="10"/><text x="380" y="44">server</text><text x="380" y="62" class="small">deciwa serve, JSON API</text>
+    <rect x="510" y="20" width="230" height="56" rx="10"/><text x="625" y="44">sphinx</text><text x="625" y="62" class="small">tags rendered HTML</text>
   </g>
   <g class="arrow"><path d="M135 76 V120"/><path d="M380 76 V120"/><path d="M625 76 V178"/></g>
   <g class="box main">

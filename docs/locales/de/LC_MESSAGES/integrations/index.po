@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"POT-Creation-Date: 2026-10-22 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -56,8 +56,8 @@ msgid "the built docs in the browser – with Sphinx-Needs"
 msgstr "die gebauten Docs im Browser – mit Sphinx-Needs"
 
 #: ../../integrations/index.md
-msgid "prototype, usable now"
-msgstr "Prototyp, schon nutzbar"
+msgid "available"
+msgstr "verfügbar"
 
 #: ../../integrations/index.md
 msgid "[VS Code](vscode.md)"
@@ -80,10 +80,6 @@ msgid "any website, with one line in the page"
 msgstr "jede Website, mit einer Zeile in der Seite"
 
 #: ../../integrations/index.md
-msgid "0.2"
-msgstr "0.2"
-
-#: ../../integrations/index.md
 msgid "[Chrome](chrome.md)"
 msgstr "[Chrome](chrome.md)"
 
@@ -104,8 +100,8 @@ msgid "a conversation with the AI; Claude asks at the element"
 msgstr "ein Gespräch mit der KI; Claude fragt am Element"
 
 #: ../../integrations/index.md
-msgid "skills in 0.1, UI later"
-msgstr "Skills in 0.1, Oberfläche später"
+msgid "usable now with the CLI; skills in 0.1, UI later"
+msgstr "nutzbar mit der CLI; Skills in 0.1, Oberfläche später"
 
 #: ../../integrations/index.md
 msgid "[Desktop app](desktop.md)"
@@ -118,4 +114,3 @@ msgstr "ohne Entwicklungsumgebung"
 #: ../../integrations/index.md
 msgid "later"
 msgstr "später"
-

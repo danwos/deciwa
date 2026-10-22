@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"POT-Creation-Date: 2026-10-22 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -95,8 +95,8 @@ msgstr ""
 "Bild"
 
 #: ../../product/elements.md
-msgid "now (prototype)"
-msgstr "jetzt (Prototyp)"
+msgid "now"
+msgstr "jetzt"
 
 #: ../../product/elements.md
 msgid "Markdown"
@@ -139,8 +139,8 @@ msgid "block containers, headings, paragraphs, images"
 msgstr "Block-Container, Überschriften, Absätze, Bilder"
 
 #: ../../product/elements.md
-msgid "0.2"
-msgstr "0.2"
+msgid "now (web script)"
+msgstr "jetzt (Web-Skript)"
 
 #: ../../product/elements.md
 msgid "AsciiDoc, C, JS, TS"
@@ -227,4 +227,3 @@ msgstr ""
 #: ../../product/elements.md:50
 msgid "Approved, then changed: the history shows what changed."
 msgstr "Freigegeben, dann geändert: der Verlauf zeigt, was sich geändert hat."
-

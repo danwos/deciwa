@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"POT-Creation-Date: 2026-10-22 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -373,8 +373,8 @@ msgid "built docs in the browser, with Sphinx-Needs"
 msgstr "gebaute Docs im Browser, mit Sphinx-Needs"
 
 #: ../../index.md:49
-msgid "prototype, usable now"
-msgstr "Prototyp, schon nutzbar"
+msgid "available"
+msgstr "verfügbar"
 
 #: ../../index.md:49
 msgid "[VS Code](integrations/vscode.md)"
@@ -397,10 +397,6 @@ msgid "any website, with one line in the page"
 msgstr "jede Website, mit einer Zeile in der Seite"
 
 #: ../../index.md:49
-msgid "0.2"
-msgstr "0.2"
-
-#: ../../index.md:49
 msgid "[Chrome](integrations/chrome.md)"
 msgstr "[Chrome](integrations/chrome.md)"
 
@@ -421,8 +417,8 @@ msgid "a conversation with the AI"
 msgstr "ein Gespräch mit der KI"
 
 #: ../../index.md:49
-msgid "skills in 0.1"
-msgstr "Skills in 0.1"
+msgid "usable now with the CLI; skills in 0.1"
+msgstr "nutzbar mit der CLI; Skills in 0.1"
 
 #: ../../index.md:49
 msgid "[Desktop app](integrations/desktop.md)"
@@ -443,4 +439,3 @@ msgid ""
 msgstr ""
 "Was wann kommt: [Roadmap](product/roadmap.md). Wie deciwa gebaut ist: "
 "[Technischer Überblick](technical/index.md)."
-

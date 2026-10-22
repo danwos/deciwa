@@ -1,6 +1,6 @@
 # Web script
 
-*Planned for 0.2 – technical details: [Web script](../technical/web.md).*
+*Technical details: [Web script](../technical/web.md).*
 
 Review any website – built with Astro, Hugo, WordPress or by hand – without
 changing its build. One line in the page is enough:

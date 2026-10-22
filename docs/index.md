@@ -88,11 +88,11 @@ A first round to follow: [Demo](demo.md).
 
 | | Where you review | Status |
 |---|---|---|
-| [Sphinx](integrations/sphinx/index.md) | built docs in the browser, with Sphinx-Needs | prototype, usable now |
+| [Sphinx](integrations/sphinx/index.md) | built docs in the browser, with Sphinx-Needs | available |
 | [VS Code](integrations/vscode.md) | the editor and its docs preview | 0.3 |
-| [Web script](integrations/web.md) | any website, with one line in the page | 0.2 |
+| [Web script](integrations/web.md) | any website, with one line in the page | available |
 | [Chrome](integrations/chrome.md) | any rendered page – docs or website | 0.4 |
-| [Claude](integrations/claude.md) | a conversation with the AI | skills in 0.1 |
+| [Claude](integrations/claude.md) | a conversation with the AI | usable now with the CLI; skills in 0.1 |
 | [Desktop app](integrations/desktop.md) | without a development environment | later |
 
 What comes when: [Roadmap](product/roadmap.md). How deciwa is built:

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 18:06+0200\n"
+"POT-Creation-Date: 2026-10-22 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -24,8 +24,8 @@ msgid "Web script"
 msgstr "Web-Skript"
 
 #: ../../integrations/web.md:3
-msgid "*Planned for 0.2 – technical details: [Web script](../technical/web.md).*"
-msgstr "*Geplant für 0.2 – technische Details: [Web-Skript](../technical/web.md).*"
+msgid "*Technical details: [Web script](../technical/web.md).*"
+msgstr "*Technische Details: [Web-Skript](../technical/web.md).*"
 
 #: ../../integrations/web.md:5
 msgid ""
@@ -250,4 +250,3 @@ msgid ""
 msgstr ""
 "Die [Chrome-Erweiterung](chrome.md) wird dasselbe Skript nutzen, damit es"
 " auch auf Seiten funktioniert, die sich nicht ändern lassen."
-
