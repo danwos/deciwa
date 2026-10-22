@@ -16,7 +16,7 @@ from .model import QUICK_ACTIONS, new_annotation, new_id, normalise, now
 INDEX = "_deciwa/elements.json"
 
 # element kinds a review rule can name; "all" means every element
-KINDS = ("need", "heading", "paragraph", "item", "row", "code", "note", "figure", "class", "function")
+KINDS = ("need", "heading", "paragraph", "item", "row", "code", "note", "figure", "class", "function", "statement")
 DONE = ("approved", "frozen")
 VERDICTS_ = ("approve", "reject", "freeze", "delete", "rephrase", "details")
 
@@ -40,11 +40,14 @@ class Project:
     # -- elements index (written by the Sphinx extension) ------------------
 
     def index(self) -> dict:
-        """The Sphinx elements index plus the web pages imported from browsers."""
+        """The Sphinx elements index plus the web pages imported from browsers.
+        A web page whose source file an adapter reads is left out: the adapter
+        knows its elements with their source lines."""
         path = self.build / INDEX
         index = json.loads(path.read_text()) if path.exists() else {"pages": {}}
         for url, page in store.web_pages(self.root).items():
-            index["pages"].setdefault(url, page)
+            if self.parse(page.get("source", "")) is None:
+                index["pages"].setdefault(url, page)
         return index
 
     # -- web pages: address -> source file ([web] in config.toml) ------------
