@@ -10,6 +10,7 @@ change view that shows what agents changed. deciwa adds the review to it:
   diff get the same bars, card and keys as in the browser,
 - **review on source code** – Python files and the source of Markdown and
   HTML files, element by element,
+- **review on data** – JSON and YAML files as a tree, value by value,
 - **state in the tree and the change view** – each file shows how much of it
   is open, approved, stale or frozen, and which questions wait for an answer,
 - **feedback of the active file** in monsterbrain's right panel,
@@ -41,6 +42,12 @@ before, just without review.
   `if __name__ …`) are elements (`Alt` click for the class around a method);
   an approved function that changes shows as stale. The *Source* tab of a
   Markdown or HTML file works the same way, line by line.
+- **JSON and YAML files** – monsterbrain shows them as a tree; every node is
+  an element, from the whole document down to a single value
+  ({need}`DEC_DATA_ADAPTERS`). Selecting a node inside a collapsed part opens
+  it; reformatting the file or reordering keys keeps the review, a changed
+  value makes it and the nodes around it stale. The *Source* tab works line
+  by line as for Python.
 - **HTML files** – the rendered page is reviewable with the same elements as
   its source; the review switch and `Shift R` work for the page, the page's
   own deciwa button opens its panel.

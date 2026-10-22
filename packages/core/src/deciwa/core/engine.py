@@ -16,7 +16,8 @@ from .model import QUICK_ACTIONS, new_annotation, new_id, normalise, now
 INDEX = "_deciwa/elements.json"
 
 # element kinds a review rule can name; "all" means every element
-KINDS = ("need", "heading", "paragraph", "item", "row", "code", "note", "figure", "class", "function", "statement")
+KINDS = ("need", "heading", "paragraph", "item", "row", "code", "note", "figure", "class", "function", "statement",
+         "object", "array", "value")
 DONE = ("approved", "frozen")
 VERDICTS_ = ("approve", "reject", "freeze", "delete", "rephrase", "details")
 
@@ -101,7 +102,8 @@ class Project:
         known = {p["source"] for p in pages.values()}
         extra = set(store.sources(self.root))
         for pattern in self.cfg["review"]["paths"]:
-            extra.update(p.relative_to(self.root).as_posix() for p in self.root.glob(pattern) if p.is_file())
+            extra.update(p.relative_to(self.root).as_posix() for p in self.root.glob(pattern)
+                         if p.is_file() and store.FOLDER not in p.relative_to(self.root).parts[:1])
         for source in sorted(extra - known):
             page = self.parse(source)
             if page:
@@ -163,7 +165,23 @@ class Project:
             changed = normalise(quote["exact"]) not in normalise(element["text"])
         else:
             changed = element["fingerprint"] != target["fingerprint"]
+            if changed and element["selector"] == structural:
+                moved = Project._moved(element, target, elements)
+                if moved is not None:
+                    return moved, False
         return element, changed
+
+    @staticmethod
+    def _moved(element: dict, target: dict, elements: list[dict]) -> dict | None:
+        """The element under the selector changed: an element of the same kind whose
+        selector differs only in its numbers (an array index, a counter) and that
+        still has the reviewed text, if there is exactly one – the reviewed element
+        moved when something was inserted or removed in front of it."""
+        pattern = re.sub(r"\d+", "#", element["selector"])
+        snap = normalise(target["snapshot"])
+        hits = [e for e in elements if e is not element and e["kind"] == element["kind"]
+                and re.sub(r"\d+", "#", e["selector"]) == pattern and normalise(e["text"]) == snap]
+        return hits[0] if len(hits) == 1 else None
 
     def view(self, source: str, elements: list[dict]) -> dict:
         """Every annotated element of a source with its state, plus orphans."""
@@ -474,6 +492,8 @@ class Project:
                                  "line": lines.get(sel), "element": sel,
                                  "frozen": frz["target"]["snapshot"], "current": frz["current"]})
             for o in view["orphans"]:
+                if o["status"] != "open" and o.get("verdict") not in VERDICTS_:
+                    continue  # a resolved note or answered question whose element is gone: nothing to do
                 jobs.append({"job": "relink", "id": o["id"], "source": view["source"],
                              "element": o["target"]["selectors"][0]["value"], "quote": o["target"]["snapshot"]})
         return jobs

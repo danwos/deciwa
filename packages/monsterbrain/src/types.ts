@@ -55,9 +55,12 @@ export interface ViewContext {
   kind: string;
   role: "view" | "diff" | "before";
   rev?: string;
-  mode: "rendered" | "lines";
+  /** "tree": JSON and YAML as a tree, every node marked with data-pointer */
+  mode: "rendered" | "lines" | "tree";
   element: HTMLElement;
   scroller: HTMLElement;
+  /** tree views: open the collapsed nodes around a node so it is visible */
+  reveal?(node: Element): void;
 }
 
 export interface Channel {

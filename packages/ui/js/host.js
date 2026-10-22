@@ -8,7 +8,10 @@
  *
  * Line views (source code): every line is a block with data-line. With
  * {ranges: true} the lines of each element (line … end) are grouped into one
- * block, nested as the elements are – methods inside their class. */
+ * block, nested as the elements are – methods inside their class.
+ *
+ * Tree views (JSON, YAML): every node carries data-pointer; elements with a
+ * pointer (data adapters) match the node with the same pointer. */
 import { normalise } from "./dom.js";
 
 const TAGS = {
@@ -18,10 +21,11 @@ const TAGS = {
 
 /**
  * @param {Element} container  the rendered view, marked by the host
- * @param {{selector: string, kind: string, label: string, line?: number, text?: string}[]} elements
+ * @param {{selector: string, kind: string, label: string, line?: number, text?: string, pointer?: string}[]} elements
  * @returns {{key: string, selector: string, kind: string, label: string, node: Element}[]}
  */
 export function hostElements(container, elements, { ranges = false } = {}) {
+  if (container.querySelector("[data-pointer]")) return pointerElements(container, elements);
   if (ranges) return rangeElements(container, elements);
   const byLine = new Map();
   for (const n of container.querySelectorAll("[data-line]")) {
@@ -44,6 +48,17 @@ export function hostElements(container, elements, { ranges = false } = {}) {
     if (!node) continue;
     used.add(node);
     out.push({ key: String(out.length + 1), selector: e.selector, kind: e.kind, label: e.label, node });
+  }
+  return out;
+}
+
+function pointerElements(container, elements) {
+  const nodes = new Map();
+  for (const n of container.querySelectorAll("[data-pointer]")) if (!nodes.has(n.dataset.pointer)) nodes.set(n.dataset.pointer, n);
+  const out = [];
+  for (const e of elements) {
+    const node = e.pointer != null ? nodes.get(e.pointer) : null;
+    if (node) out.push({ key: String(out.length + 1), selector: e.selector, kind: e.kind, label: e.label, node });
   }
   return out;
 }

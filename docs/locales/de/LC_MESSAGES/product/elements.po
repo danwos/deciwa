@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 09:36+0200\n"
+"POT-Creation-Date: 2026-10-22 18:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -143,6 +143,19 @@ msgid "now (web script)"
 msgstr "jetzt (Web-Skript)"
 
 #: ../../product/elements.md
+msgid "JSON, YAML"
+msgstr "JSON, YAML"
+
+#: ../../product/elements.md
+msgid "the document, every object, array and single value"
+msgstr "das Dokument, jedes Objekt, Array und jeder einzelne Wert"
+
+#: ../../product/elements.md
+#, python-brace-format
+msgid "now ({need}`DEC_DATA_ADAPTERS`)"
+msgstr "jetzt ({need}`DEC_DATA_ADAPTERS`)"
+
+#: ../../product/elements.md
 msgid "AsciiDoc, C, JS, TS"
 msgstr "AsciiDoc, C, JS, TS"
 
@@ -154,7 +167,7 @@ msgstr "Abschnitte und Blöcke; Funktionen, Klassen, Structs"
 msgid "later"
 msgstr "später"
 
-#: ../../product/elements.md:30
+#: ../../product/elements.md:31
 msgid ""
 "Pictures – images, figures and inline SVG diagrams – are reviewed as a "
 "whole."
@@ -162,11 +175,11 @@ msgstr ""
 "Bilder – Grafiken, Abbildungen und eingebettete SVG-Diagramme – werden "
 "als Ganzes reviewt."
 
-#: ../../product/elements.md:32
+#: ../../product/elements.md:33
 msgid "When an element changes"
 msgstr "Wenn sich ein Element ändert"
 
-#: ../../product/elements.md:34
+#: ../../product/elements.md:35
 msgid ""
 "deciwa recognises an element again after the file was edited, even when "
 "it moved. What happens to your feedback:"
@@ -214,16 +227,17 @@ msgstr "ist nicht mehr auffindbar"
 msgid "`orphaned` – listed in the panel"
 msgstr "`orphaned` – im Panel aufgeführt"
 
-#: ../../product/elements.md:44
+#: ../../product/elements.md:45
 msgid "A redrawn picture counts as changed too."
 msgstr "Ein neu gezeichnetes Bild zählt ebenfalls als geändert."
 
-#: ../../product/elements.md:46
+#: ../../product/elements.md:47
 msgid "A stale approval: the history shows the old and the new wording"
 msgstr ""
 "Eine veraltete Freigabe: der Verlauf zeigt die alte und die neue "
 "Formulierung"
 
-#: ../../product/elements.md:50
+#: ../../product/elements.md:51
 msgid "Approved, then changed: the history shows what changed."
 msgstr "Freigegeben, dann geändert: der Verlauf zeigt, was sich geändert hat."
+

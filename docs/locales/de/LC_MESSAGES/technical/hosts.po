@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 14:46+0200\n"
+"POT-Creation-Date: 2026-10-22 18:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -349,7 +349,8 @@ msgid ""
 "mode – the host keeps its own shortcuts), `tools: false` (no floating "
 "pill), `openDoc` (open another file in the host) and `focus`. It returns "
 "`dock()` / `undock()` to put the panel into the host's side panel, "
-"`setReview()`, `focus()`, `refresh()` and `destroy()`."
+"`setReview()`, `focus()`, `refresh()` and `destroy()`. Tree views also "
+"pass `reveal(node)` (see below)."
 msgstr ""
 "`startOverlay()` nimmt einige Optionen für Hosts: `api` (Aufrufe gehen "
 "über den Host statt über `fetch`), `scroller` (das Element, in dem der "
@@ -358,7 +359,8 @@ msgstr ""
 "`tools: false` (keine schwebende Leiste), `openDoc` (eine andere Datei im"
 " Host öffnen) und `focus`. Es liefert `dock()` / `undock()`, um das Panel"
 " in das Seitenpanel des Hosts zu setzen, sowie `setReview()`, `focus()`, "
-"`refresh()` und `destroy()`."
+"`refresh()` und `destroy()`. Baumansichten geben außerdem `reveal(node)` "
+"mit (siehe unten)."
 
 #: ../../technical/hosts.md:97
 #, python-brace-format
@@ -378,6 +380,27 @@ msgstr ""
 #: ../../technical/hosts.md:102
 #, python-brace-format
 msgid ""
+"Tree views (JSON, YAML): the host marks every node of the tree with "
+"`data-pointer=\"<JSON Pointer>\"`. Elements that carry a `pointer` (the "
+"data adapters, {need}`DEC_DATA_ADAPTERS`) are matched to the node with "
+"the same pointer (`pointerElements()` in `host.js`). A tree hides "
+"collapsed nodes, so the host passes `reveal(node)` to `startOverlay()`: "
+"the overlay calls it before it shows or opens an element, and the host "
+"opens the collapsed nodes around it. The state bars skip elements that "
+"are hidden."
+msgstr ""
+"Baumansichten (JSON, YAML): der Host markiert jeden Knoten des Baums mit "
+"`data-pointer=\"<JSON Pointer>\"`. Elemente mit einem `pointer` (die "
+"Daten-Adapter, {need}`DEC_DATA_ADAPTERS`) werden dem Knoten mit demselben"
+" Pointer zugeordnet (`pointerElements()` in `host.js`). Ein Baum "
+"versteckt zugeklappte Knoten, deshalb gibt der Host `reveal(node)` an "
+"`startOverlay()`: das Overlay ruft es auf, bevor es ein Element zeigt "
+"oder öffnet, und der Host klappt die Knoten darum herum auf. Die "
+"Zustandsbalken überspringen versteckte Elemente."
+
+#: ../../technical/hosts.md:110
+#, python-brace-format
+msgid ""
 "In a diff the overlay runs on the new side only; the old side is read "
 "only. Rendered HTML files: the host marks every start tag with `data-"
 "line`; the elements come from the engine's HTML adapter and are matched "
@@ -393,11 +416,11 @@ msgstr ""
 "Skripts zurück, dessen Elemente mit `POST /api/elements` an die Engine "
 "gehen."
 
-#: ../../technical/hosts.md:109
+#: ../../technical/hosts.md:117
 msgid "The monsterbrain extension"
 msgstr "Die monsterbrain-Erweiterung"
 
-#: ../../technical/hosts.md:111
+#: ../../technical/hosts.md:119
 msgid ""
 "`packages/monsterbrain` maps monsterbrain's extension interface v0 "
 "(`docs/extensions.md` in the monsterbrain repository) to client and "
@@ -441,11 +464,15 @@ msgstr "Einbindung in Ansichten (`mountView`)"
 
 #: ../../technical/hosts.md:3
 msgid ""
-"overlay on rendered Markdown (`mode: \"rendered\"`) and on code views "
-"(`mode: \"lines\"`, line ranges) – not on the old side of a diff"
+"overlay on rendered Markdown (`mode: \"rendered\"`), on code views "
+"(`mode: \"lines\"`, line ranges) and on the tree of JSON and YAML files "
+"(`mode: \"tree\"`, nodes by `data-pointer`, `reveal(node)` opens "
+"collapsed nodes) – not on the old side of a diff"
 msgstr ""
-"Overlay auf dargestelltem Markdown (`mode: \"rendered\"`) und auf Code-"
-"Ansichten (`mode: \"lines\"`, Zeilenbereiche) – nicht auf der alten Seite"
+"Overlay auf dargestelltem Markdown (`mode: \"rendered\"`), auf Code-"
+"Ansichten (`mode: \"lines\"`, Zeilenbereiche) und auf dem Baum von JSON- "
+"und YAML-Dateien (`mode: \"tree\"`, Knoten über `data-pointer`, "
+"`reveal(node)` klappt zugeklappte Knoten auf) – nicht auf der alten Seite"
 " eines Diffs"
 
 #: ../../technical/hosts.md:3
@@ -510,7 +537,7 @@ msgstr "MCP-Tools"
 msgid "`deciwa_feedback`, `deciwa_show`"
 msgstr "`deciwa_feedback`, `deciwa_show`"
 
-#: ../../technical/hosts.md:126
+#: ../../technical/hosts.md:134
 msgid ""
 "Views opened while the engine is still starting attach as soon as it is "
 "ready. Review mode is one setting for all files: the overlay keeps it, "
@@ -521,16 +548,16 @@ msgstr ""
 "Einstellung für alle Dateien: das Overlay merkt ihn sich, und "
 "dargestellte HTML-Seiten folgen ihm."
 
-#: ../../technical/hosts.md:130
+#: ../../technical/hosts.md:138
 msgid "Client"
 msgstr "Client"
 
-#: ../../technical/hosts.md:132
+#: ../../technical/hosts.md:140
 #, python-brace-format
 msgid "{need}`DEC_CLIENT_PACKAGE`"
 msgstr "{need}`DEC_CLIENT_PACKAGE`"
 
-#: ../../technical/hosts.md:134
+#: ../../technical/hosts.md:142
 msgid ""
 "`packages/client` (`@danwos/deciwa-client`) runs in Node – the host's "
 "main or extension process, never in a page, so the token stays there:"
@@ -539,7 +566,7 @@ msgstr ""
 "oder Erweiterungsprozess des Hosts, nie in einer Seite, so bleibt der "
 "Token dort:"
 
-#: ../../technical/hosts.md:137
+#: ../../technical/hosts.md:145
 msgid ""
 "`findEngine()` – the path from the host's settings, the engines bundled "
 "with the host, then `deciwa` on `PATH`,"
@@ -547,7 +574,7 @@ msgstr ""
 "`findEngine()` – der Pfad aus den Einstellungen des Hosts, die mit dem "
 "Host gelieferten Engines, dann `deciwa` im `PATH`,"
 
-#: ../../technical/hosts.md:139
+#: ../../technical/hosts.md:147
 #, python-brace-format
 msgid ""
 "`new Engine({root, enginePath, bundled}).start()` – starts `serve --api-"
@@ -559,7 +586,7 @@ msgstr ""
 "mismatch`), startet nach einem Absturz neu (höchstens dreimal pro "
 "Minute),"
 
-#: ../../technical/hosts.md:142
+#: ../../technical/hosts.md:150
 msgid ""
 "typed calls (`elements`, `page`, `summary`, `todo`, `annotate`, "
 "`hostPage`, `call` for any endpoint) and `events()` with reconnect,"
@@ -568,11 +595,11 @@ msgstr ""
 "`hostPage`, `call` für jeden Endpunkt) und `events()` mit "
 "Wiederverbindung,"
 
-#: ../../technical/hosts.md:144
+#: ../../technical/hosts.md:152
 msgid "`initFolder()` – `deciwa init --at <folder>`."
 msgstr "`initFolder()` – `deciwa init --at <ordner>`."
 
-#: ../../technical/hosts.md:146
+#: ../../technical/hosts.md:154
 msgid ""
 "`npm test` in `packages/client` starts the engine of the checkout against"
 " a temporary folder."
@@ -580,11 +607,11 @@ msgstr ""
 "`npm test` in `packages/client` startet die Engine des Checkouts gegen "
 "einen temporären Ordner."
 
-#: ../../technical/hosts.md:149
+#: ../../technical/hosts.md:157
 msgid "Standalone engine"
 msgstr "Eigenständige Engine"
 
-#: ../../technical/hosts.md:156
+#: ../../technical/hosts.md:164
 msgid ""
 "**Content:** `deciwa-core`, `-server`, `-cli` and the overlay files of "
 "`deciwa-ui`. Not `deciwa-sphinx`: Sphinx builds keep running in the docs "
@@ -594,7 +621,7 @@ msgstr ""
 "`deciwa-ui`. Nicht `deciwa-sphinx`: Sphinx-Builds laufen weiter in der "
 "eigenen Python-Umgebung des Doku-Projekts."
 
-#: ../../technical/hosts.md:159
+#: ../../technical/hosts.md:167
 msgid ""
 "**Form:** PyInstaller *one-folder* (starts fast; *one-file* unpacks on "
 "every start), so the host can sign every file inside."
@@ -602,7 +629,7 @@ msgstr ""
 "**Form:** PyInstaller *one-folder* (startet schnell; *one-file* entpackt "
 "bei jedem Start), damit der Host jede Datei darin signieren kann."
 
-#: ../../technical/hosts.md:161
+#: ../../technical/hosts.md:169
 msgid ""
 "**Platforms:** linux-x64, linux-arm64, macos-arm64, macos-x64, "
 "windows-x64 – built in GitHub Actions on each platform, smoke-tested with"
@@ -612,7 +639,7 @@ msgstr ""
 "windows-x64 – gebaut in GitHub Actions auf jeder Plattform, kurz getestet"
 " mit `deciwa --version` und `serve --api-only` gegen einen Testordner."
 
-#: ../../technical/hosts.md:164
+#: ../../technical/hosts.md:172
 msgid ""
 "**Release:** a zip per platform in the releases of `danwos/deciwa`. A "
 "host pins an engine version and fetches it at its own build time; it "
@@ -622,7 +649,7 @@ msgstr ""
 "Ein Host legt eine Engine-Version fest und holt sie beim eigenen Build; "
 "er lädt nie zur Laufzeit Code herunter."
 
-#: ../../technical/hosts.md:167
+#: ../../technical/hosts.md:175
 msgid ""
 "**Signing:** the host signs the bundled engine together with its own code"
 " (Apple notarisation requires every binary inside the app to be signed)."
@@ -631,7 +658,7 @@ msgstr ""
 "seinem eigenen Code (die Notarisierung bei Apple verlangt, dass jedes "
 "Binary in der App signiert ist)."
 
-#: ../../technical/hosts.md:169
+#: ../../technical/hosts.md:177
 msgid ""
 "**Size:** expected 20–40 MB per platform; to be measured with the first "
 "build."
@@ -639,7 +666,7 @@ msgstr ""
 "**Größe:** erwartet 20–40 MB pro Plattform; mit dem ersten Build zu "
 "messen."
 
-#: ../../technical/hosts.md:178
+#: ../../technical/hosts.md:186
 msgid ""
 "`vsce package --target <platform>` builds one extension package per "
 "platform, each with its engine. A universal package without engine uses "
@@ -649,7 +676,7 @@ msgstr ""
 "Plattform, jedes mit seiner Engine. Ein universelles Paket ohne Engine "
 "nutzt `deciwa` im `PATH` – für Plattformen ohne Build."
 
-#: ../../technical/hosts.md:189
+#: ../../technical/hosts.md:197
 msgid ""
 "Proposal: PyInstaller – widely used, simple, no C compiler. Alternatives:"
 " Nuitka (compiles to C: faster and smaller, but long builds and a C "

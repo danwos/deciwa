@@ -127,9 +127,9 @@ function pageStyle(): void {
 }
 
 function mountView(v: ViewContext): (() => void) | void {
-  // rendered Markdown and line views (source code); the old side of a diff stays read only
-  if (v.role === "before" || (v.mode !== "lines" && v.kind !== "markdown")) return;
-  const lines = v.mode === "lines";
+  // rendered Markdown, line views (source code) and tree views (JSON, YAML); the old side of a diff stays read only
+  if (v.role === "before" || (v.mode === "rendered" && v.kind !== "markdown")) return;
+  const lines = v.mode !== "rendered";
   let gone = false;
   let started = false;
   let overlay: Overlay | null = null;
@@ -170,6 +170,7 @@ function mountView(v: ViewContext): (() => void) | void {
       openDoc: ({ doc, source: src }: { doc: string; source?: string }, selector: string | null) =>
         void ch.call("open", src || doc, selector),
       focus,
+      reveal: v.reveal ? (node: Element) => v.reveal!(node) : undefined,
     }) as Overlay;
     if (focus) overlay.setReview(true);
     current = { path: v.path, source, overlay };
@@ -268,7 +269,7 @@ function mountPanel(el: HTMLElement, p: { path: string | null; kind?: string }):
   const draw = (): void => {
     const { here, page } = reviewable(p.path);
     if (status.state === "ready" && !here && !page && p.kind !== "markdown" && p.kind !== "html") {
-      head.innerHTML = `<div class="msg">deciwa reviews Markdown, HTML and Python files – also in the Source view.</div>`;
+      head.innerHTML = `<div class="msg">deciwa reviews Markdown, HTML, Python, JSON and YAML files – also in the Source view.</div>`;
     } else if (status.state === "ready") {
       head.innerHTML = `<span class="grow"></span><span class="mono">deciwa ${esc(status.engine ?? "")}</span>`;
     } else if (status.state === "no-deciwa") {

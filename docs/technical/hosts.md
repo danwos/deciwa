@@ -92,12 +92,20 @@ mounted inside it), `keys: "review"` (keys only in review mode – the host keep
 its own shortcuts), `tools: false` (no floating pill), `openDoc` (open another
 file in the host) and `focus`. It returns `dock()` / `undock()` to put the
 panel into the host's side panel, `setReview()`, `focus()`, `refresh()` and
-`destroy()`.
+`destroy()`. Tree views also pass `reveal(node)` (see below).
 
 Line views (source code): the host marks every line with `data-line`; with
 `hostElements(container, elements, {ranges: true})` the lines from `line` to
 `end` of each element are grouped into one block, nested as the elements
 are, so methods sit inside their class. `unwrapRanges()` undoes it.
+
+Tree views (JSON, YAML): the host marks every node of the tree with
+`data-pointer="<JSON Pointer>"`. Elements that carry a `pointer` (the data
+adapters, {need}`DEC_DATA_ADAPTERS`) are matched to the node with the same
+pointer (`pointerElements()` in `host.js`). A tree hides collapsed nodes, so
+the host passes `reveal(node)` to `startOverlay()`: the overlay calls it
+before it shows or opens an element, and the host opens the collapsed nodes
+around it. The state bars skip elements that are hidden.
 
 In a diff the overlay runs on the new side only; the old side is read only.
 Rendered HTML files: the host marks every start tag with `data-line`; the
@@ -115,7 +123,7 @@ back to the DOM scan of the web script, whose elements go to the engine with
 |---|---|
 | background process (`onRoot`, `deactivate`) | start the engine for the open folder, stop it with the app |
 | calls and events | the window's API calls go through the main process (the token stays there); change events refresh overlays and marks |
-| view injection (`mountView`) | overlay on rendered Markdown (`mode: "rendered"`) and on code views (`mode: "lines"`, line ranges) – not on the old side of a diff |
+| view injection (`mountView`) | overlay on rendered Markdown (`mode: "rendered"`), on code views (`mode: "lines"`, line ranges) and on the tree of JSON and YAML files (`mode: "tree"`, nodes by `data-pointer`, `reveal(node)` opens collapsed nodes) – not on the old side of a diff |
 | frame scripts | overlay in rendered HTML pages; monsterbrain marks start tags with `data-line`; calls from pages reach only reading and feedback |
 | panel section | the deciwa panel of the file, docked (`dock()`), or *Set up review* for a folder without `.deciwa/` |
 | toolbar | the switch *Review on/off* next to View · Source · Diff |

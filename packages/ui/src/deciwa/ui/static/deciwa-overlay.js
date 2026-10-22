@@ -1,7 +1,7 @@
-/* deciwa review overlay 0.2.46 – built from packages/ui/js/ (npm run build), do not edit */
+/* deciwa review overlay 0.2.52 – built from packages/ui/js/ (npm run build), do not edit */
 (() => {
   // <define:__BUILD__>
-  var define_BUILD_default = { version: "0.2.46", commit: "5aa3426", dirty: true, date: "2026-10-22" };
+  var define_BUILD_default = { version: "0.2.52", commit: "949df7c", dirty: true, date: "2026-10-22" };
 
   // js/hash.js
   var enc = new TextEncoder();
@@ -328,6 +328,10 @@
           const hits = els2.filter((e) => norm(e.text) === snap || quote2 && norm(e.text).includes(snap));
           if (hits.length !== 1) return [null, false];
           el = hits[0];
+        } else if (!quote2 && el.fingerprint !== a.target.fingerprint) {
+          const shape = (s) => s.replace(/\d+/g, "#"), snap = norm(a.target.snapshot);
+          const moved = els2.filter((e) => e !== el && e.kind === el.kind && shape(e.selector) === shape(structural) && norm(e.text) === snap);
+          if (moved.length === 1) return [moved[0], false];
         }
         const changed = quote2 ? !norm(el.text).includes(norm(quote2.exact)) : el.fingerprint !== a.target.fingerprint;
         return [el, changed];
@@ -582,6 +586,9 @@
       class: "Classes (source code)",
       function: "Functions, methods",
       statement: "Statements outside functions",
+      object: "Objects (JSON, YAML)",
+      array: "Arrays (JSON, YAML)",
+      value: "Values (JSON, YAML)",
       all: "Everything"
     };
     const DONE = ["approved", "frozen"];
@@ -597,6 +604,7 @@
       for (const sel of sels) {
         const e = bySel[sel];
         if (!e) continue;
+        if (!e.node.getClientRects().length) continue;
         const st = view.elements[sel];
         const r = e.node.getBoundingClientRect();
         const b = document.createElement("div");
@@ -710,6 +718,7 @@
       if (!e) return;
       if (reviewOn) openCard(e, true, false);
       else {
+        host.reveal?.(e.node);
         place(focusBox, e.node);
         setTimeout(() => {
           if (!current) focusBox.style.display = "none";
@@ -958,6 +967,7 @@
       ${changed}${replies}</div>`;
     }
     function openCard(e, reposition = true, scroll = true) {
+      host.reveal?.(e.node);
       if (reposition && e !== current) card.classList.remove("moved");
       const keepText = !reposition && current === e ? card.querySelector("textarea")?.value : "";
       current = e;

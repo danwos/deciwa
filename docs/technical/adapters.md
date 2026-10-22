@@ -56,6 +56,8 @@ CLI and what the file format stores.
 | html | `html:heading:Services/Consulting` · `html:paragraph:Services/Consulting#2` | a rendered web page, found in the browser ({doc}`web`) |
 | py | `py:class:Engine` · `py:function:Engine.start` · `py:function:main` | a class, method or function, named by its path in the code ({need}`DEC_PYTHON_ADAPTER`) |
 | py | `py:statement:imports` · `py:statement:API` · `py:statement:#2` | statements outside functions: the import block, an assignment by name, any other statement counted per scope |
+| json | `json:` · `json:/color/primary` · `json:/versions/0` | the document, an object member, an array item – a JSON Pointer ({need}`DEC_DATA_ADAPTERS`) |
+| yaml | `yaml:` · `yaml:/jobs/build/steps/2` | the same for YAML |
 
 ```{prop} Element selectors are paths of headings plus a per-section counter
 :id: PROP_SELECTORS
@@ -160,6 +162,44 @@ known.
 
 In a host the lines of each element are grouped into one block of the code
 view ([Host apps](hosts.md)).
+
+## Data files (JSON, YAML)
+
+{need}`DEC_DATA_ADAPTERS` – `deciwa.core.adapters.json` reads `.json` files,
+`deciwa.core.adapters.yaml` reads `.yaml` and `.yml` files. Both give the same
+elements:
+
+- Elements: the document, every object member and every array item, leaves
+  included, nested as in the file. Kinds: `object`, `array`, `value` – they
+  can be named in the review rules. A YAML mapping is an object, a sequence an
+  array, a scalar a value.
+- Selectors: the adapter name plus the element's JSON Pointer
+  ([RFC 6901](https://www.rfc-editor.org/rfc/rfc6901)): `json:` for the
+  document, `json:/color/primary`, `json:/versions/0`; `~` and `/` in a key
+  become `~0` and `~1`. Every element also carries its `pointer`, so a host
+  finds the node in its own tree view ([Host apps](hosts.md)).
+- Text: the value in canonical form – sorted keys, no whitespace
+  (`json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))`).
+  Reformatting, reindenting or reordering keys keeps the review state; a
+  changed value makes its element and all its parents stale.
+- Label: the key plus a short preview – `primary: "#1f6feb"`, `needs {312}`,
+  `steps [4]`; array items use their index as key.
+- Lines: `line` is the line of the key (array items: their first line), `end`
+  the last line of the value.
+- JSON: the standard library gives no positions, so a small scanner reads the
+  file once and records the lines of every key and value. Only standard JSON –
+  no JSON Lines, no comments, no `NaN`.
+- YAML: PyYAML's safe loader – the node tree gives the positions, the safe
+  constructor the values. Only the first document is read. Keys that are not
+  strings become their JSON form (`1`, `true`). Anchors, aliases and merge keys
+  are resolved in the values; members a mapping gets from a merge key
+  (`<<: *base`) and the inside of an alias are reviewed where they are
+  written, not as elements of their own.
+- An invalid file has no elements.
+
+An array index moves when an item is inserted in front. The engine then
+follows the reviewed value to its new index ([State engine](state-engine.md),
+*Moved elements*), so the review stays with the value.
 
 ## Plain text
 

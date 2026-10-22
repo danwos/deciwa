@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 16:32+0200\n"
+"POT-Creation-Date: 2026-10-22 18:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -90,12 +90,16 @@ msgid "states and coverage of the whole project"
 msgstr "Zustände und Abdeckung des ganzen Projekts"
 
 #: ../../product/cli.md
-msgid "`deciwa todo`"
-msgstr "`deciwa todo`"
+msgid "`deciwa todo [path …]`"
+msgstr "`deciwa todo [path …]`"
 
 #: ../../product/cli.md
-msgid "open jobs for the AI or developer, and open questions"
-msgstr "offene Aufgaben für die KI oder die Entwicklung und offene Fragen"
+msgid ""
+"open jobs for the AI or developer, and open questions – with paths only "
+"those of these files or folders"
+msgstr ""
+"offene Aufgaben für die KI oder die Entwicklung und offene Fragen – mit "
+"Pfaden nur die dieser Dateien oder Ordner"
 
 #: ../../product/cli.md
 msgid "`deciwa annotate <file> <element> --verdict … [--comment …]`"

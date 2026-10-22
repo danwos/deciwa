@@ -25,6 +25,7 @@ text first gives feedback on just those words ({need}`DEC_HOVER_SELECT`).
 | Plain text | paragraph, line | 0.1 |
 | Python | module, class, function, method, docstring | 0.4 |
 | HTML | block containers, headings, paragraphs, images | now (web script) |
+| JSON, YAML | the document, every object, array and single value | now ({need}`DEC_DATA_ADAPTERS`) |
 | AsciiDoc, C, JS, TS | sections and blocks; functions, classes, structs | later |
 
 Pictures – images, figures and inline SVG diagrams – are reviewed as a whole.

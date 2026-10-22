@@ -8,10 +8,10 @@ parent``.
 
 from __future__ import annotations
 
-from . import html, markdown, python
+from . import html, json, markdown, python, yaml
 
 ADAPTERS = {".md": markdown, ".markdown": markdown, ".py": python, ".pyi": python,
-            ".html": html, ".htm": html}
+            ".html": html, ".htm": html, ".json": json, ".yaml": yaml, ".yml": yaml}
 
 
 def for_path(path: str):
@@ -20,4 +20,4 @@ def for_path(path: str):
     return ADAPTERS.get(path[dot:].lower()) if dot >= 0 else None
 
 
-__all__ = ["ADAPTERS", "for_path", "html", "markdown", "python"]
+__all__ = ["ADAPTERS", "for_path", "html", "json", "markdown", "python", "yaml"]

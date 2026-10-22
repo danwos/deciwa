@@ -6,7 +6,7 @@
 |---|---|
 | [Sphinx](../integrations/sphinx/index.md) | Sphinx integration with review overlay and offline mode; CLI with `serve`, `todo`, `resolve`, export and import |
 | [Web script](../integrations/web.md) | deciwa on any website with one line; in use on the danwos website |
-| [monsterbrain](../integrations/monsterbrain.md) | review in the desktop app on Markdown, HTML and Python files, in diffs, with marks in the tree; Markdown and Python adapters; `deciwa serve --api-only` (development setup until the standalone engine) |
+| [monsterbrain](../integrations/monsterbrain.md) | review in the desktop app on Markdown, HTML, Python, JSON and YAML files, in diffs, with marks in the tree; Markdown, Python, HTML, JSON and YAML adapters; `deciwa serve --api-only` (development setup until the standalone engine) |
 
 ## Next
 

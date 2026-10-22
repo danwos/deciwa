@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 14:28+0200\n"
+"POT-Creation-Date: 2026-10-22 18:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -206,7 +206,36 @@ msgstr ""
 "Anweisungen außerhalb von Funktionen: der Importblock, eine Zuweisung "
 "nach Namen, jede andere Anweisung gezählt je Bereich"
 
-#: ../../technical/adapters.md:65
+#: ../../technical/adapters.md:12
+msgid "json"
+msgstr "json"
+
+#: ../../technical/adapters.md:12
+msgid "`json:` · `json:/color/primary` · `json:/versions/0`"
+msgstr "`json:` · `json:/color/primary` · `json:/versions/0`"
+
+#: ../../technical/adapters.md:12
+#, python-brace-format
+msgid ""
+"the document, an object member, an array item – a JSON Pointer "
+"({need}`DEC_DATA_ADAPTERS`)"
+msgstr ""
+"das Dokument, ein Objekt-Mitglied, ein Array-Eintrag – ein JSON Pointer "
+"({need}`DEC_DATA_ADAPTERS`)"
+
+#: ../../technical/adapters.md:12
+msgid "yaml"
+msgstr "yaml"
+
+#: ../../technical/adapters.md:12
+msgid "`yaml:` · `yaml:/jobs/build/steps/2`"
+msgstr "`yaml:` · `yaml:/jobs/build/steps/2`"
+
+#: ../../technical/adapters.md:12
+msgid "the same for YAML"
+msgstr "dasselbe für YAML"
+
+#: ../../technical/adapters.md:67
 #, python-brace-format
 msgid ""
 "Heading paths survive moves of whole sections and edits in other "
@@ -222,11 +251,11 @@ msgstr ""
 "probiert. Doppelte Überschriften in einem Pfad bekommen ein Suffix "
 "(`Notes~2`)."
 
-#: ../../technical/adapters.md:72
+#: ../../technical/adapters.md:74
 msgid "Markdown"
 msgstr "Markdown"
 
-#: ../../technical/adapters.md:74
+#: ../../technical/adapters.md:76
 msgid ""
 "Parser: markdown-it-py (CommonMark + tables), token maps give line "
 "ranges; offsets come from the line ranges."
@@ -234,7 +263,7 @@ msgstr ""
 "Parser: markdown-it-py (CommonMark + Tabellen); Token-Maps liefern "
 "Zeilenbereiche, Offsets ergeben sich aus den Zeilenbereichen."
 
-#: ../../technical/adapters.md:76
+#: ../../technical/adapters.md:78
 msgid ""
 "Elements: heading sections, paragraphs, list items (nested), table rows, "
 "code blocks, frontmatter fields (YAML keys at the top level)."
@@ -243,7 +272,7 @@ msgstr ""
 "(verschachtelt), Tabellenzeilen, Codeblöcke, Frontmatter-Felder (YAML-"
 "Schlüssel auf oberster Ebene)."
 
-#: ../../technical/adapters.md:79
+#: ../../technical/adapters.md:81
 #, python-brace-format
 msgid ""
 "Built first, for host apps ({need}`DEC_HOST_ELEMENTS`): "
@@ -270,11 +299,11 @@ msgstr ""
 "zählen ab 1 und schließen die Frontmatter ein. Die Engine nutzt den "
 "Adapter für jede Datei, die kein Build-Index kennt."
 
-#: ../../technical/adapters.md:90
+#: ../../technical/adapters.md:92
 msgid "rST and Sphinx-Needs"
 msgstr "rST und Sphinx-Needs"
 
-#: ../../technical/adapters.md:97
+#: ../../technical/adapters.md:99
 msgid ""
 "docutils keeps source lines on every node. Unknown directives and roles "
 "(Sphinx, Sphinx-Needs, any extension) are registered as generic "
@@ -289,7 +318,7 @@ msgstr ""
 " werden am Namen erkannt; ihre `:id:` ergibt den `sphinx-"
 "needs:`-Selektor."
 
-#: ../../technical/adapters.md:110
+#: ../../technical/adapters.md:112
 msgid ""
 "Proposal: read them from `needs.json` if the project builds one, "
 "otherwise from `.deciwa/config.toml` (`needs.directives = [\"req\", "
@@ -303,11 +332,11 @@ msgstr ""
 "`impl`, `test`, `need`). OK, oder soll deciwa `conf.py` / "
 "`ubproject.toml` direkt lesen?"
 
-#: ../../technical/adapters.md:116
+#: ../../technical/adapters.md:118
 msgid "Python"
 msgstr "Python"
 
-#: ../../technical/adapters.md:118
+#: ../../technical/adapters.md:120
 #, python-brace-format
 msgid ""
 "{need}`DEC_PYTHON_ADAPTER` – `deciwa.core.adapters.python` reads `.py` "
@@ -316,7 +345,7 @@ msgstr ""
 "{need}`DEC_PYTHON_ADAPTER` – `deciwa.core.adapters.python` liest `.py`- "
 "und `.pyi`-Dateien mit `ast` aus der Standardbibliothek:"
 
-#: ../../technical/adapters.md:121
+#: ../../technical/adapters.md:123
 msgid ""
 "Elements: classes, functions and methods, nested as in the code (a "
 "method's parent is its class, a nested function's parent the function "
@@ -328,7 +357,7 @@ msgstr ""
 "Funktion die Funktion darum); Definitionen in `if`-, `try`- oder "
 "`with`-Blöcken zählen auf ihrer Ebene."
 
-#: ../../technical/adapters.md:124
+#: ../../technical/adapters.md:126
 msgid ""
 "Statements outside functions – at module level and in a class body – are "
 "elements of the kind `statement`: the docstring (`py:statement:__doc__`),"
@@ -347,7 +376,7 @@ msgstr ""
 "\"__main__\":`; `py:statement:Engine#2`). Anweisungen in einer Funktion "
 "gehören zur Funktion."
 
-#: ../../technical/adapters.md:131
+#: ../../technical/adapters.md:133
 msgid ""
 "Selectors: `py:<class|function>:<path>` – `py:function:Engine.start`; a "
 "second definition with the same path (a property setter, a redefinition) "
@@ -357,7 +386,7 @@ msgstr ""
 "eine zweite Definition mit demselben Pfad (ein Property-Setter, eine "
 "Neudefinition) bekommt `~2`."
 
-#: ../../technical/adapters.md:133
+#: ../../technical/adapters.md:135
 msgid ""
 "Text: the source of the definition, decorators included – any change to "
 "an approved function makes it stale. Label: its first line (`def "
@@ -367,17 +396,17 @@ msgstr ""
 "Änderung an einer freigegebenen Funktion macht sie veraltet. Bezeichnung:"
 " ihre erste Zeile (`def start(self) -> Handshake:`)."
 
-#: ../../technical/adapters.md:136
+#: ../../technical/adapters.md:138
 msgid "Lines: `line` is the first line (the first decorator), `end` the last one."
 msgstr ""
 "Zeilen: `line` ist die erste Zeile (der erste Dekorator), `end` die "
 "letzte."
 
-#: ../../technical/adapters.md:137
+#: ../../technical/adapters.md:139
 msgid "A file with a syntax error has no elements."
 msgstr "Eine Datei mit Syntaxfehler hat keine Elemente."
 
-#: ../../technical/adapters.md:138
+#: ../../technical/adapters.md:140
 msgid ""
 "The element kinds `class`, `function` and `statement` can be named in the"
 " review rules."
@@ -385,17 +414,17 @@ msgstr ""
 "Die Elementarten `class`, `function` und `statement` lassen sich in den "
 "Review-Regeln nennen."
 
-#: ../../technical/adapters.md:141
+#: ../../technical/adapters.md:143
 msgid "Not yet: comments as elements; JS, TS and C (tree-sitter, next)."
 msgstr ""
 "Noch nicht: Kommentare als Elemente; JS, TS und C (tree-sitter, als "
 "Nächstes)."
 
-#: ../../technical/adapters.md:143
+#: ../../technical/adapters.md:145
 msgid "HTML files"
 msgstr "HTML-Dateien"
 
-#: ../../technical/adapters.md:145
+#: ../../technical/adapters.md:147
 #, python-brace-format
 msgid ""
 "{need}`DEC_HTML_ADAPTER` – `deciwa.core.adapters.html` reads `.html` and "
@@ -418,7 +447,7 @@ msgstr ""
 "Endzeile und sein `tag`. Ohne Browser gibt es kein Layout, deshalb zählen"
 " auch per CSS versteckte Elemente und kleine Icons."
 
-#: ../../technical/adapters.md:154
+#: ../../technical/adapters.md:156
 msgid ""
 "A host marks every start tag of the rendered page with its source line; "
 "the overlay matches each element to the tag of its kind on its line. The "
@@ -434,7 +463,7 @@ msgstr ""
 "unter ihrer Adresse gespeicherte Webseite (aus einem Browser) weicht dem "
 "Adapter, sobald ihre Quelldatei bekannt ist."
 
-#: ../../technical/adapters.md:161
+#: ../../technical/adapters.md:163
 msgid ""
 "In a host the lines of each element are grouped into one block of the "
 "code view ([Host apps](hosts.md))."
@@ -442,11 +471,128 @@ msgstr ""
 "In einem Host werden die Zeilen jedes Elements zu einem Block der Code-"
 "Ansicht zusammengefasst ([Host-Apps](hosts.md))."
 
-#: ../../technical/adapters.md:164
+#: ../../technical/adapters.md:166
+msgid "Data files (JSON, YAML)"
+msgstr "Datendateien (JSON, YAML)"
+
+#: ../../technical/adapters.md:168
+#, python-brace-format
+msgid ""
+"{need}`DEC_DATA_ADAPTERS` – `deciwa.core.adapters.json` reads `.json` "
+"files, `deciwa.core.adapters.yaml` reads `.yaml` and `.yml` files. Both "
+"give the same elements:"
+msgstr ""
+"{need}`DEC_DATA_ADAPTERS` – `deciwa.core.adapters.json` liest "
+"`.json`-Dateien, `deciwa.core.adapters.yaml` liest `.yaml`- und "
+"`.yml`-Dateien. Beide liefern dieselben Elemente:"
+
+#: ../../technical/adapters.md:172
+msgid ""
+"Elements: the document, every object member and every array item, leaves "
+"included, nested as in the file. Kinds: `object`, `array`, `value` – they"
+" can be named in the review rules. A YAML mapping is an object, a "
+"sequence an array, a scalar a value."
+msgstr ""
+"Elemente: das Dokument, jedes Objekt-Mitglied und jeder Array-Eintrag, "
+"Blätter eingeschlossen, verschachtelt wie in der Datei. Arten: `object`, "
+"`array`, `value` – sie können in den Review-Regeln genannt werden. Ein "
+"YAML-Mapping ist ein Objekt, eine Sequenz ein Array, ein Skalar ein Wert."
+
+#: ../../technical/adapters.md:176
+msgid ""
+"Selectors: the adapter name plus the element's JSON Pointer ([RFC "
+"6901](https://www.rfc-editor.org/rfc/rfc6901)): `json:` for the document,"
+" `json:/color/primary`, `json:/versions/0`; `~` and `/` in a key become "
+"`~0` and `~1`. Every element also carries its `pointer`, so a host finds "
+"the node in its own tree view ([Host apps](hosts.md))."
+msgstr ""
+"Selektoren: der Name des Adapters plus der JSON Pointer des Elements "
+"([RFC 6901](https://www.rfc-editor.org/rfc/rfc6901)): `json:` für das "
+"Dokument, `json:/color/primary`, `json:/versions/0`; `~` und `/` in einem"
+" Schlüssel werden zu `~0` und `~1`. Jedes Element trägt außerdem seinen "
+"`pointer`, damit ein Host den Knoten in seiner eigenen Baumansicht findet"
+" ([Host-Apps](hosts.md))."
+
+#: ../../technical/adapters.md:181
+msgid ""
+"Text: the value in canonical form – sorted keys, no whitespace "
+"(`json.dumps(value, sort_keys=True, ensure_ascii=False, "
+"separators=(\",\", \":\"))`). Reformatting, reindenting or reordering "
+"keys keeps the review state; a changed value makes its element and all "
+"its parents stale."
+msgstr ""
+"Text: der Wert in kanonischer Form – sortierte Schlüssel, keine "
+"Leerzeichen (`json.dumps(value, sort_keys=True, ensure_ascii=False, "
+"separators=(\",\", \":\"))`). Neu formatieren, neu einrücken oder "
+"Schlüssel umsortieren behält den Review-Stand; ein geänderter Wert macht "
+"sein Element und alle Eltern veraltet."
+
+#: ../../technical/adapters.md:185
+#, python-brace-format
+msgid ""
+"Label: the key plus a short preview – `primary: \"#1f6feb\"`, `needs "
+"{312}`, `steps [4]`; array items use their index as key."
+msgstr ""
+"Bezeichnung: der Schlüssel plus eine kurze Vorschau – `primary: "
+"\"#1f6feb\"`, `needs {312}`, `steps [4]`; Array-Einträge nehmen ihren "
+"Index als Schlüssel."
+
+#: ../../technical/adapters.md:187
+msgid ""
+"Lines: `line` is the line of the key (array items: their first line), "
+"`end` the last line of the value."
+msgstr ""
+"Zeilen: `line` ist die Zeile des Schlüssels (Array-Einträge: ihre erste "
+"Zeile), `end` die letzte Zeile des Werts."
+
+#: ../../technical/adapters.md:189
+msgid ""
+"JSON: the standard library gives no positions, so a small scanner reads "
+"the file once and records the lines of every key and value. Only standard"
+" JSON – no JSON Lines, no comments, no `NaN`."
+msgstr ""
+"JSON: die Standardbibliothek liefert keine Positionen, deshalb liest ein "
+"kleiner Scanner die Datei einmal und merkt sich die Zeilen jedes "
+"Schlüssels und Werts. Nur Standard-JSON – kein JSON Lines, keine "
+"Kommentare, kein `NaN`."
+
+#: ../../technical/adapters.md:192
+msgid ""
+"YAML: PyYAML's safe loader – the node tree gives the positions, the safe "
+"constructor the values. Only the first document is read. Keys that are "
+"not strings become their JSON form (`1`, `true`). Anchors, aliases and "
+"merge keys are resolved in the values; members a mapping gets from a "
+"merge key (`<<: *base`) and the inside of an alias are reviewed where "
+"they are written, not as elements of their own."
+msgstr ""
+"YAML: der Safe Loader von PyYAML – der Knotenbaum liefert die Positionen,"
+" der Safe Constructor die Werte. Nur das erste Dokument wird gelesen. "
+"Schlüssel, die keine Strings sind, werden zu ihrer JSON-Form (`1`, "
+"`true`). Anker, Aliase und Merge-Schlüssel sind in den Werten aufgelöst; "
+"Mitglieder, die ein Mapping über einen Merge-Schlüssel (`<<: *base`) "
+"bekommt, und das Innere eines Alias werden dort reviewt, wo sie stehen, "
+"nicht als eigene Elemente."
+
+#: ../../technical/adapters.md:198
+msgid "An invalid file has no elements."
+msgstr "Eine ungültige Datei hat keine Elemente."
+
+#: ../../technical/adapters.md:200
+msgid ""
+"An array index moves when an item is inserted in front. The engine then "
+"follows the reviewed value to its new index ([State engine](state-"
+"engine.md), *Moved elements*), so the review stays with the value."
+msgstr ""
+"Ein Array-Index verschiebt sich, wenn davor ein Eintrag eingefügt wird. "
+"Die Engine folgt dann dem reviewten Wert zu seinem neuen Index ([State-"
+"Engine](state-engine.md), *Verschobene Elemente*), so bleibt das Review "
+"beim Wert."
+
+#: ../../technical/adapters.md:204
 msgid "Plain text"
 msgstr "Reiner Text"
 
-#: ../../technical/adapters.md:166
+#: ../../technical/adapters.md:206
 msgid ""
 "Paragraphs are blocks separated by blank lines; lines are a second level."
 " Everything else is free text selection."
@@ -454,11 +600,11 @@ msgstr ""
 "Absätze sind durch Leerzeilen getrennte Blöcke; Zeilen sind eine zweite "
 "Ebene. Alles andere ist freie Textauswahl."
 
-#: ../../technical/adapters.md:169
+#: ../../technical/adapters.md:209
 msgid "HTML in the browser"
 msgstr "HTML im Browser"
 
-#: ../../technical/adapters.md:176
+#: ../../technical/adapters.md:216
 msgid ""
 "A small adapter in JavaScript reads the DOM of the review root and "
 "returns the same element list as the other adapters:"
@@ -466,7 +612,7 @@ msgstr ""
 "Ein kleiner Adapter in JavaScript liest das DOM der Review-Wurzel und "
 "liefert dieselbe Elementliste wie die anderen Adapter:"
 
-#: ../../technical/adapters.md:179
+#: ../../technical/adapters.md:219
 msgid ""
 "sections from the heading outline `h1`–`h6` (web pages rarely nest real "
 "`<section>` elements), named by their heading path,"
@@ -475,7 +621,7 @@ msgstr ""
 "verschachteln selten echte `<section>`-Elemente), benannt nach ihrem "
 "Überschriftenpfad,"
 
-#: ../../technical/adapters.md:181
+#: ../../technical/adapters.md:221
 msgid ""
 "paragraphs, list items, table rows (`tr` outside `thead`), code blocks "
 "(`pre`), notes (`aside`, `[role=note]`), pictures (`img`, `svg`, "
@@ -485,7 +631,7 @@ msgstr ""
 "Codeblöcke (`pre`), Hinweise (`aside`, `[role=note]`), Bilder (`img`, "
 "`svg`, `figure`, `picture`) – pro Abschnitt gezählt wie in Markdown,"
 
-#: ../../technical/adapters.md:184
+#: ../../technical/adapters.md:224
 msgid ""
 "left out: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-"
 "hidden=true]`, `script`, `style` and everything matching `data-ignore`."
@@ -493,7 +639,7 @@ msgstr ""
 "ausgelassen: `nav`, `header`, `footer`, `form`, `[hidden]`, `[aria-"
 "hidden=true]`, `script`, `style` und alles, worauf `data-ignore` passt."
 
-#: ../../technical/adapters.md:187
+#: ../../technical/adapters.md:227
 msgid ""
 "The fingerprint is SHA-256 over the normalised text, computed with "
 "`crypto.subtle` – the same value as `model.fingerprint` in Python, so the"
@@ -507,7 +653,7 @@ msgstr ""
 "Overlay wechselt von seinem lokalen FNV-Hash zu diesem. Bei Bildern "
 "bilden `src`, `alt` und Bildunterschrift den Fingerprint."
 
-#: ../../technical/adapters.md:193
+#: ../../technical/adapters.md:233
 msgid ""
 "Pages with build hints (`#deciwa-page`, as the Sphinx extension writes "
 "it) skip the scan and use the hints."
@@ -515,11 +661,11 @@ msgstr ""
 "Seiten mit Build-Hinweisen (`#deciwa-page`, wie die Sphinx-Erweiterung es"
 " schreibt) überspringen den Scan und nutzen die Hinweise."
 
-#: ../../technical/adapters.md:197
+#: ../../technical/adapters.md:237
 msgid "Free text selection"
 msgstr "Freie Textauswahl"
 
-#: ../../technical/adapters.md:204
+#: ../../technical/adapters.md:244
 msgid ""
 "Selecting a word stores the structural selector of the element that "
 "contains it plus a `TextQuoteSelector` (exact, prefix, suffix) and a "

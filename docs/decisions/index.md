@@ -214,6 +214,14 @@ A new decision comes from an approved proposal in the technical details – see
 :alternatives: the DOM scan of the rendered page only (no source lines, no review of the code).
 ```
 
+```{dec} JSON and YAML files are reviewed value by value; selectors are JSON Pointers
+:id: DEC_DATA_ADAPTERS
+:status: approved
+:decided: 2026-10-22
+:reason: Data files – design tokens, configs, `needs.json`, exports – are results too. Every value is an element, leaves included: the document, every object member and every array item. Selectors are JSON Pointers (RFC 6901) with the index for array items; there are no rules that depend on the data (no id fields, no special views for known files). An item that moves when something is inserted in front keeps its review because the engine follows moved elements, for every format. Only standard JSON (no JSON Lines, no JSONC) and the first document of a YAML file.
+:alternatives: id fields to name array items (data-dependent); special views for `needs.json` or tokens; review by line only.
+```
+
 ```{dec} monsterbrain is the first host, before VS Code
 :id: DEC_HOST_ORDER
 :status: approved

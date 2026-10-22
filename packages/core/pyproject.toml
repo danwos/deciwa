@@ -3,7 +3,7 @@ name = "deciwa-core"
 version = "0.0.1"
 description = "Annotation model, .deciwa/ store and engine – the logic of deciwa"
 requires-python = ">=3.12"
-dependencies = ["markdown-it-py>=3"]
+dependencies = ["markdown-it-py>=3", "pyyaml>=6"]
 
 [build-system]
 requires = ["hatchling>=1.25"]

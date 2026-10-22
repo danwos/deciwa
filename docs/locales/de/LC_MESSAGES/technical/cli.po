@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 13:53+0200\n"
+"POT-Creation-Date: 2026-10-22 18:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -104,12 +104,16 @@ msgid "counts per state, coverage"
 msgstr "Anzahl pro Zustand, Abdeckung"
 
 #: ../../technical/cli.md:8
-msgid "`deciwa todo [--for <who>]`"
-msgstr "`deciwa todo [--for <who>]`"
+msgid "`deciwa todo [path …] [--for <who>]`"
+msgstr "`deciwa todo [path …] [--for <who>]`"
 
 #: ../../technical/cli.md:8
-msgid "open quick actions and requests"
-msgstr "offene Schnellaktionen und Anfragen"
+msgid ""
+"open quick actions and requests; paths (files or folders, from the "
+"current folder or the project root) limit them"
+msgstr ""
+"offene Schnellaktionen und Anfragen; Pfade (Dateien oder Ordner, vom "
+"aktuellen Ordner oder vom Projektstamm aus) schränken sie ein"
 
 #: ../../technical/cli.md:8
 msgid "`deciwa resolve <id> [--note …]`"
@@ -181,4 +185,7 @@ msgstr ""
 "`deciwa status --fail-on frozen-changed,orphaned` endet mit `3`, wenn "
 "solche Elemente existieren. deciwa zeigt trotzdem nur – das Team "
 "entscheidet, ob CI stoppt. Optional für 0.1."
+
+#~ msgid "open quick actions and requests"
+#~ msgstr "offene Schnellaktionen und Anfragen"
 

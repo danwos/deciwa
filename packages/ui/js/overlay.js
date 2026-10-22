@@ -19,6 +19,7 @@
  *   openDoc({doc, source}, selector)   open another page in the host
  *   focus             selector to open at start
  *   onReview(on)      review mode was switched
+ *   reveal(node)      make a hidden element visible (open the collapsed nodes of a tree) before it is shown
  * startOverlay returns {update, refresh, destroy, dock, undock, setReview, toggleReview, focus, review}. */
 import { sha256 } from "./hash.js";
 
@@ -193,6 +194,11 @@ export function startOverlay(host) {
         const hits = els.filter(e => norm(e.text) === snap || (quote && norm(e.text).includes(snap)));
         if (hits.length !== 1) return [null, false];
         el = hits[0];
+      } else if (!quote && el.fingerprint !== a.target.fingerprint) {
+        // moved: the reviewed text, unchanged, under the same selector with other numbers (engine: resolve)
+        const shape = s => s.replace(/\d+/g, "#"), snap = norm(a.target.snapshot);
+        const moved = els.filter(e => e !== el && e.kind === el.kind && shape(e.selector) === shape(structural) && norm(e.text) === snap);
+        if (moved.length === 1) return [moved[0], false];
       }
       const changed = quote ? !norm(el.text).includes(norm(quote.exact)) : el.fingerprint !== a.target.fingerprint;
       return [el, changed];
@@ -382,6 +388,7 @@ export function startOverlay(host) {
   const KIND_LABELS = { need: "Sphinx-Needs objects", heading: "Headings (sections)", paragraph: "Paragraphs",
     item: "List items", row: "Table rows", code: "Code blocks", note: "Notes, admonitions", figure: "Figures",
     class: "Classes (source code)", function: "Functions, methods", statement: "Statements outside functions",
+    object: "Objects (JSON, YAML)", array: "Arrays (JSON, YAML)", value: "Values (JSON, YAML)",
     all: "Everything" };
   const DONE = ["approved", "frozen"];
   const isRequired = sel => (view.required || []).includes(sel);
@@ -397,6 +404,7 @@ export function startOverlay(host) {
     const sels = new Set([...Object.keys(view.elements), ...(view.required || [])]);
     for (const sel of sels) {
       const e = bySel[sel]; if (!e) continue;
+      if (!e.node.getClientRects().length) continue;  // hidden, e.g. inside a collapsed tree node
       const st = view.elements[sel];
       const r = e.node.getBoundingClientRect();
       const b = document.createElement("div");
@@ -517,6 +525,7 @@ export function startOverlay(host) {
     // open at once and scroll only once, so that element and card are both in view
     if (reviewOn) openCard(e, true, false);
     else {
+      host.reveal?.(e.node);
       place(focusBox, e.node);  // just show where it is
       setTimeout(() => { if (!current) focusBox.style.display = "none"; }, 1600);
     }
@@ -709,6 +718,7 @@ export function startOverlay(host) {
   }
 
   function openCard(e, reposition = true, scroll = true) {
+    host.reveal?.(e.node);
     if (reposition && e !== current) card.classList.remove("moved");
     const keepText = !reposition && current === e ? card.querySelector("textarea")?.value : "";
     current = e;

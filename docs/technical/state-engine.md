@@ -54,6 +54,20 @@ Text quote and position follow the
 [W3C Web Annotation Data Model](https://www.w3.org/TR/annotation-model/).
 ```
 
+### Moved elements
+
+A counter in a selector – an array index (`json:/steps/2`), the paragraph
+number in `md:paragraph:Setup#2` – moves when something is inserted or
+removed in front. The element under the old selector then has a new
+fingerprint, although the reviewed element is unchanged one place further
+down. So when the element found by its selector changed and the annotation
+has no text quote, the engine looks for elements of the same kind whose
+selector differs only in its numbers and whose text is still the reviewed
+one. If there is exactly one, the annotation follows it and keeps its state;
+otherwise the element under the selector counts, and it is `stale`. The
+selector is a hint, the reviewed text decides ({need}`DEC_DATA_ADAPTERS`).
+This works for every format.
+
 ## 2 · Compare
 
 ```{prop} The fingerprint covers the source text with whitespace normalised

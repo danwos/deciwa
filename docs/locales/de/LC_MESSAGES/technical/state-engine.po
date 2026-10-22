@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 14:05+0200\n"
+"POT-Creation-Date: 2026-10-22 18:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -18,28 +18,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-
-#: ../../technical/state-engine.md:1
-msgid "State engine"
-msgstr "Zustands-Engine"
-
-#: ../../technical/state-engine.md:3
-msgid "Status: draft"
-msgstr "Status: Entwurf"
-
-#: ../../technical/state-engine.md:5
-msgid "Proposals by Claude – not binding until Daniel approves them."
-msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
-
-#: ../../technical/state-engine.md:8
-msgid ""
-"State is never stored, always computed from the annotations plus the "
-"current source. The engine does it in three steps for every annotated "
-"file."
-msgstr ""
-"Der Zustand wird nie gespeichert, sondern immer aus den Annotationen plus"
-" der aktuellen Quelle berechnet. Die Engine macht das für jede annotierte"
-" Datei in drei Schritten."
 
 #: ../../technical/state-engine.md:11
 msgid ""
@@ -119,6 +97,28 @@ msgstr ""
 "</svg>\n"
 "</figure>"
 
+#: ../../technical/state-engine.md:1
+msgid "State engine"
+msgstr "Zustands-Engine"
+
+#: ../../technical/state-engine.md:3
+msgid "Status: draft"
+msgstr "Status: Entwurf"
+
+#: ../../technical/state-engine.md:5
+msgid "Proposals by Claude – not binding until Daniel approves them."
+msgstr "Vorschläge von Claude – nicht verbindlich, bis Daniel sie freigibt."
+
+#: ../../technical/state-engine.md:8
+msgid ""
+"State is never stored, always computed from the annotations plus the "
+"current source. The engine does it in three steps for every annotated "
+"file."
+msgstr ""
+"Der Zustand wird nie gespeichert, sondern immer aus den Annotationen plus"
+" der aktuellen Quelle berechnet. Die Engine macht das für jede annotierte"
+" Datei in drei Schritten."
+
 #: ../../technical/state-engine.md:35
 msgid "1 · Resolve"
 msgstr "1 · Auflösen"
@@ -164,10 +164,42 @@ msgstr ""
 "[W3C Web Annotation Data Model](https://www.w3.org/TR/annotation-model/)."
 
 #: ../../technical/state-engine.md:57
+msgid "Moved elements"
+msgstr "Verschobene Elemente"
+
+#: ../../technical/state-engine.md:59
+#, python-brace-format
+msgid ""
+"A counter in a selector – an array index (`json:/steps/2`), the paragraph"
+" number in `md:paragraph:Setup#2` – moves when something is inserted or "
+"removed in front. The element under the old selector then has a new "
+"fingerprint, although the reviewed element is unchanged one place further"
+" down. So when the element found by its selector changed and the "
+"annotation has no text quote, the engine looks for elements of the same "
+"kind whose selector differs only in its numbers and whose text is still "
+"the reviewed one. If there is exactly one, the annotation follows it and "
+"keeps its state; otherwise the element under the selector counts, and it "
+"is `stale`. The selector is a hint, the reviewed text decides "
+"({need}`DEC_DATA_ADAPTERS`). This works for every format."
+msgstr ""
+"Ein Zähler in einem Selektor – ein Array-Index (`json:/steps/2`), die "
+"Absatznummer in `md:paragraph:Setup#2` – verschiebt sich, wenn davor "
+"etwas eingefügt oder entfernt wird. Das Element unter dem alten Selektor "
+"hat dann einen neuen Fingerabdruck, obwohl das reviewte Element "
+"unverändert eine Stelle weiter steht. Hat sich das über seinen Selektor "
+"gefundene Element geändert und hat die Annotation kein Textzitat, sucht "
+"die Engine deshalb Elemente derselben Art, deren Selektor sich nur in den"
+" Zahlen unterscheidet und deren Text noch der reviewte ist. Gibt es genau"
+" eines, folgt die Annotation ihm und behält ihren Zustand; sonst zählt "
+"das Element unter dem Selektor, und es ist `stale`. Der Selektor ist ein "
+"Hinweis, der reviewte Text entscheidet ({need}`DEC_DATA_ADAPTERS`). Das "
+"gilt für jedes Format."
+
+#: ../../technical/state-engine.md:71
 msgid "2 · Compare"
 msgstr "2 · Vergleichen"
 
-#: ../../technical/state-engine.md:64
+#: ../../technical/state-engine.md:78
 msgid ""
 "`sha256` over the element's source text after Unicode NFC, trimming and "
 "collapsing runs of whitespace into one space. Markup stays in: turning a "
@@ -177,7 +209,7 @@ msgstr ""
 "dem Zusammenfassen von Leerzeichenfolgen zu einem Leerzeichen. Markup "
 "bleibt drin: ein Wort fett zu machen, lässt eine Freigabe `stale` werden."
 
-#: ../../technical/state-engine.md:75
+#: ../../technical/state-engine.md:89
 msgid ""
 "With markup in the fingerprint, bold, a new link or a re-wrapped table "
 "makes an approved statement `stale`. Without it, only changes to the "
@@ -191,11 +223,11 @@ msgstr ""
 " entfernen. Vorschlag: Markup für 0.1 drin lassen (einfach, sicher); neu "
 "bewerten, falls es in der Wissensbasis zu viel Rauschen erzeugt."
 
-#: ../../technical/state-engine.md:81
+#: ../../technical/state-engine.md:95
 msgid "3 · State"
 msgstr "3 · Zustand"
 
-#: ../../technical/state-engine.md:83
+#: ../../technical/state-engine.md:97
 msgid ""
 "Ratings and notes never change the state. For everything else the engine "
 "looks at the open and the latest annotations of an element and picks the "
@@ -205,127 +237,127 @@ msgstr ""
 "die Engine auf die offenen und die neuesten Annotationen eines Elements "
 "und nimmt die erste Regel, die zutrifft:"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "#"
 msgstr "#"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "Rule"
 msgstr "Regel"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "State"
 msgstr "Zustand"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "1"
 msgstr "1"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "target not found"
 msgstr "Ziel nicht gefunden"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`orphaned`"
 msgstr "`orphaned`"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "2"
 msgstr "2"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "latest freeze is in force and the fingerprint changed"
 msgstr "das neueste Einfrieren gilt, und der Fingerprint hat sich geändert"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`frozen, but changed`"
 msgstr "`frozen, but changed`"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "3"
 msgstr "3"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "latest freeze is in force"
 msgstr "das neueste Einfrieren gilt"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`frozen`"
 msgstr "`frozen`"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "4"
 msgstr "4"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "an open delete job"
 msgstr "eine offene Lösch-Aufgabe"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`changes requested`"
 msgstr "`changes requested`"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "5"
 msgstr "5"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "latest verdict is an open reject (not fixed yet)"
 msgstr "das neueste Urteil ist ein offenes Ablehnen (noch nicht behoben)"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`rejected`"
 msgstr "`rejected`"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "6"
 msgstr "6"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "latest verdict is approve and the fingerprint changed"
 msgstr "das neueste Urteil ist freigeben, und der Fingerprint hat sich geändert"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`stale`"
 msgstr "`stale`"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "7"
 msgstr "7"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "latest verdict is approve"
 msgstr "das neueste Urteil ist freigeben"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`approved`"
 msgstr "`approved`"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "8"
 msgstr "8"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "an open request"
 msgstr "eine offene Anfrage"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`requested`"
 msgstr "`requested`"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "9"
 msgstr "9"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "none of these"
 msgstr "nichts davon"
 
-#: ../../technical/state-engine.md:69
+#: ../../technical/state-engine.md:83
 msgid "`unreviewed`"
 msgstr "`unreviewed`"
 
-#: ../../technical/state-engine.md:104
+#: ../../technical/state-engine.md:118
 msgid ""
 "An open request is shown as a badge on top of every other state, so "
 "`approved` with an open question is still visible as approved. A resolved"
@@ -339,7 +371,7 @@ msgstr ""
 "`deciwa resolve` fällt das Element auf seinen vorherigen Zustand zurück, "
 "und die `stale`-Prüfung zeigt, dass es geändert wurde."
 
-#: ../../technical/state-engine.md:117
+#: ../../technical/state-engine.md:131
 #, python-brace-format
 msgid ""
 "Options were: (a) a new verdict on the element ends the freeze; (b) an "
