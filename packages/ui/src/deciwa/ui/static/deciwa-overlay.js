@@ -1,5 +1,8 @@
-/* deciwa review overlay 0.2.0 – built from packages/ui/js/ (npm run build), do not edit */
+/* deciwa review overlay 0.2.26 – built from packages/ui/js/ (npm run build), do not edit */
 (() => {
+  // <define:__BUILD__>
+  var define_BUILD_default = { version: "0.2.26", commit: "d666f99", dirty: true, date: "2026-10-22" };
+
   // js/hash.js
   var enc = new TextEncoder();
   async function sha256(text) {
@@ -217,7 +220,7 @@
         return {};
       }
     })();
-    let panelTab = ["project", "files"].includes(panelPrefs.tab) ? panelPrefs.tab : "page";
+    let panelTab = ["project", "files", "help"].includes(panelPrefs.tab) ? panelPrefs.tab : "page";
     function savePanelPrefs() {
       try {
         localStorage.setItem(PANEL_KEY, JSON.stringify({ open: document.querySelector(".dwr-panel").classList.contains("on"), tab: panelTab, review: reviewOn, guided }));
@@ -817,18 +820,54 @@
         };
       });
     }
+    const buildLine = () => [define_BUILD_default.version, define_BUILD_default.commit && define_BUILD_default.commit + (define_BUILD_default.dirty ? "+" : ""), define_BUILD_default.date].filter(Boolean).join(" \xB7 ");
+    const HELP_KEYS = [
+      ["Shift R", "review mode on/off"],
+      ["Shift P", "panel on/off"],
+      ["a r f d", "approve \xB7 reject \xB7 freeze \xB7 delete"],
+      ["0\u20135", "stars"],
+      ["n", "write a comment"],
+      ["v", "guided review"],
+      ["j k", "next / previous element"],
+      ["Alt click", "the enclosing element"],
+      ["Ctrl click", "follow a link"],
+      ["Esc", "close the card"],
+      ["F1", "this help"]
+    ];
+    const HELP_LINKS = [
+      ["Docs", "https://deciwa.danwos.dev"],
+      ["danwos.dev", "https://danwos.dev"],
+      ["LinkedIn", "https://www.linkedin.com/in/daniel-woste-362b6252"]
+    ];
+    function helpBody() {
+      return `<div class="about"><img src="${MONSTER}" alt=""><div><b>deciwa</b><span>decision watcher</span></div></div>
+      <p>Point at an element of a doc or website and give feedback, rate it or decide on it. deciwa keeps that tied to exactly that element, notices when it changes and shows what is confirmed, open or frozen.</p>
+      <h4>Keys</h4>
+      <dl class="helpkeys">${HELP_KEYS.map(([k, v]) => `<dt>${k.split(" ").map((c) => `<kbd>${esc(c)}</kbd>`).join(" ")}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+      <h4>Version</h4><p class="mono">${esc(buildLine())}</p>
+      <h4>Author</h4><p>Daniel Woste \xB7 danwos</p>
+      <p class="links">${HELP_LINKS.map(([l, u]) => `<a href="${u}" target="_blank" rel="noopener">${l} \u2197</a>`).join("")}</p>`;
+    }
+    function showHelp() {
+      panelTab = "help";
+      if (!panel.classList.contains("on")) togglePanel();
+      else {
+        savePanelPrefs();
+        drawPanel();
+      }
+    }
     async function drawPanel() {
       const tab = panelTab;
-      const body = tab === "project" ? await projectBody() : tab === "files" ? filesBody() : pageBody();
+      const body = tab === "project" ? await projectBody() : tab === "files" ? filesBody() : tab === "help" ? helpBody() : pageBody();
       if (tab !== panelTab) return;
       const openDetails = [...panel.querySelectorAll("details[data-k]")].filter((d) => d.open).map((d) => d.dataset.k);
-      const offline = mode === "offline" && tab !== "files" ? `<div class="offline"><span class="chip off">offline</span>
+      const offline = mode === "offline" && tab !== "files" && tab !== "help" ? `<div class="offline"><span class="chip off">offline</span>
         <span class="hint">${Offline.count()} entries in this browser</span>
         <button class="btn" data-tab="files">Im/Export</button></div>` : "";
       panel.innerHTML = `<div class="tbar"><img class="logo" src="${MONSTER}" alt=""><div class="kind">deciwa</div>
-        <b>${tab === "project" ? "Whole project" : tab === "files" ? "Import and export" : esc(document.title.split(" - ")[0])}</b>
+        <b>${tab === "project" ? "Whole project" : tab === "files" ? "Import and export" : tab === "help" ? "Help" : esc(document.title.split(" - ")[0])}</b>
         <button class="x" title="Close (Shift+P)">\xD7</button>
-        <div class="tabs"><button data-tab="page" class="${tab === "page" ? "on" : ""}">This page</button><button data-tab="project" class="${tab === "project" ? "on" : ""}">Project</button><button data-tab="files" class="${tab === "files" ? "on" : ""}">Im/Export</button></div></div>
+        <div class="tabs"><button data-tab="page" class="${tab === "page" ? "on" : ""}">This page</button><button data-tab="project" class="${tab === "project" ? "on" : ""}">Project</button><button data-tab="files" class="${tab === "files" ? "on" : ""}">Im/Export</button><button data-tab="help" class="help ${tab === "help" ? "on" : ""}" title="Help (F1)" aria-label="Help">?</button></div></div>
       <div class="inner">${offline}${body}</div>`;
       if (tab === "files") wireFiles();
       panel.querySelector("[data-guided]")?.addEventListener("click", () => setGuided(!guided));
@@ -1071,6 +1110,11 @@
       if (ev.key === "Escape") {
         closeModal();
         closeCard();
+        return;
+      }
+      if (ev.key === "F1") {
+        ev.preventDefault();
+        showHelp();
         return;
       }
       if (typing) return;

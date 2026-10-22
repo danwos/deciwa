@@ -197,10 +197,23 @@ body[data-theme="dark"] {
 .dwr-panel .srcs div { display: flex; justify-content: space-between; gap: 8px; padding: 1px 0; }
 .dwr-panel .warnbox { border: 2px solid var(--change); border-radius: 10px; padding: 6px 9px; font-size: 12px; color: var(--change); margin: 6px 0; }
 .dwr-panel .tabs { display: flex; gap: 2px; margin-top: 10px; }
-.dwr-panel .tabs button { border: 0; background: transparent; color: var(--t-bar-muted); font-weight: 600; font-size: 12px;
-  padding: 5px 12px 6px; border-radius: 8px 8px 0 0; }
+.dwr-panel .tabs button { border: 0; background: transparent; color: var(--t-bar-muted); font-weight: 600; font-size: 12px; white-space: nowrap;
+  padding: 5px 10px 6px; border-radius: 8px 8px 0 0; }
 .dwr-panel .tabs button.on { background: var(--t-surface); color: var(--t-text); }
 .dwr-panel .tabs button:not(.on):hover { color: var(--t-on-bar); }
+.dwr-panel .tabs button.help { margin-left: auto; padding: 5px 10px 6px; }
+/* help tab */
+.dwr-panel .about { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.dwr-panel .about img { width: 56px; height: 56px; object-fit: contain; border: 2px solid var(--t-edge); border-radius: 14px; padding: 3px; background: var(--t-bg); }
+.dwr-panel .about b { display: block; font: 700 18px/1.2 "Bricolage Grotesque", Inter, sans-serif; }
+.dwr-panel .about span { color: var(--t-muted); font-size: 12px; }
+.dwr-panel .inner > p { font-size: 12.5px; margin: 6px 0; }
+.dwr-panel .helpkeys { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; font-size: 12px; margin: 0; align-items: center; }
+.dwr-panel .helpkeys dt { white-space: nowrap; }
+.dwr-panel .helpkeys dd { margin: 0; color: var(--t-muted); }
+.dwr-panel .links { display: flex; gap: 14px; flex-wrap: wrap; }
+.dwr-panel .links a { color: var(--t-primary); font-weight: 600; text-decoration: none; }
+.dwr-panel .links a:hover { text-decoration: underline; }
 .dwr-panel details.pg { border: 2px solid var(--t-line); border-radius: 12px; margin: 10px 0; padding: 0 8px; }
 .dwr-panel details.pg[open] { padding-bottom: 4px; }
 .dwr-panel details.pg summary { cursor: pointer; display: flex; justify-content: space-between; gap: 8px; padding: 7px 0; font-size: 12.5px; }
