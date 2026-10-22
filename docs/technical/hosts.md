@@ -100,8 +100,11 @@ Line views (source code): the host marks every line with `data-line`; with
 are, so methods sit inside their class. `unwrapRanges()` undoes it.
 
 In a diff the overlay runs on the new side only; the old side is read only.
-Rendered HTML files keep the DOM scan of the web script, with the file path
-as source; their elements go to the engine with `POST /api/elements`.
+Rendered HTML files: the host marks every start tag with `data-line`; the
+elements come from the engine's HTML adapter and are matched by line and
+tag ({need}`DEC_HTML_ADAPTER`). Only a page the adapter cannot read falls
+back to the DOM scan of the web script, whose elements go to the engine with
+`POST /api/elements`.
 
 ## Client
 

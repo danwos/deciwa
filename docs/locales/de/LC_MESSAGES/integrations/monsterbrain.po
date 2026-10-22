@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 14:09+0200\n"
+"POT-Creation-Date: 2026-10-22 14:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -144,21 +144,30 @@ msgstr ""
 
 #: ../../integrations/monsterbrain.md:36
 msgid ""
-"**Source code** – Python files in the code view: classes, functions and "
-"methods are elements (`Alt` click for the class around a method); an "
-"approved function that changes shows as stale. The *Source* tab of a "
-"Markdown file works the same way, line by line."
+"**Source code** – Python files in the code view: classes, functions, "
+"methods and the statements outside functions (imports, assignments, `if "
+"__name__ …`) are elements (`Alt` click for the class around a method); an"
+" approved function that changes shows as stale. The *Source* tab of a "
+"Markdown or HTML file works the same way, line by line."
 msgstr ""
-"**Quelltext** – Python-Dateien in der Code-Ansicht: Klassen, Funktionen "
-"und Methoden sind Elemente (`Alt`-Klick für die Klasse um eine Methode); "
-"eine freigegebene Funktion, die sich ändert, erscheint als veraltet. Der "
-"Tab *Source* einer Markdown-Datei funktioniert genauso, Zeile für Zeile."
-
-#: ../../integrations/monsterbrain.md:40
-msgid "**HTML files** – the page gets the deciwa button inside its frame."
-msgstr "**HTML-Dateien** – die Seite bekommt den deciwa-Knopf in ihrem Frame."
+"**Quelltext** – Python-Dateien in der Code-Ansicht: Klassen, Funktionen, "
+"Methoden und die Anweisungen außerhalb von Funktionen (Importe, "
+"Zuweisungen, `if __name__ …`) sind Elemente (`Alt`-Klick für die Klasse "
+"um eine Methode); eine freigegebene Funktion, die sich ändert, erscheint "
+"als veraltet. Der Tab *Source* einer Markdown- oder HTML-Datei "
+"funktioniert genauso, Zeile für Zeile."
 
 #: ../../integrations/monsterbrain.md:41
+msgid ""
+"**HTML files** – the rendered page is reviewable with the same elements "
+"as its source; the review switch in the side panel and `Shift R` work for"
+" the page, the page's own deciwa button opens its panel."
+msgstr ""
+"**HTML-Dateien** – die dargestellte Seite ist mit denselben Elementen "
+"prüfbar wie ihr Quelltext; der Review-Schalter im Seitenpanel und `Shift "
+"R` wirken auf die Seite, der deciwa-Knopf in der Seite öffnet ihr Panel."
+
+#: ../../integrations/monsterbrain.md:44
 msgid ""
 "**Claude** – monsterbrain's MCP server gains `deciwa_feedback` (the "
 "review state of a file, or every open job) and `deciwa_show` (open a file"
@@ -168,7 +177,7 @@ msgstr ""
 "(der Review-Stand einer Datei oder alle offenen Aufgaben) und "
 "`deciwa_show` (eine Datei an einem Element öffnen)."
 
-#: ../../integrations/monsterbrain.md:45
+#: ../../integrations/monsterbrain.md:48
 msgid ""
 "The review data is the folder's `.deciwa/`. A folder without one shows "
 "*Set up review* in the side panel (`deciwa init`)."
@@ -176,11 +185,11 @@ msgstr ""
 "Die Review-Daten sind das `.deciwa/` des Ordners. Ein Ordner ohne zeigt "
 "im Seitenpanel *Set up review* (`deciwa init`)."
 
-#: ../../integrations/monsterbrain.md:48
+#: ../../integrations/monsterbrain.md:51
 msgid "Setting up (development)"
 msgstr "Einrichten (Entwicklung)"
 
-#: ../../integrations/monsterbrain.md:50
+#: ../../integrations/monsterbrain.md:53
 msgid ""
 "Until the standalone engine exists, the extension uses the engine of a "
 "deciwa checkout:"
@@ -188,7 +197,7 @@ msgstr ""
 "Bis es die eigenständige Engine gibt, nutzt die Erweiterung die Engine "
 "eines deciwa-Checkouts:"
 
-#: ../../integrations/monsterbrain.md:58
+#: ../../integrations/monsterbrain.md:61
 #, python-brace-format
 msgid ""
 "In monsterbrain: settings (`Ctrl ,`) → *Extensions* → *Add folder …* → "
@@ -204,4 +213,7 @@ msgstr ""
 "lässt sich in der `settings.json` von monsterbrain setzen: `{\"path\": "
 "\"…/packages/monsterbrain\", \"options\": {\"enginePath\": "
 "\"/pfad/zu/deciwa\"}}`."
+
+#~ msgid "**HTML files** – the page gets the deciwa button inside its frame."
+#~ msgstr "**HTML-Dateien** – die Seite bekommt den deciwa-Knopf in ihrem Frame."
 

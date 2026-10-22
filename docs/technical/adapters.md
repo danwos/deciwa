@@ -55,6 +55,7 @@ CLI and what the file format stores.
 | text | `text:paragraph#4` · `text:line#17` | plain text |
 | html | `html:heading:Services/Consulting` · `html:paragraph:Services/Consulting#2` | a rendered web page, found in the browser ({doc}`web`) |
 | py | `py:class:Engine` · `py:function:Engine.start` · `py:function:main` | a class, method or function, named by its path in the code ({need}`DEC_PYTHON_ADAPTER`) |
+| py | `py:statement:imports` · `py:statement:API` · `py:statement:#2` | statements outside functions: the import block, an assignment by name, any other statement counted per scope |
 
 ```{prop} Element selectors are paths of headings plus a per-section counter
 :id: PROP_SELECTORS
@@ -120,6 +121,13 @@ fall back to the Sphinx-Needs defaults (`req`, `spec`, `impl`, `test`,
 - Elements: classes, functions and methods, nested as in the code (a method's
   parent is its class, a nested function's parent the function around it);
   definitions inside `if`, `try` or `with` blocks count at their level.
+- Statements outside functions – at module level and in a class body – are
+  elements of the kind `statement`: the docstring (`py:statement:__doc__`), a
+  block of imports (`py:statement:imports`), an assignment by its name
+  (`py:statement:API`, `py:statement:Engine.size`), any other statement
+  counted per scope (`py:statement:#1` – e.g. `if __name__ == "__main__":`;
+  `py:statement:Engine#2`). Statements inside a function belong to the
+  function.
 - Selectors: `py:<class|function>:<path>` – `py:function:Engine.start`; a second
   definition with the same path (a property setter, a redefinition) gets `~2`.
 - Text: the source of the definition, decorators included – any change to an
@@ -127,10 +135,28 @@ fall back to the Sphinx-Needs defaults (`req`, `spec`, `impl`, `test`,
   (`def start(self) -> Handshake:`).
 - Lines: `line` is the first line (the first decorator), `end` the last one.
 - A file with a syntax error has no elements.
-- The element kinds `class` and `function` can be named in the review rules.
+- The element kinds `class`, `function` and `statement` can be named in the
+  review rules.
 
-Not yet: comments and module-level constants as elements; JS, TS and C
-(tree-sitter, next).
+Not yet: comments as elements; JS, TS and C (tree-sitter, next).
+
+## HTML files
+
+{need}`DEC_HTML_ADAPTER` – `deciwa.core.adapters.html` reads `.html` and
+`.htm` files with the standard library `html.parser` and follows the rules of
+the browser's DOM scan ({need}`PROP_DOM_ADAPTER`): the review root (`main`, a
+single `article`, else `body`), sections by the heading outline, paragraphs,
+list items, table rows, code blocks, notes and pictures, counted per section –
+the same `html:` selectors. Each element carries its start line, its end line
+and its `tag`. Without a browser there is no layout, so elements hidden by CSS
+and small icons count as well.
+
+A host marks every start tag of the rendered page with its source line;
+the overlay matches each element to the tag of its kind on its line. The
+rendered page and the source view therefore share their elements, and
+feedback on the page points at the source line. A web page kept under its
+address (from a browser) gives way to the adapter once its source file is
+known.
 
 In a host the lines of each element are grouped into one block of the code
 view ([Host apps](hosts.md)).

@@ -198,12 +198,20 @@ A new decision comes from an approved proposal in the technical details – see
 :alternatives: every host adapter talking to the engine on its own.
 ```
 
-```{dec} Python source is reviewed per class, function and method, read with the standard library ast
+```{dec} Python source is reviewed per class, function, method and statement outside functions, read with the standard library ast
 :id: DEC_PYTHON_ADAPTER
 :status: approved
 :decided: 2026-10-22
 :reason: Code repositories are reviewed in monsterbrain next to the knowledge base; ast gives exact line ranges without a new dependency. The Python adapter moves up from 0.4; JS, TS and C follow with tree-sitter.
 :alternatives: tree-sitter for all languages at once (more dependencies, a bigger standalone engine); review of single lines only.
+```
+
+```{dec} HTML files are read by an adapter in the engine, with source lines; the rendered page and the source view share its elements
+:id: DEC_HTML_ADAPTER
+:status: approved
+:decided: 2026-10-22
+:reason: HTML results in a knowledge base are reviewed both as a page and as code; with source lines from the engine, feedback on the page points at the source and `deciwa todo` names the line. It follows the rules of the browser's DOM scan, so the selectors stay the same.
+:alternatives: the DOM scan of the rendered page only (no source lines, no review of the code).
 ```
 
 ```{dec} monsterbrain is the first host, before VS Code
