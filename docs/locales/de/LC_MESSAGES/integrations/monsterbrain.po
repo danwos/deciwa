@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: deciwa \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 18:39+0200\n"
+"POT-Creation-Date: 2026-10-23 18:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -260,14 +260,16 @@ msgid ""
 "**Implement concept** – monsterbrain's *Implement concept* (`▾` of the "
 "Claude button) also reads the review of `concept.md`: Claude skips the "
 "tasks you rejected, follows your comments on tasks and answers your "
-"questions there first."
+"questions there first. *Implement task* on a backlog item reads the "
+"item's review the same way."
 msgstr ""
 "**Konzept umsetzen** – *Implement concept* von monsterbrain (`▾` am "
 "Claude-Knopf) liest auch das Review von `concept.md`: Claude überspringt "
 "die Aufgaben, die du abgelehnt hast, folgt deinen Kommentaren zu Aufgaben"
-" und beantwortet deine Fragen dort zuerst."
+" und beantwortet deine Fragen dort zuerst. *Implement task* an einem "
+"Backlog-Eintrag liest das Review des Eintrags genauso."
 
-#: ../../integrations/monsterbrain.md:76
+#: ../../integrations/monsterbrain.md:77
 msgid ""
 "**Claude tools** – monsterbrain's MCP server gains `deciwa_feedback` (the"
 " review state of a file, or every open job) and `deciwa_show` (open a "
@@ -277,19 +279,19 @@ msgstr ""
 "`deciwa_feedback` (der Review-Stand einer Datei oder alle offenen "
 "Aufgaben) und `deciwa_show` (eine Datei an einem Element öffnen)."
 
-#: ../../integrations/monsterbrain.md:80
+#: ../../integrations/monsterbrain.md:81
 msgid "monsterbrain's facts view with a fact selected and the deciwa card open"
 msgstr ""
 "Die Fakten-Ansicht von monsterbrain mit einem ausgewählten Fakt und "
 "offener deciwa-Karte"
 
-#: ../../integrations/monsterbrain.md:83
+#: ../../integrations/monsterbrain.md:84
 msgid "The facts view in monsterbrain: a click on a fact opens it in review mode."
 msgstr ""
 "Die Fakten-Ansicht in monsterbrain: Ein Klick auf ein Fakt öffnet es im "
 "Review-Modus."
 
-#: ../../integrations/monsterbrain.md:86
+#: ../../integrations/monsterbrain.md:87
 msgid ""
 "The review data is the folder's `.deciwa/`. A folder without one shows "
 "*Set up review* in the side panel (`deciwa init`)."
@@ -297,11 +299,11 @@ msgstr ""
 "Die Review-Daten sind das `.deciwa/` des Ordners. Ein Ordner ohne zeigt "
 "im Seitenpanel *Set up review* (`deciwa init`)."
 
-#: ../../integrations/monsterbrain.md:89
+#: ../../integrations/monsterbrain.md:90
 msgid "Setting up (development)"
 msgstr "Einrichten (Entwicklung)"
 
-#: ../../integrations/monsterbrain.md:91
+#: ../../integrations/monsterbrain.md:92
 msgid ""
 "Until the standalone engine exists, the extension uses the engine of a "
 "deciwa checkout:"
@@ -309,7 +311,7 @@ msgstr ""
 "Bis es die eigenständige Engine gibt, nutzt die Erweiterung die Engine "
 "eines deciwa-Checkouts:"
 
-#: ../../integrations/monsterbrain.md:99
+#: ../../integrations/monsterbrain.md:100
 #, python-brace-format
 msgid ""
 "In monsterbrain: settings (`Ctrl ,`) → *Extensions* → *Add folder …* → "

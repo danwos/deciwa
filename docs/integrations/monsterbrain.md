@@ -73,6 +73,7 @@ before, just without review.
   Claude button) also reads the review of `concept.md`: Claude skips the
   tasks you rejected, follows your comments on tasks and answers your
   questions there first.
+  *Implement task* on a backlog item reads the item's review the same way.
 - **Claude tools** – monsterbrain's MCP server gains `deciwa_feedback` (the review
   state of a file, or every open job) and `deciwa_show` (open a file at an
   element).

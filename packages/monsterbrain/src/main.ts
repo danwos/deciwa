@@ -294,21 +294,25 @@ export function activate(c: HostContext): void {
     return result;
   });
 
-  // "Implement concept" in monsterbrain's Claude button: the review of concept.md decides which tasks count
-  ctx.agentPrompt("concept_implement", async ({ concept }) => {
-    if (!engine || !concept || !status.engineRoot) return null;
+  // "Implement concept" / "Implement task" in monsterbrain's Claude button: the review of concept.md or of the
+  // backlog item decides what counts
+  const reviewPart = (file: string, what: string, rejected: string): string | null => {
+    if (!engine || !status.engineRoot) return null;
     const exe = findEngine({ enginePath: enginePath(), bundled: bundled() });
     if (!exe) return null;
     const cli = `${exe} --root ${status.engineRoot}`;
-    const source = toSource(`${concept.folder}/concept.md`);
     return [
-      `Before you start, read my review of the concept in deciwa: \`${cli} --json show ${source}\`.`,
-      "- A task I rejected is not wanted: skip it, leave it unticked and name it in your summary.",
-      "- A comment on a task tells you how to do it; a question at a task: answer it there first.",
+      `Before you start, read my review of the ${what} in deciwa: \`${cli} --json show ${toSource(file)}\`.`,
+      rejected,
+      "- A comment tells you how to do it; a question: answer it there first.",
       `- Mark what you handled done: \`${cli} resolve <id> --note "…" --author agent:claude\`.`,
       "- Frozen elements stay as they are.",
     ].join("\n");
-  });
+  };
+  ctx.agentPrompt("concept_implement", ({ concept }) =>
+    concept ? reviewPart(`${concept.folder}/concept.md`, "concept", "- A task I rejected is not wanted: skip it, leave it unticked and name it in your summary.") : null);
+  ctx.agentPrompt("task_implement", ({ path }) =>
+    reviewPart(path, "task", "- A statement I rejected is not wanted: leave it out, and ask me if that changes the task."));
 
   ctx.children("facts", {
     list: (paths) => factChildren(paths),
