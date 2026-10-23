@@ -294,6 +294,22 @@ export function activate(c: HostContext): void {
     return result;
   });
 
+  // "Implement concept" in monsterbrain's Claude button: the review of concept.md decides which tasks count
+  ctx.agentPrompt("concept_implement", async ({ concept }) => {
+    if (!engine || !concept || !status.engineRoot) return null;
+    const exe = findEngine({ enginePath: enginePath(), bundled: bundled() });
+    if (!exe) return null;
+    const cli = `${exe} --root ${status.engineRoot}`;
+    const source = toSource(`${concept.folder}/concept.md`);
+    return [
+      `Before you start, read my review of the concept in deciwa: \`${cli} --json show ${source}\`.`,
+      "- A task I rejected is not wanted: skip it, leave it unticked and name it in your summary.",
+      "- A comment on a task tells you how to do it; a question at a task: answer it there first.",
+      `- Mark what you handled done: \`${cli} resolve <id> --note "…" --author agent:claude\`.`,
+      "- Frozen elements stay as they are.",
+    ].join("\n");
+  });
+
   ctx.children("facts", {
     list: (paths) => factChildren(paths),
     // a fact selected in the facts view: the overlay switches to review mode and selects it

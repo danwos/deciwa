@@ -60,15 +60,19 @@ before, just without review.
   `✓` on a file or folder, or `Shift A` on the active file, approves every
   fact not approved yet and the file as a whole. A whole-file approval shows
   `✓` at the file and gets stale (`✓!`) on any change.
-- **Inform Claude** – the button next to the review switch tells the
-  Claude session of the folder about the review (monsterbrain's agent
-  actions). It covers the file's open concept when that concept – its folder
+- **Inform Claude** – the main entry of monsterbrain's Claude button (its
+  left part, next to the review switch) tells the Claude session of the
+  folder about the review (monsterbrain's agent actions). It covers the file's open concept when that concept – its folder
   or a file it lists under `results:` – has review entries newer than the
   last hand-over, else the file alone. Approvals count: Claude may be waiting
   for one. Claude reads the entries itself (`deciwa show`, `deciwa todo`);
   their `created` times tell it what is new. The button is greyed out while
   nothing is new and only a click starts it; the time of the last hand-over
   is kept only while monsterbrain runs – deciwa stores nothing for it.
+- **Implement concept** – monsterbrain's *Implement concept* (`▾` of the
+  Claude button) also reads the review of `concept.md`: Claude skips the
+  tasks you rejected, follows your comments on tasks and answers your
+  questions there first.
 - **Claude tools** – monsterbrain's MCP server gains `deciwa_feedback` (the review
   state of a file, or every open job) and `deciwa_show` (open a file at an
   element).

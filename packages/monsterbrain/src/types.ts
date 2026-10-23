@@ -26,6 +26,8 @@ export interface HostContext {
   concepts(path: string): Promise<Concept[]>;
   /** hand a request to the Claude session of the open folder (only on a click of the user) */
   agent(req: { action: string; prompt: string; meta?: Record<string, string> }): Promise<{ sent: boolean; session?: string; started?: boolean }>;
+  /** add lines to the prompt of one of monsterbrain's Claude actions (concept_implement, concept_close, message) */
+  agentPrompt(action: string, fn: (p: { path: string; concept?: Concept }) => string | null | undefined | Promise<string | null | undefined>): void;
   /** fill the file nodes of a side bar view with children (monsterbrain's facts view) */
   children(view: "facts", provider: {
     list(paths: string[]): Promise<ChildList>;
@@ -104,6 +106,16 @@ export interface Contribution {
   panel?: { title: string; mount(el: HTMLElement, p: { path: string | null; kind?: string }): void | (() => void) };
   toolbar?: { mount(el: HTMLElement, p: { path: string | null; kind?: string }): void | (() => void) };
   commands?: { id: string; title: string; key?: string; run?: () => void }[];
+  /** the main entry of monsterbrain's Claude button (split button in the head of the file) */
+  claude?: { watch(p: { path: string | null; kind?: string }, set: (e: ClaudeEntry | null) => void): void | (() => void) };
+}
+
+/** The main entry of monsterbrain's Claude button. */
+export interface ClaudeEntry {
+  label: string;
+  title?: string;
+  enabled: boolean;
+  run(): void | Promise<unknown>;
 }
 
 declare global {

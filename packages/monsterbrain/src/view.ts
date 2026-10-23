@@ -8,7 +8,7 @@ import { hostElements, unwrapRanges } from "../../ui/js/host.js";
 import { shadowCss } from "../../ui/js/shadow.js";
 import CSS from "../../ui/src/deciwa/ui/static/deciwa-overlay.css";
 import MONSTER from "../../ui/src/deciwa/ui/static/deciwa-monster.webp";
-import type { ReviewScope, Status, ViewContext } from "./types";
+import type { ClaudeEntry, ReviewScope, Status, ViewContext } from "./types";
 
 interface Overlay {
   refresh(): Promise<void>;
@@ -34,10 +34,12 @@ let status: Status = { state: "starting" };
 let current: { path: string; source: string; overlay: Overlay } | null = null;
 let section: { path: string | null; kind?: string; slot: HTMLElement; draw: () => void } | null = null;
 let toolbar: { path: string | null; kind?: string; draw: () => void } | null = null;
+const claudeWatches = new Set<() => void>();  // "Inform Claude" in monsterbrain's Claude button, one per file head
 const pendingFocus = new Map<string, string>();
 const redraw = (): void => {
   section?.draw();
   toolbar?.draw();
+  claudeWatches.forEach((u) => u());
 };
 // views mounted while the engine was not ready yet: attached as soon as it is
 const waiting = new Set<() => void>();
@@ -48,6 +50,7 @@ const ch = window.mbx.register("deciwa", {
   mountView,
   panel: { title: "Review · deciwa", mount: mountPanel },
   toolbar: { mount: mountToolbar },
+  claude: { watch: watchClaude },
   commands: [
     { id: "review", title: "review mode on/off", key: "Shift+R", run: toggleReview },
     { id: "verdicts", title: "approve · reject · freeze · delete (review mode)", key: "a r f d" },
@@ -61,7 +64,7 @@ const ch = window.mbx.register("deciwa", {
 
 const api = (path: string, body?: unknown): Promise<unknown> => ch.call("api", path, body ?? null);
 
-// counts changes of the review data and the engine, so the toolbar asks for the Claude scope again
+// counts changes of the review data and the engine, so "Inform Claude" asks for its scope again
 let scopeTick = 0;
 
 function setStatus(s: Status): void {
@@ -199,54 +202,17 @@ function reviewable(path: string | null): { here: boolean; page: boolean; on: bo
   return { here, page, on: here ? current!.overlay.review : page ? frames.get(path!)! : reviewPref() };
 }
 
-/** The review switch in the head of the file, next to View / Source / Diff, and "Inform Claude" – greyed out while nothing is new. */
+/** The review switch in the head of the file, next to View / Source / Diff. */
 function mountToolbar(el: HTMLElement, p: { path: string | null; kind?: string }): () => void {
   const root = el.shadowRoot ?? el.attachShadow({ mode: "open" });
-  root.innerHTML = `<style>${STYLE} .dwr { display: inline-flex; gap: 6px; } .dwr .chip { padding: 3px 10px; } .dwr .chip[disabled] { opacity: .45; cursor: default; }</style><span class="dwr"></span>`;
+  root.innerHTML = `<style>${STYLE} .dwr { display: inline-flex; gap: 6px; } .dwr .chip { padding: 3px 10px; }</style><span class="dwr"></span>`;
   const box = root.querySelector<HTMLElement>(".dwr")!;
-  // what "Claude" would cover – asked again when the review data or the engine changes
-  let scope: ReviewScope | null = null;
-  let asked = -1;
-  let sending = false;
-  const ask = (): void => {
-    if (asked === scopeTick || !p.path || status.state !== "ready") return;
-    asked = scopeTick;
-    void (ch.call("review-scope", p.path) as Promise<ReviewScope | null>)
-      .then((s) => { scope = s; draw(); })
-      .catch(() => { scope = null; draw(); });
-  };
-  const toClaude = async (): Promise<void> => {
-    if (!p.path || sending) return;
-    sending = true;
-    draw();
-    try {
-      await ch.call("review-to-claude", p.path);
-    } catch (e) {
-      console.error("deciwa:", e);
-    } finally {
-      sending = false;
-      draw();
-    }
-  };
   const draw = (): void => {
-    ask();
     const { here, page, on } = reviewable(p.path);
-    if (status.state !== "ready") {
-      box.innerHTML = "";
-      return;
-    }
-    const review = here || page
+    box.innerHTML = status.state === "ready" && (here || page)
       ? `<button class="chip${on ? " on" : ""}" data-review title="Review mode with deciwa (Shift+R)">Review ${on ? "on" : "off"} <kbd>Shift R</kbd></button>`
       : "";
-    const what = scope?.kind === "concept" ? `the concept “${scope.title}”` : "this file";
-    const live = !!scope?.active && !sending;
-    const tip = live
-      ? `Tell the Claude session of this folder about your review of ${what} – new feedback, approvals, answers and open jobs`
-      : "Nothing new in the review since Claude was last informed";
-    const claude = p.path ? `<button class="chip" data-claude ${live ? "" : "disabled"} title="${esc(tip)}">Inform Claude</button>` : "";
-    box.innerHTML = review + claude;
     box.querySelector("[data-review]")?.addEventListener("click", toggleReview);
-    box.querySelector("[data-claude]")?.addEventListener("click", () => void toClaude());
   };
   toolbar = { path: p.path, kind: p.kind, draw };
   draw();
@@ -254,6 +220,54 @@ function mountToolbar(el: HTMLElement, p: { path: string | null; kind?: string }
     if (toolbar?.draw === draw) toolbar = null;
     root.innerHTML = "";
   };
+}
+
+/**
+ * "Inform Claude" – the main entry of monsterbrain's Claude button: tells the Claude session of the folder
+ * about the review. Disabled while nothing is new.
+ */
+function watchClaude(p: { path: string | null; kind?: string }, set: (e: ClaudeEntry | null) => void): () => void {
+  // what it would cover – asked again when the review data or the engine changes
+  let scope: ReviewScope | null = null;
+  let asked = -1;
+  let sending = false;
+  const ask = (): void => {
+    if (asked === scopeTick || !p.path || status.state !== "ready") return;
+    asked = scopeTick;
+    void (ch.call("review-scope", p.path) as Promise<ReviewScope | null>)
+      .then((s) => { scope = s; update(); })
+      .catch(() => { scope = null; update(); });
+  };
+  const toClaude = async (): Promise<void> => {
+    if (!p.path || sending) return;
+    sending = true;
+    update();
+    try {
+      await ch.call("review-to-claude", p.path);
+    } catch (e) {
+      console.error("deciwa:", e);
+    } finally {
+      sending = false;
+      update();
+    }
+  };
+  const update = (): void => {
+    ask();
+    if (!p.path || status.state !== "ready") return set(null);
+    const what = scope?.kind === "concept" ? `the concept “${scope.title}”` : "this file";
+    const live = !!scope?.active && !sending;
+    set({
+      label: "Inform Claude",
+      title: live
+        ? `Tell the Claude session of this folder about your review of ${what} – new feedback, approvals, answers and open jobs`
+        : "Nothing new in the review since Claude was last informed",
+      enabled: live,
+      run: toClaude,
+    });
+  };
+  claudeWatches.add(update);
+  update();
+  return () => void claudeWatches.delete(update);
 }
 
 const esc = (s: string): string => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
