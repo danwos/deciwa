@@ -25,7 +25,9 @@ const STYLE = shadowCss(CSS) + `
   .dwr-host-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
   .dwr-host-head .msg { color: var(--t-muted); font-size: 12px; flex: 1 1 100%; }
   .dwr-host-head .grow { flex: 1; }
-  .dwr-host-head .mono { font-size: 11px; color: var(--t-muted); }`;
+  .dwr-host-head .mono { font-size: 11px; color: var(--t-muted); }
+  /* monsterbrain's setting "Show keys" off: no key hints, except in the help */
+  :host-context(.hide-keys) :is(kbd, .keys):not(.helpkeys *) { display: none; }`;
 // in monsterbrain's own document: reviewable blocks show that a click reviews them
 const PAGE_CSS = "body.dwr-on [data-dw-key] { cursor: pointer; } body.dwr-on [data-dw-key] a { cursor: alias; }";
 const PREFS = "deciwa-panel";  // the overlay keeps review mode here
@@ -205,7 +207,7 @@ function reviewable(path: string | null): { here: boolean; page: boolean; on: bo
 /** The review switch in the head of the file, next to View / Source / Diff. */
 function mountToolbar(el: HTMLElement, p: { path: string | null; kind?: string }): () => void {
   const root = el.shadowRoot ?? el.attachShadow({ mode: "open" });
-  root.innerHTML = `<style>${STYLE} .dwr { display: inline-flex; gap: 6px; } .dwr .chip { padding: 3px 10px; } :host-context(.hide-keys) kbd { display: none; }</style><span class="dwr"></span>`;
+  root.innerHTML = `<style>${STYLE} .dwr { display: inline-flex; gap: 6px; } .dwr .chip { padding: 3px 10px; }</style><span class="dwr"></span>`;
   const box = root.querySelector<HTMLElement>(".dwr")!;
   const draw = (): void => {
     const { here, page, on } = reviewable(p.path);
