@@ -2,6 +2,7 @@
 name = "deciwa-cli"
 version = "0.0.1"
 description = "The deciwa command line – the master for all integrations and agents"
+license = "AGPL-3.0-only"
 requires-python = ">=3.12"
 dependencies = ["deciwa-core", "deciwa-server"]
 

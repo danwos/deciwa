@@ -2,6 +2,7 @@
   "name": "@danwos/deciwa-client",
   "version": "0.1.0",
   "private": true,
+  "license": "AGPL-3.0-only",
   "description": "Finds, starts and stops the deciwa engine for a host app and calls its JSON API – shared by monsterbrain and VS Code",
   "type": "module",
   "main": "dist/index.cjs",

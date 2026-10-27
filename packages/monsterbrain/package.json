@@ -2,6 +2,7 @@
   "name": "deciwa-monsterbrain",
   "version": "0.1.0",
   "private": true,
+  "license": "AGPL-3.0-only",
   "description": "deciwa in monsterbrain: review on rendered files, feedback in the side panel, state in the tree – a monsterbrain extension",
   "type": "module",
   "monsterbrain": {

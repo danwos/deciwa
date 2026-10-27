@@ -2,6 +2,7 @@
 name = "deciwa-server"
 version = "0.0.1"
 description = "Local review server: serves a built site with the deciwa JSON API, rebuilds on change"
+license = "AGPL-3.0-only"
 requires-python = ">=3.12"
 dependencies = ["deciwa-core"]
 

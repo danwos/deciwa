@@ -2,6 +2,7 @@
 name = "deciwa-sphinx"
 version = "0.0.1"
 description = "deciwa for Sphinx: review built pages, elements incl. Sphinx-Needs"
+license = "AGPL-3.0-only"
 requires-python = ">=3.12"
 dependencies = ["deciwa-core", "deciwa-ui", "sphinx>=9"]
 

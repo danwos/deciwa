@@ -2,6 +2,7 @@
 name = "deciwa-ui"
 version = "0.0.1"
 description = "The deciwa review UI (overlay JavaScript, CSS, logo) in the danwos tool UI kit"
+license = "AGPL-3.0-only"
 requires-python = ">=3.12"
 dependencies = []
 
