@@ -1,5 +1,5 @@
-# Builds the docs and publishes them on GitHub Pages of the public repository
-# danwos/deciwa.docs – the code in this repository stays private.
+# Builds the docs and publishes them on GitHub Pages of the repository
+# danwos/deciwa.docs (custom domain deciwa.danwos.dev).
 #
 # The public build is an offline review build: visitors can try deciwa right
 # on these pages – their review stays in their own browser – and no review

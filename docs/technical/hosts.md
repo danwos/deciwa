@@ -36,7 +36,7 @@ the TypeScript parts only call the engine.
 
 ```console
 $ deciwa serve --api-only --root <folder> --port 0
-{"deciwa": "0.0.1", "api": 1, "port": 41873, "token": "…", "root": "/home/daniel/brain"}
+{"deciwa": "0.0.1", "api": 1, "port": 41873, "token": "…", "root": "/home/me/project"}
 ```
 
 - **Handshake:** the first line on stdout. `root` is the folder that holds
