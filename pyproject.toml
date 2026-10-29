@@ -18,6 +18,7 @@ docs = [
     "myst-parser>=5",
     "sphinx-autobuild",
     "sphinx-intl>=2.4.0",
+    "sphinxext-opengraph>=0.13.0",
 ]
 
 [tool.uv]

@@ -10,7 +10,7 @@ project = "deciwa"
 author = "danwos"
 copyright = "2026, danwos"
 
-extensions = ["myst_parser", "sphinx_needs", "sphinx.ext.graphviz", "deciwa.sphinx", "docs_i18n"]  # deciwa.sphinx: review these docs in deciwa itself
+extensions = ["myst_parser", "sphinx_needs", "sphinx.ext.graphviz", "deciwa.sphinx", "docs_i18n", "sphinxext.opengraph"]  # deciwa.sphinx: review these docs in deciwa itself
 
 source_suffix = {".md": "markdown", ".rst": "restructuredtext"}
 exclude_patterns = ["_build", "README.md"]
@@ -30,12 +30,31 @@ gettext_uuid = False
 DOCS_LANGUAGES = {"en": ("English", ""), "de": ("Deutsch", "de/")}
 DOCS_URL = "https://deciwa.danwos.dev/"
 
+# -- Link previews (Open Graph, Twitter Card) ------------------------------------
+# sphinxext-opengraph writes og:title, og:description (the page's first
+# paragraph), og:url and og:image on every page. The card image is the tool's
+# card from danwos.dev (built there from src/pages/og/), so docs and website
+# share one look; _languages picks the language.
+ogp_site_name = "deciwa"
+ogp_image_alt = "deciwa – danwos"
+ogp_social_cards = {"enable": False}
+OGP_TAGS = [
+    '<meta property="og:image:width" content="1200">',
+    '<meta property="og:image:height" content="630">',
+    '<meta name="twitter:card" content="summary_large_image">',
+]
+
 
 def _languages(app, config):
     """Switcher and hreflang links: the same page in every other language."""
     here = DOCS_LANGUAGES.get(config.language, DOCS_LANGUAGES["en"])[1]
     up = "../" * here.count("/")  # from this build's root to the site root
     config.html_baseurl = DOCS_URL + here
+    # link previews: the tool's card from the website, in this build's language
+    lang = config.language if config.language in DOCS_LANGUAGES else "en"
+    config.ogp_site_url = DOCS_URL + here
+    config.ogp_image = f"https://danwos.dev/og/{lang}/tools/deciwa.png"
+    config.ogp_custom_meta_tags = [*OGP_TAGS, f'<meta property="og:locale" content="{"de_DE" if lang == "de" else "en_US"}">']
     config.html_context["docs_languages"] = [
         {"code": code, "name": name, "rel": up + folder, "url": DOCS_URL + folder, "current": code == config.language}
         for code, (name, folder) in DOCS_LANGUAGES.items()
