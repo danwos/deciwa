@@ -83,6 +83,8 @@ html_favicon = "_static/img/logo.svg"
 html_static_path = ["_static"]
 templates_path = ["_templates"]
 html_css_files = ["danwos.css"]
+# visit counter without cookies (GoatCounter, one site per docs); ignores localhost
+html_js_files = [("https://gc.zgo.at/count.js", {"async": "async", "data-goatcounter": "https://deciwadocs.goatcounter.com/count"})]
 html_show_sourcelink = False
 html_context = {}
 html_sidebars = {"**": ["sidebar/brand.html", "sidebar/search.html", "sidebar/languages.html",

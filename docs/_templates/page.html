@@ -15,4 +15,9 @@
     <span>a <b>danwos</b> project</span>
   </a>
 </div>
+<div class="dw-legal">
+  {%- set dw_lang = "de" if language == "de" else "en" %}
+  <a href="https://danwos.dev/{{ dw_lang }}/imprint/">{{ "Impressum" if dw_lang == "de" else "Imprint" }}</a>
+  <a href="https://danwos.dev/{{ dw_lang }}/privacy/">{{ "Datenschutz" if dw_lang == "de" else "Privacy" }}</a>
+</div>
 {% endblock footer %}

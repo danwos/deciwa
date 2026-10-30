@@ -138,6 +138,11 @@ figure.diagram .arrowhead { fill: var(--dw-muted); }
 .dw-made-by img { height: 26px; width: auto; }
 .dw-made-by b { font-family: var(--font-stack--headings); font-weight: 800; color: var(--color-foreground-primary); }
 
+/* imprint and privacy live on danwos.dev; they cover the docs too */
+.dw-legal { display: flex; gap: 14px; margin: 6px 0 0 4px; font-size: .75rem; }
+.dw-legal a { color: var(--color-foreground-secondary); text-decoration: none; }
+.dw-legal a:hover { color: var(--color-brand-primary); text-decoration: underline; }
+
 /* diagrams: run-time connections dashed, plus legend keys */
 figure.diagram .arrow.run path { stroke: var(--dw-terracotta); stroke-dasharray: 6 5; }
 figure.diagram .legend-key path { stroke-width: 2; fill: none; }
